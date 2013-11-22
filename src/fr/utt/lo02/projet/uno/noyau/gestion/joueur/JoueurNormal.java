@@ -30,7 +30,7 @@ public class JoueurNormal extends Joueur {
 			System.out.println("Carte du talon: " + Talon.getInstance().getDerniereCarte().toString());
 			System.out.println("Votre Main: ");
 			this.main.afficherMain();
-			System.out.println((this.main.getNombreCarte()+1) + ": Piocher et passer");
+			System.out.println((this.main.getNombreCarte()+1) + ": Piocher");
 			System.out.println("Choisissez une carte [1.." + (this.main.getNombreCarte()+1) + "] : ");
 			int choix= sc.nextInt();
 

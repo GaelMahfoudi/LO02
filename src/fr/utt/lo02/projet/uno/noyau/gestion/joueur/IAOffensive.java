@@ -9,6 +9,7 @@ public class IAOffensive implements StyleIA {
 	public void jouerCarte() {
 		// TODO Auto-generated method stub
 		
+		
 	}
   /* {author=Victor Le Deuff Ga�l Mahfoudi}*/
 

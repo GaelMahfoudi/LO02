@@ -105,7 +105,7 @@ public class Partie {
 			{
 				listeJoueur.get(joueurActuel).jouer(this); //il joue
 				
-				joueurActuel = (joueurActuel+sens)%nbreJoueur;
+				joueurActuel = Math.abs((joueurActuel+sens)%nbreJoueur);
 			}
 			
 		}

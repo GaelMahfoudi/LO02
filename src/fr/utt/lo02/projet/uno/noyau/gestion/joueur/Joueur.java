@@ -51,7 +51,7 @@ public abstract class Joueur {
 	}
 	
 	public void afficherPseudo(){
-		System.out.println(this.pseudo);
+		System.out.print(this.pseudo);
 	}
 	
 	public abstract void direUno();

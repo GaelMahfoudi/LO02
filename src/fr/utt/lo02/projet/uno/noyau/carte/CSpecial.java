@@ -40,12 +40,34 @@ public class CSpecial extends Carte {
 				break;
 			case PLUS_DEUX:
 				
-				Joueur joueurNext = partie.getJoueur((partie.getJoueurActuel()+partie.getSens())%partie.getNbreJoueur());
+				Joueur joueurNext = partie.getJoueur(Math.abs((partie.getJoueurActuel()+partie.getSens())%partie.getNbreJoueur()));
 				joueurNext.piocherCarte(Pioche.getInstance());
 				joueurNext.piocherCarte(Pioche.getInstance());
-				
+				joueurNext.afficherPseudo();
+				System.out.println("a pioché 2 nouvelles cartes"  );
 				break;
 			case PLUS_QUATRE:
+				Joueur joueurNext1 = partie.getJoueur(Math.abs((partie.getJoueurActuel()+partie.getSens())%partie.getNbreJoueur()));
+				joueurNext1.piocherCarte(Pioche.getInstance());
+				joueurNext1.piocherCarte(Pioche.getInstance());
+				joueurNext1.afficherPseudo();
+				System.out.println("a pioché 4 nouvelles cartes" );
+				System.out.println("Choisissez la nouvelle couleur [B|R|J|V]:");
+				switch(sc.nextLine().charAt(0))
+				{
+					case 'B':
+						Talon.getInstance().setCouleurDerniereCarte(ECouleur.BLEU);
+					break;
+					case 'R':
+						Talon.getInstance().setCouleurDerniereCarte(ECouleur.ROUGE);
+					break;
+					case 'J':
+						Talon.getInstance().setCouleurDerniereCarte(ECouleur.JAUNE);
+					break;
+					case 'V':
+						Talon.getInstance().setCouleurDerniereCarte(ECouleur.VERT);
+					break;
+				}
 				break;
 			case JOKER:		
 				System.out.println("Choisissez la nouvelle couleur [B|R|J|V]:");
