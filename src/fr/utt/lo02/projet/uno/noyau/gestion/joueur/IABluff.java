@@ -1,6 +1,6 @@
-package fr.utt.lo02.projet.uno.noyau.gestion.joueur;
+package lo02.projet.uno.noyau.gestion.joueur;
 /**
- *  Classe gérant l'IA de type Bluff
+ *  Classe gï¿½rant l'IA de type Bluff
  */
 public class IABluff implements StyleIA {
 
@@ -9,6 +9,6 @@ public class IABluff implements StyleIA {
 		// TODO Auto-generated method stub
 		
 	}
-  /* {author=Victor Le Deuff Gaël Mahfoudi}*/
+  /* {author=Victor Le Deuff Gaï¿½l Mahfoudi}*/
 
 }

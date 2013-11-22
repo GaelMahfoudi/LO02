@@ -1,10 +1,12 @@
-package fr.utt.lo02.projet.uno.noyau.carte;
+package lo02.projet.uno.noyau.carte;
+
+import lo02.projet.uno.noyau.gestion.carte.Talon;
 
 /** 
- *  CSpecial hérite de Carte. CSpecial repésente l'ensemble des cartes spéciales.
+ *  CSpecial hï¿½rite de Carte. CSpecial repï¿½sente l'ensemble des cartes spï¿½ciales.
  */
 public class CSpecial extends Carte {
-	/* {author=Victor Le Deuff Gaël Mahfoudi}*/
+	/* {author=Victor Le Deuff Gaï¿½l Mahfoudi}*/
 
 
 	private ESpecial special;
@@ -22,5 +24,18 @@ public class CSpecial extends Carte {
 	public String toString() {
 		return "CSpecial [special=" + special + ", couleur=" + couleur + "]";
 	}
-
+	
+	public boolean estPosable() 
+	  {
+		  if(this.couleur == Talon.getInstance().getDerniereCarte().getCouleur())
+			  return true;
+		  else
+			  return false;
+	  }
+	
+	public int getValeur()
+	{
+		return -1; //Chiffre impossible pour les comparaisons
+	}
+	
 }

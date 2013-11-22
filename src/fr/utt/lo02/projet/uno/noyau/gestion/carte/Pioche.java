@@ -1,14 +1,14 @@
-package fr.utt.lo02.projet.uno.noyau.gestion.carte;
+package lo02.projet.uno.noyau.gestion.carte;
 
 import java.util.*;
 
-import fr.utt.lo02.projet.uno.noyau.carte.*;
+import lo02.projet.uno.noyau.carte.*;
 
 /**
- *  Pioche hérite de PaquetDeCarte. Elle représente la pioche. Elle n'est instanciée qu'une fois.
+ *  Pioche hï¿½rite de PaquetDeCarte. Elle reprï¿½sente la pioche. Elle n'est instanciï¿½e qu'une fois.
  */
 public class Pioche {
-	/* {author=Victor Le Deuff Gaël Mahfoudi}*/
+	/* {author=Victor Le Deuff Gaï¿½l Mahfoudi}*/
 	
 	private Queue<Carte> listeCarte;
 	

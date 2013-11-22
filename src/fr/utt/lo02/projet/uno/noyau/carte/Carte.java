@@ -1,18 +1,18 @@
-package fr.utt.lo02.projet.uno.noyau.carte;
+package lo02.projet.uno.noyau.carte;
+
+import lo02.projet.uno.noyau.gestion.carte.Talon;
 
 /** 
- *  Carte est abstraite. Elle possède les atrributs et méthodes communes à tout type de carte.
+ *  Carte est abstraite. Elle possï¿½de les atrributs et mï¿½thodes communes ï¿½ tout type de carte.
  */
 public abstract class Carte {
-  /* {author=Victor Le Deuff Gaël Mahfoudi}*/
+  /* {author=Victor Le Deuff Gaï¿½l Mahfoudi}*/
 
 
   protected ECouleur couleur;
 
-  public boolean estPosable() {
-  return false;
-  }
-
+  public abstract boolean estPosable();
+  public abstract int getValeur();
   public abstract ESpecial getSpecial();
 
   public ECouleur getCouleur() {

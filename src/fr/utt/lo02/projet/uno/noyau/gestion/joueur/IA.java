@@ -1,12 +1,12 @@
-package fr.utt.lo02.projet.uno.noyau.gestion.joueur;
+package lo02.projet.uno.noyau.gestion.joueur;
 
-import fr.utt.lo02.projet.uno.noyau.carte.ESpecial;
+import lo02.projet.uno.noyau.carte.ESpecial;
 
 /**
- *  IA hérite de joueur. Elle gère un joueur non-humain
+ *  IA hï¿½rite de joueur. Elle gï¿½re un joueur non-humain
  */
 public class IA extends Joueur {
-	/* {author=Victor Le Deuff Gaël Mahfoudi}*/
+	/* {author=Victor Le Deuff Gaï¿½l Mahfoudi}*/
 
 
 	private StyleIA styleJeu;

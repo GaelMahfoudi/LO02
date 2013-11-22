@@ -1,20 +1,22 @@
-package fr.utt.lo02.projet.uno.noyau.gestion.partie;
+package lo02.projet.uno.noyau.gestion.partie;
 
 import java.util.ArrayList;
 
-import fr.utt.lo02.projet.uno.noyau.carte.ESpecial;
-import fr.utt.lo02.projet.uno.noyau.gestion.joueur.*;
-import fr.utt.lo02.projet.uno.noyau.gestion.carte.Pioche;
-import fr.utt.lo02.projet.uno.noyau.gestion.carte.Talon;
+import lo02.projet.uno.noyau.carte.ESpecial;
+import lo02.projet.uno.noyau.gestion.carte.Pioche;
+import lo02.projet.uno.noyau.gestion.carte.Talon;
+import lo02.projet.uno.noyau.gestion.joueur.*;
 
 /**
- *  Partie est la classe gérant une partie de Uno. Elle gère les joueurs, les paquets de cartes et les tours de jeu.
+ *  Partie est la classe gï¿½rant une partie de Uno. Elle gï¿½re les joueurs, les paquets de cartes et les tours de jeu.
  */
 public class Partie {
-	/* {author=Victor Le Deuff Gaël Mahfoudi}*/
+	/* {author=Victor Le Deuff Gaï¿½l Mahfoudi}*/
 
 
 	private int sens;
+	
+	private int nbreJoueur;
 
 	private int joueurActuel;
 	
@@ -24,7 +26,7 @@ public class Partie {
 	
 	private ArrayList<Joueur> listeJoueur;
 
-	public Partie()
+    public Partie()
 	{
 		sens=0;
 		joueurActuel=0;
@@ -35,23 +37,31 @@ public class Partie {
 	
 	public Partie(int nbJoueur)
 	{
+		
 		sens=0;
 		joueurActuel=0;
 		pioche = Pioche.getInstance();
 		talon = Talon.getInstance();
 		listeJoueur = new ArrayList<Joueur>();
+		this.nbreJoueur = nbJoueur;
 		
-		int i = 0;
-		
-		for(i=0;i<nbJoueur;i++)
+		//generation des joueurs
+		for(int i=0;i<this.nbreJoueur;i++)
 		{
+			System.out.println("Joueur " + (i+1) + ":");
 			listeJoueur.add(new JoueurNormal());
 		}
+		
+		
+		//Distribution des cartes
+		this.distribuerCarte();
+		
+		//Lancement de la partie
+		this.deroulerPartie();
 	}
 
 	public void distribuerCarte() {
-		int i = 0;
-		for(i=0;i<listeJoueur.size();i++)
+		for(int i=0;i<listeJoueur.size();i++)
 		{
 			listeJoueur.get(i).piocherCarte(pioche);
 			listeJoueur.get(i).piocherCarte(pioche);
@@ -61,25 +71,51 @@ public class Partie {
 		}
 		
 		talon.ajouterCarte(pioche.enleverCarte());
+		
+		
+		
+	
+		
 	}
 
-	public boolean veriferGagnant() {
+	public boolean verifierGagnant() {
+		
+		for(int i=0;i<this.nbreJoueur;i++)
+		{
+			if(listeJoueur.get(i).getNombreCarte() == 0)
+			{
+				return true;
+			}
+		}
 		return false;
 	}
 
 	public void deroulerPartie() {
+		
+		while( !verifierGagnant() ) //tant que personne n'a gagnÃ©
+		{
+			
+			for (int i=0; i<this.nbreJoueur; i++) //Pour chaque joueur,
+			{
+				if (!verifierGagnant()) //si le precedent n'a pas gagnÃ©,
+				{
+					appliquerRegle(listeJoueur.get(i).jouer()); //il joue
+				}
+			}
+		}
 	}
 
-	public void creerPaquet() {
-	}
-
-	public void setSens() {
-	}
 
 	public void nextJoueur() {
 	}
 
 	public void appliquerRegle(ESpecial special) {
+		
+		//On applique la rÃ¨gle pour chaque cas de figure
+		
+		System.out.println("test");
+		//On ajoute la carte au talon
+		
 	}
 
 	public int getSens() {
@@ -88,6 +124,9 @@ public class Partie {
 
 	public void setSens(int sens) {
 		this.sens = sens;
+	}
+public void setSens() {
+		this.sens *= -1;
 	}
 
 	public void setJoueurActuel(int joueurActuel) {
@@ -106,8 +145,5 @@ public class Partie {
 		return listeJoueur.get(index);
 	}
 
-	public static void main(String[] args){
-		Partie p = new Partie();
-		p.getPioche().afficherPioche();
-	}
+	
 }

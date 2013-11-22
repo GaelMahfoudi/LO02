@@ -1,7 +1,7 @@
-package fr.utt.lo02.projet.uno.noyau.gestion.joueur;
+package lo02.projet.uno.noyau.gestion.joueur;
 
 /** 
- *  Classe gérant l'IA de type Normale
+ *  Classe gï¿½rant l'IA de type Normale
  */
 public class IANormal implements StyleIA {
 
@@ -10,6 +10,6 @@ public class IANormal implements StyleIA {
 		// TODO Auto-generated method stub
 		
 	}
-  /* {author=Victor Le Deuff Gaël Mahfoudi}*/
+  /* {author=Victor Le Deuff Gaï¿½l Mahfoudi}*/
 
 }

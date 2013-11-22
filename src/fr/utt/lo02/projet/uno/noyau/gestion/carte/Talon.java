@@ -1,15 +1,15 @@
-package fr.utt.lo02.projet.uno.noyau.gestion.carte;
+package lo02.projet.uno.noyau.gestion.carte;
 
 import java.util.*;
 
-import fr.utt.lo02.projet.uno.noyau.carte.*;
+import lo02.projet.uno.noyau.carte.*;
 
 /**
- *  Talon hérite de PaquetDeCarte. Elle représente le talon. Elle n'est instanciée qu'une fois.
+ *  Talon hï¿½rite de PaquetDeCarte. Elle reprï¿½sente le talon. Elle n'est instanciï¿½e qu'une fois.
  */
 
 public class Talon {
-	/* {author=Victor Le Deuff Gaël Mahfoudi}*/
+	/* {author=Victor Le Deuff Gaï¿½l Mahfoudi}*/
 
 
 	private Queue<Carte> listeCarte;

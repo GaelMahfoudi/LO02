@@ -1,10 +1,10 @@
-package fr.utt.lo02.projet.uno.noyau.carte;
+package lo02.projet.uno.noyau.carte;
 
 /** 
- *  ECouleur énumère les différentes couleurs des cartes
+ *  ECouleur ï¿½numï¿½re les diffï¿½rentes couleurs des cartes
  */
 public enum ECouleur {
-  /* {author=Victor Le Deuff Gaël Mahfoudi}*/
+  /* {author=Victor Le Deuff Gaï¿½l Mahfoudi}*/
 
 
   ROUGE,

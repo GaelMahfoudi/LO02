@@ -1,14 +1,14 @@
-package fr.utt.lo02.projet.uno.noyau.gestion.carte;
+package lo02.projet.uno.noyau.gestion.carte;
 
 import java.util.*;
 
-import fr.utt.lo02.projet.uno.noyau.carte.Carte;
+import lo02.projet.uno.noyau.carte.Carte;
 
 /**
- *  MainJoueur hérite de PaquetDeCarte. Elle représente la main du joueur.
+ *  MainJoueur hï¿½rite de PaquetDeCarte. Elle reprï¿½sente la main du joueur.
  */
 public class MainJoueur {
-	/* {author=Victor Le Deuff Gaël Mahfoudi}*/
+	/* {author=Victor Le Deuff Gaï¿½l Mahfoudi}*/
 
 
 	private List<Carte> main;
@@ -47,7 +47,7 @@ public class MainJoueur {
 		
 		for(i=0;i<main.size();i++)
 		{
-			System.out.println(main.get(i));
+			System.out.println((i+1)+": "+ main.get(i));
 		}
 	}
 

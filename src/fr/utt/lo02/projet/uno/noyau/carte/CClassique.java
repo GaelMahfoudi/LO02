@@ -1,11 +1,13 @@
-package fr.utt.lo02.projet.uno.noyau.carte;
+package lo02.projet.uno.noyau.carte;
+
+import lo02.projet.uno.noyau.gestion.carte.Talon;
 
 
 /**
- *  CClassique hérite de Carte. CClassique repésente l'ensemble des cartes classiques.
+ *  CClassique hï¿½rite de Carte. CClassique repï¿½sente l'ensemble des cartes classiques.
  */
 public class CClassique extends Carte{
-	/* {author=Victor Le Deuff Gaël Mahfoudi}*/
+	/* {author=Victor Le Deuff Gaï¿½l Mahfoudi}*/
 
 
 	private int valeur;
@@ -16,13 +18,24 @@ public class CClassique extends Carte{
 	}
 
 	public int getValeur() {
-		return valeur;
+		return this.valeur;
 	}
 
 	public ESpecial getSpecial() {
 		return null;
 	}
 
+	
+	public boolean estPosable()
+	{
+		if (this.couleur == Talon.getInstance().getDerniereCarte().getCouleur() || this.valeur == Talon.getInstance().getDerniereCarte().getValeur()  )
+			return true;
+		else
+			return false;
+		
+	}
+		
+		
 	@Override
 	public String toString() {
 		return "CClassique [valeur=" + valeur + ", couleur=" + couleur + "]";

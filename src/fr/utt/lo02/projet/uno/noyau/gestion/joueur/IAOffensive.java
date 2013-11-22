@@ -1,7 +1,7 @@
-package fr.utt.lo02.projet.uno.noyau.gestion.joueur;
+package lo02.projet.uno.noyau.gestion.joueur;
 
 /** 
- *  Classe gérant l'IA de type Offensive
+ *  Classe gï¿½rant l'IA de type Offensive
  */
 public class IAOffensive implements StyleIA {
 
@@ -10,6 +10,6 @@ public class IAOffensive implements StyleIA {
 		// TODO Auto-generated method stub
 		
 	}
-  /* {author=Victor Le Deuff Gaël Mahfoudi}*/
+  /* {author=Victor Le Deuff Gaï¿½l Mahfoudi}*/
 
 }

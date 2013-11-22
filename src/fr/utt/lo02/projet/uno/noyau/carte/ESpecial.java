@@ -1,10 +1,10 @@
-package fr.utt.lo02.projet.uno.noyau.carte;
+package lo02.projet.uno.noyau.carte;
 
 /** 
- *  ESpecial énumère les différentes spécialitées de carte.
+ *  ESpecial ï¿½numï¿½re les diffï¿½rentes spï¿½cialitï¿½es de carte.
  */
 public enum ESpecial {
-  /* {author=Victor Le Deuff Gaël Mahfoudi}*/
+  /* {author=Victor Le Deuff Gaï¿½l Mahfoudi}*/
 
 
   PLUS_QUATRE,

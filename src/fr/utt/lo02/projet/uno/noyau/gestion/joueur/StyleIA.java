@@ -1,10 +1,10 @@
-package fr.utt.lo02.projet.uno.noyau.gestion.joueur;
+package lo02.projet.uno.noyau.gestion.joueur;
 
 /** 
- *  Interface StyleIA, elle possède une méthode jouerCarte qui définira le comportement de l'IA
+ *  Interface StyleIA, elle possï¿½de une mï¿½thode jouerCarte qui dï¿½finira le comportement de l'IA
  */
 public interface StyleIA {
-  /* {author=Victor Le Deuff Gaël Mahfoudi}*/
+  /* {author=Victor Le Deuff Gaï¿½l Mahfoudi}*/
 
 
   
