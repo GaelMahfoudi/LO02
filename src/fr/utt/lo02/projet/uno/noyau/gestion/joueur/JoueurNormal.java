@@ -23,7 +23,7 @@ public class JoueurNormal extends Joueur {
 	
 	public ESpecial jouer() {
 		System.out.println("Au tour de " + this.pseudo);
-		System.out.println("Carte du talon:" + Talon.getInstance().getDerniereCarte().toString());
+		System.out.println("Carte du talon: " + Talon.getInstance().getDerniereCarte().toString());
 		
 		do
 		{
@@ -53,7 +53,7 @@ public class JoueurNormal extends Joueur {
 				this.piocherCarte(Pioche.getInstance());
 				Carte cartepiochee = this.main.enleverCarte(this.main.getNombreCarte()-1);
 				System.out.println("Vous avez pioché: ");
-				cartepiochee.toString();
+				System.out.println(cartepiochee.toString());
 				System.out.println("Voulez vous poser cette carte [1|0]");
 				choix = sc.nextInt();
 				if(choix == 1)
@@ -66,6 +66,7 @@ public class JoueurNormal extends Joueur {
 					}
 				}
 				//Si la carte ne peut etre posée ou le joueur ne veut pas
+				System.out.println("Vous devez passer.");
 				this.main.ajouterCarte(cartepiochee);
 				return null;
 			}
