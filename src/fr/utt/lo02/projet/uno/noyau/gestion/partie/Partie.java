@@ -2,6 +2,7 @@ package lo02.projet.uno.noyau.gestion.partie;
 
 import java.util.ArrayList;
 
+import lo02.projet.uno.noyau.carte.Carte;
 import lo02.projet.uno.noyau.carte.ESpecial;
 import lo02.projet.uno.noyau.gestion.carte.Pioche;
 import lo02.projet.uno.noyau.gestion.carte.Talon;
@@ -28,7 +29,7 @@ public class Partie {
 
     public Partie()
 	{
-		sens=0;
+		sens=1;
 		joueurActuel=0;
 		pioche = Pioche.getInstance();
 		talon = Talon.getInstance();
@@ -38,7 +39,7 @@ public class Partie {
 	public Partie(int nbJoueur)
 	{
 		
-		sens=0;
+		sens=1;
 		joueurActuel=0;
 		pioche = Pioche.getInstance();
 		talon = Talon.getInstance();
@@ -56,8 +57,7 @@ public class Partie {
 		//Distribution des cartes
 		this.distribuerCarte();
 		
-		//Lancement de la partie
-		this.deroulerPartie();
+		
 	}
 
 	public void distribuerCarte() {
@@ -70,8 +70,12 @@ public class Partie {
 			listeJoueur.get(i).piocherCarte(pioche);
 		}
 		
-		talon.ajouterCarte(pioche.enleverCarte());
-		
+		Carte cartePioche; 
+		do
+		{
+			cartePioche= pioche.enleverCarte();
+			talon.ajouterCarte(cartePioche);
+		} while(cartePioche.getSpecial() != null);
 		
 		
 	
@@ -92,31 +96,30 @@ public class Partie {
 
 	public void deroulerPartie() {
 		
-		while( !verifierGagnant() ) //tant que personne n'a gagné
-		{
-			
-			for (int i=0; i<this.nbreJoueur; i++) //Pour chaque joueur,
+		//Lancement de la partie
+		while(true) //tant qu'aucun joueur n'a atteint 500 point?
+		{	
+			joueurActuel = 0;
+			//Lancement d'une manche
+			while( !verifierGagnant() ) //tant que personne n'a gagné
 			{
-				if (!verifierGagnant()) //si le precedent n'a pas gagné,
-				{
-					appliquerRegle(listeJoueur.get(i).jouer()); //il joue
-				}
+				listeJoueur.get(joueurActuel).jouer(this); //il joue
+				
+				joueurActuel = (joueurActuel+sens)%nbreJoueur;
 			}
+			
 		}
+		
 	}
 
 
 	public void nextJoueur() {
+		
+		this.joueurActuel++;
+		
 	}
 
-	public void appliquerRegle(ESpecial special) {
-		
-		//On applique la règle pour chaque cas de figure
-		
-		System.out.println("test");
-		//On ajoute la carte au talon
-		
-	}
+	
 
 	public int getSens() {
 		return sens;
@@ -125,7 +128,7 @@ public class Partie {
 	public void setSens(int sens) {
 		this.sens = sens;
 	}
-public void setSens() {
+public  void setSens() {
 		this.sens *= -1;
 	}
 
@@ -144,6 +147,15 @@ public void setSens() {
 	public Joueur getJoueur(int index){
 		return listeJoueur.get(index);
 	}
-
+	
+	public int getJoueurActuel()
+	{
+		return this.joueurActuel;
+	}
+	
+	public int getNbreJoueur()
+	{
+		return this.nbreJoueur;
+	}
 	
 }

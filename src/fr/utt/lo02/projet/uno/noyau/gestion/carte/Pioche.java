@@ -119,12 +119,12 @@ public class Pioche {
 		
 		for(i=0;i<4;i++)
 		{
-			listeCarte.add(new CSpecial(ESpecial.JOKER, ECouleur.INCOLORE));
+			listeCarte.add(new CSpecial(ESpecial.JOKER, null));
 		}
 		
 		for(i=0;i<4;i++)
 		{
-			listeCarte.add(new CSpecial(ESpecial.PLUS_QUATRE, ECouleur.INCOLORE));
+			listeCarte.add(new CSpecial(ESpecial.PLUS_QUATRE, null));
 		}
 		
 		

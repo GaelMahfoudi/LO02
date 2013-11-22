@@ -6,6 +6,7 @@ import lo02.projet.uno.noyau.carte.Carte;
 import lo02.projet.uno.noyau.carte.ESpecial;
 import lo02.projet.uno.noyau.gestion.carte.Pioche;
 import lo02.projet.uno.noyau.gestion.carte.Talon;
+import lo02.projet.uno.noyau.gestion.partie.Partie;
 
 /**
  *  JoueurNormal h�rite de joueur. Elle g�re un joueur humain.
@@ -21,56 +22,60 @@ public class JoueurNormal extends Joueur {
 		
 	}
 	
-	public ESpecial jouer() {
+	public void jouer(Partie partie) {
 		System.out.println("Au tour de " + this.pseudo);
-		System.out.println("Carte du talon: " + Talon.getInstance().getDerniereCarte().toString());
 		
 		do
 		{
+			System.out.println("Carte du talon: " + Talon.getInstance().getDerniereCarte().toString());
 			System.out.println("Votre Main: ");
 			this.main.afficherMain();
 			System.out.println((this.main.getNombreCarte()+1) + ": Piocher et passer");
 			System.out.println("Choisissez une carte [1.." + (this.main.getNombreCarte()+1) + "] : ");
 			int choix= sc.nextInt();
+
 			
 			if(choix > 0 && choix <= this.main.getNombreCarte()) //s'il a choisit une carte
 			{
-				Carte cartechoisie = this.main.enleverCarte(choix-1); //Recupere la carte a poser
-				if(cartechoisie.estPosable())
+				Carte carteChoisie = this.main.enleverCarte(choix-1); //Recupere la carte a poser
+				
+				if(carteChoisie.estPosable())
 				{
-					Talon.getInstance().ajouterCarte(cartechoisie);
-					return cartechoisie.getSpecial();
+					Talon.getInstance().ajouterCarte(carteChoisie);
+					carteChoisie.appliquerRegle(partie);
+					return;
 				}
 				else
 				{
 					System.out.println("Cette carte ne peut etre posée, choisissez en une autre ou passez...");
-					this.main.ajouterCarte(cartechoisie); //Le joueur recupere sa carte
+					this.main.ajouterCarte(carteChoisie); //Le joueur recupere sa carte
 				}
 				
 			}
 			else if (choix == this.main.getNombreCarte()+1) //S'il a choisit de piocher
 			{
 				this.piocherCarte(Pioche.getInstance());
-				Carte cartepiochee = this.main.enleverCarte(this.main.getNombreCarte()-1);
+				Carte cartePiochee = this.main.enleverCarte(this.main.getNombreCarte()-1);
 				System.out.println("Vous avez pioché: ");
-				System.out.println(cartepiochee.toString());
+				System.out.println(cartePiochee.toString());
 				System.out.println("Voulez vous poser cette carte [1|0]");
 				choix = sc.nextInt();
 				if(choix == 1)
 				{
-					if(cartepiochee.estPosable())
+					if(cartePiochee.estPosable())
 					{
-						System.out.println("Vous pouvez la poser...");
-						Talon.getInstance().ajouterCarte(cartepiochee);
-						return cartepiochee.getSpecial();
+						System.out.println("Carte posée");
+						Talon.getInstance().ajouterCarte(cartePiochee);
+						cartePiochee.appliquerRegle(partie);
+						return;
 					}
 				}
 				//Si la carte ne peut etre posée ou le joueur ne veut pas
-				System.out.println("Vous devez passer.");
-				this.main.ajouterCarte(cartepiochee);
-				return null;
+				System.out.println("Vous passez.");
+				this.main.ajouterCarte(cartePiochee);
+				return;
 			}
-			 
+			
 			
 		} while (true);
 		

@@ -29,6 +29,7 @@ public class Talon {
 	}
 
 	public void setCouleurDerniereCarte(ECouleur couleur) {
+		((LinkedList<Carte>) listeCarte).peekLast().setCouleur(couleur);
 	}
 
 	public void ajouterCarte(Carte carte) {
@@ -36,7 +37,7 @@ public class Talon {
 	}
 
 	public Carte getDerniereCarte() {
-		return listeCarte.peek();
+		return ((LinkedList<Carte>) listeCarte).peekLast();
 	}
 
 	public static Talon getInstance() {

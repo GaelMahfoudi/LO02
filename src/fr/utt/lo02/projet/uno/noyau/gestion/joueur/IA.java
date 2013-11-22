@@ -1,6 +1,7 @@
 package lo02.projet.uno.noyau.gestion.joueur;
 
 import lo02.projet.uno.noyau.carte.ESpecial;
+import lo02.projet.uno.noyau.gestion.partie.Partie;
 
 /**
  *  IA h�rite de joueur. Elle g�re un joueur non-humain
@@ -11,8 +12,8 @@ public class IA extends Joueur {
 
 	private StyleIA styleJeu;
 
-	public ESpecial jouer() {
-		return null;
+	public void jouer(Partie partie) {
+		
 	}
 
 	public void generePseudo() {

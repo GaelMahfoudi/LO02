@@ -1,6 +1,7 @@
 package lo02.projet.uno.noyau.carte;
 
 import lo02.projet.uno.noyau.gestion.carte.Talon;
+import lo02.projet.uno.noyau.gestion.partie.Partie;
 
 
 /**
@@ -17,6 +18,11 @@ public class CClassique extends Carte{
 		this.valeur=valeur;
 	}
 
+	public void appliquerRegle(Partie partie)
+	{
+		return;
+	}
+	
 	public int getValeur() {
 		return this.valeur;
 	}
@@ -28,14 +34,17 @@ public class CClassique extends Carte{
 	
 	public boolean estPosable()
 	{
-		if (this.couleur == Talon.getInstance().getDerniereCarte().getCouleur() || this.valeur == Talon.getInstance().getDerniereCarte().getValeur()  )
+		if (couleur == Talon.getInstance().getDerniereCarte().getCouleur() || valeur == Talon.getInstance().getDerniereCarte().getValeur()  )
 			return true;
 		else
 			return false;
 		
 	}
 		
-		
+	public void setCouleur(ECouleur couleur)
+	{
+		return; //On ne peut modifier la couleur d'une carte classique
+	}
 	@Override
 	public String toString() {
 		return "CClassique [valeur=" + valeur + ", couleur=" + couleur + "]";

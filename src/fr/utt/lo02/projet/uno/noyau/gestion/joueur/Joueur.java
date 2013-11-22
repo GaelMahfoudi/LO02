@@ -2,6 +2,7 @@ package lo02.projet.uno.noyau.gestion.joueur;
 
 import lo02.projet.uno.noyau.carte.*;
 import lo02.projet.uno.noyau.gestion.carte.*;
+import lo02.projet.uno.noyau.gestion.partie.Partie;
 
 /**
  *  La classe Joueur est abstraite. Elle poss�de les attributs et m�thodes communes aux joueurs et aux IA.
@@ -33,7 +34,7 @@ public abstract class Joueur {
 		return main.getNombreCarte();
 	}
 
-	public abstract ESpecial jouer();
+	public abstract void jouer(Partie partie);
 
 	public void piocherCarte(Pioche pioche) {
 		main.ajouterCarte(pioche.enleverCarte());

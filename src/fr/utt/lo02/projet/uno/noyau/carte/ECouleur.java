@@ -13,8 +13,6 @@ public enum ECouleur {
 
   JAUNE,
 
-  VERT,
-
-  INCOLORE;
+  VERT;
 
 }
