@@ -40,7 +40,7 @@ public abstract class Joueur {
 		main.ajouterCarte(pioche.enleverCarte());
 	}
 
-	public abstract void direBluff();
+	public abstract boolean direBluff(Joueur joueur);
 
 	public ECouleur choisirCouleur() {
 		return null;
@@ -50,8 +50,8 @@ public abstract class Joueur {
 		main.afficherMain();
 	}
 	
-	public void afficherPseudo(){
-		System.out.print(this.pseudo);
+	public String afficherPseudo(){
+		return this.pseudo;
 	}
 	
 	public abstract void direUno();

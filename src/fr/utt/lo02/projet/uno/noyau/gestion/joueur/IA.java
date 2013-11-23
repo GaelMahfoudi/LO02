@@ -22,7 +22,9 @@ public class IA extends Joueur {
 	public void setStyle() {
 	}
 
-	public void direBluff() {
+	public boolean direBluff(Joueur joueur)
+	{
+		return false;
 	}
 
 	public void direUno() {
@@ -37,5 +39,7 @@ public class IA extends Joueur {
 		// TODO Auto-generated method stub
 		return false;
 	}
+
+
 
 }

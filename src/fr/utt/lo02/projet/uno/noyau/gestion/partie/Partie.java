@@ -1,6 +1,7 @@
 package lo02.projet.uno.noyau.gestion.partie;
 
 import java.util.ArrayList;
+import java.util.Scanner;
 
 import lo02.projet.uno.noyau.carte.Carte;
 import lo02.projet.uno.noyau.carte.ESpecial;
@@ -99,13 +100,14 @@ public class Partie {
 		//Lancement de la partie
 		while(true) //tant qu'aucun joueur n'a atteint 500 point?
 		{	
+			Scanner sc = new Scanner(System.in);
 			joueurActuel = 0;
 			//Lancement d'une manche
 			while( !verifierGagnant() ) //tant que personne n'a gagné
 			{
 				listeJoueur.get(joueurActuel).jouer(this); //il joue
-				
 				joueurActuel = Math.abs((joueurActuel+sens)%nbreJoueur);
+				
 			}
 			
 		}

@@ -39,6 +39,10 @@ public class Talon {
 	public Carte getDerniereCarte() {
 		return ((LinkedList<Carte>) listeCarte).peekLast();
 	}
+	
+	public Carte getAvantDerniereCarte() {
+		return ((LinkedList<Carte>) listeCarte).get(this.getNombreCarte()-1); //TODO verifier qu'il s'agit bien de l'avant derniere
+	}
 
 	public static Talon getInstance() {
 		if(Talon.talon == null)
