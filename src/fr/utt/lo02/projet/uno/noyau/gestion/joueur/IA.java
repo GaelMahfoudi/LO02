@@ -18,6 +18,7 @@ public class IA extends Joueur {
 
 	public void generePseudo() {
 	}
+	
 
 	public void setStyle() {
 	}

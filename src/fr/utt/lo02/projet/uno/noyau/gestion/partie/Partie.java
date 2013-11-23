@@ -15,7 +15,8 @@ import lo02.projet.uno.noyau.gestion.joueur.*;
 public class Partie {
 	/* {author=Victor Le Deuff Ga�l Mahfoudi}*/
 
-
+	private int manche;
+	
 	private int sens;
 	
 	private int nbreJoueur;
@@ -31,6 +32,7 @@ public class Partie {
     public Partie()
 	{
 		sens=1;
+		manche = 1;
 		joueurActuel=0;
 		pioche = Pioche.getInstance();
 		talon = Talon.getInstance();
@@ -41,6 +43,7 @@ public class Partie {
 	{
 		
 		sens=1;
+		manche = 1;
 		joueurActuel=0;
 		pioche = Pioche.getInstance();
 		talon = Talon.getInstance();
@@ -96,13 +99,18 @@ public class Partie {
 	}
 
 	public void deroulerPartie() {
-		
+		boolean cinqCent = false;
 		//Lancement de la partie
-		while(true) //tant qu'aucun joueur n'a atteint 500 point?
+		Scanner sc = new Scanner(System.in);
+		while(!cinqCent) //tant qu'aucun joueur n'a atteint 500 point?
 		{	
-			Scanner sc = new Scanner(System.in);
-			joueurActuel = 0;
+			
+			
 			//Lancement d'une manche
+			System.out.println("\n\nDebut de la manche" + manche + ":");
+			joueurActuel = 0;
+			
+			
 			while( !verifierGagnant() ) //tant que personne n'a gagné
 			{
 				listeJoueur.get(joueurActuel).jouer(this); //il joue
@@ -110,7 +118,35 @@ public class Partie {
 				
 			}
 			
+			//Un joueur n'a plus de cartes, fin de la manche
+			System.out.println( listeJoueur.get(Math.abs((joueurActuel+sens)%nbreJoueur)).afficherPseudo() +" remporte la manche "+ manche);
+			//Comptage des points
+			for(int i=0; i<this.nbreJoueur; i++)
+			{
+				this.listeJoueur.get(i).calculerScore();
+				System.out.println(this.listeJoueur.get(i).afficherPseudo() + " a "+this.listeJoueur.get(i).getScore()+" points.");
+				if (this.listeJoueur.get(i).getScore() >= 500)
+				{
+					System.out.println(this.listeJoueur.get(i).afficherPseudo()+" remporte la partie");
+					cinqCent = true;
+				}
+				
+			}
+			
+			//Reinitialisation des cartes pour une nouvelle manche
+			Pioche.getInstance().reinitialiserPioche();
+			for(int i=0; i<this.nbreJoueur; i++)
+			{
+				this.listeJoueur.get(i).reinitialiserMain();
+			}
+			
+			this.distribuerCarte();
+			//Nouvelle manche
+			manche++;
 		}
+		
+		//Un joueur a depassé les 500 points, fin du jeu
+		
 		
 	}
 

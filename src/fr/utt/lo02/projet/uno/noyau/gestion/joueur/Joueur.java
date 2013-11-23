@@ -19,15 +19,21 @@ public abstract class Joueur {
 
 	protected boolean uno;
 	
+	
 	public Joueur() {
 		main = new MainJoueur();
 		score = 0;
-		pseudo = "jean";
 		uno = false;
 	}
 	
-	public int calculerScore() {
-		return main.scoreMain();
+	public void calculerScore() {
+		
+		this.score += this.main.scoreMain();
+	}
+	
+	public int getScore()
+	{
+		return this.score;
 	}
 
 	public int getNombreCarte() {
@@ -41,6 +47,13 @@ public abstract class Joueur {
 	}
 
 	public abstract boolean direBluff(Joueur joueur);
+	
+	public void reinitialiserMain()
+	{
+		this.main.reinitialiserMain();
+		this.uno=false;
+		
+	}
 
 	public ECouleur choisirCouleur() {
 		return null;

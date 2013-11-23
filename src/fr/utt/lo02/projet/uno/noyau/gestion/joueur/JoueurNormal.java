@@ -156,4 +156,5 @@ public class JoueurNormal extends Joueur {
 			return false;
 	}
 
+	
 }

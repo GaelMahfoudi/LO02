@@ -162,5 +162,10 @@ public class Pioche {
 	      System.out.println(carte);
 		}
 	}
-
+	
+	public void reinitialiserPioche()
+	{
+		Pioche.pioche = null;
+		Pioche.pioche = Pioche.getInstance();
+	}
 }

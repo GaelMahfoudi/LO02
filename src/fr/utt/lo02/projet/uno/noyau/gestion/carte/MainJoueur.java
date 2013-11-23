@@ -18,6 +18,12 @@ public class MainJoueur {
 		main = new ArrayList<Carte>();
 	}
 
+	public void reinitialiserMain()
+	{
+		this.main.clear();
+	}
+	
+	
 	public int getNombreCarte() {
 		return main.size();
 	}
