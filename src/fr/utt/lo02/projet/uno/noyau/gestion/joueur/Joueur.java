@@ -1,8 +1,8 @@
-package lo02.projet.uno.noyau.gestion.joueur;
+package fr.utt.lo02.projet.uno.noyau.gestion.joueur;
 
-import lo02.projet.uno.noyau.carte.*;
-import lo02.projet.uno.noyau.gestion.carte.*;
-import lo02.projet.uno.noyau.gestion.partie.Partie;
+import fr.utt.lo02.projet.uno.noyau.carte.*;
+import fr.utt.lo02.projet.uno.noyau.gestion.carte.*;
+import fr.utt.lo02.projet.uno.noyau.gestion.partie.Partie;
 
 /**
  *  La classe Joueur est abstraite. Elle poss�de les attributs et m�thodes communes aux joueurs et aux IA.

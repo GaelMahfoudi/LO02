@@ -1,4 +1,4 @@
-package lo02.projet.uno.noyau.carte;
+package fr.utt.lo02.projet.uno.noyau.carte;
 
 /** 
  *  ECouleur �num�re les diff�rentes couleurs des cartes

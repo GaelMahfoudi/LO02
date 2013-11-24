@@ -1,12 +1,12 @@
-package lo02.projet.uno.noyau.gestion.joueur;
+package fr.utt.lo02.projet.uno.noyau.gestion.joueur;
 
 import java.util.Scanner;
 
-import lo02.projet.uno.noyau.carte.Carte;
-import lo02.projet.uno.noyau.carte.ESpecial;
-import lo02.projet.uno.noyau.gestion.carte.Pioche;
-import lo02.projet.uno.noyau.gestion.carte.Talon;
-import lo02.projet.uno.noyau.gestion.partie.Partie;
+import fr.utt.lo02.projet.uno.noyau.carte.Carte;
+import fr.utt.lo02.projet.uno.noyau.carte.ESpecial;
+import fr.utt.lo02.projet.uno.noyau.gestion.carte.Pioche;
+import fr.utt.lo02.projet.uno.noyau.gestion.carte.Talon;
+import fr.utt.lo02.projet.uno.noyau.gestion.partie.Partie;
 
 /**
  *  JoueurNormal h�rite de joueur. Elle g�re un joueur humain.

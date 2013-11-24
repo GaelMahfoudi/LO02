@@ -1,4 +1,4 @@
-package lo02.projet.uno.noyau.gestion.joueur;
+package fr.utt.lo02.projet.uno.noyau.gestion.joueur;
 /**
  *  Classe g�rant l'IA de type Bluff
  */

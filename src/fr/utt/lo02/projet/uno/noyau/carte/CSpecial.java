@@ -1,12 +1,12 @@
-package lo02.projet.uno.noyau.carte;
+package fr.utt.lo02.projet.uno.noyau.carte;
 
 
 import java.util.Scanner;
 
-import lo02.projet.uno.noyau.gestion.carte.Pioche;
-import lo02.projet.uno.noyau.gestion.carte.Talon;
-import lo02.projet.uno.noyau.gestion.joueur.Joueur;
-import lo02.projet.uno.noyau.gestion.partie.Partie;
+import fr.utt.lo02.projet.uno.noyau.gestion.carte.Pioche;
+import fr.utt.lo02.projet.uno.noyau.gestion.carte.Talon;
+import fr.utt.lo02.projet.uno.noyau.gestion.joueur.Joueur;
+import fr.utt.lo02.projet.uno.noyau.gestion.partie.Partie;
 
 /** 
  *  CSpecial h�rite de Carte. CSpecial rep�sente l'ensemble des cartes sp�ciales.

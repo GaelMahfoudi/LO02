@@ -1,8 +1,8 @@
-package lo02.projet.uno.noyau.gestion.carte;
+package fr.utt.lo02.projet.uno.noyau.gestion.carte;
 
 import java.util.*;
 
-import lo02.projet.uno.noyau.carte.Carte;
+import fr.utt.lo02.projet.uno.noyau.carte.Carte;
 
 /**
  *  MainJoueur h�rite de PaquetDeCarte. Elle repr�sente la main du joueur.

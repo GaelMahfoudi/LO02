@@ -1,8 +1,8 @@
-package lo02.projet.uno.noyau.gestion.carte;
+package fr.utt.lo02.projet.uno.noyau.gestion.carte;
 
 import java.util.*;
 
-import lo02.projet.uno.noyau.carte.*;
+import fr.utt.lo02.projet.uno.noyau.carte.*;
 
 /**
  *  Pioche h�rite de PaquetDeCarte. Elle repr�sente la pioche. Elle n'est instanci�e qu'une fois.

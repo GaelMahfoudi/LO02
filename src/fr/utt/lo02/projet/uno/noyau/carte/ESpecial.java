@@ -1,4 +1,4 @@
-package lo02.projet.uno.noyau.carte;
+package fr.utt.lo02.projet.uno.noyau.carte;
 
 /** 
  *  ESpecial �num�re les diff�rentes sp�cialit�es de carte.

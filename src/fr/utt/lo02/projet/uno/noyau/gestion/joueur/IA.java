@@ -1,7 +1,7 @@
-package lo02.projet.uno.noyau.gestion.joueur;
+package fr.utt.lo02.projet.uno.noyau.gestion.joueur;
 
-import lo02.projet.uno.noyau.carte.ESpecial;
-import lo02.projet.uno.noyau.gestion.partie.Partie;
+import fr.utt.lo02.projet.uno.noyau.carte.ESpecial;
+import fr.utt.lo02.projet.uno.noyau.gestion.partie.Partie;
 
 /**
  *  IA h�rite de joueur. Elle g�re un joueur non-humain
