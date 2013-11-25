@@ -129,7 +129,7 @@ public class Partie {
 				if (this.listeJoueur.get(i).getScore() >= 500)
 				{
 					System.out.println(this.listeJoueur.get(i).afficherPseudo()+" remporte la partie");
-					String joueurGagnant = this.listeJoueur.get(i).afficherPseudo();
+					String joueurGagnant = (String)this.listeJoueur.get(i).afficherPseudo();
 					cinqCent = true;
 			
 				}
