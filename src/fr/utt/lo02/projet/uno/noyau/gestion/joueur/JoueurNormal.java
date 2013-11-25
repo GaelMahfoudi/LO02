@@ -90,8 +90,9 @@ public class JoueurNormal extends Joueur {
 			{ 
 				if(!this.direContreUno(partie))
 				{
-					System.out.println("Le contre-Uno n'est pas valide, vous piochez X cartes"); //TODO
-					//Que dois je faire si je me suis trompé? combie de carte?
+					System.out.println("Le contre-Uno n'est pas valide, vous piochez 2 cartes");
+					this.piocherCarte(Pioche.getInstance());
+					this.piocherCarte(Pioche.getInstance());
 				}
 			}
 
@@ -109,16 +110,21 @@ public class JoueurNormal extends Joueur {
 			this.main.ajouterCarte(carte);
 			if(carte.getCouleur() == carteAComparer.getCouleur()  || carte.getCouleur() == null || carte.getValeur()== carteAComparer.getValeur()) 
 			{
-				System.out.println(joueur.afficherPseudo() + " a bluffé");
-				//TODO si le joueur a bluffé, on le punit
+				System.out.println(joueur.afficherPseudo() + " a bluffé, il pioche 4 cartes");
+				joueur.piocherCarte(Pioche.getInstance());
+				joueur.piocherCarte(Pioche.getInstance());
+				joueur.piocherCarte(Pioche.getInstance());
+				joueur.piocherCarte(Pioche.getInstance());
 				return true;
 
 			}
 
 		}
 
-		//TODO Si le joueur n'a pas bluffé, on punit le joueur qui l'a denoncé
-		System.out.println(joueur.afficherPseudo() + " ne bluffait pas");
+		
+		System.out.println(joueur.afficherPseudo() + " ne bluffait pas, " + this.afficherPseudo() + "pioche 2 cartes.");
+		this.piocherCarte(Pioche.getInstance());
+		this.piocherCarte(Pioche.getInstance());
 		return false;
 
 
@@ -148,11 +154,9 @@ public class JoueurNormal extends Joueur {
 
 	@Override
 	public boolean direContreUno(Joueur j) {
-		if( j.getNombreCarte() == 1 && !j.uno) //TODO verifier la regle
+		if( j.getNombreCarte() == 1 && !j.uno) 
 		{
-			System.out.println(j.afficherPseudo()+" pioche 4 cartes");
-			j.piocherCarte(Pioche.getInstance());
-			j.piocherCarte(Pioche.getInstance());
+			System.out.println(j.afficherPseudo()+" pioche 2 cartes");
 			j.piocherCarte(Pioche.getInstance());
 			j.piocherCarte(Pioche.getInstance());
 			return true;

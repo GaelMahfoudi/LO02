@@ -129,6 +129,7 @@ public class Partie {
 				if (this.listeJoueur.get(i).getScore() >= 500)
 				{
 					System.out.println(this.listeJoueur.get(i).afficherPseudo()+" remporte la partie");
+					String joueurGagnant = this.listeJoueur.get(i).afficherPseudo();
 					cinqCent = true;
 			
 				}
@@ -149,7 +150,7 @@ public class Partie {
 		}
 
 		//Un joueur a depassé les 500 points, fin du jeu
-
+		System.out.println( joueurGagnant + "remporte la partie, le jeu est terminé");
 
 	}
 
