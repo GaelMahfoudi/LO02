@@ -160,7 +160,7 @@ public class Partie {
 
 		//Un joueur a depassé les 500 points, fin du jeu
 		System.out.println( joueurGagnant + "remporte la partie, le jeu est terminé");
-
+		sc.close();
 	}
 
 

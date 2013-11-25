@@ -47,6 +47,6 @@ public class CClassique extends Carte{
 	}
 	@Override
 	public String toString() {
-		return "CClassique [valeur=" + valeur + ", couleur=" + couleur + "]";
+		return "CClassique [ Valeur= "+valeur + ", Couleur= " + couleur+"]";
 	}
 }

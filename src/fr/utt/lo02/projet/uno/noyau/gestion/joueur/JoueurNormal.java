@@ -22,11 +22,8 @@ public class JoueurNormal extends Joueur {
 
 	}
 
-	public void jouer(Partie partie) {
-		
-		
-		
-		
+	public void jouer(Partie partie) 
+	{
 		if(this.uno && this.getNombreCarte() !=0)
 			this.uno=false;
 
@@ -64,6 +61,7 @@ public class JoueurNormal extends Joueur {
 					System.out.println("Carte posée");
 					Talon.getInstance().ajouterCarte(carteChoisie);
 					carteChoisie.appliquerRegle(partie);
+					this.direUno();
 					return;
 				}
 				else
@@ -88,12 +86,14 @@ public class JoueurNormal extends Joueur {
 						System.out.println("Carte posée");
 						Talon.getInstance().ajouterCarte(cartePiochee);
 						cartePiochee.appliquerRegle(partie);
+						this.direUno();
 						return;
 					}
 				}
 				//Si la carte ne peut etre posée ou le joueur ne veut pas
 				System.out.println("Vous passez.");
 				this.main.ajouterCarte(cartePiochee);
+				this.direUno();
 				return;
 			}
 			if ( choix == this.main.getNombreCarte()+2 ) //ContreUno
@@ -106,9 +106,8 @@ public class JoueurNormal extends Joueur {
 				}
 			}
 
-
 		} while (true);
-
+		
 	}
 
 	public boolean direBluff(Joueur joueur) 
@@ -144,13 +143,19 @@ public class JoueurNormal extends Joueur {
 	}
 
 	public void direUno() {
-		if( this.getNombreCarte() == 0)
-			this.uno=true;
-		else
-			this.uno=false;
+		Scanner sc = new Scanner(System.in);
+		System.out.println("voulez vous déclarer un UNO? [1|0]");
+		if(sc.nextInt() == 0)
+		{
+			if( this.getNombreCarte() == 0)
+				this.uno=true;
+			else
+				this.uno=false;
+		}
 	}
 
-	public boolean direContreUno(Partie partie) {
+	public boolean direContreUno(Partie partie) 
+	{
 		Scanner sc = new Scanner(System.in);
 		System.out.println("A qui dites vous contre Uno? [1.."+(partie.getNbreJoueur())+"]");
 		for(int i = 0; i<partie.getNbreJoueur(); i++)

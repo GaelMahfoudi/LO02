@@ -14,6 +14,7 @@ public class Pioche {
 	
 	private static Pioche pioche = null;
 	
+	@SuppressWarnings("unchecked")
 	private Pioche(){
 		int i = 0;
 		

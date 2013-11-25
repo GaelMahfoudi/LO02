@@ -57,6 +57,7 @@ public class CSpecial extends Carte {
 				if (bluff < partie.getNbreJoueur() && bluff >=0)
 					{
 						if (partie.getJoueur(bluff).direBluff( partie.getJoueur( partie.getJoueurActuel() ) ))
+							sc.close();
 							return;
 					}
 			
@@ -107,17 +108,18 @@ public class CSpecial extends Carte {
 				break;
 		}
 			
+	sc.close();
 	}
 	
 	
 	@Override
 	public String toString() {
-		return "CSpecial [special=" + this.special + ", couleur=" + this.couleur + "]";
+		return "CSpecial [ Special= " + this.special + ", Couleur= " + this.couleur+"]";
 	}
 	
 	public boolean estPosable() 
 	  {
-		  if(couleur == Talon.getInstance().getDerniereCarte().getCouleur() || couleur == null || special == Talon.getInstance().getDerniereCarte().getSpecial())
+		  if(couleur == Talon.getInstance().getDerniereCarte().getCouleur() || ESpecial.JOKER  == Talon.getInstance().getDerniereCarte().getSpecial() || special == Talon.getInstance().getDerniereCarte().getSpecial())
 			  return true;
 		  else
 			  return false;
