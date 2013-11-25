@@ -120,10 +120,11 @@ public class Partie {
 
 			//Un joueur n'a plus de cartes, fin de la manche
 			System.out.println( listeJoueur.get(Math.abs((joueurActuel+sens)%nbreJoueur)).afficherPseudo() +" remporte la manche "+ manche);
-			//Comptage des points
+			//Comptage des points du gagnant
+			this.listeJoueur.get(Math.abs((joueurActuel+sens)%nbreJoueur)).calculerScore(this);
+			
 			for(int i=0; i<this.nbreJoueur; i++)
 			{
-				this.listeJoueur.get(i).calculerScore();
 				System.out.println(this.listeJoueur.get(i).afficherPseudo() + " a "+this.listeJoueur.get(i).getScore()+" points.");
 				if (this.listeJoueur.get(i).getScore() >= 500)
 				{
@@ -131,8 +132,9 @@ public class Partie {
 					cinqCent = true;
 			
 				}
-
 			}
+
+			
 
 			//Reinitialisation des cartes pour une nouvelle manche
 			Pioche.getInstance().reinitialiserPioche();
@@ -197,12 +199,6 @@ public class Partie {
 		return this.nbreJoueur;
 	}
 
-	public static void main(String[] args)
-	{
-		Partie p= new Partie(1);
-		
-		p.distribuerCarte();
-		p.deroulerPartie();
-	}
+
 
 }

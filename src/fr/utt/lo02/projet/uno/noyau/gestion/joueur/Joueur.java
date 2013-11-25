@@ -26,9 +26,13 @@ public abstract class Joueur {
 		uno = false;
 	}
 	
-	public void calculerScore() {
+	public void calculerScore(Partie partie) {
 		
-		this.score += this.main.scoreMain();
+		for(int i=0; i<partie.getNbreJoueur(); i++)
+		{
+			if(this != partie.getJoueur(i))
+				this.score += partie.getJoueur(i).main.scoreMain();
+		}
 	}
 	
 	public int getScore()

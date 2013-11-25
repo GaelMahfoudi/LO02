@@ -2,7 +2,10 @@ package fr.utt.lo02.projet.uno.noyau.gestion.carte;
 
 import java.util.*;
 
+import fr.utt.lo02.projet.uno.noyau.carte.CClassique;
+import fr.utt.lo02.projet.uno.noyau.carte.CSpecial;
 import fr.utt.lo02.projet.uno.noyau.carte.Carte;
+import fr.utt.lo02.projet.uno.noyau.carte.ESpecial;
 
 /**
  *  MainJoueur h�rite de PaquetDeCarte. Elle repr�sente la main du joueur.
@@ -40,7 +43,20 @@ public class MainJoueur {
 	}
 
 	public int scoreMain() {
-		return 0;
+		int score = 0;
+		for (int i=0; i< this.main.size(); i++)
+		{
+			if (this.main.get(i) instanceof CClassique )
+			   score += this.main.get(i).getValeur();
+			else if (this.main.get(i) instanceof CSpecial)
+			{
+				if(this.main.get(i).getSpecial() == ESpecial.PLUS_DEUX || this.main.get(i).getSpecial() == ESpecial.INVERSE || this.main.get(i).getSpecial() == ESpecial.PASSE)
+					score+=20;
+				else if (this.main.get(i).getSpecial() == ESpecial.PLUS_QUATRE || this.main.get(i).getSpecial() == ESpecial.JOKER)
+					score+=50;
+			}
+		}
+		return score;
 	}
 
 	public void ajouterCarte(Carte carte) {
