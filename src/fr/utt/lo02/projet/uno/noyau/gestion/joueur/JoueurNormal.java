@@ -23,11 +23,21 @@ public class JoueurNormal extends Joueur {
 	}
 
 	public void jouer(Partie partie) {
+		
+		
+		
+		
 		if(this.uno && this.getNombreCarte() !=0)
 			this.uno=false;
 
-		System.out.println("Au tour de " + this.pseudo);
-
+		System.out.println(" \n\n\n\n\n\nAu tour de " + this.pseudo+". Appuyez sur Espace puis Entrée lorsque vous serez pret");
+		char wait = 'e';
+		while (wait !=  ' ')
+		{
+			wait = (char)sc.nextLine().charAt(0);
+		}
+			
+		System.out.println("oui");
 		do
 		{
 			int choix = 0;

@@ -140,6 +140,11 @@ public class Pioche {
 	}
 
 	public Carte enleverCarte() {
+		
+		if(Pioche.getInstance().getNombreCarte() == 0 )
+		{
+			Talon.getInstance().viderTalon(pioche);
+		}
 		return listeCarte.poll();
 	}
 

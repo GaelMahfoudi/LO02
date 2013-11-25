@@ -39,7 +39,7 @@ public class Partie {
 		listeJoueur = new ArrayList<Joueur>();
 	}
 
-	public Partie(int nbJoueur)
+	public Partie(int nbJoueurReel, int nbreJoueurVirtuel)
 	{
 
 		sens=1;
@@ -48,14 +48,22 @@ public class Partie {
 		pioche = Pioche.getInstance();
 		talon = Talon.getInstance();
 		listeJoueur = new ArrayList<Joueur>();
-		this.nbreJoueur = nbJoueur;
+		this.nbreJoueur = nbJoueurReel + nbreJoueurVirtuel;
 
-		//generation des joueurs
-		for(int i=0;i<this.nbreJoueur;i++)
+		//generation des joueurs Reels
+		for(int i=0;i<nbJoueurReel;i++)
 		{
 			System.out.println("Joueur " + (i+1) + ":");
 			listeJoueur.add(new JoueurNormal());
 		}
+		
+		//generation des IA
+		for(int i=0;i<nbreJoueurVirtuel;i++)
+		{
+			System.out.println("Joueur " + (i+1) + ":");
+			listeJoueur.add(new IA());
+		}
+		
 
 
 		//Distribution des cartes
@@ -99,6 +107,7 @@ public class Partie {
 	}
 
 	public void deroulerPartie() {
+		String joueurGagnant = new String (" ");
 		boolean cinqCent = false;
 		//Lancement de la partie
 		Scanner sc = new Scanner(System.in);
@@ -107,7 +116,7 @@ public class Partie {
 
 
 			//Lancement d'une manche
-			System.out.println("\n\nDebut de la manche" + manche + ":");
+			System.out.println("\n\nDebut de la manche " + manche + ":");
 			joueurActuel = 0;
 
 
@@ -129,7 +138,7 @@ public class Partie {
 				if (this.listeJoueur.get(i).getScore() >= 500)
 				{
 					System.out.println(this.listeJoueur.get(i).afficherPseudo()+" remporte la partie");
-					String joueurGagnant = (String)this.listeJoueur.get(i).afficherPseudo();
+					joueurGagnant = (String)this.listeJoueur.get(i).afficherPseudo();
 					cinqCent = true;
 			
 				}
