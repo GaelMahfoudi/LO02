@@ -14,36 +14,41 @@ import fr.utt.lo02.projet.uno.noyau.gestion.partie.Partie;
 public class JoueurNormal extends Joueur {
 	/* {author=Victor Le Deuff Ga�l Mahfoudi}*/
 	Scanner sc = new Scanner(System.in);
-	
+
 	public JoueurNormal() {
 		super();
 		System.out.println("Saisissez le nom du joueur:");
 		this.pseudo = sc.nextLine();
-		
+
 	}
-	
+
 	public void jouer(Partie partie) {
 		if(this.uno && this.getNombreCarte() !=0)
 			this.uno=false;
-			
+
 		System.out.println("Au tour de " + this.pseudo);
-		
+
 		do
 		{
-			System.out.println("Carte du talon: " + Talon.getInstance().getDerniereCarte().toString());
-			System.out.println("Votre Main: ");
-			this.main.afficherMain();
-			System.out.println((this.main.getNombreCarte()+1) + ": Piocher");
+			int choix = 0;
+			while(choix<=0 || choix>(this.main.getNombreCarte()+2))
+			{
+				System.out.println("Carte du talon: " + Talon.getInstance().getDerniereCarte().toString());
+				System.out.println("Votre Main: ");
+				this.main.afficherMain();
+				System.out.println((this.main.getNombreCarte()+1) + ": Piocher");
 
-			System.out.println((this.main.getNombreCarte()+2) + ": Declarer un Contre Uno");
-			System.out.println("Choisissez une carte [1.." + (this.main.getNombreCarte()+2) + "] : ");
-			int choix= sc.nextInt();
+				System.out.println((this.main.getNombreCarte()+2) + ": Declarer un Contre Uno");
+				System.out.println("Choisissez une carte [1.." + (this.main.getNombreCarte()+2) + "] : ");
+				choix= sc.nextInt();
 
-			
+			}
+
+
 			if(choix > 0 && choix <= this.main.getNombreCarte()) //s'il a choisit une carte
 			{
 				Carte carteChoisie = this.main.enleverCarte(choix-1); //Recupere la carte a poser
-				
+
 				if(carteChoisie.estPosable())
 				{
 					System.out.println("Carte posée");
@@ -56,7 +61,7 @@ public class JoueurNormal extends Joueur {
 					System.out.println("Cette carte ne peut etre posée, choisissez en une autre ou passez...");
 					this.main.ajouterCarte(carteChoisie); //Le joueur recupere sa carte
 				}
-				
+
 			}
 			else if (choix == this.main.getNombreCarte()+1) //S'il a choisit de piocher
 			{
@@ -89,10 +94,10 @@ public class JoueurNormal extends Joueur {
 					//Que dois je faire si je me suis trompé? combie de carte?
 				}
 			}
-			
-			
+
+
 		} while (true);
-		
+
 	}
 
 	public boolean direBluff(Joueur joueur) 
@@ -107,19 +112,19 @@ public class JoueurNormal extends Joueur {
 				System.out.println(joueur.afficherPseudo() + " a bluffé");
 				//TODO si le joueur a bluffé, on le punit
 				return true;
-				
+
 			}
-		
+
 		}
-		
+
 		//TODO Si le joueur n'a pas bluffé, on punit le joueur qui l'a denoncé
 		System.out.println(joueur.afficherPseudo() + " ne bluffait pas");
 		return false;
-		
-		
-			
-		
-		
+
+
+
+
+
 	}
 
 	public void direUno() {
@@ -136,11 +141,11 @@ public class JoueurNormal extends Joueur {
 		{
 			System.out.println((i+1) + ":" + partie.getJoueur(i).afficherPseudo() );
 		}
-		 int nJoueur = sc.nextInt()-1;
+		int nJoueur = sc.nextInt()-1;
 		return direContreUno(partie.getJoueur(nJoueur));
-		
+
 	}
-	
+
 	@Override
 	public boolean direContreUno(Joueur j) {
 		if( j.getNombreCarte() == 1 && !j.uno) //TODO verifier la regle
@@ -156,5 +161,5 @@ public class JoueurNormal extends Joueur {
 			return false;
 	}
 
-	
+
 }
