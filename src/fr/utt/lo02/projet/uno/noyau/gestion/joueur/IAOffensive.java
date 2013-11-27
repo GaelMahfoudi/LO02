@@ -9,9 +9,31 @@ public class IAOffensive implements StyleIA {
 
 	@Override
 	public int jouerCarte(Partie partie, Joueur joueur) {
-		return 0;
-		// TODO Auto-generated method stub
+
+		int i = 0;
 		
+		//Il cherche la première carte de la bonne couleur et retourne son indice.
+
+		for(i=0;i<joueur.getNombreCarte();i++)
+		{
+			if(joueur.getMain().getMain().get(i).estPosable())
+			{
+				return i;
+			}
+		}
+
+		//Il cherche la première carte normale de la bonne couleur si il y en a une et retourne son indice.
+
+		for(i=0;i<joueur.getNombreCarte();i++)
+		{
+			if(joueur.getMain().getMain().get(i).estPosable() && joueur.getMain().getMain().get(i).getSpecial() == null)
+			{
+				return i;
+			}
+		}
+
+		
+		return joueur.getNombreCarte()+1;
 	}
 
 }

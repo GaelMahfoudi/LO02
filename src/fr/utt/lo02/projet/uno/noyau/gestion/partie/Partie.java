@@ -65,7 +65,8 @@ public class Partie {
 	
 	public Partie(int nbJoueur, int nbIA)
 	{
-
+		int type = 0;
+		Scanner sc = new Scanner(System.in);
 		sens=1;
 		manche = 1;
 		joueurActuel=0;
@@ -82,8 +83,9 @@ public class Partie {
 		}
 		for(int i=0;i<nbIA;i++)
 		{
+			type = sc.nextInt();
 			System.out.println("Joueur " + (i+1+nbJoueur) + ":");
-			listeJoueur.add(new IA());
+			listeJoueur.add(new IA(type));
 		}
 
 		//On vide le talon dans la pioche
