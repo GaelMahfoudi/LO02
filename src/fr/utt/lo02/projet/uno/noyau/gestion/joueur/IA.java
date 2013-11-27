@@ -1,5 +1,7 @@
 package fr.utt.lo02.projet.uno.noyau.gestion.joueur;
 
+import java.util.Scanner;
+
 import fr.utt.lo02.projet.uno.noyau.carte.ESpecial;
 import fr.utt.lo02.projet.uno.noyau.gestion.partie.Partie;
 
@@ -11,9 +13,31 @@ public class IA extends Joueur {
 
 
 	private StyleIA styleJeu;
-
+	private Scanner sc = new Scanner(System.in);
+	
+	public IA()
+	{
+		super();
+		System.out.println("Saisissez le nom du joueur:");
+		this.pseudo = sc.nextLine();
+		styleJeu = new IANormal();
+	}
 	public void jouer(Partie partie) {
+		int i = 0;
 		
+		i = styleJeu.jouerCarte(partie, this);
+		
+		if(i< main.getNombreCarte())
+		{
+			System.out.println(pseudo + " a joué " + main.getMain().get(i));
+			main.getMain().get(i).appliquerRegle(partie);
+			partie.getTalon().ajouterCarte(main.enleverCarte(i));
+		}
+		else
+		{
+			main.ajouterCarte(partie.getPioche().enleverCarte());
+			System.out.println(pseudo + " a pioché");
+		}
 	}
 
 	public void generePseudo() {

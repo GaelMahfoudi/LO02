@@ -13,7 +13,7 @@ import fr.utt.lo02.projet.uno.noyau.gestion.partie.Partie;
  */
 public class JoueurNormal extends Joueur {
 	/* {author=Victor Le Deuff Ga�l Mahfoudi}*/
-	Scanner sc = new Scanner(System.in);
+	private Scanner sc = new Scanner(System.in);
 
 	public JoueurNormal() {
 		super();

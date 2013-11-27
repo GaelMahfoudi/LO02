@@ -57,11 +57,39 @@ public class Partie {
 			listeJoueur.add(new JoueurNormal());
 		}
 
-
+		//On vide le talon dans la pioche
+		talon.viderTalon(pioche);
 		//Distribution des cartes
 		this.distribuerCarte();
+	}
+	
+	public Partie(int nbJoueur, int nbIA)
+	{
 
+		sens=1;
+		manche = 1;
+		joueurActuel=0;
+		pioche = Pioche.getInstance();
+		talon = Talon.getInstance();
+		listeJoueur = new ArrayList<Joueur>();
+		this.nbreJoueur = nbJoueur + nbIA;
 
+		//generation des joueurs
+		for(int i=0;i<nbJoueur;i++)
+		{
+			System.out.println("Joueur " + (i+1) + ":");
+			listeJoueur.add(new JoueurNormal());
+		}
+		for(int i=0;i<nbIA;i++)
+		{
+			System.out.println("Joueur " + (i+1+nbJoueur) + ":");
+			listeJoueur.add(new IA());
+		}
+
+		//On vide le talon dans la pioche
+		talon.viderTalon(pioche);
+		//Distribution des cartes
+		this.distribuerCarte();
 	}
 
 	public void distribuerCarte() {
@@ -199,9 +227,8 @@ public class Partie {
 
 	public static void main(String[] args)
 	{
-		Partie p= new Partie(1);
-		
-		p.distribuerCarte();
+		Partie p= new Partie(1, 1);
+	
 		p.deroulerPartie();
 	}
 

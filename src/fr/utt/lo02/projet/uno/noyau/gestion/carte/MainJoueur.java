@@ -47,6 +47,15 @@ public class MainJoueur {
 		main.add(carte);
 	}
 	
+	
+	public List<Carte> getMain() {
+		return main;
+	}
+
+	public void setMain(List<Carte> main) {
+		this.main = main;
+	}
+
 	public void afficherMain() {
 		
 		int i = 0;

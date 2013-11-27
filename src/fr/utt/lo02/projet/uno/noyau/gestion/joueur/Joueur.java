@@ -67,6 +67,15 @@ public abstract class Joueur {
 		return this.pseudo;
 	}
 	
+	
+	public MainJoueur getMain() {
+		return main;
+	}
+
+	public void setMain(MainJoueur main) {
+		this.main = main;
+	}
+
 	public abstract void direUno();
 
 	public abstract boolean direContreUno(Joueur j);
