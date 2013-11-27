@@ -22,12 +22,19 @@ public class JoueurNormal extends Joueur {
 
 	}
 
-	public void jouer(Partie partie) {
+	public void jouer(Partie partie) 
+	{
 		if(this.uno && this.getNombreCarte() !=0)
 			this.uno=false;
 
-		System.out.println("Au tour de " + this.pseudo);
-
+		System.out.println(" \n\n\n\n\n\nAu tour de " + this.pseudo+". Appuyez sur Espace puis Entrée lorsque vous serez pret");
+		char wait = 'e';
+		while (wait !=  ' ')
+		{
+			wait = (char)sc.nextLine().charAt(0);
+		}
+			
+		System.out.println("oui");
 		do
 		{
 			int choix = 0;
@@ -54,6 +61,7 @@ public class JoueurNormal extends Joueur {
 					System.out.println("Carte posée");
 					Talon.getInstance().ajouterCarte(carteChoisie);
 					carteChoisie.appliquerRegle(partie);
+					this.direUno();
 					return;
 				}
 				else
@@ -78,26 +86,28 @@ public class JoueurNormal extends Joueur {
 						System.out.println("Carte posée");
 						Talon.getInstance().ajouterCarte(cartePiochee);
 						cartePiochee.appliquerRegle(partie);
+						this.direUno();
 						return;
 					}
 				}
 				//Si la carte ne peut etre posée ou le joueur ne veut pas
 				System.out.println("Vous passez.");
 				this.main.ajouterCarte(cartePiochee);
+				this.direUno();
 				return;
 			}
 			if ( choix == this.main.getNombreCarte()+2 ) //ContreUno
 			{ 
 				if(!this.direContreUno(partie))
 				{
-					System.out.println("Le contre-Uno n'est pas valide, vous piochez X cartes"); //TODO
-					//Que dois je faire si je me suis trompé? combie de carte?
+					System.out.println("Le contre-Uno n'est pas valide, vous piochez 2 cartes");
+					this.piocherCarte(Pioche.getInstance());
+					this.piocherCarte(Pioche.getInstance());
 				}
 			}
 
-
 		} while (true);
-
+		
 	}
 
 	public boolean direBluff(Joueur joueur) 
@@ -109,16 +119,21 @@ public class JoueurNormal extends Joueur {
 			this.main.ajouterCarte(carte);
 			if(carte.getCouleur() == carteAComparer.getCouleur()  || carte.getCouleur() == null || carte.getValeur()== carteAComparer.getValeur()) 
 			{
-				System.out.println(joueur.afficherPseudo() + " a bluffé");
-				//TODO si le joueur a bluffé, on le punit
+				System.out.println(joueur.afficherPseudo() + " a bluffé, il pioche 4 cartes");
+				joueur.piocherCarte(Pioche.getInstance());
+				joueur.piocherCarte(Pioche.getInstance());
+				joueur.piocherCarte(Pioche.getInstance());
+				joueur.piocherCarte(Pioche.getInstance());
 				return true;
 
 			}
 
 		}
 
-		//TODO Si le joueur n'a pas bluffé, on punit le joueur qui l'a denoncé
-		System.out.println(joueur.afficherPseudo() + " ne bluffait pas");
+		
+		System.out.println(joueur.afficherPseudo() + " ne bluffait pas, " + this.afficherPseudo() + "pioche 2 cartes.");
+		this.piocherCarte(Pioche.getInstance());
+		this.piocherCarte(Pioche.getInstance());
 		return false;
 
 
@@ -128,13 +143,19 @@ public class JoueurNormal extends Joueur {
 	}
 
 	public void direUno() {
-		if( this.getNombreCarte() == 0)
-			this.uno=true;
-		else
-			this.uno=false;
+		Scanner sc = new Scanner(System.in);
+		System.out.println("voulez vous déclarer un UNO? [1|0]");
+		if(sc.nextInt() == 0)
+		{
+			if( this.getNombreCarte() == 0)
+				this.uno=true;
+			else
+				this.uno=false;
+		}
 	}
 
-	public boolean direContreUno(Partie partie) {
+	public boolean direContreUno(Partie partie) 
+	{
 		Scanner sc = new Scanner(System.in);
 		System.out.println("A qui dites vous contre Uno? [1.."+(partie.getNbreJoueur())+"]");
 		for(int i = 0; i<partie.getNbreJoueur(); i++)
@@ -148,11 +169,9 @@ public class JoueurNormal extends Joueur {
 
 	@Override
 	public boolean direContreUno(Joueur j) {
-		if( j.getNombreCarte() == 1 && !j.uno) //TODO verifier la regle
+		if( j.getNombreCarte() == 1 && !j.uno) 
 		{
-			System.out.println(j.afficherPseudo()+" pioche 4 cartes");
-			j.piocherCarte(Pioche.getInstance());
-			j.piocherCarte(Pioche.getInstance());
+			System.out.println(j.afficherPseudo()+" pioche 2 cartes");
 			j.piocherCarte(Pioche.getInstance());
 			j.piocherCarte(Pioche.getInstance());
 			return true;

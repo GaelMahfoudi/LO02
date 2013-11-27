@@ -22,7 +22,7 @@ public class Talon {
 	}
 
 	public void viderTalon(Pioche pioche) {
-		while(listeCarte.isEmpty()!=true)
+		while(listeCarte.size() != 1)
 		{
 			pioche.ajouterCarte(listeCarte.poll());
 		}

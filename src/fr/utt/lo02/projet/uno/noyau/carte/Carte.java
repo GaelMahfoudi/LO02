@@ -1,6 +1,5 @@
 package fr.utt.lo02.projet.uno.noyau.carte;
 
-import fr.utt.lo02.projet.uno.noyau.gestion.carte.Talon;
 import fr.utt.lo02.projet.uno.noyau.gestion.partie.Partie;
 
 /** 

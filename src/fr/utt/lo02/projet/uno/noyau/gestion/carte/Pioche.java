@@ -14,6 +14,7 @@ public class Pioche {
 	
 	private static Pioche pioche = null;
 	
+	@SuppressWarnings("unchecked")
 	private Pioche(){
 		int i = 0;
 		
@@ -140,6 +141,11 @@ public class Pioche {
 	}
 
 	public Carte enleverCarte() {
+		
+		if(Pioche.getInstance().getNombreCarte() == 0 )
+		{
+			Talon.getInstance().viderTalon(pioche);
+		}
 		return listeCarte.poll();
 	}
 
