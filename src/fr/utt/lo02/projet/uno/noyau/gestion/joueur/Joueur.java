@@ -49,6 +49,15 @@ public abstract class Joueur {
 	public void piocherCarte(Pioche pioche) {
 		main.ajouterCarte(pioche.enleverCarte());
 	}
+	
+	public void piocherCarte(Pioche pioche, int nb) {
+		int i = 0;
+		
+		for(i=0;i<nb;i++)
+		{
+			main.ajouterCarte(pioche.enleverCarte());
+		}
+	}
 
 	public abstract boolean direBluff(Joueur joueur);
 	

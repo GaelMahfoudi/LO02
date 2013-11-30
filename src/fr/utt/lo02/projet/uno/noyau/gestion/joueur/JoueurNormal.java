@@ -39,17 +39,7 @@ public class JoueurNormal extends Joueur {
 		{
 			int choix = 0;
 
-			/*System.out.println("Carte du talon: " + Talon.getInstance().getDerniereCarte().toString());
-			System.out.println("Votre Main: ");
-			this.main.afficherMain();
-			System.out.println((this.main.getNombreCarte()+1) + ": Piocher");
-
-			System.out.println((this.main.getNombreCarte()+2) + ": Declarer un Contre Uno");
-			System.out.println("Choisissez une carte [1.." + (this.main.getNombreCarte()+2) + "] : ");
-			choix= sc.nextInt();*/
-
 			choix = choisirCarte();
-
 
 			if(choix > 0 && choix <= this.main.getNombreCarte()) //s'il a choisit une carte
 			{
@@ -112,7 +102,8 @@ public class JoueurNormal extends Joueur {
 	private int choisirCarte()
 	{
 		int choix = 0;
-
+		
+		//Tant que le choix est invalide
 		while(choix<=0 || choix>this.main.getNombreCarte()+2)
 		{
 			System.out.println("Carte du talon: " + Talon.getInstance().getDerniereCarte().toString());
@@ -123,9 +114,9 @@ public class JoueurNormal extends Joueur {
 			System.out.println((this.main.getNombreCarte()+2) + ": Declarer un Contre Uno");
 			System.out.println("Choisissez une carte [1.." + (this.main.getNombreCarte()+2) + "] : ");
 			choix= sc.nextInt();
-
 		}
 		
+		//on retourne le choix
 		return choix;
 	}
 
