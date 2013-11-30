@@ -1,9 +1,10 @@
 package fr.utt.lo02.projet.uno.noyau.gestion.joueur;
 
+import java.nio.Buffer;
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 import fr.utt.lo02.projet.uno.noyau.carte.Carte;
-import fr.utt.lo02.projet.uno.noyau.carte.ESpecial;
 import fr.utt.lo02.projet.uno.noyau.gestion.carte.Pioche;
 import fr.utt.lo02.projet.uno.noyau.gestion.carte.Talon;
 import fr.utt.lo02.projet.uno.noyau.gestion.partie.Partie;
@@ -27,29 +28,23 @@ public class JoueurNormal extends Joueur {
 		if(this.uno && this.getNombreCarte() !=0)
 			this.uno=false;
 
-		System.out.println(" \n\n\n\n\n\nAu tour de " + this.pseudo+". Appuyez sur Espace puis Entrée lorsque vous serez pret");
-		char wait = 'e';
-		while (wait !=  ' ')
-		{
-			wait = (char)sc.nextLine().charAt(0);
-		}
-			
-		System.out.println("oui");
+		System.out.println(" \n\n\n\n\n\nAu tour de " + this.pseudo+". Appuyez sur une touche lorsque vous serez pret");
+		sc.next().charAt(0);	
+		
 		do
 		{
-			int choix = 0;
-			while(choix<=0 || choix>(this.main.getNombreCarte()+2))
-			{
-				System.out.println("Carte du talon: " + Talon.getInstance().getDerniereCarte().toString());
-				System.out.println("Votre Main: ");
-				this.main.afficherMain();
-				System.out.println((this.main.getNombreCarte()+1) + ": Piocher");
+			
+			
+			System.out.println("Carte du talon: " + Talon.getInstance().getDerniereCarte().toString());
+			System.out.println("Votre Main: ");
+			this.main.afficherMain();
+			System.out.println((this.main.getNombreCarte()+1) + ": Piocher");
 
-				System.out.println((this.main.getNombreCarte()+2) + ": Declarer un Contre Uno");
-				System.out.println("Choisissez une carte [1.." + (this.main.getNombreCarte()+2) + "] : ");
-				choix= sc.nextInt();
+			System.out.println((this.main.getNombreCarte()+2) + ": Declarer un Contre Uno");
+			System.out.println("Choisissez une carte [1.." + (this.main.getNombreCarte()+2) + "] : ");
+			int choix= getNombre(0, this.main.getNombreCarte()+2);
 
-			}
+			
 
 
 			if(choix > 0 && choix <= this.main.getNombreCarte()) //s'il a choisit une carte
@@ -78,7 +73,7 @@ public class JoueurNormal extends Joueur {
 				System.out.println("Vous avez pioché: ");
 				System.out.println(cartePiochee.toString());
 				System.out.println("Voulez vous poser cette carte [1|0]");
-				choix = sc.nextInt();
+				choix = getNombre(0,1);
 				if(choix == 1)
 				{
 					if(cartePiochee.estPosable())
@@ -97,17 +92,34 @@ public class JoueurNormal extends Joueur {
 				return;
 			}
 			if ( choix == this.main.getNombreCarte()+2 ) //ContreUno
-			{ 
-				if(!this.direContreUno(partie))
-				{
-					System.out.println("Le contre-Uno n'est pas valide, vous piochez 2 cartes");
-					this.piocherCarte(Pioche.getInstance());
-					this.piocherCarte(Pioche.getInstance());
-				}
-			}
-
+				this.direContreUno(partie);
 		} while (true);
 		
+	}
+
+	private int getNombre(int min, int max) {
+		
+		Scanner sc = new Scanner(System.in);
+		int i = -1;
+		
+		try{
+			i  = sc.nextInt();
+			}
+		catch(InputMismatchException e)
+			{
+				System.out.println("Erreur: entrez un entier entre "+ min + " et " + max + ": ");
+				i = getNombre(min, max);
+			}
+		finally
+		{
+			if ( i < min || i > max)
+			{
+				System.out.println("Erreur: entrez un entier entre "+ min + " et " + max + ": ");
+				i=getNombre(min, max);
+			}
+		}
+		
+		return i;
 	}
 
 	public boolean direBluff(Joueur joueur) 
@@ -145,7 +157,8 @@ public class JoueurNormal extends Joueur {
 	public void direUno() {
 		Scanner sc = new Scanner(System.in);
 		System.out.println("voulez vous déclarer un UNO? [1|0]");
-		if(sc.nextInt() == 0)
+		int choix = getNombre(0,1);
+		if(choix == 0)
 		{
 			if( this.getNombreCarte() == 0)
 				this.uno=true;
@@ -154,7 +167,7 @@ public class JoueurNormal extends Joueur {
 		}
 	}
 
-	public boolean direContreUno(Partie partie) 
+	public void direContreUno(Partie partie) 
 	{
 		Scanner sc = new Scanner(System.in);
 		System.out.println("A qui dites vous contre Uno? [1.."+(partie.getNbreJoueur())+"]");
@@ -162,22 +175,27 @@ public class JoueurNormal extends Joueur {
 		{
 			System.out.println((i+1) + ":" + partie.getJoueur(i).afficherPseudo() );
 		}
-		int nJoueur = sc.nextInt()-1;
-		return direContreUno(partie.getJoueur(nJoueur));
+		int nJoueur = getNombre(0, partie.getNbreJoueur())-1;
+		direContreUno(partie.getJoueur(nJoueur));
 
 	}
 
 	@Override
-	public boolean direContreUno(Joueur j) {
+	public void direContreUno(Joueur j) {
 		if( j.getNombreCarte() == 1 && !j.uno) 
 		{
 			System.out.println(j.afficherPseudo()+" pioche 2 cartes");
 			j.piocherCarte(Pioche.getInstance());
 			j.piocherCarte(Pioche.getInstance());
-			return true;
 		}
 		else
-			return false;
+		{
+			System.out.println("Le contre-Uno n'est pas valide, vous piochez 2 cartes");
+			this.piocherCarte(Pioche.getInstance());
+			this.piocherCarte(Pioche.getInstance());
+		}
+			
+		
 	}
 
 

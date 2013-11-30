@@ -68,50 +68,43 @@ public class CSpecial extends Carte {
 					joueurNext1.piocherCarte(Pioche.getInstance());
 					joueurNext1.piocherCarte(Pioche.getInstance());
 					System.out.println(joueurNext1.afficherPseudo() +" a pioché 4 nouvelles cartes" );
-					System.out.println("Choisissez la nouvelle couleur [B|R|J|V]:");
-					String couleurChoisie = sc.nextLine(); //Buffer
-					couleurChoisie = sc.nextLine();
-					switch(couleurChoisie.charAt(0))
-					{
-						case 'B':
-							Talon.getInstance().setCouleurDerniereCarte(ECouleur.BLEU);
-						break;
-						case 'R':
-							Talon.getInstance().setCouleurDerniereCarte(ECouleur.ROUGE);
-						break;
-						case 'J':
-							Talon.getInstance().setCouleurDerniereCarte(ECouleur.JAUNE);
-						break;
-						case 'V':
-							Talon.getInstance().setCouleurDerniereCarte(ECouleur.VERT);
-						break;
-					}
+					choixCouleur();
 				
 				break;
 			case JOKER:		
-				System.out.println("Choisissez la nouvelle couleur [B|R|J|V]:");
-				switch(sc.nextLine().charAt(0))
-				{
-					case 'B':
-						Talon.getInstance().setCouleurDerniereCarte(ECouleur.BLEU);
-					break;
-					case 'R':
-						Talon.getInstance().setCouleurDerniereCarte(ECouleur.ROUGE);
-					break;
-					case 'J':
-						Talon.getInstance().setCouleurDerniereCarte(ECouleur.JAUNE);
-					break;
-					case 'V':
-						Talon.getInstance().setCouleurDerniereCarte(ECouleur.VERT);
-					break;
-				}
+				choixCouleur();
 				break;
 		}
 			
-	sc.close();
 	}
 	
 	
+	private void choixCouleur() {
+		Scanner sc = new Scanner(System.in);
+		System.out.println("Choisissez la nouvelle couleur [B|R|J|V]:");
+		String couleur = sc.nextLine();
+		switch(couleur.charAt(0))
+		{
+			case 'B':
+				Talon.getInstance().setCouleurDerniereCarte(ECouleur.BLEU);
+			break;
+			case 'R':
+				Talon.getInstance().setCouleurDerniereCarte(ECouleur.ROUGE);
+			break;
+			case 'J':
+				Talon.getInstance().setCouleurDerniereCarte(ECouleur.JAUNE);
+			break;
+			case 'V':
+				Talon.getInstance().setCouleurDerniereCarte(ECouleur.VERT);
+			break;
+			default:
+				System.out.println("Erreur: veuillez recommencer");
+				choixCouleur();
+			break;
+		}
+		
+	}
+
 	@Override
 	public String toString() {
 		return "CSpecial [ Special= " + this.special + ", Couleur= " + this.couleur+"]";
@@ -119,7 +112,7 @@ public class CSpecial extends Carte {
 	
 	public boolean estPosable() 
 	  {
-		  if(couleur == Talon.getInstance().getDerniereCarte().getCouleur() || ESpecial.JOKER  == Talon.getInstance().getDerniereCarte().getSpecial() || special == Talon.getInstance().getDerniereCarte().getSpecial())
+		  if(couleur == Talon.getInstance().getDerniereCarte().getCouleur() || ESpecial.JOKER  == special || special == Talon.getInstance().getDerniereCarte().getSpecial() || ESpecial.PLUS_QUATRE == special)
 			  return true;
 		  else
 			  return false;
