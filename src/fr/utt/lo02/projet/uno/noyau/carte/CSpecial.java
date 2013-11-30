@@ -119,10 +119,7 @@ public class CSpecial extends Carte {
 	
 	public boolean estPosable() 
 	  {
-		  if(couleur == Talon.getInstance().getDerniereCarte().getCouleur() || ESpecial.JOKER  == Talon.getInstance().getDerniereCarte().getSpecial() || special == Talon.getInstance().getDerniereCarte().getSpecial())
-			  return true;
-		  else
-			  return false;
+		  return true;
 	  }
 	
 	public int getValeur()
