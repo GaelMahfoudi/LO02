@@ -3,6 +3,7 @@ package fr.utt.lo02.projet.uno.noyau.gestion.joueur;
 import java.util.Scanner;
 
 import fr.utt.lo02.projet.uno.noyau.carte.Carte;
+import fr.utt.lo02.projet.uno.noyau.carte.ECouleur;
 import fr.utt.lo02.projet.uno.noyau.carte.ESpecial;
 import fr.utt.lo02.projet.uno.noyau.gestion.carte.Pioche;
 import fr.utt.lo02.projet.uno.noyau.gestion.carte.Talon;
@@ -118,6 +119,7 @@ public class JoueurNormal extends Joueur {
 		//on retourne le choix
 		return choix;
 	}
+	
 
 	public boolean direBluff(Joueur joueur) 
 	{
@@ -140,7 +142,6 @@ public class JoueurNormal extends Joueur {
 		System.out.println(joueur.afficherPseudo() + " ne bluffait pas, " + this.afficherPseudo() + "pioche 2 cartes.");
 		this.piocherCarte(Pioche.getInstance(), 2);
 		return false;
-
 	}
 
 	public void direUno() {
@@ -183,6 +184,40 @@ public class JoueurNormal extends Joueur {
 		}
 		else
 			return false;
+	}
+
+	@Override
+	public void choisirCouleur() {
+		
+		System.out.println("Choisissez la nouvelle couleur [B|R|J|V]:");
+		String a = "Jean";
+		
+		//Recupere un \n si il y a eu un nextInt() précédement
+		sc.nextLine();
+		
+		//Choix du joueur
+		a = sc.nextLine();
+		
+		//On passe en majuscule
+		a.toUpperCase();
+		
+		//On choisis la bonne couleur
+		switch(a.charAt(0))
+		{
+			case 'B':
+				Talon.getInstance().setCouleurDerniereCarte(ECouleur.BLEU);
+			break;
+			case 'R':
+				Talon.getInstance().setCouleurDerniereCarte(ECouleur.ROUGE);
+			break;
+			case 'J':
+				Talon.getInstance().setCouleurDerniereCarte(ECouleur.JAUNE);
+			break;
+			case 'V':
+				Talon.getInstance().setCouleurDerniereCarte(ECouleur.VERT);
+			break;
+		}
+		
 	}
 
 

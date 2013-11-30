@@ -63,43 +63,10 @@ public class CSpecial extends Carte {
 					Joueur joueurNext1 = partie.getJoueur(Math.abs((partie.getJoueurActuel()+partie.getSens())%partie.getNbreJoueur()));
 					joueurNext1.piocherCarte(Pioche.getInstance(),4);
 					System.out.println(joueurNext1.afficherPseudo() +" a pioché 4 nouvelles cartes" );
-					System.out.println("Choisissez la nouvelle couleur [B|R|J|V]:");
-					String couleurChoisie = sc.nextLine(); //Buffer
-					couleurChoisie = sc.nextLine();
-					switch(couleurChoisie.charAt(0))
-					{
-						case 'B':
-							Talon.getInstance().setCouleurDerniereCarte(ECouleur.BLEU);
-						break;
-						case 'R':
-							Talon.getInstance().setCouleurDerniereCarte(ECouleur.ROUGE);
-						break;
-						case 'J':
-							Talon.getInstance().setCouleurDerniereCarte(ECouleur.JAUNE);
-						break;
-						case 'V':
-							Talon.getInstance().setCouleurDerniereCarte(ECouleur.VERT);
-						break;
-					}
-				
+					partie.getJoueur(partie.getJoueurActuel()).choisirCouleur();
 				break;
 			case JOKER:		
-				System.out.println("Choisissez la nouvelle couleur [B|R|J|V]:");
-				switch(sc.nextLine().charAt(0))
-				{
-					case 'B':
-						Talon.getInstance().setCouleurDerniereCarte(ECouleur.BLEU);
-					break;
-					case 'R':
-						Talon.getInstance().setCouleurDerniereCarte(ECouleur.ROUGE);
-					break;
-					case 'J':
-						Talon.getInstance().setCouleurDerniereCarte(ECouleur.JAUNE);
-					break;
-					case 'V':
-						Talon.getInstance().setCouleurDerniereCarte(ECouleur.VERT);
-					break;
-				}
+				partie.getJoueur(partie.getJoueurActuel()).choisirCouleur();
 				break;
 		}
 	}

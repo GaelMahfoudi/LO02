@@ -67,10 +67,6 @@ public abstract class Joueur {
 		this.uno=false;
 		
 	}
-
-	public ECouleur choisirCouleur() {
-		return null;
-	}
 	
 	public void afficherMain(){
 		main.afficherMain();
@@ -92,4 +88,6 @@ public abstract class Joueur {
 	public abstract void direUno();
 
 	public abstract boolean direContreUno(Joueur j);
+	
+	public abstract void choisirCouleur();
 }

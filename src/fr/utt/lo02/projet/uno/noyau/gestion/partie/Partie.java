@@ -213,7 +213,7 @@ public class Partie {
 
 	public static void main(String[] args)
 	{
-		Partie p= new Partie(1,1);
+		Partie p= new Partie(1);
 	
 		p.deroulerPartie();
 	}
