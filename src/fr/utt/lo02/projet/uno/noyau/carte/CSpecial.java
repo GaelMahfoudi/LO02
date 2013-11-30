@@ -78,9 +78,20 @@ public class CSpecial extends Carte {
 	}
 	
 	public boolean estPosable() 
-	  {
-		  return true;
-	  }
+	{
+		  if(this.getSpecial()==ESpecial.PLUS_QUATRE || this.getSpecial()==ESpecial.JOKER)
+		  {
+			  return true;
+		  }
+		  else if(this.getCouleur()==Talon.getInstance().getDerniereCarte().getCouleur())
+		  {
+			  return true;
+		  }
+		  else
+		  {
+			  return false;
+		  }
+	}
 	
 	public int getValeur()
 	{
