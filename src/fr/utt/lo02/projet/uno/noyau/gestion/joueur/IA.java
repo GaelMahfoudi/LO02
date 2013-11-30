@@ -13,12 +13,13 @@ public class IA extends Joueur {
 
 
 	private StyleIA styleJeu;
-	private Scanner sc = new Scanner(System.in);
+	private Scanner sc;
 	
 	public IA()
 	{
 		super();
 		System.out.println("Saisissez le nom du joueur:");
+		sc = new Scanner(System.in);
 		this.pseudo = sc.nextLine();
 	}
 	public void jouer(Partie partie) {

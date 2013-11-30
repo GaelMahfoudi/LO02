@@ -1,6 +1,5 @@
 package fr.utt.lo02.projet.uno.noyau.gestion.joueur;
 
-import java.util.InputMismatchException;
 import java.util.Scanner;
 
 import fr.utt.lo02.projet.uno.noyau.carte.Carte;
@@ -14,40 +13,40 @@ import fr.utt.lo02.projet.uno.noyau.gestion.partie.Partie;
  */
 public class JoueurNormal extends Joueur {
 	/* {author=Victor Le Deuff Ga�l Mahfoudi}*/
-	private Scanner sc = new Scanner(System.in);
-
+	
+	private Scanner sc;
+	
 	public JoueurNormal() {
 		super();
 		System.out.println("Saisissez le nom du joueur:");
+		sc = new Scanner(System.in);
 		this.pseudo = sc.nextLine();
-
 	}
 
 	public void jouer(Partie partie) 
 	{
+		sc = new Scanner(System.in);
 		if(this.uno && this.getNombreCarte() !=0)
 			this.uno=false;
 
-		System.out.println(" \n\n\n\n\n\nAu tour de " + this.pseudo+". Appuyez sur Espace puis Entrée lorsque vous serez pret");
-		/*char wait = 'e';
-		while (wait !=  ' ')
-		{
-			wait = (char)sc.nextLine().charAt(0);
-		}*/
+		System.out.println(" \n\n\n\n\n\nAu tour de " + this.pseudo+". Appuyez sur Entrée lorsque vous serez pret");
+		sc.nextLine();
 			
 		System.out.println("oui");
+		
+		
 		do
 		{
 			int choix = 0;
-			
-				System.out.println("Carte du talon: " + Talon.getInstance().getDerniereCarte().toString());
-				System.out.println("Votre Main: ");
-				this.main.afficherMain();
-				System.out.println((this.main.getNombreCarte()+1) + ": Piocher");
 
-				System.out.println((this.main.getNombreCarte()+2) + ": Declarer un Contre Uno");
-				System.out.println("Choisissez une carte [1.." + (this.main.getNombreCarte()+2) + "] : ");
-				choix= sc.nextInt();
+			System.out.println("Carte du talon: " + Talon.getInstance().getDerniereCarte().toString());
+			System.out.println("Votre Main: ");
+			this.main.afficherMain();
+			System.out.println((this.main.getNombreCarte()+1) + ": Piocher");
+
+			System.out.println((this.main.getNombreCarte()+2) + ": Declarer un Contre Uno");
+			System.out.println("Choisissez une carte [1.." + (this.main.getNombreCarte()+2) + "] : ");
+			choix= sc.nextInt();
 
 			
 
@@ -136,17 +135,14 @@ public class JoueurNormal extends Joueur {
 		this.piocherCarte(Pioche.getInstance());
 		return false;
 
-
-
-
-
 	}
 
 	public void direUno() {
-		Scanner sc = new Scanner(System.in);
 		System.out.println("voulez vous déclarer un UNO? [1|0]");
-	
-		if(sc.nextInt() == 0)
+		sc = new Scanner(System.in);
+		
+		int a = sc.nextInt();
+		if(a == 0)
 		{
 			if( this.getNombreCarte() == 0)
 				this.uno=true;
@@ -160,7 +156,7 @@ public class JoueurNormal extends Joueur {
 
 	public boolean direContreUno(Partie partie) 
 	{
-		Scanner sc = new Scanner(System.in);
+		sc = new Scanner(System.in);
 		System.out.println("A qui dites vous contre Uno? [1.."+(partie.getNbreJoueur())+"]");
 		for(int i = 0; i<partie.getNbreJoueur(); i++)
 		{

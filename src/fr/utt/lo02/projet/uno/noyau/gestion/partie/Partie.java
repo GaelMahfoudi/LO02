@@ -41,8 +41,6 @@ public class Partie {
 
 	public Partie(int nbJoueur)
 	{
-		int type = 0;
-		Scanner sc = new Scanner(System.in);
 		sens=1;
 		manche = 1;
 		joueurActuel=0;
@@ -64,8 +62,6 @@ public class Partie {
 	
 	public Partie(int nbJoueur, int nbIA)
 	{
-		int type = 0;
-		Scanner sc = new Scanner(System.in);
 		sens=1;
 		manche = 1;
 		joueurActuel=0;
@@ -137,7 +133,6 @@ public class Partie {
 		String joueurGagnant = new String (" ");
 		boolean cinqCent = false;
 		//Lancement de la partie
-		Scanner sc = new Scanner(System.in);
 		while(!cinqCent) //tant qu'aucun joueur n'a atteint 500 point?
 		{	
 
@@ -187,7 +182,6 @@ public class Partie {
 
 		//Un joueur a depassé les 500 points, fin du jeu
 		System.out.println( joueurGagnant + "remporte la partie, le jeu est terminé");
-		sc.close();
 	}
 
 

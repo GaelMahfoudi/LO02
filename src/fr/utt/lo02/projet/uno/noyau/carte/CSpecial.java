@@ -57,7 +57,6 @@ public class CSpecial extends Carte {
 				if (bluff < partie.getNbreJoueur() && bluff >=0)
 					{
 						if (partie.getJoueur(bluff).direBluff( partie.getJoueur( partie.getJoueurActuel() ) ))
-							sc.close();
 							return;
 					}
 			
@@ -107,8 +106,6 @@ public class CSpecial extends Carte {
 				}
 				break;
 		}
-			
-	sc.close();
 	}
 	
 	
