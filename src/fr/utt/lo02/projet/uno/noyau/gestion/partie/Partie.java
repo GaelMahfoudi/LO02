@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 import fr.utt.lo02.projet.uno.noyau.carte.Carte;
+import fr.utt.lo02.projet.uno.noyau.carte.ECouleur;
 import fr.utt.lo02.projet.uno.noyau.carte.ESpecial;
 import fr.utt.lo02.projet.uno.noyau.gestion.carte.Pioche;
 import fr.utt.lo02.projet.uno.noyau.gestion.carte.Talon;
@@ -87,17 +88,32 @@ public class Partie {
 	}
 
 	public void distribuerCarte() {
+		
+		
 		for(int i=0;i<listeJoueur.size();i++)
 		{
+			//Pour Èviter que la pioche soit vide au moment de poser une carte sur le talon
+			if(pioche.getNombreCarte()<=10)
+			{
+				talon.viderTalon(pioche);
+			}
 			listeJoueur.get(i).piocherCarte(pioche, 10);
 		}
 
 		Carte cartePioche; 
-		do
+
+		cartePioche = pioche.enleverCarte();
+		
+		if(cartePioche.getSpecial() == ESpecial.JOKER || cartePioche.getSpecial() == ESpecial.PLUS_QUATRE)
 		{
-			cartePioche= pioche.enleverCarte();
 			talon.ajouterCarte(cartePioche);
-		} while(cartePioche.getSpecial() != null);
+			talon.setCouleurDerniereCarte(ECouleur.ROUGE);
+		}
+		else
+		{
+			talon.ajouterCarte(cartePioche);
+		}
+		
 	}
 
 	public boolean verifierGagnant() {
@@ -125,29 +141,38 @@ public class Partie {
 			joueurActuel = 0;
 
 
-			while( !verifierGagnant() ) //tant que personne n'a gagn√©
+			while( !verifierGagnant() && pioche.getNombreCarte()>0 ) //tant que personne n'a gagn√©
 			{
+				System.out.println(talon.getDerniereCarte() + " " + pioche.getNombreCarte());
 				listeJoueur.get(joueurActuel).jouer(this); //il joue
 				joueurActuel = Math.abs((joueurActuel+sens)%nbreJoueur);
-
 			}
-
-			//Un joueur n'a plus de cartes, fin de la manche
-			System.out.println( listeJoueur.get(Math.abs((joueurActuel+sens)%nbreJoueur)).afficherPseudo() +" remporte la manche "+ manche);
-			//Comptage des points du gagnant
-			this.listeJoueur.get(Math.abs((joueurActuel+sens)%nbreJoueur)).calculerScore(this);
 			
-			for(int i=0; i<this.nbreJoueur; i++)
+			//Si la manche c'est finie car il y a eu un gagnant
+			if(pioche.getNombreCarte()>0)
 			{
-				System.out.println(this.listeJoueur.get(i).afficherPseudo() + " a "+this.listeJoueur.get(i).getScore()+" points.");
-				if (this.listeJoueur.get(i).getScore() >= 500)
+				System.out.println( listeJoueur.get(Math.abs((joueurActuel+sens)%nbreJoueur)).afficherPseudo() +" remporte la manche "+ manche);
+				//Comptage des points du gagnant
+				this.listeJoueur.get(Math.abs((joueurActuel+sens)%nbreJoueur)).calculerScore(this);
+
+				for(int i=0; i<this.nbreJoueur; i++)
 				{
-					System.out.println(this.listeJoueur.get(i).afficherPseudo()+" remporte la partie");
-					joueurGagnant = (String)this.listeJoueur.get(i).afficherPseudo();
-					cinqCent = true;
-			
+					System.out.println(this.listeJoueur.get(i).afficherPseudo() + " a "+this.listeJoueur.get(i).getScore()+" points.");
+					if (this.listeJoueur.get(i).getScore() >= 500)
+					{
+						System.out.println(this.listeJoueur.get(i).afficherPseudo()+" remporte la partie");
+						joueurGagnant = (String)this.listeJoueur.get(i).afficherPseudo();
+						cinqCent = true;
+
+					}
 				}
 			}
+			else
+			{
+				//Si la manche se termine carte la pioche est vide
+				System.out.println("La pioche est vide, la manche est terminÈe");
+			}
+			
 
 			
 
@@ -164,7 +189,7 @@ public class Partie {
 		}
 
 		//Un joueur a depass√© les 500 points, fin du jeu
-		System.out.println( joueurGagnant + "remporte la partie, le jeu est termin√©");
+		System.out.println( joueurGagnant + "remporte la partie, le jeu est terminÈe, il y a eu " + manche + " manches");
 	}
 
 
@@ -213,7 +238,7 @@ public class Partie {
 
 	public static void main(String[] args)
 	{
-		Partie p= new Partie(1);
+		Partie p= new Partie(0, 2);
 	
 		p.deroulerPartie();
 	}

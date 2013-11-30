@@ -16,7 +16,7 @@ public class IAOffensive implements StyleIA {
 
 		for(i=0;i<joueur.getNombreCarte();i++)
 		{
-			if(joueur.getMain().getMain().get(i).estPosable() && joueur.getMain().getMain().get(i).getSpecial() != null)
+			if(joueur.getMain().getMain().get(i).estPosable() && !(joueur.getMain().getMain().get(i).getSpecial() == null))
 			{
 				return i;
 			}
