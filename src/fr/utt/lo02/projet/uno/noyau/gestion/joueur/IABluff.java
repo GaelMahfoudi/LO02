@@ -11,15 +11,15 @@ public class IABluff implements StyleIA {
 	@Override
 	public int jouerCarte(Partie partie, Joueur joueur) {
 		
-		for(int i=0; i<partie.getNbreJoueur(); i++)
+		for(int i=0; i<partie.getNbreJoueur(); i++) //Contre Uno direct
 		{
 			if(partie.getJoueur(i).getNombreCarte() == 1 && !partie.getJoueur(i).uno)
 			{
 				return joueur.getNombreCarte()+2;
 			}
 		}
-		for (int i=0; i<joueur.getNombreCarte(); i++)
-		{
+		for (int i=0; i<joueur.getNombreCarte(); i++)//Plus 4 si possible
+		{ù
 			if(joueur.getMain().getMain().get(i).getSpecial() == ESpecial.PLUS_QUATRE)
 				return i;
 		}
