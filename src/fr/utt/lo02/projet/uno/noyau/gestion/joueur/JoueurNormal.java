@@ -1,5 +1,6 @@
 package fr.utt.lo02.projet.uno.noyau.gestion.joueur;
 
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 import fr.utt.lo02.projet.uno.noyau.carte.Carte;
@@ -28,18 +29,17 @@ public class JoueurNormal extends Joueur {
 			this.uno=false;
 
 		System.out.println(" \n\n\n\n\n\nAu tour de " + this.pseudo+". Appuyez sur Espace puis Entrée lorsque vous serez pret");
-		char wait = 'e';
+		/*char wait = 'e';
 		while (wait !=  ' ')
 		{
 			wait = (char)sc.nextLine().charAt(0);
-		}
+		}*/
 			
 		System.out.println("oui");
 		do
 		{
 			int choix = 0;
-			while(choix<=0 || choix>(this.main.getNombreCarte()+2))
-			{
+			
 				System.out.println("Carte du talon: " + Talon.getInstance().getDerniereCarte().toString());
 				System.out.println("Votre Main: ");
 				this.main.afficherMain();
@@ -49,7 +49,7 @@ public class JoueurNormal extends Joueur {
 				System.out.println("Choisissez une carte [1.." + (this.main.getNombreCarte()+2) + "] : ");
 				choix= sc.nextInt();
 
-			}
+			
 
 
 			if(choix > 0 && choix <= this.main.getNombreCarte()) //s'il a choisit une carte
@@ -145,6 +145,7 @@ public class JoueurNormal extends Joueur {
 	public void direUno() {
 		Scanner sc = new Scanner(System.in);
 		System.out.println("voulez vous déclarer un UNO? [1|0]");
+	
 		if(sc.nextInt() == 0)
 		{
 			if( this.getNombreCarte() == 0)
@@ -152,6 +153,9 @@ public class JoueurNormal extends Joueur {
 			else
 				this.uno=false;
 		}
+
+		
+		
 	}
 
 	public boolean direContreUno(Partie partie) 

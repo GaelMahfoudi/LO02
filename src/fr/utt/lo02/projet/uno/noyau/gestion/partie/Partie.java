@@ -39,34 +39,25 @@ public class Partie {
 		listeJoueur = new ArrayList<Joueur>();
 	}
 
-	public Partie(int nbJoueurReel, int nbreJoueurVirtuel)
+	public Partie(int nbJoueur)
 	{
-
+		int type = 0;
+		Scanner sc = new Scanner(System.in);
 		sens=1;
 		manche = 1;
 		joueurActuel=0;
 		pioche = Pioche.getInstance();
 		talon = Talon.getInstance();
 		listeJoueur = new ArrayList<Joueur>();
-		this.nbreJoueur = nbJoueurReel + nbreJoueurVirtuel;
+		this.nbreJoueur = nbJoueur;
 
-		//generation des joueurs Reels
-		for(int i=0;i<nbJoueurReel;i++)
+		//generation des joueurs
+		for(int i=0;i<nbJoueur;i++)
 		{
 			System.out.println("Joueur " + (i+1) + ":");
 			listeJoueur.add(new JoueurNormal());
 		}
-		
-		//generation des IA
-		for(int i=0;i<nbreJoueurVirtuel;i++)
-		{
-			System.out.println("Joueur " + (i+1) + ":");
-			listeJoueur.add(new IA());
-		}
-		
 
-		//On vide le talon dans la pioche
-		talon.viderTalon(pioche);
 		//Distribution des cartes
 		this.distribuerCarte();
 	}
@@ -91,13 +82,10 @@ public class Partie {
 		}
 		for(int i=0;i<nbIA;i++)
 		{
-			type = sc.nextInt();
 			System.out.println("Joueur " + (i+1+nbJoueur) + ":");
-			listeJoueur.add(new IA(type));
+			listeJoueur.add(new IA());
 		}
 
-		//On vide le talon dans la pioche
-		talon.viderTalon(pioche);
 		//Distribution des cartes
 		this.distribuerCarte();
 	}
@@ -105,6 +93,15 @@ public class Partie {
 	public void distribuerCarte() {
 		for(int i=0;i<listeJoueur.size();i++)
 		{
+			listeJoueur.get(i).piocherCarte(pioche);
+			listeJoueur.get(i).piocherCarte(pioche);
+			listeJoueur.get(i).piocherCarte(pioche);
+			listeJoueur.get(i).piocherCarte(pioche);
+			listeJoueur.get(i).piocherCarte(pioche);
+			
+			listeJoueur.get(i).piocherCarte(pioche);
+			listeJoueur.get(i).piocherCarte(pioche);
+			listeJoueur.get(i).piocherCarte(pioche);
 			listeJoueur.get(i).piocherCarte(pioche);
 			listeJoueur.get(i).piocherCarte(pioche);
 			listeJoueur.get(i).piocherCarte(pioche);
@@ -239,15 +236,12 @@ public class Partie {
 		return this.nbreJoueur;
 	}
 
-<<<<<<< HEAD
 	public static void main(String[] args)
 	{
-		Partie p= new Partie(1, 1);
+		Partie p= new Partie(1,1);
 	
 		p.deroulerPartie();
 	}
-=======
 
->>>>>>> 1111a18fa27e994c5a5e5161dd6b5959ae3b9be7
 
 }

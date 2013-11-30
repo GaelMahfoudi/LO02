@@ -15,24 +15,26 @@ public class IA extends Joueur {
 	private StyleIA styleJeu;
 	private Scanner sc = new Scanner(System.in);
 	
-	public IA(int style)
+	public IA()
 	{
 		super();
 		System.out.println("Saisissez le nom du joueur:");
 		this.pseudo = sc.nextLine();
-		switch(style)
-		{
-		case 1:
-			styleJeu = new IANormal();
-			break;
-		case 2:
-			styleJeu = new IAOffensive();
-		}
 	}
 	public void jouer(Partie partie) {
 		int i = 0;
 		
-		i = styleJeu.jouerCarte(partie, this);
+		if(this.getNombreCarte()>10)
+		{
+			styleJeu = new IAOffensive();
+			i = styleJeu.jouerCarte(partie, this);
+		}
+		else
+		{
+			styleJeu = new IANormal();
+			i = styleJeu.jouerCarte(partie, this);
+		}
+		
 		
 		if(i< main.getNombreCarte())
 		{

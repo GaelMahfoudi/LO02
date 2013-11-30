@@ -13,7 +13,7 @@ public class IANormal implements StyleIA {
 		
 		int i = 0;
 		
-		//Il cherche la première carte normale de la bonne couleur si il y en a une et retourne son indice.
+		//Il cherche la première carte normale si il y en a une et retourne son indice.
 		
 		for(i=0;i<joueur.getNombreCarte();i++)
 		{

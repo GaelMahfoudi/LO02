@@ -12,11 +12,11 @@ public class IAOffensive implements StyleIA {
 
 		int i = 0;
 		
-		//Il cherche la première carte de la bonne couleur et retourne son indice.
+		//Il cherche la première carte piège et retourne son indice.
 
 		for(i=0;i<joueur.getNombreCarte();i++)
 		{
-			if(joueur.getMain().getMain().get(i).estPosable())
+			if(joueur.getMain().getMain().get(i).estPosable() && joueur.getMain().getMain().get(i).getSpecial() != null)
 			{
 				return i;
 			}
@@ -26,7 +26,7 @@ public class IAOffensive implements StyleIA {
 
 		for(i=0;i<joueur.getNombreCarte();i++)
 		{
-			if(joueur.getMain().getMain().get(i).estPosable() && joueur.getMain().getMain().get(i).getSpecial() == null)
+			if(joueur.getMain().getMain().get(i).estPosable())
 			{
 				return i;
 			}
