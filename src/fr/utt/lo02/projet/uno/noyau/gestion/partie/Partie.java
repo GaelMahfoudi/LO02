@@ -89,20 +89,7 @@ public class Partie {
 	public void distribuerCarte() {
 		for(int i=0;i<listeJoueur.size();i++)
 		{
-			listeJoueur.get(i).piocherCarte(pioche);
-			listeJoueur.get(i).piocherCarte(pioche);
-			listeJoueur.get(i).piocherCarte(pioche);
-			listeJoueur.get(i).piocherCarte(pioche);
-			listeJoueur.get(i).piocherCarte(pioche);
-			
-			listeJoueur.get(i).piocherCarte(pioche);
-			listeJoueur.get(i).piocherCarte(pioche);
-			listeJoueur.get(i).piocherCarte(pioche);
-			listeJoueur.get(i).piocherCarte(pioche);
-			listeJoueur.get(i).piocherCarte(pioche);
-			listeJoueur.get(i).piocherCarte(pioche);
-			listeJoueur.get(i).piocherCarte(pioche);
-			listeJoueur.get(i).piocherCarte(pioche);
+			listeJoueur.get(i).piocherCarte(pioche, 10);
 		}
 
 		Carte cartePioche; 
@@ -111,10 +98,6 @@ public class Partie {
 			cartePioche= pioche.enleverCarte();
 			talon.ajouterCarte(cartePioche);
 		} while(cartePioche.getSpecial() != null);
-
-
-
-
 	}
 
 	public boolean verifierGagnant() {
@@ -186,9 +169,7 @@ public class Partie {
 
 
 	public void nextJoueur() {
-
 		this.joueurActuel++;
-
 	}
 
 

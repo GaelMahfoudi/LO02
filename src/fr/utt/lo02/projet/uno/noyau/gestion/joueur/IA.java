@@ -45,7 +45,7 @@ public class IA extends Joueur {
 		}
 		else
 		{
-			main.ajouterCarte(partie.getPioche().enleverCarte());
+			this.piocherCarte(partie.getPioche());
 			System.out.println(pseudo + " a pioché");
 		}
 	}

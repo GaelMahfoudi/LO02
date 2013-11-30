@@ -41,8 +41,7 @@ public class CSpecial extends Carte {
 			case PLUS_DEUX:
 				
 				Joueur joueurNext = partie.getJoueur(Math.abs((partie.getJoueurActuel()+partie.getSens())%partie.getNbreJoueur()));
-				joueurNext.piocherCarte(Pioche.getInstance());
-				joueurNext.piocherCarte(Pioche.getInstance());
+				joueurNext.piocherCarte(Pioche.getInstance(), 2);
 				System.out.println(joueurNext.afficherPseudo() +" a pioché 2 nouvelles cartes"  );
 				break;
 			case PLUS_QUATRE:
@@ -62,10 +61,7 @@ public class CSpecial extends Carte {
 			
 				
 					Joueur joueurNext1 = partie.getJoueur(Math.abs((partie.getJoueurActuel()+partie.getSens())%partie.getNbreJoueur()));
-					joueurNext1.piocherCarte(Pioche.getInstance());
-					joueurNext1.piocherCarte(Pioche.getInstance());
-					joueurNext1.piocherCarte(Pioche.getInstance());
-					joueurNext1.piocherCarte(Pioche.getInstance());
+					joueurNext1.piocherCarte(Pioche.getInstance(),4);
 					System.out.println(joueurNext1.afficherPseudo() +" a pioché 4 nouvelles cartes" );
 					System.out.println("Choisissez la nouvelle couleur [B|R|J|V]:");
 					String couleurChoisie = sc.nextLine(); //Buffer

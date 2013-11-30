@@ -90,8 +90,7 @@ public class JoueurNormal extends Joueur {
 				if(!this.direContreUno(partie))
 				{
 					System.out.println("Le contre-Uno n'est pas valide, vous piochez 2 cartes");
-					this.piocherCarte(Pioche.getInstance());
-					this.piocherCarte(Pioche.getInstance());
+					this.piocherCarte(Pioche.getInstance(), 2);
 				}
 			}
 
@@ -130,10 +129,7 @@ public class JoueurNormal extends Joueur {
 			if(carte.getCouleur() == carteAComparer.getCouleur()  || carte.getCouleur() == null || carte.getValeur()== carteAComparer.getValeur()) 
 			{
 				System.out.println(joueur.afficherPseudo() + " a bluffé, il pioche 4 cartes");
-				joueur.piocherCarte(Pioche.getInstance());
-				joueur.piocherCarte(Pioche.getInstance());
-				joueur.piocherCarte(Pioche.getInstance());
-				joueur.piocherCarte(Pioche.getInstance());
+				joueur.piocherCarte(Pioche.getInstance(), 4);
 				return true;
 
 			}
@@ -142,8 +138,7 @@ public class JoueurNormal extends Joueur {
 
 		
 		System.out.println(joueur.afficherPseudo() + " ne bluffait pas, " + this.afficherPseudo() + "pioche 2 cartes.");
-		this.piocherCarte(Pioche.getInstance());
-		this.piocherCarte(Pioche.getInstance());
+		this.piocherCarte(Pioche.getInstance(), 2);
 		return false;
 
 	}
@@ -183,8 +178,7 @@ public class JoueurNormal extends Joueur {
 		if( j.getNombreCarte() == 1 && !j.uno) 
 		{
 			System.out.println(j.afficherPseudo()+" pioche 2 cartes");
-			j.piocherCarte(Pioche.getInstance());
-			j.piocherCarte(Pioche.getInstance());
+			j.piocherCarte(Pioche.getInstance(), 2);
 			return true;
 		}
 		else
