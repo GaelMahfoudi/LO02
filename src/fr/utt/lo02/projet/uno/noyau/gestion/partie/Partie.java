@@ -189,7 +189,7 @@ public class Partie {
 		}
 
 		//Un joueur a depassÃ© les 500 points, fin du jeu
-		System.out.println( joueurGagnant + "remporte la partie, le jeu est terminée, il y a eu " + manche + " manches");
+		System.out.println( joueurGagnant + " remporte la partie, le jeu est terminée, il y a eu " + manche + " manches");
 	}
 
 
