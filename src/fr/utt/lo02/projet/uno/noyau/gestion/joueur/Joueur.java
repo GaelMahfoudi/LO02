@@ -62,9 +62,7 @@ public abstract class Joueur {
 		
 	}
 
-	public ECouleur choisirCouleur() {
-		return null;
-	}
+	public abstract void choisirCouleur();
 	
 	public void afficherMain(){
 		main.afficherMain();

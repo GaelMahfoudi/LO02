@@ -86,6 +86,10 @@ public class IA extends Joueur {
 		j.piocherCarte(Pioche.getInstance());
 	}
 
+	public void choisirCouleur()
+	{
+		//TODO
+	}
 
 
 }

@@ -5,6 +5,7 @@ import java.util.InputMismatchException;
 import java.util.Scanner;
 
 import fr.utt.lo02.projet.uno.noyau.carte.Carte;
+import fr.utt.lo02.projet.uno.noyau.carte.ECouleur;
 import fr.utt.lo02.projet.uno.noyau.gestion.carte.Pioche;
 import fr.utt.lo02.projet.uno.noyau.gestion.carte.Talon;
 import fr.utt.lo02.projet.uno.noyau.gestion.partie.Partie;
@@ -198,5 +199,40 @@ public class JoueurNormal extends Joueur {
 		
 	}
 
+	public void choisirCouleur() 
+	{
+		Scanner sc = new Scanner(System.in);
+		System.out.println("Choisissez la nouvelle couleur [B|R|J|V]:");
+		try
+		{
+			String couleur = sc.nextLine();
+			switch(couleur.charAt(0))
+			{
+				case 'B':
+					Talon.getInstance().setCouleurDerniereCarte(ECouleur.BLEU);
+				break;
+				case 'R':
+					Talon.getInstance().setCouleurDerniereCarte(ECouleur.ROUGE);
+				break;
+				case 'J':
+					Talon.getInstance().setCouleurDerniereCarte(ECouleur.JAUNE);
+				break;
+				case 'V':
+					Talon.getInstance().setCouleurDerniereCarte(ECouleur.VERT);
+				break;
+				default:
+					System.out.println("Erreur: veuillez recommencer");
+					choisirCouleur();
+				break;
+			}
+		}
+		catch(InputMismatchException e)
+		{
+			System.out.println("Erreur: Veuillez recommencer");
+			choisirCouleur();
+		}
+		
+	
+	}
 
 }
