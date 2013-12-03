@@ -1,6 +1,7 @@
 package fr.utt.lo02.projet.uno.noyau.gestion.partie;
 
 import java.util.ArrayList;
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 import fr.utt.lo02.projet.uno.noyau.carte.Carte;
@@ -86,7 +87,7 @@ public class Partie {
 		
 		for(int i=0;i<listeJoueur.size();i++)
 		{
-			//Pour éviter que la pioche soit vide au moment de poser une carte sur le talon
+			//Pour ï¿½viter que la pioche soit vide au moment de poser une carte sur le talon
 			if(pioche.getNombreCarte()<=10)
 			{
 				talon.viderTalon(pioche);
@@ -164,7 +165,7 @@ public class Partie {
 			else
 			{
 				//Si la manche se termine carte la pioche est vide
-				System.out.println("La pioche est vide, la manche est terminée");
+				System.out.println("La pioche est vide, la manche est terminï¿½e");
 			}
 			
 
@@ -184,7 +185,7 @@ public class Partie {
 
 		//Un joueur a depassÃ© les 500 points, fin du jeu
 
-		System.out.println( joueurGagnant + " remporte la partie, le jeu est terminée, il y a eu " + manche + " manches");
+		System.out.println( joueurGagnant + " remporte la partie, le jeu est terminï¿½e, il y a eu " + manche + " manches");
 	}
 
 
@@ -229,6 +230,31 @@ public class Partie {
 		Partie p= new Partie(0, 2);
 	
 		p.deroulerPartie();
+	}
+	
+    public static int getNombre(int min, int max) {
+		
+		Scanner sc = new Scanner(System.in);
+		int i = -1;
+		
+		try{
+			i  = sc.nextInt();
+			}
+		catch(InputMismatchException e)
+			{
+				System.out.println("Erreur: entrez un entier entre "+ min + " et " + max + ": ");
+				i = getNombre(min, max);
+			}
+		finally
+		{
+			if ( i < min || i > max)
+			{
+				System.out.println("Erreur: entrez un entier entre "+ min + " et " + max + ": ");
+				i=getNombre(min, max);
+			}
+		}
+		
+		return i;
 	}
 
 }

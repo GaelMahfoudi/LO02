@@ -52,7 +52,7 @@ public class CSpecial extends Carte {
 					System.out.println((i+1)+": "+ partie.getJoueur(i).afficherPseudo());
 					}
 				System.out.println((partie.getNbreJoueur()+1)+": Personne");
-				int bluff = sc.nextInt() -1;
+				int bluff = Partie.getNombre(1, partie.getNbreJoueur()+1) -1;
 				if (bluff < partie.getNbreJoueur() && bluff >=0)
 					{
 						if (partie.getJoueur(bluff).direBluff( partie.getJoueur( partie.getJoueurActuel() ) ))

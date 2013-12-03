@@ -47,7 +47,7 @@ public class JoueurNormal extends Joueur {
 
 			System.out.println((this.main.getNombreCarte()+2) + ": Declarer un Contre Uno");
 			System.out.println("Choisissez une carte [1.." + (this.main.getNombreCarte()+2) + "] : ");
-			int choix= getNombre(0, this.main.getNombreCarte()+2);
+			int choix= Partie.getNombre(0, this.main.getNombreCarte()+2);
 
 
 			choix = choisirCarte();
@@ -78,7 +78,7 @@ public class JoueurNormal extends Joueur {
 				System.out.println("Vous avez pioché: ");
 				System.out.println(cartePiochee.toString());
 				System.out.println("Voulez vous poser cette carte [1|0]");
-				choix = getNombre(0,1);
+				choix = Partie.getNombre(0,1);
 				if(choix == 1)
 				{
 					if(cartePiochee.estPosable())
@@ -128,30 +128,7 @@ public class JoueurNormal extends Joueur {
 	}
 	
 
-	private int getNombre(int min, int max) {
-		
-		Scanner sc = new Scanner(System.in);
-		int i = -1;
-		
-		try{
-			i  = sc.nextInt();
-			}
-		catch(InputMismatchException e)
-			{
-				System.out.println("Erreur: entrez un entier entre "+ min + " et " + max + ": ");
-				i = getNombre(min, max);
-			}
-		finally
-		{
-			if ( i < min || i > max)
-			{
-				System.out.println("Erreur: entrez un entier entre "+ min + " et " + max + ": ");
-				i=getNombre(min, max);
-			}
-		}
-		
-		return i;
-	}
+	
 
 	public boolean direBluff(Joueur joueur) 
 	{
@@ -180,7 +157,7 @@ public class JoueurNormal extends Joueur {
 		System.out.println("voulez vous déclarer un UNO? [1|0]");
 
 		sc = new Scanner(System.in);
-		int choix = getNombre(0,1);
+		int choix = Partie.getNombre(0,1);
 		if(choix == 0)
 		{
 			if( this.getNombreCarte() == 0)
@@ -201,7 +178,7 @@ public class JoueurNormal extends Joueur {
 		{
 			System.out.println((i+1) + ":" + partie.getJoueur(i).afficherPseudo() );
 		}
-		int nJoueur = getNombre(0, partie.getNbreJoueur())-1;
+		int nJoueur = Partie.getNombre(0, partie.getNbreJoueur())-1;
 		direContreUno(partie.getJoueur(nJoueur));
 	}
 
