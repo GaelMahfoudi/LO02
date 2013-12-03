@@ -1,3 +1,5 @@
+
+
 package fr.utt.lo02.projet.uno.noyau.gestion.joueur;
 
 import fr.utt.lo02.projet.uno.noyau.gestion.partie.Partie;
@@ -13,7 +15,9 @@ public class IANormal implements StyleIA {
 		
 		int i = 0;
 		
+
 		//Il cherche la première carte normale si il y en a une et retourne son indice.
+		//Il cherche la premiï¿½re carte normale de la bonne couleur si il y en a une et retourne son indice.
 		
 		for(i=0;i<joueur.getNombreCarte();i++)
 		{
@@ -23,7 +27,7 @@ public class IANormal implements StyleIA {
 			}
 		}
 		
-		//Il cherche la première carte de la bonne couleur et retourne son indice.
+		//Il cherche la premiï¿½re carte de la bonne couleur et retourne son indice.
 		
 		for(i=0;i<joueur.getNombreCarte();i++)
 		{

@@ -5,6 +5,7 @@ import java.util.Scanner;
 
 import fr.utt.lo02.projet.uno.noyau.carte.ECouleur;
 import fr.utt.lo02.projet.uno.noyau.carte.ESpecial;
+import fr.utt.lo02.projet.uno.noyau.gestion.carte.Pioche;
 import fr.utt.lo02.projet.uno.noyau.gestion.carte.Talon;
 import fr.utt.lo02.projet.uno.noyau.gestion.partie.Partie;
 
@@ -43,13 +44,17 @@ public class IA extends Joueur {
 		if(i< main.getNombreCarte())
 		{
 			System.out.println(pseudo + " a joué " + main.getMain().get(i));
-			partie.getTalon().ajouterCarte(main.enleverCarte(i));
-			partie.getTalon().getDerniereCarte().appliquerRegle(partie);
+			Talon.getInstance().ajouterCarte(main.enleverCarte(i));
+			Talon.getInstance().getDerniereCarte().appliquerRegle(partie);
+		}
+		else if(i == main.getNombreCarte()+1)
+		{
+			this.piocherCarte(Pioche.getInstance());
+			System.out.println(pseudo + " a pioché");
 		}
 		else
 		{
-			this.piocherCarte(partie.getPioche());
-			System.out.println(pseudo + " a pioché");
+			this.direContreUno(partie);
 		}
 	}
 
@@ -68,8 +73,15 @@ public class IA extends Joueur {
 	public void direUno() {
 	}
 
-	public boolean direContreUno() {
-		return false;
+	public void direContreUno(Partie partie) {
+		for(int i=0; i<partie.getNbreJoueur(); i++)
+		{
+			if(partie.getJoueur(i).getNombreCarte()==0)
+			{
+				direContreUno(partie.getJoueur(i));
+				return;
+			}
+		}
 	}
 
 	
@@ -107,11 +119,10 @@ public class IA extends Joueur {
 
 	}
 	@Override
-	public boolean direContreUno(Joueur j) {
-		// TODO Auto-generated method stub
-		return false;
+	public void direContreUno(Joueur j) {
+
+		j.piocherCarte(Pioche.getInstance());
+		j.piocherCarte(Pioche.getInstance());
 	}
-
-
 
 }

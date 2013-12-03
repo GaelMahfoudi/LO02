@@ -21,6 +21,7 @@ public abstract class Joueur {
 	
 	
 	public Joueur() {
+
 		main = new MainJoueur();
 		score = 0;
 		uno = false;
@@ -46,7 +47,9 @@ public abstract class Joueur {
 
 	public abstract void jouer(Partie partie);
 
-	public void piocherCarte(Pioche pioche) {
+	
+	public void piocherCarte(Pioche pioche)
+	{
 		main.ajouterCarte(pioche.enleverCarte());
 	}
 	
@@ -67,6 +70,7 @@ public abstract class Joueur {
 		this.uno=false;
 		
 	}
+
 	
 	public void afficherMain(){
 		main.afficherMain();
@@ -87,7 +91,9 @@ public abstract class Joueur {
 
 	public abstract void direUno();
 
-	public abstract boolean direContreUno(Joueur j);
-	
 	public abstract void choisirCouleur();
+
+	public abstract void direContreUno(Joueur j);
+	
+	public abstract void direContreUno(Partie partie);
 }

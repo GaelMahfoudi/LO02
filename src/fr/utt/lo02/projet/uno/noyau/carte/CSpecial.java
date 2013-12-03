@@ -64,12 +64,15 @@ public class CSpecial extends Carte {
 					joueurNext1.piocherCarte(Pioche.getInstance(),4);
 					System.out.println(joueurNext1.afficherPseudo() +" a pioché 4 nouvelles cartes" );
 					partie.getJoueur(partie.getJoueurActuel()).choisirCouleur();
+
 				break;
 			case JOKER:		
 				partie.getJoueur(partie.getJoueurActuel()).choisirCouleur();
 				break;
 		}
+
 	}
+	
 	
 	
 	@Override

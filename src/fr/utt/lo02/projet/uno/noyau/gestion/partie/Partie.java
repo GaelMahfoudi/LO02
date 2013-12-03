@@ -30,15 +30,6 @@ public class Partie {
 
 	private ArrayList<Joueur> listeJoueur;
 
-	public Partie()
-	{
-		sens=1;
-		manche = 1;
-		joueurActuel=0;
-		pioche = Pioche.getInstance();
-		talon = Talon.getInstance();
-		listeJoueur = new ArrayList<Joueur>();
-	}
 
 	public Partie(int nbJoueur)
 	{
@@ -71,13 +62,15 @@ public class Partie {
 		listeJoueur = new ArrayList<Joueur>();
 		this.nbreJoueur = nbJoueur + nbIA;
 
-		//generation des joueurs
+		//generation des joueurs normaux
 		for(int i=0;i<nbJoueur;i++)
 		{
 			System.out.println("Joueur " + (i+1) + ":");
 			listeJoueur.add(new JoueurNormal());
 		}
-		for(int i=0;i<nbIA;i++)
+
+		//Generation des IAS
+		for(int i=0; i<nbIA; i++)
 		{
 			System.out.println("Joueur " + (i+1+nbJoueur) + ":");
 			listeJoueur.add(new IA());
@@ -85,6 +78,7 @@ public class Partie {
 
 		//Distribution des cartes
 		this.distribuerCarte();
+
 	}
 
 	public void distribuerCarte() {
@@ -132,7 +126,8 @@ public class Partie {
 		String joueurGagnant = new String (" ");
 		boolean cinqCent = false;
 		//Lancement de la partie
-		while(!cinqCent) //tant qu'aucun joueur n'a atteint 500 point?
+
+		while(!cinqCent) //tant qu'aucun joueur n'a atteint 500 point
 		{	
 
 
@@ -140,8 +135,7 @@ public class Partie {
 			System.out.println("\n\nDebut de la manche " + manche + ":");
 			joueurActuel = 0;
 
-
-			while( !verifierGagnant() && pioche.getNombreCarte()>0 ) //tant que personne n'a gagné
+			while( !verifierGagnant() ) //tant que personne n'a gagné
 			{
 				System.out.println(talon.getDerniereCarte() + " " + pioche.getNombreCarte());
 				listeJoueur.get(joueurActuel).jouer(this); //il joue
@@ -189,6 +183,7 @@ public class Partie {
 		}
 
 		//Un joueur a depassé les 500 points, fin du jeu
+
 		System.out.println( joueurGagnant + " remporte la partie, le jeu est termin�e, il y a eu " + manche + " manches");
 	}
 
@@ -214,13 +209,6 @@ public class Partie {
 		this.joueurActuel = joueurActuel;
 	}
 
-	public Pioche getPioche() {
-		return pioche;
-	}
-
-	public Talon getTalon() {
-		return talon;
-	}
 
 	public Joueur getJoueur(int index){
 		return listeJoueur.get(index);
@@ -242,6 +230,5 @@ public class Partie {
 	
 		p.deroulerPartie();
 	}
-
 
 }
