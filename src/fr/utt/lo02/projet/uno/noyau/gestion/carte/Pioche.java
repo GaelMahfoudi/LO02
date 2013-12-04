@@ -120,7 +120,7 @@ public class Pioche {
 		
 		for(i=0;i<4;i++)
 		{
-			listeCarte.add(new CSpecial(ESpecial.JOKER, null));
+			listeCarte.add(new CJoker());
 		}
 		
 		for(i=0;i<4;i++)
