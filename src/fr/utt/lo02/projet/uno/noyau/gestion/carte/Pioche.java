@@ -56,20 +56,20 @@ public class Pioche {
 		{
 			switch(i){
 				case 0:
-					listeCarte.add(new CSpecial(ESpecial.PLUS_DEUX, ECouleur.BLEU));
-					listeCarte.add(new CSpecial(ESpecial.PLUS_DEUX, ECouleur.BLEU));
+					listeCarte.add(new CPlusDeux(ECouleur.BLEU));
+					listeCarte.add(new CPlusDeux(ECouleur.BLEU));
 					break;
 				case 1:
-					listeCarte.add(new CSpecial(ESpecial.PLUS_DEUX, ECouleur.JAUNE));
-					listeCarte.add(new CSpecial(ESpecial.PLUS_DEUX, ECouleur.JAUNE));
+					listeCarte.add(new CPlusDeux(ECouleur.JAUNE));
+					listeCarte.add(new CPlusDeux(ECouleur.JAUNE));
 					break;
 				case 2:
-					listeCarte.add(new CSpecial(ESpecial.PLUS_DEUX, ECouleur.ROUGE));
-					listeCarte.add(new CSpecial(ESpecial.PLUS_DEUX, ECouleur.ROUGE));
+					listeCarte.add(new CPlusDeux(ECouleur.ROUGE));
+					listeCarte.add(new CPlusDeux(ECouleur.ROUGE));
 					break;
 				case 3:
-					listeCarte.add(new CSpecial(ESpecial.PLUS_DEUX, ECouleur.VERT));
-					listeCarte.add(new CSpecial(ESpecial.PLUS_DEUX, ECouleur.VERT));
+					listeCarte.add(new CPlusDeux(ECouleur.VERT));
+					listeCarte.add(new CPlusDeux(ECouleur.VERT));
 					break;
 			}
 		}
