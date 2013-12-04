@@ -142,7 +142,6 @@ public class JoueurNormal extends Joueur {
 				System.out.println(joueur.afficherPseudo() + " a bluffé, il pioche 4 cartes");
 				joueur.piocherCarte(Pioche.getInstance(), 4);
 				return true;
-
 			}
 
 		}

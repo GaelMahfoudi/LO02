@@ -125,7 +125,7 @@ public class Pioche {
 		
 		for(i=0;i<4;i++)
 		{
-			listeCarte.add(new CSpecial(ESpecial.PLUS_QUATRE, null));
+			listeCarte.add(new CPlusQuatre());
 		}
 		
 		

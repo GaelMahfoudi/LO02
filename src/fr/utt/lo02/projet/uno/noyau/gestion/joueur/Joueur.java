@@ -61,8 +61,6 @@ public abstract class Joueur {
 			main.ajouterCarte(pioche.enleverCarte());
 		}
 	}
-
-	public abstract boolean direBluff(Joueur joueur);
 	
 	public void reinitialiserMain()
 	{
@@ -96,4 +94,5 @@ public abstract class Joueur {
 	public abstract void direContreUno(Joueur j);
 	
 	public abstract void direContreUno(Partie partie);
+	public abstract boolean direBluff(Joueur joueur);
 }

@@ -67,6 +67,14 @@ public class IA extends Joueur {
 
 	public boolean direBluff(Joueur joueur)
 	{
+		if(joueur == this)
+		{
+			return false;
+		}
+		else 
+		{
+			styleJeu.direBluff(joueur);
+		}
 		return false;
 	}
 

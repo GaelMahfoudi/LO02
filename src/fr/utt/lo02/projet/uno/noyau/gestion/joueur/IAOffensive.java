@@ -36,4 +36,17 @@ public class IAOffensive implements StyleIA {
 		return joueur.getNombreCarte()+1;
 	}
 
+	@Override
+	public boolean direBluff(Joueur j) {
+		
+		if(j.getNombreCarte()>10)
+		{
+			return true;
+		}
+		
+		return false;
+	}
+	
+	
+
 }

@@ -15,7 +15,7 @@ public class CSpecial extends Carte {
 	/* {author=Victor Le Deuff Ga�l Mahfoudi}*/
 
 
-	private ESpecial special;
+	protected ESpecial special;
 
 	public CSpecial(ESpecial special, ECouleur couleur)
 	{
@@ -32,73 +32,75 @@ public class CSpecial extends Carte {
 		Scanner sc = new Scanner(System.in);
 		switch( this.getSpecial())
 		{
-			case PASSE:
-				partie.nextJoueur();
-				break;
-			case INVERSE:
-				partie.setSens();
-				break;
-			case PLUS_DEUX:
-				
-				Joueur joueurNext = partie.getJoueur(Math.abs((partie.getJoueurActuel()+partie.getSens())%partie.getNbreJoueur()));
-				joueurNext.piocherCarte(Pioche.getInstance(), 2);
-				System.out.println(joueurNext.afficherPseudo() +" a pioché 2 nouvelles cartes"  );
-				break;
-			case PLUS_QUATRE:
-				
-				System.out.println("\n\n\n\n\n\n\n\n\n\nQuelqu'un veut il declarer un bluff? [1.."+partie.getNbreJoueur()+"] :");
-				for(int i=0; i<partie.getNbreJoueur(); i++)
-					{
-					System.out.println((i+1)+": "+ partie.getJoueur(i).afficherPseudo());
-					}
-				System.out.println((partie.getNbreJoueur()+1)+": Personne");
-				int bluff = Partie.getNombre(1, partie.getNbreJoueur()+1) -1;
-				if (bluff < partie.getNbreJoueur() && bluff >=0)
-					{
-						if (partie.getJoueur(bluff).direBluff( partie.getJoueur( partie.getJoueurActuel() ) ))
-							return;
-					}
-			
-				
-					Joueur joueurNext1 = partie.getJoueur(Math.abs((partie.getJoueurActuel()+partie.getSens())%partie.getNbreJoueur()));
-					joueurNext1.piocherCarte(Pioche.getInstance(),4);
-					System.out.println(joueurNext1.afficherPseudo() +" a pioché 4 nouvelles cartes" );
-					partie.getJoueur(partie.getJoueurActuel()).choisirCouleur();
+		case PASSE:
+			partie.nextJoueur();
+			break;
+		case INVERSE:
+			partie.setSens();
+			break;
+		case PLUS_DEUX:
 
-				break;
-			case JOKER:		
-				partie.getJoueur(partie.getJoueurActuel()).choisirCouleur();
-				break;
+			Joueur joueurNext = partie.getJoueur(Math.abs((partie.getJoueurActuel()+partie.getSens())%partie.getNbreJoueur()));
+			joueurNext.piocherCarte(Pioche.getInstance(), 2);
+			System.out.println(joueurNext.afficherPseudo() +" a pioché 2 nouvelles cartes"  );
+			break;
+		case PLUS_QUATRE:
+			
+			
+			
+			System.out.println("\n\n\n\n\n\n\n\n\n\nQuelqu'un veut il declarer un bluff? [1.."+partie.getNbreJoueur()+"] :");
+			for(int i=0; i<partie.getNbreJoueur(); i++)
+			{
+				System.out.println((i+1)+": "+ partie.getJoueur(i).afficherPseudo());
+			}
+			System.out.println((partie.getNbreJoueur()+1)+": Personne");
+			int bluff = Partie.getNombre(1, partie.getNbreJoueur()+1) -1;
+			if (bluff < partie.getNbreJoueur() && bluff >=0)
+			{
+				if (partie.getJoueur(bluff).direBluff( partie.getJoueur( partie.getJoueurActuel() ) ))
+					return;
+			}
+
+
+			Joueur joueurNext1 = partie.getJoueur(Math.abs((partie.getJoueurActuel()+partie.getSens())%partie.getNbreJoueur()));
+			joueurNext1.piocherCarte(Pioche.getInstance(),4);
+			System.out.println(joueurNext1.afficherPseudo() +" a pioché 4 nouvelles cartes" );
+			partie.getJoueur(partie.getJoueurActuel()).choisirCouleur();
+
+			break;
+		case JOKER:		
+			partie.getJoueur(partie.getJoueurActuel()).choisirCouleur();
+			break;
 		}
 
 	}
-	
-	
-	
+
+
+
 	@Override
 	public String toString() {
 		return "CSpecial [ Special= " + this.special + ", Couleur= " + this.couleur+"]";
 	}
-	
+
 	public boolean estPosable() 
 	{
-		  if(this.getSpecial()==ESpecial.PLUS_QUATRE || this.getSpecial()==ESpecial.JOKER)
-		  {
-			  return true;
-		  }
-		  else if(this.getCouleur()==Talon.getInstance().getDerniereCarte().getCouleur())
-		  {
-			  return true;
-		  }
-		  else
-		  {
-			  return false;
-		  }
+		if(this.getSpecial()==ESpecial.PLUS_QUATRE || this.getSpecial()==ESpecial.JOKER)
+		{
+			return true;
+		}
+		else if(this.getCouleur()==Talon.getInstance().getDerniereCarte().getCouleur())
+		{
+			return true;
+		}
+		else
+		{
+			return false;
+		}
 	}
-	
+
 	public int getValeur()
 	{
 		return -1; //Chiffre impossible pour les comparaisons
 	}
-	
+
 }

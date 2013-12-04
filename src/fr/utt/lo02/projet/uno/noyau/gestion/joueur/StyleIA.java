@@ -11,5 +11,6 @@ public interface StyleIA {
 
   
   public int jouerCarte(Partie partie, Joueur joueur);
+  public boolean direBluff(Joueur j);
 
 }

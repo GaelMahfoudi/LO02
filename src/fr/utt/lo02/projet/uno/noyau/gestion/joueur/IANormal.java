@@ -41,6 +41,12 @@ public class IANormal implements StyleIA {
 		
 	}
 
+	@Override
+	public boolean direBluff(Joueur j) {
+		
+		return false;
+	}
+
   /* {author=Victor Le Deuff Ga�l Mahfoudi}*/
 
 }
