@@ -38,7 +38,7 @@ public class CPlusQuatre extends CSpecial {
 
 
 		Joueur joueurNext1 = partie.getJoueur(Math.abs((partie.getJoueurActuel()+partie.getSens())%partie.getNbreJoueur()));
-		joueurNext1.piocherCarte(Pioche.getInstance(),4);
+		joueurNext1.piocherCarte(4);
 		System.out.println(joueurNext1.afficherPseudo() +" a pioché 4 nouvelles cartes" );
 		partie.getJoueur(partie.getJoueurActuel()).choisirCouleur();
 	}

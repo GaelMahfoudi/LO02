@@ -71,5 +71,11 @@ public class Talon {
 	      System.out.println(carte);
 		}
 	}
+	
+	public static void reinitialiserTalon()
+	{
+		talon = null;
+		talon = new Talon();
+	}
 
 }

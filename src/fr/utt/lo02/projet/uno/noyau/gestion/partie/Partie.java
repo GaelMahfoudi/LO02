@@ -25,10 +25,6 @@ public class Partie {
 
 	private int joueurActuel;
 
-	private Pioche pioche;
-
-	private Talon talon;
-
 	private ArrayList<Joueur> listeJoueur;
 
 
@@ -37,8 +33,6 @@ public class Partie {
 		sens=1;
 		manche = 1;
 		joueurActuel=0;
-		pioche = Pioche.getInstance();
-		talon = Talon.getInstance();
 		listeJoueur = new ArrayList<Joueur>();
 		this.nbreJoueur = nbJoueur;
 
@@ -58,8 +52,6 @@ public class Partie {
 		sens=1;
 		manche = 1;
 		joueurActuel=0;
-		pioche = Pioche.getInstance();
-		talon = Talon.getInstance();
 		listeJoueur = new ArrayList<Joueur>();
 		this.nbreJoueur = nbJoueur + nbIA;
 
@@ -84,30 +76,23 @@ public class Partie {
 
 	public void distribuerCarte() {
 		
-		
 		for(int i=0;i<listeJoueur.size();i++)
 		{
-			//Pour �viter que la pioche soit vide au moment de poser une carte sur le talon
-			if(pioche.getNombreCarte()<=10)
-			{
-				talon.viderTalon(pioche);
-			}
-			listeJoueur.get(i).piocherCarte(pioche, 10);
+			listeJoueur.get(i).piocherCarte(5);
 		}
 
 		Carte cartePioche; 
-
-		cartePioche = pioche.enleverCarte();
 		
-		if(cartePioche.getSpecial() == ESpecial.JOKER || cartePioche.getSpecial() == ESpecial.PLUS_QUATRE)
+		do
 		{
-			talon.ajouterCarte(cartePioche);
-			talon.setCouleurDerniereCarte(ECouleur.ROUGE);
-		}
-		else
-		{
-			talon.ajouterCarte(cartePioche);
-		}
+			
+			if(Pioche.getInstance().getNombreCarte()==0)
+			{
+				Talon.getInstance().viderTalon(Pioche.getInstance());
+			}
+			cartePioche = Pioche.getInstance().enleverCarte();
+			Talon.getInstance().ajouterCarte(cartePioche);
+		}while(cartePioche.getSpecial()!=null);
 		
 	}
 
@@ -138,13 +123,13 @@ public class Partie {
 
 			while( !verifierGagnant() ) //tant que personne n'a gagné
 			{
-				System.out.println(talon.getDerniereCarte() + " " + pioche.getNombreCarte());
+				System.out.println(Talon.getInstance().getDerniereCarte() + " " + "il y a  " + Talon.getInstance().getNombreCarte()+ " dans le talon");
 				listeJoueur.get(joueurActuel).jouer(this); //il joue
 				joueurActuel = Math.abs((joueurActuel+sens)%nbreJoueur);
 			}
 			
 			//Si la manche c'est finie car il y a eu un gagnant
-			if(pioche.getNombreCarte()>0)
+			if(Pioche.getInstance().getNombreCarte()>0)
 			{
 				System.out.println( listeJoueur.get(Math.abs((joueurActuel+sens)%nbreJoueur)).afficherPseudo() +" remporte la manche "+ manche);
 				//Comptage des points du gagnant
@@ -158,7 +143,6 @@ public class Partie {
 						System.out.println(this.listeJoueur.get(i).afficherPseudo()+" remporte la partie");
 						joueurGagnant = (String)this.listeJoueur.get(i).afficherPseudo();
 						cinqCent = true;
-
 					}
 				}
 			}
@@ -172,7 +156,8 @@ public class Partie {
 			
 
 			//Reinitialisation des cartes pour une nouvelle manche
-			Pioche.getInstance().reinitialiserPioche();
+			Pioche.reinitialiserPioche();
+			Talon.reinitialiserTalon();
 			for(int i=0; i<this.nbreJoueur; i++)
 			{
 				this.listeJoueur.get(i).reinitialiserMain();
@@ -227,7 +212,7 @@ public class Partie {
 
 	public static void main(String[] args)
 	{
-		Partie p= new Partie(0, 4);
+		Partie p= new Partie(0, 2);
 	
 		p.deroulerPartie();
 	}

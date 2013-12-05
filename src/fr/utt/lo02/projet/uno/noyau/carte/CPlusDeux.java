@@ -16,7 +16,7 @@ public class CPlusDeux extends CSpecial {
 	public void appliquerRegle(Partie partie) {
 
 		Joueur joueurNext = partie.getJoueur(Math.abs((partie.getJoueurActuel()+partie.getSens())%partie.getNbreJoueur()));
-		joueurNext.piocherCarte(Pioche.getInstance(), 2);
+		joueurNext.piocherCarte(2);
 		System.out.println(joueurNext.afficherPseudo() +" a pioché 2 nouvelles cartes"  );
 		
 	}

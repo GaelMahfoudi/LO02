@@ -48,17 +48,17 @@ public abstract class Joueur {
 	public abstract void jouer(Partie partie);
 
 	
-	public void piocherCarte(Pioche pioche)
+	public void piocherCarte()
 	{
-		main.ajouterCarte(pioche.enleverCarte());
+		main.ajouterCarte(Pioche.getInstance().enleverCarte());
 	}
 	
-	public void piocherCarte(Pioche pioche, int nb) {
+	public void piocherCarte(int nb) {
 		int i = 0;
 		
 		for(i=0;i<nb;i++)
 		{
-			main.ajouterCarte(pioche.enleverCarte());
+			main.ajouterCarte(Pioche.getInstance().enleverCarte());
 		}
 	}
 	

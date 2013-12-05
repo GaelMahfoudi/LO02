@@ -169,9 +169,9 @@ public class Pioche {
 		}
 	}
 	
-	public void reinitialiserPioche()
+	public static void reinitialiserPioche()
 	{
-		Pioche.pioche = null;
-		Pioche.pioche = Pioche.getInstance();
+		pioche = null;
+		pioche = new Pioche();
 	}
 }

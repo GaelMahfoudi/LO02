@@ -49,7 +49,7 @@ public class IA extends Joueur {
 		}
 		else if(i == main.getNombreCarte()+1)
 		{
-			this.piocherCarte(Pioche.getInstance());
+			this.piocherCarte();
 			System.out.println(pseudo + " a pioché");
 		}
 		else
@@ -129,8 +129,8 @@ public class IA extends Joueur {
 	@Override
 	public void direContreUno(Joueur j) {
 
-		j.piocherCarte(Pioche.getInstance());
-		j.piocherCarte(Pioche.getInstance());
+		j.piocherCarte();
+		j.piocherCarte();
 	}
 
 }
