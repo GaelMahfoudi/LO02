@@ -52,7 +52,7 @@ public abstract class Joueur {
 	{
 		if(Pioche.getInstance().getNombreCarte()==0)
 		{
-			Talon.getInstance().viderTalon(Pioche.getInstance());
+			Talon.getInstance().viderTalon();
 		}
 		main.ajouterCarte(Pioche.getInstance().enleverCarte());
 	}
@@ -64,7 +64,7 @@ public abstract class Joueur {
 		{
 			if(Pioche.getInstance().getNombreCarte()==0)
 			{
-				Talon.getInstance().viderTalon(Pioche.getInstance());
+				Talon.getInstance().viderTalon();
 			}
 			main.ajouterCarte(Pioche.getInstance().enleverCarte());
 		}

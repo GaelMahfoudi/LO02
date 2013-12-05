@@ -144,7 +144,7 @@ public class Pioche {
 		
 		if(Pioche.getInstance().getNombreCarte() == 0 )
 		{
-			Talon.getInstance().viderTalon(pioche);
+			Talon.getInstance().viderTalon();
 		}
 		return listeCarte.poll();
 	}

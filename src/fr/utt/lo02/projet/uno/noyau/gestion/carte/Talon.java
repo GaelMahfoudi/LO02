@@ -21,10 +21,10 @@ public class Talon {
 		listeCarte = new LinkedList<Carte>();
 	}
 
-	public void viderTalon(Pioche pioche) {
+	public void viderTalon() {
 		while(listeCarte.size() != 1)
 		{
-			pioche.ajouterCarte(listeCarte.poll());
+			Pioche.getInstance().ajouterCarte(listeCarte.poll());
 		}
 	}
 

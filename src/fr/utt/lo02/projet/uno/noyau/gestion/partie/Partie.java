@@ -88,7 +88,7 @@ public class Partie {
 			
 			if(Pioche.getInstance().getNombreCarte()==0)
 			{
-				Talon.getInstance().viderTalon(Pioche.getInstance());
+				Talon.getInstance().viderTalon();
 			}
 			cartePioche = Pioche.getInstance().enleverCarte();
 			Talon.getInstance().ajouterCarte(cartePioche);
