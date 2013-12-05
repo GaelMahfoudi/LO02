@@ -50,6 +50,10 @@ public abstract class Joueur {
 	
 	public void piocherCarte()
 	{
+		if(Pioche.getInstance().getNombreCarte()==0)
+		{
+			Talon.getInstance().viderTalon(Pioche.getInstance());
+		}
 		main.ajouterCarte(Pioche.getInstance().enleverCarte());
 	}
 	
@@ -58,6 +62,10 @@ public abstract class Joueur {
 		
 		for(i=0;i<nb;i++)
 		{
+			if(Pioche.getInstance().getNombreCarte()==0)
+			{
+				Talon.getInstance().viderTalon(Pioche.getInstance());
+			}
 			main.ajouterCarte(Pioche.getInstance().enleverCarte());
 		}
 	}

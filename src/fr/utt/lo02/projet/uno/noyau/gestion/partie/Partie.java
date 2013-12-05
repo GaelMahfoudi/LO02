@@ -212,7 +212,7 @@ public class Partie {
 
 	public static void main(String[] args)
 	{
-		Partie p= new Partie(0, 2);
+		Partie p= new Partie(0, 5);
 	
 		p.deroulerPartie();
 	}
