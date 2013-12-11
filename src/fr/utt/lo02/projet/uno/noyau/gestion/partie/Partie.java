@@ -2,9 +2,11 @@ package fr.utt.lo02.projet.uno.noyau.gestion.partie;
 
 import java.util.ArrayList;
 import java.util.InputMismatchException;
-import java.util.Observable;
 import java.util.Scanner;
 
+import IHM.ModeConsole;
+import Observer.Observateur;
+import Observer.Observer;
 import fr.utt.lo02.projet.uno.noyau.carte.Carte;
 import fr.utt.lo02.projet.uno.noyau.gestion.carte.Pioche;
 import fr.utt.lo02.projet.uno.noyau.gestion.carte.Talon;
@@ -13,7 +15,7 @@ import fr.utt.lo02.projet.uno.noyau.gestion.joueur.*;
 /**
  *  Partie est la classe g�rant une partie de Uno. Elle g�re les joueurs, les paquets de cartes et les tours de jeu.
  */
-public class Partie extends Observable{
+public class Partie implements Observer{
 	/* {author=Victor Le Deuff Ga�l Mahfoudi}*/
 
 	private int manche;
@@ -25,13 +27,15 @@ public class Partie extends Observable{
 	private int joueurActuel;
 
 	private ArrayList<Joueur> listeJoueur;
-	
+
+	private Observateur obs;
+
 
 
 	public Partie(int nbJoueur)
 	{
 		sens=1;
-		manche = 1;
+		manche = 0;
 		joueurActuel=0;
 		listeJoueur = new ArrayList<Joueur>();
 		this.nbreJoueur = nbJoueur;
@@ -50,7 +54,7 @@ public class Partie extends Observable{
 	public Partie(int nbJoueur, int nbIA)
 	{
 		sens=1;
-		manche = 1;
+		manche = 0;
 		joueurActuel=0;
 		listeJoueur = new ArrayList<Joueur>();
 		this.nbreJoueur = nbJoueur + nbIA;
@@ -69,8 +73,6 @@ public class Partie extends Observable{
 			listeJoueur.add(new IA());
 		}
 
-		//Distribution des cartes
-		this.distribuerCarte();
 
 	}
 
@@ -96,7 +98,7 @@ public class Partie extends Observable{
 		
 	}
 
-	public boolean verifierGagnant() {
+	public boolean verifierGagnantManche() {
 
 		for(int i=0;i<this.nbreJoueur;i++)
 		{
@@ -108,72 +110,57 @@ public class Partie extends Observable{
 		return false;
 	}
 
-	public void deroulerPartie() {
-		String joueurGagnant = new String (" ");
-		boolean cinqCent = false;
-		
+	public boolean verifierGagnantPartie()
+	{
+		for(int i=0;i<this.nbreJoueur;i++)
+		{
+			if(listeJoueur.get(i).getScore() >= 500)
+			{
+				return true;
+			}
+		}
+		return false;
+	}
 	
-		
-		//Lancement de la partie
-
-		while(!cinqCent) //tant qu'aucun joueur n'a atteint 500 point
-		{	
-
-			
-			//Lancement d'une manche
-			System.out.println("\n\nDebut de la manche " + manche + ":");
-			joueurActuel = 0;
-
-			while( !verifierGagnant() ) //tant que personne n'a gagné
-			{
-				System.out.println(Talon.getInstance().getDerniereCarte() + " " + "il y a  " + Talon.getInstance().getNombreCarte()+ " dans le talon");
-				listeJoueur.get(joueurActuel).jouer(this); //il joue
-				joueurActuel = Math.abs((joueurActuel+sens)%nbreJoueur);
-			}
-			
-			//Si la manche s'est finie car il y a eu un gagnant
-			if(Pioche.getInstance().getNombreCarte()>0)
-			{
-				System.out.println( listeJoueur.get(Math.abs((joueurActuel+sens)%nbreJoueur)).afficherPseudo() +" remporte la manche "+ manche);
-				//Comptage des points du gagnant
-				this.listeJoueur.get(Math.abs((joueurActuel+sens)%nbreJoueur)).calculerScore(this);
-
-				for(int i=0; i<this.nbreJoueur; i++)
-				{
-					System.out.println(this.listeJoueur.get(i).afficherPseudo() + " a "+this.listeJoueur.get(i).getScore()+" points.");
-					if (this.listeJoueur.get(i).getScore() >= 500)
-					{
-						System.out.println(this.listeJoueur.get(i).afficherPseudo()+" remporte la partie");
-						joueurGagnant = (String)this.listeJoueur.get(i).afficherPseudo();
-						cinqCent = true;
-					}
-				}
-			}
-			else
-			{
-				//Si la manche se termine carte la pioche est vide
-				System.out.println("La pioche est vide, la manche est termin�e");
-			}
-			
-
-			
-
-			//Reinitialisation des cartes pour une nouvelle manche
-			Pioche.reinitialiserPioche();
-			Talon.reinitialiserTalon();
-			for(int i=0; i<this.nbreJoueur; i++)
-			{
-				this.listeJoueur.get(i).reinitialiserMain();
-			}
-
-			this.distribuerCarte();
-			//Nouvelle manche
-			manche++;
+	
+	public void deroulerManche()
+	{
+		//Initialisation de la manche
+		Pioche.reinitialiserPioche();
+		Talon.reinitialiserTalon();
+		for(int i=0; i<this.nbreJoueur; i++)
+		{
+			this.listeJoueur.get(i).reinitialiserMain();
 		}
 
-		//Un joueur a depassé les 500 points, fin du jeu
+		this.distribuerCarte(); //Distribution des cartes.
+		joueurActuel = -1;
+		manche++;
+		while( !verifierGagnantManche() ) //tant que personne n'a gagné
+		{
+			joueurActuel = Math.abs((joueurActuel+sens)%nbreJoueur);
+			
+			listeJoueur.get(joueurActuel).jouer(this);
+			
+			
+		}
+		//MAJ points du gagnant de la manche
+		this.listeJoueur.get(this.joueurActuel).calculerScore(this); //TODO erreur a joueur < 3
+		this.updateOManche();
 
-		System.out.println( joueurGagnant + " remporte la partie, le jeu est termin�e, il y a eu " + manche + " manches");
+	}
+	
+	
+	public void deroulerPartie() 
+	{
+		//Lancement de la partie
+
+		while(!verifierGagnantPartie()) //tant qu'aucun joueur n'a atteint 500 point
+		{	
+			this.deroulerManche();
+		}
+		this.updateOPartie(); // on notifie les observateurs
+		
 	}
 
 
@@ -187,9 +174,7 @@ public class Partie extends Observable{
 		return sens;
 	}
 
-	public void setSens(int sens) {
-		this.sens = sens;
-	}
+	
 	public  void setSens() {
 		this.sens *= -1;
 	}
@@ -215,9 +200,7 @@ public class Partie extends Observable{
 
 	public static void main(String[] args)
 	{
-		Partie p= new Partie(2, 0);
-	
-		p.deroulerPartie();
+		ModeConsole c = new ModeConsole();
 	}
 	
     public static int getNombre(int min, int max) {
@@ -248,7 +231,36 @@ public class Partie extends Observable{
     
     
     
+
+
+	public int getManche() {
+		return manche;
+	}
+
+	public void addObservateur(Observateur obs) {
+		 this.obs = obs;
+		
+	}
+
+
+	public void updateOManche() {
+	      this.obs.updateManche(this);
+		
+	}
+
+	public void updateOPartie() {
 	
+	      this.obs.updatePartie(this);
+		
+	}
+	
+	public void updateOJoueur(Joueur joueur, int i)
+	{ 
+		this.obs.updateJoueur(joueur, i);
+	}
+	
+	
+
 
 }
 

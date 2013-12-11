@@ -31,9 +31,9 @@ public class IABluff implements StyleIA {
 
 	@Override
 	public boolean direBluff(Joueur j) {
-		// TODO Auto-generated method stub
 		if(j.getNombreCarte()>7)
 		{
+			
 			return true;
 		}
 		

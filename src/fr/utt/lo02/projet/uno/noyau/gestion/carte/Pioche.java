@@ -161,13 +161,7 @@ public class Pioche {
 		}
 	}
 	
-	public void afficherPioche()
-	{
-		for (Iterator<Carte> i = listeCarte.iterator(); i.hasNext();) {
-	      Carte carte = (Carte) i.next();
-	      System.out.println(carte);
-		}
-	}
+	
 	
 	public static void reinitialiserPioche()
 	{

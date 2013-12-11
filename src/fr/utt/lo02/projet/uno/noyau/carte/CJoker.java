@@ -1,8 +1,6 @@
 package fr.utt.lo02.projet.uno.noyau.carte;
 
-import java.util.Scanner;
 
-import fr.utt.lo02.projet.uno.noyau.gestion.carte.Talon;
 import fr.utt.lo02.projet.uno.noyau.gestion.partie.Partie;
 
 public class CJoker extends CSpecial{

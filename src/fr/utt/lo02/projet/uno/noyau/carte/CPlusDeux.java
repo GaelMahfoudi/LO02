@@ -1,6 +1,5 @@
 package fr.utt.lo02.projet.uno.noyau.carte;
 
-import fr.utt.lo02.projet.uno.noyau.gestion.carte.Pioche;
 import fr.utt.lo02.projet.uno.noyau.gestion.carte.Talon;
 import fr.utt.lo02.projet.uno.noyau.gestion.joueur.Joueur;
 import fr.utt.lo02.projet.uno.noyau.gestion.partie.Partie;
@@ -17,7 +16,6 @@ public class CPlusDeux extends CSpecial {
 
 		Joueur joueurNext = partie.getJoueur(Math.abs((partie.getJoueurActuel()+partie.getSens())%partie.getNbreJoueur()));
 		joueurNext.piocherCarte(2);
-		System.out.println(joueurNext.afficherPseudo() +" a pioché 2 nouvelles cartes"  );
 		
 	}
 

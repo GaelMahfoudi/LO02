@@ -1,15 +1,15 @@
 package fr.utt.lo02.projet.uno.noyau.gestion.joueur;
 
-import fr.utt.lo02.projet.uno.noyau.carte.*;
+import Observer.Observateur;
 import fr.utt.lo02.projet.uno.noyau.gestion.carte.*;
 import fr.utt.lo02.projet.uno.noyau.gestion.partie.Partie;
 
 /**
  *  La classe Joueur est abstraite. Elle poss�de les attributs et m�thodes communes aux joueurs et aux IA.
  */
-public abstract class Joueur {
+public abstract class Joueur{
 	/* {author=Victor Le Deuff Ga�l Mahfoudi}*/
-
+	
 
 	protected int score;
 
@@ -18,6 +18,8 @@ public abstract class Joueur {
 	protected MainJoueur main;
 
 	protected boolean uno;
+	
+	public Observateur obs;
 	
 	
 	public Joueur() {
@@ -29,10 +31,9 @@ public abstract class Joueur {
 	
 	public void calculerScore(Partie partie) {
 		
-		for(int i=0; i<partie.getNbreJoueur(); i++)
+		for(int i=0; i < partie.getNbreJoueur(); i++)
 		{
-			if(this != partie.getJoueur(i))
-				this.score += partie.getJoueur(i).main.scoreMain();
+			this.score += partie.getJoueur(i).main.scoreMain();
 		}
 	}
 	
@@ -44,8 +45,6 @@ public abstract class Joueur {
 	public int getNombreCarte() {
 		return main.getNombreCarte();
 	}
-
-	public abstract void jouer(Partie partie);
 
 	
 	public void piocherCarte()
@@ -70,6 +69,7 @@ public abstract class Joueur {
 		}
 	}
 	
+	public abstract void jouer (Partie partie);
 	public void reinitialiserMain()
 	{
 		this.main.reinitialiserMain();
@@ -78,9 +78,7 @@ public abstract class Joueur {
 	}
 
 	
-	public void afficherMain(){
-		main.afficherMain();
-	}
+	
 	
 	public String afficherPseudo(){
 		return this.pseudo;
@@ -102,5 +100,13 @@ public abstract class Joueur {
 	public abstract void direContreUno(Joueur j);
 	
 	public abstract void direContreUno(Partie partie);
-	public abstract boolean direBluff(Joueur joueur);
+	public abstract void direBluff(Joueur joueur);
+
+	public void addObservateur(Observateur obs) {
+		this.obs= obs;
+		
+	}
+
+
+
 }

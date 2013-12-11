@@ -3,9 +3,8 @@ package fr.utt.lo02.projet.uno.noyau.gestion.joueur;
 import java.util.Random;
 import java.util.Scanner;
 
+import fr.utt.lo02.projet.uno.noyau.carte.Carte;
 import fr.utt.lo02.projet.uno.noyau.carte.ECouleur;
-import fr.utt.lo02.projet.uno.noyau.carte.ESpecial;
-import fr.utt.lo02.projet.uno.noyau.gestion.carte.Pioche;
 import fr.utt.lo02.projet.uno.noyau.gestion.carte.Talon;
 import fr.utt.lo02.projet.uno.noyau.gestion.partie.Partie;
 
@@ -41,22 +40,25 @@ public class IA extends Joueur {
 		}
 		
 		
-		if(i< main.getNombreCarte())
+		if(i <= main.getNombreCarte())
 		{
-			System.out.println(pseudo + " a joué " + main.getMain().get(i));
 			Talon.getInstance().ajouterCarte(main.enleverCarte(i));
 			Talon.getInstance().getDerniereCarte().appliquerRegle(partie);
+			obs.updateJoueur(this, i);
 		}
 		else if(i == main.getNombreCarte()+1)
 		{
 			this.piocherCarte();
-			System.out.println(pseudo + " a pioché");
+			obs.updateJoueur(this, i);
 		}
 		else
 		{
 			this.direContreUno(partie);
+			//TODO notify contre uno
 		}
+		
 	}
+	
 
 	public void generePseudo() {
 	}
@@ -65,17 +67,34 @@ public class IA extends Joueur {
 	public void setStyle() {
 	}
 
-	public boolean direBluff(Joueur joueur)
+	public void direBluff(Joueur joueur)
 	{
-		if(joueur == this)
+		if(joueur != this)
 		{
-			return false;
+			boolean bluff = styleJeu.direBluff(joueur);
+			if(bluff)
+			{
+				Carte carteAComparer = Talon.getInstance().getAvantDerniereCarte();
+				bluff = false;
+				for(int i=0; i<this.getNombreCarte(); i++)
+				{
+					Carte carte = this.main.enleverCarte(i);
+					this.main.ajouterCarte(carte);
+					if(carte.getCouleur() == carteAComparer.getCouleur()  || carte.getCouleur() == null || carte.getValeur()== carteAComparer.getValeur()) 
+						bluff = true; //Il bluff
+				}
+				if (bluff)
+					joueur.piocherCarte(4); //LE joueur bluffait
+				else
+					this.piocherCarte(6); //Le jouer ne bluffait pas
+			}
+			else
+			{
+				this.piocherCarte(4); //Le joueur n'a pas dementi le joueur actuel
+			}
+			
+		this.choisirCouleur();
 		}
-		else 
-		{
-			styleJeu.direBluff(joueur);
-		}
-		return false;
 	}
 
 	public void direUno() {
@@ -94,7 +113,7 @@ public class IA extends Joueur {
 
 	
 	@Override
-	public void choisirCouleur() {
+	public void choisirCouleur() { //TODO
 		
 		Random r = new Random();
 		
@@ -108,19 +127,15 @@ public class IA extends Joueur {
 		{
 		case 0:
 			Talon.getInstance().setCouleurDerniereCarte(ECouleur.BLEU);
-			System.out.println(this.pseudo + " a choisi la couleur bleu");
 			break;
 		case 1:
 			Talon.getInstance().setCouleurDerniereCarte(ECouleur.ROUGE);
-			System.out.println(this.pseudo + " a choisi la couleur rouge");
 			break;
 		case 2:
 			Talon.getInstance().setCouleurDerniereCarte(ECouleur.JAUNE);
-			System.out.println(this.pseudo + " a choisi la couleur jaune");
 			break;
 		case 3:
 			Talon.getInstance().setCouleurDerniereCarte(ECouleur.VERT);
-			System.out.println(this.pseudo + " a choisi la couleur vert");
 			break;
 		}
 

@@ -72,14 +72,6 @@ public class MainJoueur {
 		this.main = main;
 	}
 
-	public void afficherMain() {
-		
-		int i = 0;
-		
-		for(i=0;i<main.size();i++)
-		{
-			System.out.println((i+1)+": "+ main.get(i));
-		}
-	}
+	
 
 }
