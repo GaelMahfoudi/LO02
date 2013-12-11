@@ -2,11 +2,10 @@ package fr.utt.lo02.projet.uno.noyau.gestion.partie;
 
 import java.util.ArrayList;
 import java.util.InputMismatchException;
+import java.util.Observable;
 import java.util.Scanner;
 
 import fr.utt.lo02.projet.uno.noyau.carte.Carte;
-import fr.utt.lo02.projet.uno.noyau.carte.ECouleur;
-import fr.utt.lo02.projet.uno.noyau.carte.ESpecial;
 import fr.utt.lo02.projet.uno.noyau.gestion.carte.Pioche;
 import fr.utt.lo02.projet.uno.noyau.gestion.carte.Talon;
 import fr.utt.lo02.projet.uno.noyau.gestion.joueur.*;
@@ -14,7 +13,7 @@ import fr.utt.lo02.projet.uno.noyau.gestion.joueur.*;
 /**
  *  Partie est la classe g�rant une partie de Uno. Elle g�re les joueurs, les paquets de cartes et les tours de jeu.
  */
-public class Partie {
+public class Partie extends Observable{
 	/* {author=Victor Le Deuff Ga�l Mahfoudi}*/
 
 	private int manche;
@@ -26,6 +25,7 @@ public class Partie {
 	private int joueurActuel;
 
 	private ArrayList<Joueur> listeJoueur;
+	
 
 
 	public Partie(int nbJoueur)
@@ -111,12 +111,15 @@ public class Partie {
 	public void deroulerPartie() {
 		String joueurGagnant = new String (" ");
 		boolean cinqCent = false;
+		
+	
+		
 		//Lancement de la partie
 
 		while(!cinqCent) //tant qu'aucun joueur n'a atteint 500 point
 		{	
 
-
+			
 			//Lancement d'une manche
 			System.out.println("\n\nDebut de la manche " + manche + ":");
 			joueurActuel = 0;
@@ -128,7 +131,7 @@ public class Partie {
 				joueurActuel = Math.abs((joueurActuel+sens)%nbreJoueur);
 			}
 			
-			//Si la manche c'est finie car il y a eu un gagnant
+			//Si la manche s'est finie car il y a eu un gagnant
 			if(Pioche.getInstance().getNombreCarte()>0)
 			{
 				System.out.println( listeJoueur.get(Math.abs((joueurActuel+sens)%nbreJoueur)).afficherPseudo() +" remporte la manche "+ manche);
@@ -212,7 +215,7 @@ public class Partie {
 
 	public static void main(String[] args)
 	{
-		Partie p= new Partie(0, 5);
+		Partie p= new Partie(2, 0);
 	
 		p.deroulerPartie();
 	}
@@ -242,4 +245,13 @@ public class Partie {
 		return i;
 	}
 
+    
+    
+    
+	
+
 }
+
+
+
+
