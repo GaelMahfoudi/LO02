@@ -141,11 +141,15 @@ public class Partie implements Observer{
 			joueurActuel = Math.abs((joueurActuel+sens)%nbreJoueur);
 			
 			listeJoueur.get(joueurActuel).jouer(this);
-			
-			
+
 		}
 		//MAJ points du gagnant de la manche
-		this.listeJoueur.get(this.joueurActuel).calculerScore(this); //TODO erreur a joueur < 3
+		for (int i=0; i<this.getNbreJoueur(); i++)
+		{
+			if(this.listeJoueur.get(i).getNombreCarte() == 0)
+				this.listeJoueur.get(i).calculerScore(this);
+		}
+		
 		this.updateOManche();
 
 	}
