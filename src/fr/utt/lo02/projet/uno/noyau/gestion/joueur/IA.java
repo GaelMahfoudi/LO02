@@ -31,13 +31,12 @@ public class IA extends Joueur {
 		if(this.getNombreCarte()>10)
 		{
 			styleJeu = new IAOffensive();
-			i = styleJeu.jouerCarte(partie, this);
 		}
 		else
 		{
 			styleJeu = new IANormal();
-			i = styleJeu.jouerCarte(partie, this);
 		}
+		i = styleJeu.jouerCarte(partie, this);
 		
 		
 		if(i <= main.getNombreCarte())
@@ -49,7 +48,7 @@ public class IA extends Joueur {
 		else if(i == main.getNombreCarte()+1)
 		{
 			this.piocherCarte();
-			obs.updateJoueur(this, i);
+			obs.updateJoueur(this, i+1);
 		}
 		else
 		{
