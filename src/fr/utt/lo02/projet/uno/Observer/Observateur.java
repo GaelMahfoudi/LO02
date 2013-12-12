@@ -3,7 +3,7 @@ package Observer;
 import fr.utt.lo02.projet.uno.noyau.carte.ECouleur;
 import fr.utt.lo02.projet.uno.noyau.gestion.joueur.Joueur;
 import fr.utt.lo02.projet.uno.noyau.gestion.partie.Partie;
-
+//Notons que l'observateur doit instancier lui meme partie dans son constructeur
 public interface Observateur
 {
 	public void updateManche(Partie partie);
