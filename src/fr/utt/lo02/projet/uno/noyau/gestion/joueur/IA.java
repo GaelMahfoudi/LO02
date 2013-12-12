@@ -1,8 +1,8 @@
 package fr.utt.lo02.projet.uno.noyau.gestion.joueur;
 
 import java.util.Random;
-import java.util.Scanner;
 
+import Observer.Observateur;
 import fr.utt.lo02.projet.uno.noyau.carte.Carte;
 import fr.utt.lo02.projet.uno.noyau.carte.ECouleur;
 import fr.utt.lo02.projet.uno.noyau.gestion.carte.Talon;
@@ -16,14 +16,11 @@ public class IA extends Joueur {
 
 
 	private StyleIA styleJeu;
-	private Scanner sc;
 	
-	public IA()
+	public IA(Observateur obs)
 	{
-		super();
-		System.out.println("Saisissez le nom du joueur:");
-		sc = new Scanner(System.in);
-		this.pseudo = sc.nextLine();
+		super(obs);
+		pseudo = generePseudo();
 	}
 	public void jouer(Partie partie) {
 		int i = 0;
@@ -59,7 +56,8 @@ public class IA extends Joueur {
 	}
 	
 
-	public void generePseudo() {
+	public String generePseudo() {
+		return "Bernard";
 	}
 	
 

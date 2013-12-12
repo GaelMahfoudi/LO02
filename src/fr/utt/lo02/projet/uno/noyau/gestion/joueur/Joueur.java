@@ -22,11 +22,12 @@ public abstract class Joueur{
 	public Observateur obs;
 	
 	
-	public Joueur() {
-
+	public Joueur(Observateur obs) {
+		this.addObservateur(obs);
 		main = new MainJoueur();
 		score = 0;
 		uno = false;
+		pseudo = " ";
 	}
 	
 	public void calculerScore(Partie partie) {
@@ -54,6 +55,8 @@ public abstract class Joueur{
 			Talon.getInstance().viderTalon();
 		}
 		main.ajouterCarte(Pioche.getInstance().enleverCarte());
+		obs.upgradePioche(this);
+		 
 	}
 	
 	public void piocherCarte(int nb) {
@@ -61,11 +64,7 @@ public abstract class Joueur{
 		
 		for(i=0;i<nb;i++)
 		{
-			if(Pioche.getInstance().getNombreCarte()==0)
-			{
-				Talon.getInstance().viderTalon();
-			}
-			main.ajouterCarte(Pioche.getInstance().enleverCarte());
+			this.piocherCarte();
 		}
 	}
 	
@@ -88,6 +87,8 @@ public abstract class Joueur{
 	public MainJoueur getMain() {
 		return main;
 	}
+	
+	
 
 	public void setMain(MainJoueur main) {
 		this.main = main;

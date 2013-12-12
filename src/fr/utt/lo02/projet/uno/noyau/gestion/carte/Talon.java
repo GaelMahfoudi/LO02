@@ -27,6 +27,11 @@ public class Talon {
 			Pioche.getInstance().ajouterCarte(listeCarte.poll());
 		}
 	}
+	
+	public Carte enleverDerniereCarte()
+	{
+		return listeCarte.remove();
+	}
 
 	public void setCouleurDerniereCarte(ECouleur couleur) {
 		((LinkedList<Carte>) listeCarte).peekLast().setCouleur(couleur);

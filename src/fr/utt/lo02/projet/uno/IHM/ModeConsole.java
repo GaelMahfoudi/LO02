@@ -14,30 +14,23 @@ import Observer.Observateur;
 
 
 public class ModeConsole implements Observateur
-{
-
-	private Partie partie;
+{	
 	
-	public ModeConsole()
+	public Partie partie;
+	public ModeConsole() //Constructeur
 	{
 		
 		System.out.println("/////* Jeu de Uno *\\\\\\\\\\");
 		System.out.println("Saisissez le nombre de joueurs réels: "); 
-		int nbreJoueurReel = Partie.getNombre(0,10);
+		int nbreJoueurReel = this.getNombre(0,10);
 		System.out.println("Saisissez le nombre de joueurs virtuels: "); 
-		int nbreJoueurVirtuel = Partie.getNombre(0,10);
+		int nbreJoueurVirtuel = this.getNombre(0,10);
 		
-		partie = new Partie(nbreJoueurReel, nbreJoueurVirtuel);
-		partie.addObservateur(this);
-		for (int i=0; i<partie.getNbreJoueur(); i++)
-		{	
-			partie.getJoueur(i).addObservateur(this);
-		}
-		
+		partie = new Partie(nbreJoueurReel, nbreJoueurVirtuel, this);
 		this.deroulerPartie();
 	}
 	
-	public void deroulerPartie()
+	public void deroulerPartie() //lance le moteur du jeu
 	{
 		System.out.println("\n\nDebut de la premiere manche:");
 		partie.deroulerPartie();
@@ -46,7 +39,8 @@ public class ModeConsole implements Observateur
 	}
 	
 	
-	public void updateManche(Partie partie) {
+	public void updateManche(Partie partie) //Change de manche
+	{
 		boolean fin = false;
 		System.out.println( partie.getJoueur(partie.getJoueurActuel()).afficherPseudo() +" remporte la manche "+ partie.getManche());
 		for (int i = 0; i< partie.getNbreJoueur(); i++)
@@ -61,18 +55,18 @@ public class ModeConsole implements Observateur
 		
 	}
 	
-	public void updatePartie(Partie partie)
+	public void updatePartie(Partie partie) //Fin de partie
 	{
 		System.out.println( partie.getJoueur(partie.getJoueurActuel()).afficherPseudo() + " remporte la partie, le jeu est terminé, il y a eu " + partie.getManche() + " manches");	
 	}
 	
-	public void notifyError() //Notifie si la carte pu etre jouée
+	public void notifyError() //Notifie si la carte n'a pu etre jouée
 	{
 		System.out.println("Cette carte ne peut etre posée...");
 	}
 	
 	@SuppressWarnings("incomplete-switch")
-	public void updateJoueur(Joueur joueur, int choix)
+	public void updateJoueur(Joueur joueur, int choix) //Info sur la fin d'un tour
 	{
 		if(choix < joueur.getMain().getNombreCarte())
 		{
@@ -84,12 +78,6 @@ public class ModeConsole implements Observateur
 				case JOKER:
 					System.out.println(joueur.afficherPseudo() +" a choisi la couleur " + Talon.getInstance().getDerniereCarte().getCouleur());
 					break;
-				case PASSE:
-					System.out.println("Le joueur suivant passe son tour.");
-					break;
-				case PLUS_DEUX:
-					System.out.println("Le joueur suivant pioche 2 cartes.");
-					break;
 				case INVERSE:
 					System.out.println("Le jeu change de sens.");
 					break;
@@ -97,7 +85,7 @@ public class ModeConsole implements Observateur
 				}
 			}
 		}
-		else if (choix >= joueur.getMain().getNombreCarte())
+		else if (choix >= joueur.getMain().getNombreCarte()+1)
 		{
 			System.out.println(joueur.afficherPseudo() +" passe.");
 		}
@@ -105,9 +93,10 @@ public class ModeConsole implements Observateur
 	}
 	
 	
-	public int choisirCarte(Joueur joueur)
+	public int choisirCarte(Joueur joueur) //Permet au joueur de choisir une carte
 	{
 		int choix = 0;
+		System.out.println("Au tour de " + joueur.afficherPseudo() +":");
 		System.out.println("Carte du talon: " + Talon.getInstance().getDerniereCarte().toString());
 		System.out.println("Votre Main: ");
 		for (int i = 0; i< joueur.getMain().getNombreCarte(); i++)
@@ -118,7 +107,7 @@ public class ModeConsole implements Observateur
 
 		System.out.println((joueur.getMain().getNombreCarte()+2) + ": Declarer un Contre Uno");
 		System.out.println("Choisissez une carte [1.." + (joueur.getMain().getNombreCarte()+2) + "] : ");
-		choix= Partie.getNombre(0, joueur.getMain().getNombreCarte()+2);
+		choix= this.getNombre(0, joueur.getMain().getNombreCarte()+2);
 	
 		//on retourne le choix
 		return choix-1;
@@ -126,14 +115,14 @@ public class ModeConsole implements Observateur
 
 	
 
-	 public int upgradeBluff()
+	 public int upgradeBluff() //Savoir si le joueur declare un bleuff
 	  {
 		 System.out.println(partie.getJoueur(partie.getJoueurActuel()).afficherPseudo() + " A posé un PLUS_QUATRE,");
 		 Joueur joueur = partie.getJoueur(Math.abs((partie.getJoueurActuel()+partie.getSens())%partie.getNbreJoueur()));
 		 if( joueur instanceof JoueurNormal)
 		 {
 			 System.out.println(joueur.afficherPseudo()+ ", voulez vous declarer un bluff? [1|0] ");
-			 return Partie.getNombre(0,1);
+			 return this.getNombre(0,1);
 		 }
 		 else
 		 {
@@ -142,15 +131,21 @@ public class ModeConsole implements Observateur
 		 }
 	  }
 	  
-	 public int upgradePasse(Joueur joueur)
+	 public void upgradePioche(Joueur joueur) //Losrque le joueur pioche
 	 {
-		 System.out.println("Vous avez pioché un " + joueur.getMain().getMain().get(joueur.getNombreCarte()-1));
+		 if( this.partie.getManche() != 0)
+			 System.out.println("Vous avez pioché un " + joueur.getMain().getMain().get(joueur.getNombreCarte()-1));
+		 
+	 }
+	 
+	 public int upgradePasse(Joueur joueur) //Demande au joueur s'il veut poser la carte piochée
+	 {
 		 System.out.println("Voulez vous la poser? [1|0]");
-		 return Partie.getNombre(0,1);
+		 return this.getNombre(0,1);
 		
 	 }
 	
-	 public ECouleur choisirCouleur()
+	 public ECouleur choisirCouleur() //Choisir couleur
 	 {
 		 Scanner sc = new Scanner(System.in);
 			System.out.println("Choisissez la nouvelle couleur [B|R|J|V]:");
@@ -182,11 +177,72 @@ public class ModeConsole implements Observateur
 	 }
 	 
 	 
-	 public int choisirUno()
+	 public int updateDireContreUno() //Declarer un contru uno
+	 {
+		 Scanner sc = new Scanner(System.in);
+		System.out.println("A qui dites vous contre Uno? [1.."+(partie.getNbreJoueur())+"]");
+		for(int i = 0; i<partie.getNbreJoueur(); i++)
+		{
+			System.out.println((i+1) + ":" + partie.getJoueur(i).afficherPseudo() );
+		}
+		System.out.println((partie.getNbreJoueur()) + ": Annuler");
+		return this.getNombre(0, partie.getNbreJoueur());
+	 }
+	 
+	 public int choisirUno() //Declarer un uno
 	 {
 		 System.out.println("voulez vous déclarer un UNO? [1|0]");
-		 return Partie.getNombre(0, 1);
+		 return this.getNombre(0, 1);
 
 	 }
+	
+
+
+		public int getNombre(int min, int max) {
+		
+		Scanner sc = new Scanner(System.in);
+		int i = -1;
+		
+		try{
+			i  = sc.nextInt();
+			}
+		catch(InputMismatchException e)
+			{
+				System.out.println("Erreur: entrez un entier entre "+ min + " et " + max + ": ");
+				i = getNombre(min, max);
+			}
+		finally
+		{
+			if ( i < min || i > max)
+			{
+				System.out.println("Erreur: entrez un entier entre "+ min + " et " + max + ": ");
+				i=getNombre(min, max);
+			}
+		}
+		
+		return i;
+}
+	
+	public String updatePseudo()
+	{
+		
+		Scanner sc = new Scanner(System.in);
+		System.out.println("Saisissez le nom du joueur:");
+		String s = " ";
+		try
+		{
+			s = sc.nextLine();
+		}
+		catch (NullPointerException e)
+		{
+			System.out.println("Erreur: reessayez");
+		
+			s = updatePseudo();
+		}
+		
+			return s;
+		
+		
+	}
 	
 }

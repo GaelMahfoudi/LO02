@@ -13,8 +13,12 @@ public class CInverse extends CSpecial{
 	@Override
 	public void appliquerRegle(Partie partie) {
 		partie.setSens();
+		if(partie.getNbreJoueur() == 2)
+		{
+			partie.nextJoueur();
+		}
+		
 	}
-
 	@Override
 	public boolean estPosable() {
 		

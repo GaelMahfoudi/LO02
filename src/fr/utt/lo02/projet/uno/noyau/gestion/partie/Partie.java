@@ -32,45 +32,26 @@ public class Partie implements Observer{
 
 
 
-	public Partie(int nbJoueur)
-	{
-		sens=1;
-		manche = 0;
-		joueurActuel=0;
-		listeJoueur = new ArrayList<Joueur>();
-		this.nbreJoueur = nbJoueur;
-
-		//generation des joueurs
-		for(int i=0;i<nbJoueur;i++)
-		{
-			System.out.println("Joueur " + (i+1) + ":");
-			listeJoueur.add(new JoueurNormal());
-		}
-
-		//Distribution des cartes
-		this.distribuerCarte();
-	}
 	
-	public Partie(int nbJoueur, int nbIA)
+	
+	public Partie(int nbJoueur, int nbIA, Observateur obs)
 	{
 		sens=1;
 		manche = 0;
 		joueurActuel=0;
 		listeJoueur = new ArrayList<Joueur>();
 		this.nbreJoueur = nbJoueur + nbIA;
-
+		this.addObservateur(obs);//ajoute l'observeur dés le debut
 		//generation des joueurs normaux
 		for(int i=0;i<nbJoueur;i++)
 		{
-			System.out.println("Joueur " + (i+1) + ":");
-			listeJoueur.add(new JoueurNormal());
+			listeJoueur.add(new JoueurNormal(obs));
 		}
 
 		//Generation des IAS
 		for(int i=0; i<nbIA; i++)
 		{
-			System.out.println("Joueur " + (i+1+nbJoueur) + ":");
-			listeJoueur.add(new IA());
+			listeJoueur.add(new IA(obs));
 		}
 
 
@@ -138,8 +119,7 @@ public class Partie implements Observer{
 		manche++;
 		while( !verifierGagnantManche() ) //tant que personne n'a gagné
 		{
-			joueurActuel = Math.abs((joueurActuel+sens)%nbreJoueur);
-			
+			this.nextJoueur();
 			listeJoueur.get(joueurActuel).jouer(this);
 
 		}
@@ -169,7 +149,8 @@ public class Partie implements Observer{
 
 
 	public void nextJoueur() {
-		this.joueurActuel++;
+		joueurActuel = Math.abs((joueurActuel+sens)%nbreJoueur);
+		
 	}
 
 
@@ -207,31 +188,7 @@ public class Partie implements Observer{
 		ModeConsole c = new ModeConsole();
 	}
 	
-    public static int getNombre(int min, int max) {
-		
-		Scanner sc = new Scanner(System.in);
-		int i = -1;
-		
-		try{
-			i  = sc.nextInt();
-			}
-		catch(InputMismatchException e)
-			{
-				System.out.println("Erreur: entrez un entier entre "+ min + " et " + max + ": ");
-				i = getNombre(min, max);
-			}
-		finally
-		{
-			if ( i < min || i > max)
-			{
-				System.out.println("Erreur: entrez un entier entre "+ min + " et " + max + ": ");
-				i=getNombre(min, max);
-			}
-		}
-		
-		return i;
-	}
-
+    
     
     
     

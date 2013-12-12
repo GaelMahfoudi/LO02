@@ -1,7 +1,7 @@
 package fr.utt.lo02.projet.uno.noyau.gestion.joueur;
 
-import java.util.Scanner;
 
+import Observer.Observateur;
 import fr.utt.lo02.projet.uno.noyau.carte.Carte;
 import fr.utt.lo02.projet.uno.noyau.gestion.carte.Talon;
 import fr.utt.lo02.projet.uno.noyau.gestion.partie.Partie;
@@ -12,13 +12,13 @@ import fr.utt.lo02.projet.uno.noyau.gestion.partie.Partie;
 public class JoueurNormal extends Joueur {
 	/* {author=Victor Le Deuff Ga�l Mahfoudi}*/
 	
-	private Scanner sc;
 	
-	public JoueurNormal() {
-		super();
-		System.out.println("Saisissez le nom du joueur:");
-		sc = new Scanner(System.in);
-		this.pseudo = sc.nextLine();
+	public JoueurNormal(Observateur obs) {
+		super(obs);
+		this.pseudo = obs.updatePseudo();
+		
+		
+		
 	}
 
 	public void jouer(Partie partie) 
@@ -76,7 +76,7 @@ public class JoueurNormal extends Joueur {
 				obs.updateJoueur(this, choix+1);
 				return;
 			}
-			else if ( choix == this.main.getNombreCarte()+2 ) //ContreUno
+			else if ( choix == this.main.getNombreCarte()+1 ) //ContreUno
 			{ 
 				this.direContreUno(partie);
 				//TODO notify contre uno
@@ -99,6 +99,7 @@ public class JoueurNormal extends Joueur {
 		if (choix == 0)
 		{
 			this.piocherCarte(4);
+			this.choisirCouleur();
 		}
 		else
 		{
@@ -115,10 +116,13 @@ public class JoueurNormal extends Joueur {
 			if (bluff)
 			{
 				joueur.piocherCarte(4);
+				joueur.main.ajouterCarte(Talon.getInstance().enleverDerniereCarte());
+				
 			}
 			else
 			{
 				this.piocherCarte(6);
+				this.choisirCouleur();
 			}
 		}
 	}
@@ -140,27 +144,23 @@ public class JoueurNormal extends Joueur {
 
 	public void direContreUno(Partie partie) 
 	{
-		sc = new Scanner(System.in);
-		System.out.println("A qui dites vous contre Uno? [1.."+(partie.getNbreJoueur())+"]");
-		for(int i = 0; i<partie.getNbreJoueur(); i++)
+		
+		int nJoueur = obs.updateDireContreUno()-1;
+		if(nJoueur < partie.getNbreJoueur() && this != partie.getJoueur(nJoueur) )
 		{
-			System.out.println((i+1) + ":" + partie.getJoueur(i).afficherPseudo() );
+			direContreUno(partie.getJoueur(nJoueur));
 		}
-		int nJoueur = Partie.getNombre(0, partie.getNbreJoueur())-1;
-		direContreUno(partie.getJoueur(nJoueur));
 	}
 
 	public void direContreUno(Joueur j) {
+		
 		if( j.getNombreCarte() == 1 && !j.uno) 
 		{
-			System.out.println(j.afficherPseudo()+" pioche 2 cartes");
 			j.piocherCarte(2);
 		}
 		else
 		{
-			System.out.println("Le contre-Uno n'est pas valide, vous piochez 2 cartes");
-			this.piocherCarte();
-			this.piocherCarte();
+			this.piocherCarte(2);
 		}
 	}
 
