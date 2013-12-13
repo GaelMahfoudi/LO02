@@ -115,6 +115,8 @@ public class Partie implements Observer{
 		this.distribuerCarte(); //Distribution des cartes.
 		joueurActuel = -1;
 		manche++;
+		
+		
 		while( !verifierGagnantManche() ) //tant que personne n'a gagné
 		{
 			this.nextJoueur();
@@ -128,7 +130,7 @@ public class Partie implements Observer{
 				this.listeJoueur.get(i).calculerScore(this);
 		}
 		
-		this.updateOManche();
+		obs.notifyManche(this);;
 
 	}
 	
@@ -141,7 +143,7 @@ public class Partie implements Observer{
 		{	
 			this.deroulerManche();
 		}
-		this.updateOPartie(); // on notifie les observateurs
+		obs.notifyPartie(this); // on notifie les observateurs
 		
 	}
 
@@ -203,23 +205,8 @@ public class Partie implements Observer{
 	}
 
 
-	public void updateOManche() {
-	      this.obs.notifyManche(this);
-		
-	}
+	
 
-	public void updateOPartie() {
-	
-	      this.obs.notifyPartie(this);
-		
-	}
-	
-	public void updateOJoueur(Joueur joueur, int i)
-	{ 
-		this.obs.notifyTour(joueur, i);
-	}
-	
-	
 
 
 }
