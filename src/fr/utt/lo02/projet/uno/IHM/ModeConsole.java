@@ -145,6 +145,7 @@ public class ModeConsole implements Observateur
 	{
 		
 		int choix = 0;
+		System.out.println("\n\n ----------------------------------------------------------------------");
 		System.out.println("Au tour de " + joueur.afficherPseudo() +":");
 		System.out.println("Carte du talon: " + Talon.getInstance().getDerniereCarte().toString());
 		System.out.println("Votre Main: ");
@@ -317,9 +318,9 @@ public class ModeConsole implements Observateur
 	public String askPseudo()
 	{
 		
-		
+		Scanner sc = new Scanner(System.in);
 		System.out.println("Saisissez le nom du joueur:");
-		String s = " ";
+		String s = null;
 		try
 		{
 			s = sc.nextLine();
@@ -329,6 +330,14 @@ public class ModeConsole implements Observateur
 			System.out.println("Erreur: reessayez");
 		
 			s = askPseudo();
+		}
+		finally
+		{
+			if(s == null || s == " ")
+			{
+				System.out.println("Erreur; reessayez");
+				s = askPseudo();
+			}
 		}
 		
 			return s;
