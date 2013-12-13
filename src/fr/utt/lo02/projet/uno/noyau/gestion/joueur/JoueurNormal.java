@@ -15,7 +15,7 @@ public class JoueurNormal extends Joueur {
 	
 	public JoueurNormal(Observateur obs) {
 		super(obs);
-		this.pseudo = obs.updatePseudo();
+		this.pseudo = obs.askPseudo();
 		
 		
 		
@@ -30,7 +30,7 @@ public class JoueurNormal extends Joueur {
 		
 		do
 		{	
-			choix = obs.choisirCarte(this);
+			choix = obs.askCarte(this);
 			
 			if(choix >= 0 && choix < this.main.getNombreCarte()) //s'il a choisit une carte
 			{
@@ -40,7 +40,7 @@ public class JoueurNormal extends Joueur {
 				{
 					Talon.getInstance().ajouterCarte(carteChoisie);
 					carteChoisie.appliquerRegle(partie);
-					obs.updateJoueur(this, choix);
+					obs.notifyTour(this, choix);
 					this.direUno();
 					return;
 				}
@@ -54,7 +54,7 @@ public class JoueurNormal extends Joueur {
 			else if (choix == this.main.getNombreCarte()) //S'il a choisit de piocher
 			{
 				this.piocherCarte();
-				int choix2 = obs.upgradePasse(this);
+				int choix2 = obs.askPoserCarte(this);
 				Carte cartePiochee = this.main.enleverCarte(this.main.getNombreCarte()-1);
 				
 				if(choix2 == 1)
@@ -63,7 +63,7 @@ public class JoueurNormal extends Joueur {
 					{
 						Talon.getInstance().ajouterCarte(cartePiochee);
 						cartePiochee.appliquerRegle(partie);
-						obs.updateJoueur(this, choix-1);
+						obs.notifyTour(this, choix-1);
 						this.direUno();
 						return;
 					}
@@ -73,7 +73,7 @@ public class JoueurNormal extends Joueur {
 				//Si la carte ne peut etre posée ou le joueur ne veut pas
 				this.main.ajouterCarte(cartePiochee);
 				this.direUno();
-				obs.updateJoueur(this, choix+1);
+				obs.notifyTour(this, choix+1);
 				return;
 			}
 			else if ( choix == this.main.getNombreCarte()+1 ) //ContreUno
@@ -95,7 +95,7 @@ public class JoueurNormal extends Joueur {
 	public void direBluff(Joueur joueur) 
 	{		
 		Carte carteAComparer = Talon.getInstance().getAvantDerniereCarte();
-		int choix = this.obs.upgradeBluff();
+		int choix = this.obs.askBluff();
 		if (choix == 0)
 		{
 			this.piocherCarte(4);
@@ -129,7 +129,7 @@ public class JoueurNormal extends Joueur {
 
 	public void direUno() {
 		
-		int choix = obs.choisirUno();
+		int choix = obs.askUno();
 		if(choix == 1)
 		{
 			if( this.getNombreCarte() == 0)
@@ -145,7 +145,7 @@ public class JoueurNormal extends Joueur {
 	public void direContreUno(Partie partie) 
 	{
 		
-		int nJoueur = obs.updateDireContreUno()-1;
+		int nJoueur = obs.askContreUno()-1;
 		if(nJoueur < partie.getNbreJoueur() && this != partie.getJoueur(nJoueur) )
 		{
 			direContreUno(partie.getJoueur(nJoueur));
@@ -167,7 +167,7 @@ public class JoueurNormal extends Joueur {
 
 	public void choisirCouleur() 
 	{
-		Talon.getInstance().setCouleurDerniereCarte(obs.choisirCouleur());
+		Talon.getInstance().setCouleurDerniereCarte(obs.askCouleur());
 	}
 
 }

@@ -1,8 +1,6 @@
 package fr.utt.lo02.projet.uno.noyau.gestion.partie;
 
 import java.util.ArrayList;
-import java.util.InputMismatchException;
-import java.util.Scanner;
 
 import IHM.ModeConsole;
 import Observer.Observateur;
@@ -185,6 +183,7 @@ public class Partie implements Observer{
 
 	public static void main(String[] args)
 	{
+		@SuppressWarnings("unused")
 		ModeConsole c = new ModeConsole();
 	}
 	
@@ -205,19 +204,19 @@ public class Partie implements Observer{
 
 
 	public void updateOManche() {
-	      this.obs.updateManche(this);
+	      this.obs.notifyManche(this);
 		
 	}
 
 	public void updateOPartie() {
 	
-	      this.obs.updatePartie(this);
+	      this.obs.notifyPartie(this);
 		
 	}
 	
 	public void updateOJoueur(Joueur joueur, int i)
 	{ 
-		this.obs.updateJoueur(joueur, i);
+		this.obs.notifyTour(joueur, i);
 	}
 	
 	

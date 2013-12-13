@@ -55,7 +55,7 @@ public abstract class Joueur{
 			Talon.getInstance().viderTalon();
 		}
 		main.ajouterCarte(Pioche.getInstance().enleverCarte());
-		obs.upgradePioche(this);
+		obs.notifyPioche(this);
 		 
 	}
 	

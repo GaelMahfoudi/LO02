@@ -6,19 +6,18 @@ import fr.utt.lo02.projet.uno.noyau.gestion.partie.Partie;
 //Notons que l'observateur doit instancier lui meme partie dans son constructeur
 public interface Observateur
 {
-	public void updateManche(Partie partie);
-	  public void updatePartie(Partie partie);
-	  public void updateJoueur(Joueur joueur, int choix);
-	  public int choisirCarte(Joueur joueur);
-	  public int upgradePasse(Joueur joueur);
-	  public void upgradePioche(Joueur joueur);
-	  public int upgradeBluff();
+	public void notifyManche(Partie partie);
+	  public void notifyPartie(Partie partie);
+	  public void notifyTour(Joueur joueur, int choix);
+	  public int askCarte(Joueur joueur);
+	  public int askPoserCarte(Joueur joueur);
+	  public void notifyPioche(Joueur joueur);
+	  public int askBluff();
 	  public void notifyError();
-	  public ECouleur choisirCouleur();
-	  public int choisirUno();
-	public int updateDireContreUno();
-	public String updatePseudo();
-	public void deroulerPartie();
-	public int getNombre(int min, int max);
+	  public ECouleur askCouleur();
+	  public int askUno();
+	public int askContreUno();
+	public String askPseudo();
+	public int askNombre(int min, int max);
 	
 }

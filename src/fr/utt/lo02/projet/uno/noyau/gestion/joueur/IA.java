@@ -40,12 +40,12 @@ public class IA extends Joueur {
 		{
 			Talon.getInstance().ajouterCarte(main.enleverCarte(i));
 			Talon.getInstance().getDerniereCarte().appliquerRegle(partie);
-			obs.updateJoueur(this, i);
+			obs.notifyTour(this, i);
 		}
 		else if(i == main.getNombreCarte()+1)
 		{
 			this.piocherCarte();
-			obs.updateJoueur(this, i+1);
+			obs.notifyTour(this, i+1);
 		}
 		else
 		{
