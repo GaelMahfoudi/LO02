@@ -1,6 +1,8 @@
 package fr.utt.lo02.projet.uno.noyau.gestion.joueur;
 
 import fr.utt.lo02.projet.uno.ihm.observer.*;
+import fr.utt.lo02.projet.uno.noyau.carte.Carte;
+import fr.utt.lo02.projet.uno.noyau.carte.ESpecial;
 import fr.utt.lo02.projet.uno.noyau.gestion.carte.*;
 import fr.utt.lo02.projet.uno.noyau.gestion.partie.Partie;
 
@@ -54,7 +56,15 @@ public abstract class Joueur{
 		{
 			Talon.getInstance().viderTalon();
 		}
-		main.ajouterCarte(Pioche.getInstance().enleverCarte());
+		
+		Carte c = Pioche.getInstance().enleverCarte();
+		
+		if((c.getSpecial()==ESpecial.JOKER || c.getSpecial() == ESpecial.PLUS_QUATRE) && c.getCouleur()!=null)
+		{
+			c.setCouleur(null);
+		}
+		
+		main.ajouterCarte(c);
 		obs.notifyPioche(this);
 		 
 	}
