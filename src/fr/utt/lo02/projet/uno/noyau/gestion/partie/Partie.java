@@ -2,9 +2,8 @@ package fr.utt.lo02.projet.uno.noyau.gestion.partie;
 
 import java.util.ArrayList;
 
-import IHM.ModeConsole;
-import Observer.Observateur;
-import Observer.Observer;
+import fr.utt.lo02.projet.uno.ihm.console.*;
+import fr.utt.lo02.projet.uno.ihm.observer.*;
 import fr.utt.lo02.projet.uno.noyau.carte.Carte;
 import fr.utt.lo02.projet.uno.noyau.gestion.carte.Pioche;
 import fr.utt.lo02.projet.uno.noyau.gestion.carte.Talon;

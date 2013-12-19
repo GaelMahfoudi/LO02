@@ -2,7 +2,7 @@ package fr.utt.lo02.projet.uno.noyau.gestion.joueur;
 
 import java.util.Random;
 
-import Observer.Observateur;
+import fr.utt.lo02.projet.uno.ihm.observer.*;
 import fr.utt.lo02.projet.uno.noyau.carte.Carte;
 import fr.utt.lo02.projet.uno.noyau.carte.ECouleur;
 import fr.utt.lo02.projet.uno.noyau.gestion.carte.Talon;

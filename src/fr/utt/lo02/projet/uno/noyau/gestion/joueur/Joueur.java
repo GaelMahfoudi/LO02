@@ -1,6 +1,6 @@
 package fr.utt.lo02.projet.uno.noyau.gestion.joueur;
 
-import Observer.Observateur;
+import fr.utt.lo02.projet.uno.ihm.observer.*;
 import fr.utt.lo02.projet.uno.noyau.gestion.carte.*;
 import fr.utt.lo02.projet.uno.noyau.gestion.partie.Partie;
 
