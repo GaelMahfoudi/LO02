@@ -1,7 +1,7 @@
 package fr.utt.lo02.projet.uno.noyau.gestion.joueur;
 
 
-import Observer.Observateur;
+import fr.utt.lo02.projet.uno.ihm.observer.*;
 import fr.utt.lo02.projet.uno.noyau.carte.Carte;
 import fr.utt.lo02.projet.uno.noyau.carte.ESpecial;
 import fr.utt.lo02.projet.uno.noyau.gestion.carte.Talon;
@@ -16,10 +16,7 @@ public class JoueurNormal extends Joueur {
 	
 	public JoueurNormal(Observateur obs) {
 		super(obs);
-		this.pseudo = obs.askPseudo();
-		
-		
-		
+		this.pseudo = obs.askPseudo();	
 	}
 
 	public void jouer(Partie partie) 
