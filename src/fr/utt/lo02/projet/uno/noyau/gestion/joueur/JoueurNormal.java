@@ -3,6 +3,7 @@ package fr.utt.lo02.projet.uno.noyau.gestion.joueur;
 
 import Observer.Observateur;
 import fr.utt.lo02.projet.uno.noyau.carte.Carte;
+import fr.utt.lo02.projet.uno.noyau.carte.ESpecial;
 import fr.utt.lo02.projet.uno.noyau.gestion.carte.Talon;
 import fr.utt.lo02.projet.uno.noyau.gestion.partie.Partie;
 
@@ -40,6 +41,8 @@ public class JoueurNormal extends Joueur {
 				{
 					Talon.getInstance().ajouterCarte(carteChoisie);
 					carteChoisie.appliquerRegle(partie);
+					if(carteChoisie.getSpecial() == ESpecial.JOKER && carteChoisie.getSpecial() == ESpecial.PLUS_QUATRE)
+						obs.askCouleur();
 					obs.notifyTour(this, choix);
 					this.direUno();
 					return;
@@ -63,6 +66,8 @@ public class JoueurNormal extends Joueur {
 					{
 						Talon.getInstance().ajouterCarte(cartePiochee);
 						cartePiochee.appliquerRegle(partie);
+						if(cartePiochee.getSpecial() == ESpecial.JOKER && cartePiochee.getSpecial() == ESpecial.PLUS_QUATRE)
+							obs.askCouleur();
 						obs.notifyTour(this, choix-1);
 						this.direUno();
 						return;
@@ -73,7 +78,7 @@ public class JoueurNormal extends Joueur {
 				//Si la carte ne peut etre posée ou le joueur ne veut pas
 				this.main.ajouterCarte(cartePiochee);
 				this.direUno();
-				obs.notifyTour(this, choix+1);
+				obs.notifyTour(this, this.getNombreCarte()+1);
 				return;
 			}
 			else if ( choix == this.main.getNombreCarte()+1 ) //ContreUno
@@ -99,7 +104,7 @@ public class JoueurNormal extends Joueur {
 		if (choix == 0)
 		{
 			this.piocherCarte(4);
-			this.choisirCouleur();
+			joueur.choisirCouleur();
 		}
 		else
 		{
@@ -117,12 +122,13 @@ public class JoueurNormal extends Joueur {
 			{
 				joueur.piocherCarte(4);
 				joueur.main.ajouterCarte(Talon.getInstance().enleverDerniereCarte());
+				joueur.choisirCouleur();
 				
 			}
 			else
 			{
 				this.piocherCarte(6);
-				this.choisirCouleur();
+				joueur.choisirCouleur();
 			}
 		}
 	}

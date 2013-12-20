@@ -17,6 +17,8 @@ public class CPlusQuatre extends CSpecial {
 		
 		joueurNext.direBluff(partie.getJoueur(partie.getJoueurActuel()));
 		
+		partie.getJoueur(partie.getJoueurActuel()).choisirCouleur();
+		
 	}
 	
 	public boolean estPosable() 

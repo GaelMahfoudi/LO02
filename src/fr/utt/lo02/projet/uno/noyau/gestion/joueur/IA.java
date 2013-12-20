@@ -22,17 +22,12 @@ public class IA extends Joueur {
 		super(obs);
 		pseudo = generePseudo();
 	}
+	
+	
 	public void jouer(Partie partie) {
 		int i = 0;
 		
-		if(this.getNombreCarte()>10)
-		{
-			styleJeu = new IAOffensive();
-		}
-		else
-		{
-			styleJeu = new IANormal();
-		}
+		this.setStyleJeu();
 		i = styleJeu.jouerCarte(partie, this);
 		
 		
@@ -45,27 +40,41 @@ public class IA extends Joueur {
 		else if(i == main.getNombreCarte()+1)
 		{
 			this.piocherCarte();
-			obs.notifyTour(this, i+1);
+			obs.notifyTour(this, this.getNombreCarte()+1);
 		}
 		else
 		{
 			this.direContreUno(partie);
-			//TODO notify contre uno
+			obs.askContreUno();
 		}
 		
 	}
 	
+
+	private void setStyleJeu() {
+
+		if(this.getNombreCarte()>10)
+		{
+			styleJeu = new IAOffensive();
+		}
+		else
+		{
+			styleJeu = new IANormal();
+		}
+		
+	}
+
 
 	public String generePseudo() {
 		return "Bernard";
 	}
 	
 
-	public void setStyle() {
-	}
+	
 
 	public void direBluff(Joueur joueur)
 	{
+		this.setStyleJeu();
 		if(joueur != this)
 		{
 			boolean bluff = styleJeu.direBluff(joueur);
@@ -90,7 +99,6 @@ public class IA extends Joueur {
 				this.piocherCarte(4); //Le joueur n'a pas dementi le joueur actuel
 			}
 			
-		this.choisirCouleur();
 		}
 	}
 

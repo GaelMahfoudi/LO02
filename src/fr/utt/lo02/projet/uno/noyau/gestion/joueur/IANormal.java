@@ -25,7 +25,7 @@ public class IANormal implements StyleIA {
 			}
 		}
 		
-		//Il cherche la premi�re carte de la bonne couleur et retourne son indice.
+		//Il cherche la première carte de la bonne couleur et retourne son indice.
 		
 		for(i=0;i<joueur.getNombreCarte();i++)
 		{

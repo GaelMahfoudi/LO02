@@ -22,7 +22,7 @@ public class CInverse extends CSpecial{
 	@Override
 	public boolean estPosable() {
 		
-		if(this.couleur==Talon.getInstance().getDerniereCarte().getCouleur())
+		if(this.couleur==Talon.getInstance().getDerniereCarte().getCouleur() || this.special == Talon.getInstance().getDerniereCarte().getSpecial())
 		{
 			return true;
 		}

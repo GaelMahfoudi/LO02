@@ -1,6 +1,8 @@
 package fr.utt.lo02.projet.uno.noyau.gestion.partie;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 import IHM.ModeConsole;
 import Observer.Observateur;
@@ -51,6 +53,8 @@ public class Partie implements Observer{
 		{
 			listeJoueur.add(new IA(obs));
 		}
+		//On melange les joueurs
+		Collections.shuffle((List<Joueur>) listeJoueur);
 
 
 	}
@@ -130,7 +134,7 @@ public class Partie implements Observer{
 				this.listeJoueur.get(i).calculerScore(this);
 		}
 		
-		obs.notifyManche(this);;
+		obs.notifyManche(this);
 
 	}
 	

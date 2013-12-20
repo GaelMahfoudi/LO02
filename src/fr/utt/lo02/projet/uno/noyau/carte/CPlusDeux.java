@@ -16,13 +16,14 @@ public class CPlusDeux extends CSpecial {
 
 		Joueur joueurNext = partie.getJoueur(Math.abs((partie.getJoueurActuel()+partie.getSens())%partie.getNbreJoueur()));
 		joueurNext.piocherCarte(2);
+		partie.nextJoueur();
 		
 	}
 
 	@Override
 	public boolean estPosable() {
 		
-		if(this.couleur==Talon.getInstance().getDerniereCarte().getCouleur())
+		if(this.couleur==Talon.getInstance().getDerniereCarte().getCouleur() || this.special == Talon.getInstance().getDerniereCarte().getSpecial())
 		{
 			return true;
 		}
