@@ -44,8 +44,7 @@ public class IA extends Joueur {
 		}
 		else
 		{
-			this.direContreUno(partie);
-			obs.askContreUno();
+			obs.notifyTour(this, this.getNombreCarte()+1);
 		}
 		
 	}

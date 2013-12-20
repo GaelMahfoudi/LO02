@@ -32,7 +32,6 @@ public class IAOffensive implements StyleIA {
 			}
 		}
 
-		
 		return joueur.getNombreCarte()+1;
 	}
 

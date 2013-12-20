@@ -48,6 +48,11 @@ public abstract class Joueur{
 	public int getNombreCarte() {
 		return main.getNombreCarte();
 	}
+	
+	public boolean getUno()
+	{
+		return uno;
+	}
 
 	
 	public void piocherCarte()

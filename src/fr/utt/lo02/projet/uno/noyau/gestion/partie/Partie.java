@@ -4,7 +4,8 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-import IHM.ModeConsole;
+import fr.utt.lo02.projet.uno.ihm.observer.*;
+import fr.utt.lo02.projet.uno.ihm.console.*;
 import fr.utt.lo02.projet.uno.noyau.carte.Carte;
 import fr.utt.lo02.projet.uno.noyau.gestion.carte.Pioche;
 import fr.utt.lo02.projet.uno.noyau.gestion.carte.Talon;
@@ -123,7 +124,6 @@ public class Partie implements Observer{
 		{
 			this.nextJoueur();
 			listeJoueur.get(joueurActuel).jouer(this);
-
 		}
 		//MAJ points du gagnant de la manche
 		for (int i=0; i<this.getNbreJoueur(); i++)
@@ -192,11 +192,6 @@ public class Partie implements Observer{
 	}
 	
     
-    
-    
-    
-
-
 	public int getManche() {
 		return manche;
 	}

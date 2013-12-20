@@ -33,7 +33,6 @@ public class IABluff implements StyleIA {
 	public boolean direBluff(Joueur j) {
 		if(j.getNombreCarte()>7)
 		{
-			
 			return true;
 		}
 		

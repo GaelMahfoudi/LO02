@@ -106,11 +106,11 @@ public class JoueurNormal extends Joueur {
 		else
 		{
 			boolean bluff = false;
-			for(int i=0; i<this.getNombreCarte(); i++)
+			for(int i=0; i<joueur.getNombreCarte(); i++)
 			{
-				Carte carte = this.main.enleverCarte(i);
-				this.main.ajouterCarte(carte);
-				if(carte.getCouleur() == carteAComparer.getCouleur()  || carte.getCouleur() == null || carte.getValeur()== carteAComparer.getValeur()) 
+				Carte carte = joueur.main.enleverCarte(i);
+				joueur.main.ajouterCarte(carte);
+				if(carte.getCouleur() == carteAComparer.getCouleur()  || carte.getSpecial() == ESpecial.JOKER || carte.getValeur()== carteAComparer.getValeur()) 
 				{
 					bluff = true; //Il bluff
 				}
@@ -119,7 +119,7 @@ public class JoueurNormal extends Joueur {
 			{
 				joueur.piocherCarte(4);
 				joueur.main.ajouterCarte(Talon.getInstance().enleverDerniereCarte());
-				joueur.choisirCouleur();
+				//joueur.choisirCouleur();
 				
 			}
 			else
@@ -135,10 +135,11 @@ public class JoueurNormal extends Joueur {
 		int choix = obs.askUno();
 		if(choix == 1)
 		{
-			if( this.getNombreCarte() == 0)
+			/*if( this.getNombreCarte() == 0)
 				this.uno=true;
 			else
-				this.uno=false;
+				this.uno=false;*/
+			uno = true;
 		}
 
 		
@@ -157,7 +158,7 @@ public class JoueurNormal extends Joueur {
 
 	public void direContreUno(Joueur j) {
 		
-		if( j.getNombreCarte() == 1 && !j.uno) 
+		if( j.getNombreCarte() != 1 && j.getUno() == true) 
 		{
 			j.piocherCarte(2);
 		}
