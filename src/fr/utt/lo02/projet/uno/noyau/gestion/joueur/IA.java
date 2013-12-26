@@ -71,7 +71,7 @@ public class IA extends Joueur {
 
 	
 
-	public void direBluff(Joueur joueur)
+	public void direBluff(Joueur joueur, Partie partie)
 	{
 		this.setStyleJeu();
 		if(joueur != this)
