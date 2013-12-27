@@ -8,6 +8,7 @@ public class CJoker extends CSpecial{
 	public CJoker()
 	{
 		super(ESpecial.JOKER, null);
+		
 	}
 	
 	public void appliquerRegle(Partie partie)

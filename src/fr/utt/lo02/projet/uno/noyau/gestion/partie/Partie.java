@@ -58,36 +58,7 @@ public class Partie implements Observer{
 	}
 	
 	
-	public Partie(UnoController controleur)
-	{
-		sens=1;
-		manche = 0;
-		joueurActuel=0;
-		listeJoueur = new ArrayList<Joueur>();
-		this.addObservateur(controleur);
-		
-		int nbreJoueurReel = 0;
-		nbreJoueurReel = controleur.askNombre(0, 10);
-		int nbreIA = 0;
-		nbreIA = controleur.askNombre(0, 10-nbreJoueurReel);
-		
-		nbreJoueur = nbreJoueurReel+nbreIA;
-		
-		for(int i=0;i<nbreJoueurReel;i++)
-		{
-			listeJoueur.add(new JoueurNormal(obs));
-		}
-
-		//Generation des IAS
-		for(int i=0; i<nbreIA; i++)
-		{
-			listeJoueur.add(new IA(obs));
-		}
-		//On melange les joueurs
-		Collections.shuffle((List<Joueur>) listeJoueur);
-		
-	}
-
+	
 	public void distribuerCarte() {
 		
 		for(int i=0;i<listeJoueur.size();i++)
