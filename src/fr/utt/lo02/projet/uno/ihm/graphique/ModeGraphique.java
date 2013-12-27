@@ -7,6 +7,8 @@ import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
 
 import javax.swing.JButton;
 import javax.swing.JComboBox;
@@ -22,33 +24,33 @@ import fr.utt.lo02.projet.uno.noyau.carte.ECouleur;
 import fr.utt.lo02.projet.uno.noyau.gestion.joueur.Joueur;
 import fr.utt.lo02.projet.uno.noyau.gestion.partie.Partie;
 
-public class ModeGraphique extends JFrame implements View, ActionListener{
+public class ModeGraphique extends JFrame implements View, ActionListener, ItemListener{
 
-	private JComboBox nbJoueurReel;
+	private JComboBox comboReel;
+	private JComboBox comboIA;
 	private JLabel nomJoueur;
-	public int nbreJoueurReel = 0;
-	public int nbreIA =0;
-	private JComboBox nbIA;
-	private JTextField nbJoueurReel_text;
+	public int nbreJoueurReel;
+	public int nbreIA;
 	private JTextField nomJoueur_text;
-	private JTextField nbIA_text;
 	private JButton nouvellePartie;
 	private JButton nomOk;
-	private JPanel pan;
 	private boolean ok;
+	private boolean nbreJoueurOk;
 	
 	public ModeGraphique()
 	{
-		pan = new JPanel();
 		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
 		this.setSize(300, 300);
 		this.setLocationRelativeTo(null);
 		this.setResizable(false);
+		nbreJoueurReel = 0;
+		nbreIA =0;
 	}
 
 	
 	
 	public Partie demarrerPartie(Partie partie, UnoController controller) {
+		this.nbreJoueurOk = false;
 		 this.setLayout(new GridLayout(3, 1));
 		 //Generation des champs 
 
@@ -63,8 +65,8 @@ public class ModeGraphique extends JFrame implements View, ActionListener{
 		 panIA.add(labelIA);
 		 
 		 String[] tab = {"0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10"};
-		 JComboBox comboReel = new JComboBox(tab);
-		 JComboBox comboIA = new JComboBox(tab);
+		 comboReel = new JComboBox(tab);
+		 comboIA = new JComboBox(tab);
 		 
 		 panReel.add(comboReel);
 		 panIA.add(comboIA);
@@ -72,45 +74,68 @@ public class ModeGraphique extends JFrame implements View, ActionListener{
 		 this.getContentPane().add(panReel);
 		 this.getContentPane().add(panIA);
 		 //Ajout des listener
-		 //TODO
+		 comboReel.addItemListener(this);
+		 comboIA.addItemListener(this);
 		 
 		 //Bouton de validation
-		 JButton bouton = new JButton("Lancer la partie");
-		 bouton.addActionListener(this);
-		 this.getContentPane().add(bouton);
-
+		 nouvellePartie = new JButton("Lancer la partie");
+		 nouvellePartie.addActionListener(this);
+		 this.getContentPane().add(nouvellePartie);
+		 
 		this.setVisible(true);
+		int nbreJoueur = nbreJoueurReel+nbreIA;
+		while(nbreJoueur == 0 || nbreJoueur > 10)
+		{
+			//On attend
+			//TODO une autree solution d'attente
+		}
+		partie = new Partie(nbreJoueurReel, nbreIA, controller);
 		return partie;
 	}
 	
 	     
 	
+	public void itemStateChanged(ItemEvent e) 
+	{
+
+		if(e.getSource().equals(comboIA))
+		{
+			this.nbreIA = Integer.parseInt((String) e.getItem());
+		}
+		else if(e.getSource().equals(comboReel))
+		{
+			this.nbreJoueurReel = Integer.parseInt((String) e.getItem());
+		}
+	}
+		   
 	public void actionPerformed(ActionEvent arg0) {
 		
 		//Lorsque l'on clique sur le bouton, on verifie le que le nombre de joueur n'est pas superieur a 10 et different de 0
-		int nbJoueur = nbreJoueurReel+nbreIA;
-		if(nbJoueur == 0 || nbJoueur >= 0)
+		
+		
+		if(arg0.getSource().equals(nouvellePartie))
 		{
-			JFrame fen = new JFrame();
-			fen.setSize(300, 300);
-			fen.setLocationRelativeTo(null);
-			fen.setResizable(false);
-			JPanel container = new JPanel();
-			JLabel label = new JLabel("Erreur, veuillez revoir les parametres entrés (max 10 joueurs)");
-			
-			Font police = new Font("Tahoma", Font.BOLD, 16);  
-			label.setFont(police);  
-			label.setForeground(Color.blue);  
-			label.setHorizontalAlignment(JLabel.CENTER);
-			container.add(label, BorderLayout.NORTH);
-			fen.setContentPane(container);
-			fen.setVisible(true);
+			int nbJoueur = nbreJoueurReel+nbreIA;			
+			if( nbJoueur == 0 || nbJoueur > 10)
+			{
+				JFrame fen = new JFrame();
+				fen.setSize(300, 300);
+				fen.setLocationRelativeTo(null);
+				fen.setResizable(false);
+				JPanel container = new JPanel();
+				JLabel label = new JLabel("Erreur, veuillez revoir les parametres entrés (max 10 joueurs)");
+				
+				Font police = new Font("Tahoma", Font.BOLD, 16);  
+				label.setFont(police);  
+				label.setForeground(Color.blue);  
+				label.setHorizontalAlignment(JLabel.CENTER);
+				container.add(label, BorderLayout.NORTH);
+				fen.setContentPane(container);
+				fen.setVisible(true);
+			}
 		}
-		else //Si on peut lancer la partie
-		{
-			
-		}
-	}   
+	}
+	   
 	
 	@Override
 	public void afficherFinManche(Partie p) {
@@ -180,8 +205,7 @@ public class ModeGraphique extends JFrame implements View, ActionListener{
 
 	@Override
 	public String demanderPseudo() {
-		pan.removeAll();
-
+		
 		String nom = null;
 
 		while(nom == null)
@@ -208,15 +232,7 @@ public class ModeGraphique extends JFrame implements View, ActionListener{
 
 	
 
-	public JTextField getJoueurText()
-	{
-		return nbJoueurReel_text;
-	}
-
-	public JTextField getIAText()
-	{
-		return nbIA_text;
-	}
+	
 	
 	public void setOk(boolean b)
 	{
