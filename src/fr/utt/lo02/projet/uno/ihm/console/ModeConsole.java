@@ -1,3 +1,4 @@
+
 package fr.utt.lo02.projet.uno.ihm.console;
 
 import java.util.Collections;
@@ -569,3 +570,4 @@ public class ModeConsole implements Observateur, View
 	}
 
 }
+
