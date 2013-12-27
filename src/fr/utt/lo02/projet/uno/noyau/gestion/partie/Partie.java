@@ -227,8 +227,7 @@ public class Partie implements Observer{
 
 	public static void main(String[] args)
 	{
-		//ModeGraphique g = new ModeGraphique();
-		
+		//ModeConsole c = new ModeConsole();
 		ModeGraphique g = new ModeGraphique();
 		UnoController controller = new UnoController(g);
 		

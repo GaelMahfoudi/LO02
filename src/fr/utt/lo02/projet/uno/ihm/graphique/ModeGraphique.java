@@ -29,12 +29,13 @@ public class ModeGraphique extends JFrame implements View, ActionListener, ItemL
 	private JComboBox comboReel;
 	private JComboBox comboIA;
 	private JLabel nomJoueur;
-	public int nbreJoueurReel;
-	public int nbreIA;
+	private int nbreJoueurReel = 0;
+	private int nbreIA = 0;;
+	private int nbreJoueurTot = 0;
 	private JTextField nomJoueur_text;
 	private JButton nouvellePartie;
 	private JButton nomOk;
-	private boolean ok;
+	private boolean ok = false;
 	private boolean nbreJoueurOk;
 	
 	public ModeGraphique()
@@ -43,8 +44,6 @@ public class ModeGraphique extends JFrame implements View, ActionListener, ItemL
 		this.setSize(300, 300);
 		this.setLocationRelativeTo(null);
 		this.setResizable(false);
-		nbreJoueurReel = 0;
-		nbreIA =0;
 	}
 
 	
@@ -83,12 +82,19 @@ public class ModeGraphique extends JFrame implements View, ActionListener, ItemL
 		 this.getContentPane().add(nouvellePartie);
 		 
 		this.setVisible(true);
-		int nbreJoueur = nbreJoueurReel+nbreIA;
-		while(nbreJoueur == 0 || nbreJoueur > 10)
+		ok = false;
+		while(nbreJoueurTot == 0 || nbreJoueurTot > 10)
 		{
 			//On attend
 			//TODO une autree solution d'attente
+			try {
+				Thread.sleep(500);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
+		System.out.println("Got here");
 		partie = new Partie(nbreJoueurReel, nbreIA, controller);
 		return partie;
 	}
@@ -115,10 +121,12 @@ public class ModeGraphique extends JFrame implements View, ActionListener, ItemL
 		
 		if(arg0.getSource().equals(nouvellePartie))
 		{
-			int nbJoueur = nbreJoueurReel+nbreIA;			
-			if( nbJoueur == 0 || nbJoueur > 10)
+			System.out.println(nbreJoueurReel + " " + nbreIA + " " + nbreJoueurTot);
+			nbreJoueurTot = nbreJoueurReel+nbreIA;		
+			System.out.println(nbreJoueurTot);
+			if( nbreJoueurTot == 0 || nbreJoueurTot > 10)
 			{
-				JFrame fen = new JFrame();
+				/*JFrame fen = new JFrame();
 				fen.setSize(300, 300);
 				fen.setLocationRelativeTo(null);
 				fen.setResizable(false);
@@ -131,7 +139,15 @@ public class ModeGraphique extends JFrame implements View, ActionListener, ItemL
 				label.setHorizontalAlignment(JLabel.CENTER);
 				container.add(label, BorderLayout.NORTH);
 				fen.setContentPane(container);
-				fen.setVisible(true);
+				fen.setVisible(true);*/
+				
+				
+				JOptionPane o = new JOptionPane();
+				o.showMessageDialog(null, "Choisissez un nombre de joueur entre 0 et 10", "Erreur Joueur", JOptionPane.INFORMATION_MESSAGE);
+			}
+			else
+			{
+				ok = true;
 			}
 		}
 	}
