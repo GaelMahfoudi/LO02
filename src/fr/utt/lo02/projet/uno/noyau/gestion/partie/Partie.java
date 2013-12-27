@@ -6,6 +6,7 @@ import java.util.List;
 
 import fr.utt.lo02.projet.uno.ihm.observer.*;
 import fr.utt.lo02.projet.uno.ihm.console.*;
+import fr.utt.lo02.projet.uno.ihm.graphique.ModeGraphique;
 import fr.utt.lo02.projet.uno.noyau.carte.Carte;
 import fr.utt.lo02.projet.uno.noyau.gestion.carte.Pioche;
 import fr.utt.lo02.projet.uno.noyau.gestion.carte.Talon;
@@ -54,15 +55,44 @@ public class Partie implements Observer{
 		}
 		//On melange les joueurs
 		Collections.shuffle((List<Joueur>) listeJoueur);
+	}
+	
+	
+	public Partie(UnoController controleur)
+	{
+		sens=1;
+		manche = 0;
+		joueurActuel=0;
+		listeJoueur = new ArrayList<Joueur>();
+		this.addObservateur(controleur);
+		
+		int nbreJoueurReel = 0;
+		nbreJoueurReel = controleur.askNombre(0, 10);
+		int nbreIA = 0;
+		nbreIA = controleur.askNombre(0, 10-nbreJoueurReel);
+		
+		nbreJoueur = nbreJoueurReel+nbreIA;
+		
+		for(int i=0;i<nbreJoueurReel;i++)
+		{
+			listeJoueur.add(new JoueurNormal(obs));
+		}
 
-
+		//Generation des IAS
+		for(int i=0; i<nbreIA; i++)
+		{
+			listeJoueur.add(new IA(obs));
+		}
+		//On melange les joueurs
+		Collections.shuffle((List<Joueur>) listeJoueur);
+		
 	}
 
 	public void distribuerCarte() {
 		
 		for(int i=0;i<listeJoueur.size();i++)
 		{
-			listeJoueur.get(i).piocherCarte(5);
+			listeJoueur.get(i).piocherCarteFirstTour(5);
 		}
 
 		Carte cartePioche; 
@@ -140,7 +170,7 @@ public class Partie implements Observer{
 	public void deroulerPartie() 
 	{
 		//Lancement de la partie
-
+		
 		while(!verifierGagnantPartie()) //tant qu'aucun joueur n'a atteint 500 point
 		{	
 			this.deroulerManche();
@@ -184,11 +214,26 @@ public class Partie implements Observer{
 	{
 		return this.nbreJoueur;
 	}
+	
+	public void setNbreJoueur(int nbreJoueur)
+	{
+		this.nbreJoueur = nbreJoueur;
+	}
+	
+	public ArrayList<Joueur> getListeJoueur()
+	{
+		return listeJoueur;
+	}
 
 	public static void main(String[] args)
 	{
-		@SuppressWarnings("unused")
-		ModeConsole c = new ModeConsole();
+		//ModeGraphique g = new ModeGraphique();
+		
+		ModeGraphique g = new ModeGraphique();
+		UnoController controller = new UnoController(g);
+		
+		controller.initialiserPartie();
+		
 	}
 	
     
@@ -198,14 +243,12 @@ public class Partie implements Observer{
 
 	public void addObservateur(Observateur obs) {
 		 this.obs = obs;
-		
 	}
-
-
 	
-
-
-
+	public Observateur getObservateur()
+	{
+		return obs;
+	}
 }
 
 

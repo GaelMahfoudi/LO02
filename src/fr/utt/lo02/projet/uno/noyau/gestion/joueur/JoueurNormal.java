@@ -70,7 +70,10 @@ public class JoueurNormal extends Joueur {
 						return;
 					}
 					else
+					{
 						obs.notifyError();
+					}
+						
 				}
 				//Si la carte ne peut etre posée ou le joueur ne veut pas
 				this.main.ajouterCarte(cartePiochee);
@@ -94,10 +97,10 @@ public class JoueurNormal extends Joueur {
 
 	
 
-	public void direBluff(Joueur joueur) 
+	public void direBluff(Joueur joueur, Partie partie) 
 	{		
 		Carte carteAComparer = Talon.getInstance().getAvantDerniereCarte();
-		int choix = this.obs.askBluff();
+		int choix = this.obs.askBluff(partie);
 		if (choix == 0)
 		{
 			this.piocherCarte(4);

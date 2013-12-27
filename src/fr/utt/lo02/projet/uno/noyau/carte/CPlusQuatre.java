@@ -15,7 +15,7 @@ public class CPlusQuatre extends CSpecial {
 	{
 		Joueur joueurNext = partie.getJoueur(Math.abs((partie.getJoueurActuel()+partie.getSens())%partie.getNbreJoueur()));
 		
-		joueurNext.direBluff(partie.getJoueur(partie.getJoueurActuel()));
+		joueurNext.direBluff(partie.getJoueur(partie.getJoueurActuel()), partie);
 		
 		partie.getJoueur(partie.getJoueurActuel()).choisirCouleur();
 		
