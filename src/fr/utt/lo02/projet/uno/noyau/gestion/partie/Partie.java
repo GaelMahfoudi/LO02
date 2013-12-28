@@ -199,6 +199,7 @@ public class Partie implements Observer{
 	public static void main(String[] args)
 	{
 		//ModeConsole c = new ModeConsole();
+		
 		ModeGraphique g = new ModeGraphique();
 		UnoController controller = new UnoController(g);
 		

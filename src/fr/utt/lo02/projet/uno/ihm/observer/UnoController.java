@@ -89,6 +89,7 @@ public class UnoController implements Observateur{
 		return v.demanderPseudo();
 	}
 
+	
 
 	public int askNombre(int min, int max) {
 		

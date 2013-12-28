@@ -55,15 +55,10 @@ public class MainJoueurPan extends JPanel implements ActionListener{
 	
 	public int getChoix()
 	{
-		while(choix == -1)
+		for(int i=0; i<main.size(); i++)
 		{
-			for(int i=0; i<main.size(); i++)
-			{
-				main.get(i).addActionListener(this);
-			}
+			main.get(i).addActionListener(this);
 		}
-		System.out.println(choix);
-		this.removeAll();
 		return choix;
 	}
 
