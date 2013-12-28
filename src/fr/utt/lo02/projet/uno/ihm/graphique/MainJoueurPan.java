@@ -12,6 +12,10 @@ import javax.swing.JScrollPane;
 import fr.utt.lo02.projet.uno.noyau.carte.Carte;
 import fr.utt.lo02.projet.uno.noyau.gestion.joueur.Joueur;
 
+
+//Amelioration a prevoir: gliser les cartes pour les ranger dans un autre ordre?
+
+
 public class MainJoueurPan extends JPanel implements ActionListener{
 
 	public static final int hCarte=175;
@@ -26,8 +30,12 @@ public class MainJoueurPan extends JPanel implements ActionListener{
 	{
 		super();
 		mainPane = new JPanel();
-		scroll = new JScrollPane(mainPane); 
 		
+		scroll = new JScrollPane(mainPane); 
+		scroll.setPreferredSize(new Dimension(5*lCarte, hCarte+30));
+		scroll.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_NEVER); // Pas de barre verticale
+		scroll.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS); //Barre horizontale
+		 
 		joueur = null;
 		choix = -1;
 
@@ -40,15 +48,10 @@ public class MainJoueurPan extends JPanel implements ActionListener{
 		
 	}
 
-	public MainJoueurPan(Joueur joueur) {
+	public void refresh(Joueur joueur) {
 		
-		super();
-		mainPane = new JPanel();
-		scroll = new JScrollPane(mainPane); 
-		scroll.setPreferredSize(new Dimension(5*lCarte, hCarte+30));
-		scroll.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_NEVER); // Pas de barre verticale
-		scroll.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS); //Barre horizontale
 		
+		 mainPane.removeAll();
 		 main = new ArrayList<ImageCarte>();
 		 choix = -1;
 		 
@@ -60,10 +63,15 @@ public class MainJoueurPan extends JPanel implements ActionListener{
              main.add(c);
              mainPane.add(c);
 		 }
-		 this.add(scroll);
-			
 	}
 
+	public void vider() {
+		mainPane.removeAll();
+		for(int i=0; i<5; i++)
+		{
+			mainPane.add(new ImageCarte());
+		}
+	}
 	
 	
 	public int getChoix()
@@ -91,6 +99,8 @@ public class MainJoueurPan extends JPanel implements ActionListener{
 			}
 		}
 	}
+
+	
 
 	
 

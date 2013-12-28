@@ -18,6 +18,8 @@ public class TablePan extends JPanel implements ActionListener{
 	private boolean choixPioche;
 	private ImageCarte carteTalon;
 	private ImageCarte cartePioche;
+	private JLabel labelPioche;
+	private JLabel labelTalon;
 	
 	public TablePan()
 	{
@@ -26,24 +28,31 @@ public class TablePan extends JPanel implements ActionListener{
 		
 		pioche = new JPanel();
 		pioche.setLayout(new GridLayout(2,1));
-		JLabel labelPioche = new JLabel("Piocher");
-		
-		talon = new JPanel();
-		talon.setLayout(new GridLayout(2,1));
-		JLabel labelTalon = new JLabel("Carte du Talon");
+		labelPioche = new JLabel("Piocher");
 		cartePioche = new ImageCarte();
 		this.pioche.add(cartePioche);
 		this.pioche.add(labelPioche);
+		this.add(pioche);
+		
+		talon = new JPanel();
+		talon.setLayout(new GridLayout(2,1));
+		labelTalon = new JLabel("Carte du Talon");
+		carteTalon = new ImageCarte();
+		this.add(talon);
+		
+		
+	}
+	
+	public void refresh()
+	{
+		setChoixPioche(false);
+		
 		carteTalon = new ImageCarte(Talon.getInstance().getDerniereCarte());
+		talon.removeAll();
 		this.talon.add(carteTalon);
 		this.talon.add(labelTalon);
 		
-		
-		this.add(pioche);
-		this.add(talon);
-		
 	}
-
 	public boolean isChoixPioche() {
 		
 		cartePioche.addActionListener(this);

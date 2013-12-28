@@ -22,11 +22,14 @@ public class ModeGraphique extends JFrame implements View{
 
 	public final static int hFenetre = 700;
 	public final static int lFenetre = 800;
-	private Partie partie;
+	//private Partie partie;
 	private ParametrerPartie param;
 	private MainJoueurPan main;
 	private TablePan table;
-
+	private TableauDeBord tableauDeBord;
+	private RapportDActivite rapport;
+	private Partie partie;
+	
 	
 	public ModeGraphique()
 	{
@@ -42,15 +45,30 @@ public class ModeGraphique extends JFrame implements View{
 	
 	public Partie demarrerPartie(Partie partie, UnoController controller) 
 	{
+		//Creation de la partie
 		partie = param.recupererPartie(partie, controller);
 		this.partie = partie;
+		
+		//mise en place des differents panneaux
+		//Le centre: table de jeu
 		table = new TablePan();
 		this.getContentPane().add(table, BorderLayout.CENTER);
-
+		
+		//Le sud: la main du joueur actuel
 		main = new MainJoueurPan();
 		this.getContentPane().add(main, BorderLayout.SOUTH);
-		this.setVisible(true);
 		
+		//Le nord: indique le nom et la manche
+		tableauDeBord = new TableauDeBord();
+		this.getContentPane().add(tableauDeBord, BorderLayout.NORTH);
+		
+		//L'ouest: indique le nombre de cartes de chaques joueurs, TODO
+		rapport = new RapportDActivite(partie);
+		this.getContentPane().add(rapport, BorderLayout.WEST);
+		
+		
+		
+		this.setVisible(true);
 		JOptionPane.showMessageDialog(null, " Appuyez sur ok lorsque vous serez pret", ("Au tour de "+ (String)partie.getJoueur(partie.getJoueurActuel()).afficherPseudo()), JOptionPane.WARNING_MESSAGE);
 		
 		
@@ -65,22 +83,33 @@ public class ModeGraphique extends JFrame implements View{
 	
 	public int demanderCarteAJouer(Joueur joueur) 
 	{
-		//Rafraichissement de la table de jeu
-		table.removeAll();
-		table = new TablePan();
-		this.getContentPane().add(table, BorderLayout.CENTER);
-		
-		//Rafraichissement de la main du joueur
-		main.removeAll();
-		main = new MainJoueurPan(joueur);
-		
-		this.getContentPane().add(main, BorderLayout.SOUTH);
-		
-		
-		this.setVisible(true);
-		return this.demanderChoix(0, joueur.getNombreCarte()+1);
+		this.refresh(joueur);
+		return this.demanderChoix(0, joueur.getNombreCarte());
 	}
 	
+
+
+
+	private void refresh(Joueur joueur) {
+		
+		
+				
+				
+				//Rafraichissement du tableau de bord
+				tableauDeBord.setJoueur(joueur);
+				tableauDeBord.refresh();
+				
+				//Rafraichissement de la table de jeu
+				table.refresh();
+				//Rafraichissement de la main du joueur
+				main.refresh(joueur);
+				//Rafraichissement du rapport d'activité
+				rapport.refresh();
+				
+				
+				this.repaint();
+				this.setVisible(true);
+	}
 
 
 
@@ -95,7 +124,7 @@ public class ModeGraphique extends JFrame implements View{
 		
 		if(choixPioche)
 		{
-			return (partie.getJoueur( partie.getJoueurActuel() ).getNombreCarte());
+			return max;
 		}
 		else
 		{
@@ -106,9 +135,13 @@ public class ModeGraphique extends JFrame implements View{
 
 
 	public void afficherFinManche(Partie p) {
-		// TODO Auto-generated method stub
-		
 
+		main.vider();
+		
+		
+		//TODO un message de qui a gagné
+		
+		tableauDeBord.setManche(p.getManche());
 	}
 
 	@Override
@@ -119,6 +152,13 @@ public class ModeGraphique extends JFrame implements View{
 
 	@Override
 	public void afficherTour(Joueur joueur, int choix) {
+		
+		rapport.refreshJoueur(joueur);
+		
+		
+		//TODO maj machin a posé truc
+		
+		main.vider(); //Protection de la main du joueur precedent
 		JOptionPane.showMessageDialog(null, " Appuyez sur ok lorsque vous serez pret", ("Au tour de "+ (String)partie.getJoueur(Math.abs((partie.getJoueurActuel()+partie.getSens())%partie.getNbreJoueur())).afficherPseudo()), JOptionPane.WARNING_MESSAGE);
 		
 	
@@ -145,15 +185,19 @@ public class ModeGraphique extends JFrame implements View{
 	
 		if(option == JOptionPane.OK_OPTION)
 		{
+			
 			return 1;
 		}
 		else
+		{
 			return 0;
+		}
+		
 	}
 
 	@Override
 	public void afficherCartePioche(Joueur joueur) {
-		// Sans interet dans le mode graphique... fonction incluse dans poserCartePioche;
+		//NE sert a rien en mode graphique... inclut dans poserCartePioche
 		
 
 	}
@@ -167,7 +211,6 @@ public class ModeGraphique extends JFrame implements View{
 	@Override
 	public void afficherMauvaisChoix() {
 		JOptionPane.showMessageDialog(null, "Cette carte ne peut etre posée", "Erreur", JOptionPane.ERROR_MESSAGE);
-		
 	}
 
 	@Override
