@@ -417,7 +417,6 @@ public class ModeConsole implements Observateur, View
 	@Override
 	public void afficherCartePioche(Joueur joueur) {
 
-		//if( this.partie.getManche() != 0)
 			System.out.println(joueur.afficherPseudo() + " a pioché un " + joueur.getMain().getMain().get(joueur.getNombreCarte()-1));
 
 	}

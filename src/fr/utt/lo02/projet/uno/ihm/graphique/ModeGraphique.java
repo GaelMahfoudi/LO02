@@ -2,31 +2,37 @@ package fr.utt.lo02.projet.uno.ihm.graphique;
 
 
 import java.awt.BorderLayout;
+import java.awt.Image;
 
+import javax.swing.Icon;
+import javax.swing.ImageIcon;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
+import javax.swing.JScrollPane;
 
 import fr.utt.lo02.projet.uno.ihm.observer.UnoController;
 import fr.utt.lo02.projet.uno.ihm.observer.View;
 import fr.utt.lo02.projet.uno.noyau.carte.ECouleur;
+import fr.utt.lo02.projet.uno.noyau.gestion.carte.Talon;
 import fr.utt.lo02.projet.uno.noyau.gestion.joueur.Joueur;
 import fr.utt.lo02.projet.uno.noyau.gestion.partie.Partie;
 
 public class ModeGraphique extends JFrame implements View{
 
+	public final static int hFenetre = 700;
+	public final static int lFenetre = 800;
 	private Partie partie;
 	private ParametrerPartie param;
 	private MainJoueurPan main;
 	private TablePan table;
-	private Joueur joueur;
-
 
 	
 	public ModeGraphique()
 	{
 		param = new ParametrerPartie();
 		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
-		this.setSize(700, 600);
+		this.setSize(lFenetre, hFenetre);
 		this.setLocationRelativeTo(null);
 		this.setResizable(false);
 		this.setLayout(new BorderLayout());
@@ -45,8 +51,7 @@ public class ModeGraphique extends JFrame implements View{
 		this.getContentPane().add(main, BorderLayout.SOUTH);
 		this.setVisible(true);
 		
-		JOptionPane jop2 = new JOptionPane();
-		jop2.showMessageDialog(null, " Appuyez sur ok lorsque vous serez pret", ("Au tour de "+ (String)partie.getJoueur(partie.getJoueurActuel()).afficherPseudo()), JOptionPane.WARNING_MESSAGE);
+		JOptionPane.showMessageDialog(null, " Appuyez sur ok lorsque vous serez pret", ("Au tour de "+ (String)partie.getJoueur(partie.getJoueurActuel()).afficherPseudo()), JOptionPane.WARNING_MESSAGE);
 		
 		
 		return partie;
@@ -60,12 +65,18 @@ public class ModeGraphique extends JFrame implements View{
 	
 	public int demanderCarteAJouer(Joueur joueur) 
 	{
+		//Rafraichissement de la table de jeu
 		table.removeAll();
 		table = new TablePan();
 		this.getContentPane().add(table, BorderLayout.CENTER);
+		
+		//Rafraichissement de la main du joueur
 		main.removeAll();
 		main = new MainJoueurPan(joueur);
+		
 		this.getContentPane().add(main, BorderLayout.SOUTH);
+		
+		
 		this.setVisible(true);
 		return this.demanderChoix(0, joueur.getNombreCarte()+1);
 	}
@@ -82,8 +93,6 @@ public class ModeGraphique extends JFrame implements View{
 			choixPioche = table.isChoixPioche();
 		}
 		
-		main.removeAll();
-		table.removeAll();
 		if(choixPioche)
 		{
 			return (partie.getJoueur( partie.getJoueurActuel() ).getNombreCarte());
@@ -110,9 +119,7 @@ public class ModeGraphique extends JFrame implements View{
 
 	@Override
 	public void afficherTour(Joueur joueur, int choix) {
-		// TODO Auto-generated method stub
-		JOptionPane jop2 = new JOptionPane();
-		jop2.showMessageDialog(null, " Appuyez sur ok lorsque vous serez pret", ("Au tour de "+ (String)partie.getJoueur(Math.abs((partie.getJoueurActuel()+partie.getSens())%partie.getNbreJoueur())).afficherPseudo()), JOptionPane.WARNING_MESSAGE);
+		JOptionPane.showMessageDialog(null, " Appuyez sur ok lorsque vous serez pret", ("Au tour de "+ (String)partie.getJoueur(Math.abs((partie.getJoueurActuel()+partie.getSens())%partie.getNbreJoueur())).afficherPseudo()), JOptionPane.WARNING_MESSAGE);
 		
 	
 	}
@@ -120,10 +127,22 @@ public class ModeGraphique extends JFrame implements View{
 	
 	@Override
 	public int poserCartePioche(Joueur joueur) {
-		// TODO Auto-generated method stub
-		JOptionPane jop = new JOptionPane();			
-		int option = jop.showConfirmDialog(null, "Voulez poser cette carte?", "Lancement de l'animation", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
-		//TODO onenestla
+			
+		ImageIcon icon;
+		if( joueur.getMain().getMain().get(joueur.getNombreCarte()-1).getSpecial() != null)
+		{
+			icon = new ImageIcon("./src/fr/utt/lo02/projet/uno/ihm/uno_images/" + ImageCarte.getCouleur(joueur.getMain().getMain().get(joueur.getNombreCarte()-1)) + "/" + ImageCarte.getSpecial(joueur.getMain().getMain().get(joueur.getNombreCarte()-1)) +".jpg");
+			icon = new ImageIcon(icon.getImage().getScaledInstance(ImageCarte.lCarte, ImageCarte.hCarte, Image.SCALE_DEFAULT));
+		}
+		else
+		{
+			icon = new ImageIcon("./src/fr/utt/lo02/projet/uno/ihm/uno_images/" + ImageCarte.getCouleur(joueur.getMain().getMain().get(joueur.getNombreCarte()-1)) + "/" + ImageCarte.getValeur(joueur.getMain().getMain().get(joueur.getNombreCarte()-1)) +".jpg");
+			icon = new ImageIcon(icon.getImage().getScaledInstance(ImageCarte.lCarte, ImageCarte.hCarte, Image.SCALE_DEFAULT));
+			
+		}
+        
+		int option = JOptionPane.showConfirmDialog(null, "Voulez vous poser cette carte?", "Vous avez pioché", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE , icon );
+	
 		if(option == JOptionPane.OK_OPTION)
 		{
 			return 1;
@@ -134,7 +153,7 @@ public class ModeGraphique extends JFrame implements View{
 
 	@Override
 	public void afficherCartePioche(Joueur joueur) {
-		// TODO Auto-generated method stub
+		// Sans interet dans le mode graphique... fonction incluse dans poserCartePioche;
 		
 
 	}
@@ -147,8 +166,7 @@ public class ModeGraphique extends JFrame implements View{
 
 	@Override
 	public void afficherMauvaisChoix() {
-		JOptionPane jop2 = new JOptionPane();
-		jop2.showMessageDialog(null, "Cette carte ne peut etre posée", "Erreur", JOptionPane.ERROR_MESSAGE);
+		JOptionPane.showMessageDialog(null, "Cette carte ne peut etre posée", "Erreur", JOptionPane.ERROR_MESSAGE);
 		
 	}
 

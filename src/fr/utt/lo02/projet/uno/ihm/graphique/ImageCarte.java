@@ -30,7 +30,7 @@ public class ImageCarte extends JButton {
          this.carte = null;
     	 this.setPreferredSize(new Dimension(lCarte, hCarte));
          this.image=new JLabel();
-         this.image.setPreferredSize(new Dimension(this.lCarte, this.hCarte));
+         this.image.setPreferredSize(new Dimension(ImageCarte.lCarte, ImageCarte.hCarte));
          this.add(image);
          // refesh
          this.refresh();
@@ -45,7 +45,7 @@ public class ImageCarte extends JButton {
          this.setPreferredSize(new Dimension(lCarte, hCarte));
          
          this.image=new JLabel();
-         this.image.setPreferredSize(new Dimension(this.lCarte, this.hCarte));
+         this.image.setPreferredSize(new Dimension(ImageCarte.lCarte, ImageCarte.hCarte));
          this.add(image);
          // refesh
          this.refresh();
@@ -57,7 +57,7 @@ public class ImageCarte extends JButton {
 		if (carte == null)
 		{
 			ImageIcon img=new ImageIcon(this.pathImage + "/special/back.jpg");
-            Image i=img.getImage().getScaledInstance(this.lCarte, this.hCarte, Image.SCALE_DEFAULT);
+            Image i=img.getImage().getScaledInstance(ImageCarte.lCarte, ImageCarte.hCarte, Image.SCALE_DEFAULT);
             img.setImage(i);
             this.setIcon(img);
             
@@ -67,13 +67,12 @@ public class ImageCarte extends JButton {
 		{
 			if (carte.getValeur() >= 0) //Si la carte n'est pas speciale
 			{
-				String couleur=this.getCouleur();
-				String val = this.getValeur();
+				String couleur=ImageCarte.getCouleur(carte);
+				String val = ImageCarte.getValeur(carte);
 	          
 	
-	            System.out.println(this.pathImage + "/" + couleur + "/" + val +".jpg");
 	            ImageIcon img=new ImageIcon(this.pathImage + "/" + couleur + "/" + val +".jpg");
-	            Image i=img.getImage().getScaledInstance(this.lCarte, this.hCarte, Image.SCALE_DEFAULT);
+	            Image i=img.getImage().getScaledInstance(ImageCarte.lCarte, ImageCarte.hCarte, Image.SCALE_DEFAULT);
 	            img.setImage(i);
 	
 	            this.setIcon(img);
@@ -81,13 +80,12 @@ public class ImageCarte extends JButton {
 			}
 			else //si elle est speciale
 			{
-				String couleur=this.getCouleur();
-				String special = this.getSpecial();
+				String couleur=ImageCarte.getCouleur(carte);
+				String special = ImageCarte.getSpecial(carte);
 	          
 	
-	            System.out.println(this.pathImage + "/" + couleur + "/" + special +".jpg");
 	            ImageIcon img=new ImageIcon(this.pathImage + "/" + couleur + "/" + special +".jpg");
-	            Image i=img.getImage().getScaledInstance(this.lCarte, this.hCarte, Image.SCALE_DEFAULT);
+	            Image i=img.getImage().getScaledInstance(ImageCarte.lCarte, ImageCarte.hCarte, Image.SCALE_DEFAULT);
 	            img.setImage(i);
 	
 	
@@ -101,7 +99,7 @@ public class ImageCarte extends JButton {
 		
 	}
 
-	private String getSpecial() {
+	public static String getSpecial(Carte carte) {
 		
 		if(carte.getSpecial() == null)
 			return null;
@@ -123,7 +121,7 @@ public class ImageCarte extends JButton {
 		}
 	}
 
-	public String getCouleur() {
+	public static String getCouleur(Carte carte) {
 			
 		if(carte.getCouleur() == null)
 			return "special";
@@ -144,7 +142,7 @@ public class ImageCarte extends JButton {
 		
 	}
 	
-	public String getValeur() {
+	public static String getValeur(Carte carte) {
 		  switch (carte.getValeur())
         {
         case 0:

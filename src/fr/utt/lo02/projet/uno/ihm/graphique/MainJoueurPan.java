@@ -1,14 +1,13 @@
 package fr.utt.lo02.projet.uno.ihm.graphique;
 
+import java.awt.Dimension;
 import java.awt.FlowLayout;
-import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
-import javax.swing.AbstractButton;
-import javax.swing.JButton;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 
 import fr.utt.lo02.projet.uno.noyau.carte.Carte;
 import fr.utt.lo02.projet.uno.noyau.gestion.joueur.Joueur;
@@ -20,35 +19,49 @@ public class MainJoueurPan extends JPanel implements ActionListener{
 	private int choix;
 	private Joueur joueur;
 	private ArrayList<ImageCarte> main; 
+	private JPanel mainPane;
+	private JScrollPane scroll;
 
 	public MainJoueurPan()
 	{
+		super();
+		mainPane = new JPanel();
+		scroll = new JScrollPane(mainPane); 
 		
 		joueur = null;
 		choix = -1;
 
-		this.setLayout(new FlowLayout());
 		for(int i=0; i<5; i++)
 		{
-			this.add(new ImageCarte());
+			mainPane.add(new ImageCarte());
+
 		}
+		this.add(scroll);
 		
 	}
 
 	public MainJoueurPan(Joueur joueur) {
+		
+		super();
+		mainPane = new JPanel();
+		scroll = new JScrollPane(mainPane); 
+		scroll.setPreferredSize(new Dimension(5*lCarte, hCarte+30));
+		scroll.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_NEVER); // Pas de barre verticale
+		scroll.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS); //Barre horizontale
+		
 		 main = new ArrayList<ImageCarte>();
-		main.clear();
 		 choix = -1;
+		 
 		 this.joueur = joueur;
-		 this.setLayout(new FlowLayout());
 		 for (int i=0; i<joueur.getNombreCarte(); i++)
 		 {
              
              ImageCarte c = new ImageCarte(joueur.getMain().getMain().get(i)); 
              main.add(c);
-             this.add(c);
+             mainPane.add(c);
 		 }
-
+		 this.add(scroll);
+			
 	}
 
 	
@@ -57,12 +70,15 @@ public class MainJoueurPan extends JPanel implements ActionListener{
 	{
 		for(int i=0; i<main.size(); i++)
 		{
-			main.get(i).addActionListener(this);
+			ImageCarte c = (ImageCarte) main.get(i);
+			c.addActionListener(this);
 		}
+		
 		return choix;
 	}
 
-	@Override
+
+	
 	public void actionPerformed(ActionEvent e) {
 		ImageCarte carteG = (ImageCarte)e.getSource();
 		Carte carte = carteG.getCarte();
@@ -70,6 +86,7 @@ public class MainJoueurPan extends JPanel implements ActionListener{
 		{
 			if( carte.equals(joueur.getMain().getMain().get(i)) )
 			{
+
 				choix = i;
 			}
 		}
