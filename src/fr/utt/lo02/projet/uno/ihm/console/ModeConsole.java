@@ -1,14 +1,11 @@
 
 package fr.utt.lo02.projet.uno.ihm.console;
 
-import java.util.Collections;
 import java.util.InputMismatchException;
-import java.util.List;
 import java.util.Scanner;
 
 import fr.utt.lo02.projet.uno.noyau.carte.ECouleur;
 import fr.utt.lo02.projet.uno.noyau.gestion.carte.Talon;
-import fr.utt.lo02.projet.uno.noyau.gestion.joueur.IA;
 import fr.utt.lo02.projet.uno.noyau.gestion.joueur.Joueur;
 import fr.utt.lo02.projet.uno.noyau.gestion.joueur.JoueurNormal;
 import fr.utt.lo02.projet.uno.noyau.gestion.partie.Partie;

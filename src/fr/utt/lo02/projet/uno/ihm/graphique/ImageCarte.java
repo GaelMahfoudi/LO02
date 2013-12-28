@@ -5,20 +5,15 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 
 import fr.utt.lo02.projet.uno.noyau.carte.Carte;
-import fr.utt.lo02.projet.uno.noyau.carte.ESpecial;
-
-import java.awt.Color;
 import java.awt.Dimension;
-import java.awt.FlowLayout;
-import java.awt.Graphics;
 import java.awt.Image;
-import java.awt.Toolkit;
 
 
 
 public class ImageCarte extends JButton {
 
 	
+	private static final long serialVersionUID = -6038129419355178442L;
 	public static final int hCarte=175;
     public static final int lCarte=108;
     private Carte carte;
@@ -82,9 +77,7 @@ public class ImageCarte extends JButton {
 			{
 				String couleur=ImageCarte.getCouleur(carte);
 				String special = ImageCarte.getSpecial(carte);
-	          
-	
-	            ImageIcon img=new ImageIcon(this.pathImage + "/" + couleur + "/" + special +".jpg");
+				ImageIcon img=new ImageIcon(this.pathImage + "/" + couleur + "/" + special +".jpg");
 	            Image i=img.getImage().getScaledInstance(ImageCarte.lCarte, ImageCarte.hCarte, Image.SCALE_DEFAULT);
 	            img.setImage(i);
 	

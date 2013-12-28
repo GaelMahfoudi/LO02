@@ -8,7 +8,6 @@ import java.awt.event.ActionListener;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-import fr.utt.lo02.projet.uno.noyau.carte.Carte;
 import fr.utt.lo02.projet.uno.noyau.gestion.carte.Talon;
 
 public class TablePan extends JPanel implements ActionListener{

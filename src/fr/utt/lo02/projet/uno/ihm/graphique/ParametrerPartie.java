@@ -10,7 +10,6 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
-import javax.swing.JTextField;
 
 import fr.utt.lo02.projet.uno.ihm.observer.UnoController;
 import fr.utt.lo02.projet.uno.noyau.gestion.partie.Partie;
@@ -18,8 +17,8 @@ import fr.utt.lo02.projet.uno.noyau.gestion.partie.Partie;
 public class ParametrerPartie  extends JFrame implements ActionListener{
 
 	private boolean nbreJoueurOk;
-	private JComboBox comboIA;
-	private JComboBox comboReel;
+	private JComboBox<?> comboIA;
+	private JComboBox<?> comboReel;
 	private JButton nouvellePartie;
 	private int nbreJoueurReel;
 	private int nbreIA;
@@ -35,6 +34,7 @@ public class ParametrerPartie  extends JFrame implements ActionListener{
 		this.setLocationRelativeTo(null);
 		this.setResizable(false);
 	}
+	
 	public Partie recupererPartie(Partie partie, UnoController controller) {
 		this.nbreJoueurOk = false;
 		 this.setLayout(new GridLayout(3, 1));
@@ -49,8 +49,8 @@ public class ParametrerPartie  extends JFrame implements ActionListener{
 		 panIA.add(labelIA);
 		 
 		 String[] tab = {"0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10"};
-		 comboReel = new JComboBox(tab);
-		 comboIA = new JComboBox(tab);
+		 comboReel = new JComboBox<Object>(tab);
+		 comboIA = new JComboBox<Object>(tab);
 		 
 		 panReel.add(comboReel);
 		 panIA.add(comboIA);
@@ -96,8 +96,7 @@ public void actionPerformed(ActionEvent arg0) {
 			int nbJoueur = this.nbreJoueurReel+this.nbreIA;			
 			if( nbJoueur == 0 || nbJoueur > 10)
 			{
-				JOptionPane jop2 = new JOptionPane();
-				jop2.showMessageDialog(null, "Le nombre de joueur total doit etre compris entre 1 et 10", "Attention", JOptionPane.WARNING_MESSAGE);
+				JOptionPane.showMessageDialog(null, "Le nombre de joueur total doit etre compris entre 1 et 10", "Attention", JOptionPane.WARNING_MESSAGE);
 				
 			}
 		}
@@ -112,9 +111,7 @@ public void actionPerformed(ActionEvent arg0) {
 
 	while(nom == null)
 	{
-		JOptionPane o = new JOptionPane();
-
-		nom = o.showInputDialog(null, "Donnez le nom du joueur", "Nom", JOptionPane.QUESTION_MESSAGE);
+		nom = JOptionPane.showInputDialog(null, "Donnez le nom du joueur", "Nom", JOptionPane.QUESTION_MESSAGE);
 	}
 	return nom;
 }

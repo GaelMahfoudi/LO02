@@ -4,17 +4,13 @@ package fr.utt.lo02.projet.uno.ihm.graphique;
 import java.awt.BorderLayout;
 import java.awt.Image;
 
-import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
-import javax.swing.JLabel;
 import javax.swing.JOptionPane;
-import javax.swing.JScrollPane;
 
 import fr.utt.lo02.projet.uno.ihm.observer.UnoController;
 import fr.utt.lo02.projet.uno.ihm.observer.View;
 import fr.utt.lo02.projet.uno.noyau.carte.ECouleur;
-import fr.utt.lo02.projet.uno.noyau.gestion.carte.Talon;
 import fr.utt.lo02.projet.uno.noyau.gestion.joueur.Joueur;
 import fr.utt.lo02.projet.uno.noyau.gestion.partie.Partie;
 
@@ -29,7 +25,7 @@ public class ModeGraphique extends JFrame implements View{
 	private TableauDeBord tableauDeBord;
 	private RapportDActivite rapport;
 	private Partie partie;
-	
+	private OptionJeu option;
 	
 	public ModeGraphique()
 	{
@@ -215,8 +211,22 @@ public class ModeGraphique extends JFrame implements View{
 
 	@Override
 	public ECouleur demanderCouleur() {
-		// TODO Auto-generated method stub
-		return null;
+		String[] couleur = {"Bleu", "Rouge", "Jaune", "Vert"};
+	    
+		 int rang = JOptionPane.showOptionDialog(null, "Veuillez choisir la nouvelle couleur:", "Ghangement de couleur", JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE, null, couleur, "echec");
+		switch(rang)
+		{
+			case 0:
+				return ECouleur.BLEU;
+			case 1:
+				return ECouleur.JAUNE;
+			case 2:
+				return ECouleur.ROUGE;
+			case 3:
+				return ECouleur.VERT;
+			default:
+				return this.demanderCouleur();
+		}
 	}
 
 	@Override

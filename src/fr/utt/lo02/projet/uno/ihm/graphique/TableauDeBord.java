@@ -4,7 +4,6 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 import fr.utt.lo02.projet.uno.noyau.gestion.joueur.Joueur;
-import fr.utt.lo02.projet.uno.noyau.gestion.partie.Partie;
 
 public class TableauDeBord extends JPanel{
 
