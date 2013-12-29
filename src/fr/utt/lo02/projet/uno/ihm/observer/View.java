@@ -8,6 +8,7 @@ public interface View {
 	
 	public void afficherFinManche(Partie p);
 	public void afficherFinPartie(Partie p);
+	public void afficherPasse(Joueur joueur);
 	public void afficherTour(Joueur joueur, int choix);
 	public int demanderCarteAJouer(Joueur joueur);
 	public int poserCartePioche(Joueur joueur);

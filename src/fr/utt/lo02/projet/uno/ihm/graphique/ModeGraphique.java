@@ -85,12 +85,9 @@ public class ModeGraphique extends JFrame implements View{
 	
 
 
-
 	private void refresh(Joueur joueur) {
 		
 		
-				
-				
 				//Rafraichissement du tableau de bord
 				tableauDeBord.setJoueur(joueur);
 				tableauDeBord.refresh();
@@ -140,11 +137,7 @@ public class ModeGraphique extends JFrame implements View{
 		tableauDeBord.setManche(p.getManche());
 	}
 
-	@Override
-	public void afficherFinPartie(Partie p) {
-		// TODO Auto-generated method stub
-
-	}
+	
 
 	@Override
 	public void afficherTour(Joueur joueur, int choix) {
@@ -191,18 +184,6 @@ public class ModeGraphique extends JFrame implements View{
 		
 	}
 
-	@Override
-	public void afficherCartePioche(Joueur joueur) {
-		//NE sert a rien en mode graphique... inclut dans poserCartePioche
-		
-
-	}
-
-	@Override
-	public int demanderBluff(Partie partie) {
-		// TODO Auto-generated method stub
-		return 0;
-	}
 
 	@Override
 	public void afficherMauvaisChoix() {
@@ -219,9 +200,9 @@ public class ModeGraphique extends JFrame implements View{
 			case 0:
 				return ECouleur.BLEU;
 			case 1:
-				return ECouleur.JAUNE;
-			case 2:
 				return ECouleur.ROUGE;
+			case 2:
+				return ECouleur.JAUNE;
 			case 3:
 				return ECouleur.VERT;
 			default:
@@ -229,23 +210,63 @@ public class ModeGraphique extends JFrame implements View{
 		}
 	}
 
+
+	public int demanderBluff(Partie partie) {
+		// TODO Auto-generated method stub
+		Joueur joueur = partie.getJoueur(Math.abs((partie.getJoueurActuel()+partie.getSens())%partie.getNbreJoueur()));
+		ImageIcon icon = new ImageIcon("./src/fr/utt/lo02/projet/uno/ihm/uno_images/special/plus_quatre.jpg");
+		icon = new ImageIcon(icon.getImage().getScaledInstance(ImageCarte.lCarte, ImageCarte.hCarte, Image.SCALE_DEFAULT));
+	
+		int option = JOptionPane.showConfirmDialog(null,  joueur.afficherPseudo()+ ", voulez vous declarer un bluff?", partie.getJoueur(partie.getJoueurActuel()).afficherPseudo() +" a posé un Plus quatre:", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE , icon );
+		
+		
+			if(option == JOptionPane.OK_OPTION)
+			{
+				
+				return 1;
+			}
+			else
+			{
+				return 0;
+			}
+		
+	}
+
+
 	@Override
 	public int demanderUno() {
 		// TODO Auto-generated method stub
 		return 0;
 	}
-
+	
 	@Override
 	public int demanderContreUno() {
 		// TODO Auto-generated method stub
 		return 0;
 	}
 
+	@Override
+	public void afficherFinPartie(Partie p) {
+		// TODO Auto-generated method stub
+
+	}
 	
-	
+
+
+	@Override
+	public void afficherCartePioche(Joueur joueur) {
+		rapport.refreshJoueur(joueur);
+		
+
+	}
 
 
 
+	@Override
+	public void afficherPasse(Joueur joueur) {
+		// TODO Auto-generated method stub
+		
+	}
 	
 
 	

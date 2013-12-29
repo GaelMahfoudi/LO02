@@ -3,6 +3,8 @@ package fr.utt.lo02.projet.uno.ihm.graphique;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseMotionListener;
 import java.util.ArrayList;
 
 import javax.swing.JPanel;
@@ -15,7 +17,7 @@ import fr.utt.lo02.projet.uno.noyau.gestion.joueur.Joueur;
 //Amelioration a prevoir: gliser les cartes pour les ranger dans un autre ordre?
 
 
-public class MainJoueurPan extends JPanel implements ActionListener{
+public class MainJoueurPan extends JPanel implements ActionListener, MouseMotionListener{
 
 	public static final int hCarte=175;
 	public static final int lCarte=125;
@@ -24,12 +26,15 @@ public class MainJoueurPan extends JPanel implements ActionListener{
 	private ArrayList<ImageCarte> main; 
 	private JPanel mainPane;
 	private JScrollPane scroll;
+	private int carteADeplacer;
+	private int carteAPlacer;
+	
 
 	public MainJoueurPan()
 	{
 		super();
+		carteADeplacer=-1;
 		mainPane = new JPanel();
-		
 		scroll = new JScrollPane(mainPane); 
 		scroll.setPreferredSize(new Dimension(5*lCarte, hCarte+30));
 		scroll.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_NEVER); // Pas de barre verticale
@@ -49,7 +54,7 @@ public class MainJoueurPan extends JPanel implements ActionListener{
 
 	public void refresh(Joueur joueur) {
 		
-		
+		 carteADeplacer = -1;
 		 mainPane.removeAll();
 		 main = new ArrayList<ImageCarte>();
 		 choix = -1;
@@ -57,13 +62,22 @@ public class MainJoueurPan extends JPanel implements ActionListener{
 		 this.joueur = joueur;
 		 for (int i=0; i<joueur.getNombreCarte(); i++)
 		 {
-             
              ImageCarte c = new ImageCarte(joueur.getMain().getMain().get(i)); 
              main.add(c);
              mainPane.add(c);
 		 }
 	}
 
+	//Cette methode permet de changer l'ordre des cartes
+	private void refreshOrdreMain() 
+	{
+		Carte carte = joueur.getMain().getMain().get(carteADeplacer);
+		joueur.getMain().getMain().remove(carteADeplacer);
+		joueur.getMain().getMain().add(carteAPlacer, carte);
+		this.refresh(joueur);
+	}
+
+	
 	public void vider() {
 		mainPane.removeAll();
 		for(int i=0; i<5; i++)
@@ -78,7 +92,7 @@ public class MainJoueurPan extends JPanel implements ActionListener{
 		for(int i=0; i<main.size(); i++)
 		{
 			ImageCarte c = (ImageCarte) main.get(i);
-			c.addActionListener(this);
+			this.addListeners(c);
 		}
 		
 		return choix;
@@ -86,6 +100,12 @@ public class MainJoueurPan extends JPanel implements ActionListener{
 
 
 	
+	private void addListeners(ImageCarte c) {
+			c.addActionListener(this);
+			//c.addMouseMotionListener(this);
+		
+	}
+
 	public void actionPerformed(ActionEvent e) {
 		ImageCarte carteG = (ImageCarte)e.getSource();
 		Carte carte = carteG.getCarte();
@@ -99,6 +119,38 @@ public class MainJoueurPan extends JPanel implements ActionListener{
 		}
 	}
 
+	
+
+
+
+
+	@Override
+	public void mouseDragged(MouseEvent e) 
+	{
+		if (contains(e.getX(),e.getY())) 
+		{
+			if(carteADeplacer == -1)
+			{
+				carteADeplacer = (int)(e.getX()/ImageCarte.lCarte);
+				System.out.println("Carte a deplacer:"+ carteADeplacer);
+			}
+			else
+			{
+				carteAPlacer = (int)(e.getX()/ImageCarte.lCarte);
+				System.out.println("Carte a placer:"+ carteAPlacer);
+				if(carteAPlacer != carteADeplacer)
+					this.refreshOrdreMain();
+			}
+		}
+	}
+
+	@Override
+	public void mouseMoved(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	
 	
 
 	

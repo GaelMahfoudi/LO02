@@ -8,6 +8,7 @@ public interface Observateur
 {
 	public void notifyManche(Partie partie);
 	public void notifyPartie(Partie partie);
+	public void notifyPasse(Joueur joueur);
 	public void notifyTour(Joueur joueur, int choix);
 	public int askCarte(Joueur joueur);
 	public int askPoserCarte(Joueur joueur);

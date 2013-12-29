@@ -96,4 +96,9 @@ public class UnoController implements Observateur{
 		return v.demanderChoix(min, max);
 	}
 
+	
+	public void notifyPasse(Joueur joueur) {
+		v.afficherPasse(joueur);
+	}
+
 }

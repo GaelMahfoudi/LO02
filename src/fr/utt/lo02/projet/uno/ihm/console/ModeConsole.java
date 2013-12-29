@@ -158,16 +158,8 @@ public class ModeConsole implements Observateur, View
 
 		System.out.println(partie.getJoueur(partie.getJoueurActuel()).afficherPseudo() + " A posé un PLUS_QUATRE,");
 		Joueur joueur = partie.getJoueur(Math.abs((partie.getJoueurActuel()+partie.getSens())%partie.getNbreJoueur()));
-		if( joueur instanceof JoueurNormal)
-		{
-			System.out.println(joueur.afficherPseudo()+ ", voulez vous declarer un bluff? [1|0] ");
-			return this.askNombre(0,1);
-		}
-		else
-		{
-			joueur.direBluff(partie.getJoueur(partie.getJoueurActuel()), partie);
-			return 1;
-		}
+		System.out.println(joueur.afficherPseudo()+ ", voulez vous declarer un bluff? [1|0] ");
+		return this.askNombre(0,1);
 	}
 
 
@@ -179,7 +171,6 @@ public class ModeConsole implements Observateur, View
 	public void notifyPioche(Joueur joueur) //Losrque le joueur pioche
 	{
 
-		//if( this.partie.getManche() != 0)
 			System.out.println(joueur.afficherPseudo() + " a pioché un " + joueur.getMain().getMain().get(joueur.getNombreCarte()-1));
 
 	}
@@ -373,7 +364,7 @@ public class ModeConsole implements Observateur, View
 		}
 		else if (choix >= joueur.getMain().getNombreCarte()+1)
 		{
-			System.out.println(joueur.afficherPseudo() +" passe.");
+			this.notifyPasse(joueur);
 		}
 
 	}
@@ -563,6 +554,20 @@ public class ModeConsole implements Observateur, View
 		partie = new Partie(nbreJoueurReel, nbreJoueurVirtuel, controller);
 		
 		return partie;
+	}
+
+
+
+	@Override
+	public void afficherPasse(Joueur joueur) {
+		System.out.println(joueur.afficherPseudo() +" passe.");
+	}
+
+
+
+	@Override
+	public void notifyPasse(Joueur joueur) {
+		this.afficherPasse(joueur);
 	}
 
 }

@@ -104,7 +104,6 @@ public class JoueurNormal extends Joueur {
 		if (choix == 0)
 		{
 			this.piocherCarte(4);
-			joueur.choisirCouleur();
 		}
 		else
 		{
@@ -122,13 +121,12 @@ public class JoueurNormal extends Joueur {
 			{
 				joueur.piocherCarte(4);
 				joueur.main.ajouterCarte(Talon.getInstance().enleverDerniereCarte());
-				//joueur.choisirCouleur();
+				obs.notifyPasse(this);
 				
 			}
 			else
 			{
 				this.piocherCarte(6);
-				joueur.choisirCouleur();
 			}
 		}
 	}
