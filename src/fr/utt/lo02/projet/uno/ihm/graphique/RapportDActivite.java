@@ -25,9 +25,6 @@ public class RapportDActivite extends JPanel{
         	joueurCarte[i] = partie.getJoueur(i).afficherPseudo()+ ": 5 restantes" ;
         }
 		this.refresh();
-		
-		
-		
 	}
 	public void refresh()
 	{

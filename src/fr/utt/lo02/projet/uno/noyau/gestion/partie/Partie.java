@@ -152,7 +152,6 @@ public class Partie implements Observer{
 
 	public void nextJoueur() {
 		joueurActuel = Math.abs((joueurActuel+sens)%nbreJoueur);
-		
 	}
 
 

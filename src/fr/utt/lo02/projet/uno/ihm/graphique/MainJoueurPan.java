@@ -98,9 +98,4 @@ public class MainJoueurPan extends JPanel implements ActionListener{
 			}
 		}
 	}
-
-	
-
-	
-
 }

@@ -80,11 +80,10 @@ public class ModeGraphique extends JFrame implements View{
 	public int demanderCarteAJouer(Joueur joueur) 
 	{
 		this.refresh(joueur);
+		
 		return this.demanderChoix(0, joueur.getNombreCarte());
 	}
 	
-
-
 
 	private void refresh(Joueur joueur) {
 		
@@ -135,9 +134,11 @@ public class ModeGraphique extends JFrame implements View{
 		main.vider();
 		
 		
-		//TODO un message de qui a gagnÃ©
+		JOptionPane.showMessageDialog(null, "La manche est finie, tenez vous prêt !", "Fin de la manche", JOptionPane.WARNING_MESSAGE);
 		
+		rapport.refresh();
 		tableauDeBord.setManche(p.getManche());
+		this.repaint();
 	}
 
 	@Override
@@ -200,7 +201,7 @@ public class ModeGraphique extends JFrame implements View{
 
 	@Override
 	public int demanderBluff(Partie partie) {
-		// TODO Auto-generated method stub
+		int choix = 
 		return 0;
 	}
 
