@@ -136,11 +136,10 @@ public class JoueurNormal extends Joueur {
 		int choix = obs.askUno();
 		if(choix == 1)
 		{
-			/*if( this.getNombreCarte() == 0)
+			if( this.getNombreCarte() == 0)
 				this.uno=true;
 			else
-				this.uno=false;*/
-			uno = true;
+				this.uno=false;
 		}
 
 		
@@ -150,7 +149,7 @@ public class JoueurNormal extends Joueur {
 	public void direContreUno(Partie partie) 
 	{
 		
-		int nJoueur = obs.askContreUno()-1;
+		int nJoueur = obs.askContreUno(partie)-1;
 		if(nJoueur < partie.getNbreJoueur() && this != partie.getJoueur(nJoueur) )
 		{
 			direContreUno(partie.getJoueur(nJoueur));

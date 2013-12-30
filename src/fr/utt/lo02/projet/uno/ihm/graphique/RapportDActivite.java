@@ -51,7 +51,11 @@ public class RapportDActivite extends JPanel{
 				
 			if(joueurCarte[i].contains(joueur.afficherPseudo()))
 			{
-				joueurCarte[i] = joueur.afficherPseudo()+ ": " +joueur.getNombreCarte()+" restantes" ;
+				if(joueur.getUno())
+					joueurCarte[i] = joueur.afficherPseudo()+ ": " +joueur.getNombreCarte()+" restantes (uno)" ;
+				else
+					joueurCarte[i] = joueur.afficherPseudo()+ ": " +joueur.getNombreCarte()+" restantes" ;
+					
 				
 			}
 		}

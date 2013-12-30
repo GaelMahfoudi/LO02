@@ -17,8 +17,11 @@ public interface View {
 	public void afficherMauvaisChoix();
 	public ECouleur demanderCouleur();
 	public int demanderUno();
-	public int demanderContreUno();
+	public int demanderContreUno(Partie partie);
 	public String demanderPseudo();
 	public int demanderChoix(int min, int max);
 	public Partie demarrerPartie(Partie partie, UnoController controller);
+	public void declarerUno();
+	public void setController(Observateur obs);
+	public Joueur quiDemandeUno(Partie partie);
 }

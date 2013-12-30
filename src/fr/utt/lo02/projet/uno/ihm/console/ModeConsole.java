@@ -23,6 +23,7 @@ public class ModeConsole implements Observateur, View
 
 	public Partie partie;
 	public Scanner sc = new Scanner(System.in);
+	private Observateur obs;
 
 
 	/**
@@ -231,7 +232,7 @@ public class ModeConsole implements Observateur, View
 	 * @return int Choix
 	 * Demande a l'utilisateur contree qui il souhaite declarer un contre uno
 	 */
-	public int askContreUno() 
+	public int askContreUno(Partie partie) 
 	{
 
 		System.out.println("A qui dites vous contre Uno? [1.."+(partie.getNbreJoueur())+"]");
@@ -481,7 +482,7 @@ public class ModeConsole implements Observateur, View
 
 
 	@Override
-	public int demanderContreUno() {
+	public int demanderContreUno(Partie partie) {
 
 		System.out.println("A qui dites vous contre Uno? [1.."+(partie.getNbreJoueur())+"]");
 		for(int i = 0; i<partie.getNbreJoueur(); i++)
@@ -570,5 +571,32 @@ public class ModeConsole implements Observateur, View
 		this.afficherPasse(joueur);
 	}
 
+
+
+	@Override
+	public void declarerUno() {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+
+	@Override
+	public void setController(Observateur obs) {
+		// TODO Auto-generated method stub
+		this.obs=obs;
+	}
+
+
+
+	@Override
+	public Joueur quiDemandeUno(Partie partie) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+
+
+	
 }
 

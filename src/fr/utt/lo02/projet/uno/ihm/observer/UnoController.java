@@ -13,6 +13,7 @@ public class UnoController implements Observateur{
 	public UnoController(View v)
 	{
 		this.v = v;
+		v.setController(this);
 	}
 	
 	public void initialiserPartie()
@@ -74,14 +75,20 @@ public class UnoController implements Observateur{
 		
 	}
 
+	@Override
+	public void declarerUno() {
+		Joueur joueur = v.quiDemandeUno(partie);
+		if(joueur != null)
+			joueur.direUno();
+	}
 
 	public int askUno() {
-		return v.demanderUno();
+		return 1;
 	}
 
 
-	public int askContreUno() {
-		return v.demanderContreUno();
+	public int askContreUno(Partie partie) {
+		return v.demanderContreUno(partie);
 	}
 
 
@@ -100,5 +107,11 @@ public class UnoController implements Observateur{
 	public void notifyPasse(Joueur joueur) {
 		v.afficherPasse(joueur);
 	}
+
+	
+
+
+
+	
 
 }

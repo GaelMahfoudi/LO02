@@ -17,7 +17,8 @@ public interface Observateur
 	public void notifyError();
 	public ECouleur askCouleur();
 	public int askUno();
-	public int askContreUno();
+	public void declarerUno();
+	public int askContreUno(Partie partie);
 	public String askPseudo();
 	public int askNombre(int min, int max);
 
