@@ -1,5 +1,6 @@
 package fr.utt.lo02.projet.uno.ihm.observer;
 
+import fr.utt.lo02.projet.uno.ihm.graphique.ModeGraphique;
 import fr.utt.lo02.projet.uno.noyau.carte.ECouleur;
 import fr.utt.lo02.projet.uno.noyau.gestion.joueur.Joueur;
 import fr.utt.lo02.projet.uno.noyau.gestion.partie.Partie;
@@ -79,7 +80,11 @@ public class UnoController implements Observateur{
 	public void declarerUno() {
 		Joueur joueur = v.quiDemandeUno(partie);
 		if(joueur != null)
+		{
 			joueur.direUno();
+			((ModeGraphique)v).rapport.refreshJoueur(joueur);
+			v.refresh();
+		}
 	}
 
 	public int askUno() {

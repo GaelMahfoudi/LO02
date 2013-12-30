@@ -25,4 +25,6 @@ public interface View {
 	public void setController(Observateur obs);
 	public Joueur quiDemandeUno(Partie partie);
 	public Joueur quiDemandeContreUno(Partie partie);
+	public void refresh();
 }
+

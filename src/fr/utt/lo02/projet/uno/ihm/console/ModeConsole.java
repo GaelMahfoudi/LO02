@@ -613,6 +613,14 @@ public class ModeConsole implements Observateur, View
 
 
 
+	@Override
+	public void refresh() {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+
 	
 }
 
