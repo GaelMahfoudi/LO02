@@ -22,6 +22,10 @@ public class Partie implements Observer{
 	private int sens;
 
 	private int nbreJoueur;
+	
+	private int nbreJoueurReel;
+	
+	private int nbreJoueurIA;
 
 	private int joueurActuel;
 
@@ -40,6 +44,8 @@ public class Partie implements Observer{
 		joueurActuel=0;
 		listeJoueur = new ArrayList<Joueur>();
 		this.nbreJoueur = nbJoueur + nbIA;
+		this.nbreJoueurIA = nbIA;
+		this.nbreJoueurReel = nbJoueur;
 		this.addObservateur(obs);//ajoute l'observeur dés le debut
 		//generation des joueurs normaux
 		for(int i=0;i<nbJoueur;i++)
@@ -217,6 +223,13 @@ public class Partie implements Observer{
 	public Observateur getObservateur()
 	{
 		return obs;
+	}
+
+
+
+	public int getNbreJoueurReel() {
+		// TODO Auto-generated method stub
+		return nbreJoueurReel;
 	}
 }
 

@@ -42,7 +42,7 @@ public class OptionJeu extends JPanel implements ActionListener{
 		}
 		else if (arg0.getSource().equals(direContreUno))
 		{
-			
+			mg.contreUno();
 		}
 	}
 }

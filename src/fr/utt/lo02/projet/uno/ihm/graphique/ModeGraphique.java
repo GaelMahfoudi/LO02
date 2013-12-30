@@ -18,6 +18,7 @@ import fr.utt.lo02.projet.uno.ihm.observer.UnoController;
 import fr.utt.lo02.projet.uno.ihm.observer.View;
 import fr.utt.lo02.projet.uno.noyau.carte.ECouleur;
 import fr.utt.lo02.projet.uno.noyau.gestion.joueur.Joueur;
+import fr.utt.lo02.projet.uno.noyau.gestion.joueur.JoueurNormal;
 import fr.utt.lo02.projet.uno.noyau.gestion.partie.Partie;
 
 public class ModeGraphique extends JFrame implements View{
@@ -32,7 +33,7 @@ public class ModeGraphique extends JFrame implements View{
 	private Partie partie;
 	private OptionJeu option;
 	private Observateur obs;
-	public Joueur joueur;
+	public Joueur joueurActuel;
 	
 	//Pour la barre de menu
 	private JMenuBar menuBar = new JMenuBar();
@@ -107,7 +108,8 @@ public class ModeGraphique extends JFrame implements View{
 		this.getContentPane().add(option, BorderLayout.EAST);
 		
 		this.setVisible(true);
-		JOptionPane.showMessageDialog(null, " Appuyez sur ok lorsque vous serez pret", ("Au tour de "+ (String)partie.getJoueur(partie.getJoueurActuel()).afficherPseudo()), JOptionPane.WARNING_MESSAGE);
+		if(partie.getJoueur(partie.getJoueurActuel()) instanceof JoueurNormal)
+			JOptionPane.showMessageDialog(null, " Appuyez sur ok lorsque vous serez pret", ("Au tour de "+ (String)partie.getJoueur(partie.getJoueurActuel()).afficherPseudo()), JOptionPane.WARNING_MESSAGE);
 		
 		
 		return partie;
@@ -121,7 +123,7 @@ public class ModeGraphique extends JFrame implements View{
 	
 	public int demanderCarteAJouer(Joueur joueur) 
 	{
-		this.joueur=joueur;
+		this.joueurActuel=joueur;
 		this.refresh();
 		return this.demanderChoix(0, joueur.getNombreCarte());
 	}
@@ -132,13 +134,13 @@ public class ModeGraphique extends JFrame implements View{
 		
 		
 				//Rafraichissement du tableau de bord
-				tableauDeBord.setJoueur(joueur);
+				tableauDeBord.setJoueur(joueurActuel);
 				tableauDeBord.refresh();
 				
 				//Rafraichissement de la table de jeu
 				table.refresh();
 				//Rafraichissement de la main du joueur
-				main.refresh(joueur);
+				main.refresh(joueurActuel);
 				//Rafraichissement du rapport d'activité
 				rapport.refresh();
 				
@@ -200,7 +202,8 @@ public class ModeGraphique extends JFrame implements View{
 		//TODO maj machin a posé truc
 		
 		this.cacherJeu();
-		JOptionPane.showMessageDialog(null, " Appuyez sur ok lorsque vous serez pret", ("Au tour de "+ (String)partie.getJoueur(Math.abs((partie.getJoueurActuel()+partie.getSens())%partie.getNbreJoueur())).afficherPseudo()), JOptionPane.WARNING_MESSAGE);
+		if(partie.getJoueur(Math.abs((partie.getJoueurActuel()+partie.getSens())%partie.getNbreJoueur())) instanceof JoueurNormal)
+			JOptionPane.showMessageDialog(null, " Appuyez sur ok lorsque vous serez pret", ("Au tour de "+ (String)partie.getJoueur(Math.abs((partie.getJoueurActuel()+partie.getSens())%partie.getNbreJoueur())).afficherPseudo()), JOptionPane.WARNING_MESSAGE);
 		
 	
 	}
@@ -327,17 +330,62 @@ public class ModeGraphique extends JFrame implements View{
 		return 0;
 	}
 	
-	//Demande a qui on fait contreUno
-	@Override
+	//Lance l'action
+	public void contreUno() {
+		obs.declarerContreUno();
+	}
+	
+	//Demande  qui declare contreUno
+	public Joueur quiDemandeContreUno(Partie partie) {
+		int rang = -1;
+		String[] nomJoueur = new String[partie.getNbreJoueurReel()+1];
+	    int j=0;
+		for(int i=0; i<partie.getNbreJoueur(); i++)
+	    {
+	    	if(partie.getJoueur(i) instanceof JoueurNormal)
+	    	{
+	    		nomJoueur[j]=partie.getJoueur(i).afficherPseudo();
+	    		j++;
+	    	}
+	    }
+	    nomJoueur[partie.getNbreJoueurReel()] = "annuler";
+		while(rang == -1)
+			rang = JOptionPane.showOptionDialog(null, "Qui souhaite declarer un contre-UNO?", "Contre-UNO", JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE, null, nomJoueur, "echec");
+
+		
+		if(rang < partie.getNbreJoueurReel())
+		{
+			for(int i=0; i<partie.getNbreJoueur(); i++)
+			{
+				if(partie.getJoueur(i).afficherPseudo().equals(nomJoueur[rang]))
+					return partie.getJoueur(i);
+			}
+			return null; //Ne peut arriver
+		}
+			
+		else
+			return null;
+	}
+	
+	//Demande a qui on fait un contre uno
 	public int demanderContreUno(Partie partie) {
 		// TODO Auto-generated method stub
-		return 0;
+		int rang = -1;
+	    String[] nomJoueur = new String[partie.getNbreJoueur()+1];
+	    for(int i=0; i<partie.getNbreJoueur(); i++)
+	    {
+	    	nomJoueur[i]=partie.getJoueur(i).afficherPseudo();
+	    }
+	    nomJoueur[partie.getNbreJoueur()] = "annuler";
+		while(rang == -1)
+			rang = JOptionPane.showOptionDialog(null, "A qui souhaitez vous dire contre-UNO?", "Contre-UNO", JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE, null, nomJoueur, "echec");
+
+		return rang;
 	}
 
-	public void direContreUno()
-	{
-		
-	}
+	
+	
+	
 	@Override
 	public void afficherFinPartie(Partie p) {
 		// TODO Auto-generated method stub
@@ -352,6 +400,14 @@ public class ModeGraphique extends JFrame implements View{
 		// TODO Auto-generated method stub
 		
 	}
+
+
+
+
+
+
+
+	
 
 
 

@@ -87,6 +87,14 @@ public class UnoController implements Observateur{
 	}
 
 
+	public void declarerContreUno()
+	{
+		Joueur joueur = v.quiDemandeContreUno(partie);
+		if(!joueur.equals(null))
+			joueur.direContreUno(partie);
+		
+	}
+	
 	public int askContreUno(Partie partie) {
 		return v.demanderContreUno(partie);
 	}

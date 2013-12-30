@@ -21,5 +21,6 @@ public interface Observateur
 	public int askContreUno(Partie partie);
 	public String askPseudo();
 	public int askNombre(int min, int max);
+	public void declarerContreUno();
 
 }

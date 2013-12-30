@@ -597,6 +597,22 @@ public class ModeConsole implements Observateur, View
 
 
 
+	@Override
+	public Joueur quiDemandeContreUno(Partie partie) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+
+
+	@Override
+	public void declarerContreUno() {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+
 	
 }
 

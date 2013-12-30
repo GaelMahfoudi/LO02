@@ -24,4 +24,5 @@ public interface View {
 	public void declarerUno();
 	public void setController(Observateur obs);
 	public Joueur quiDemandeUno(Partie partie);
+	public Joueur quiDemandeContreUno(Partie partie);
 }
