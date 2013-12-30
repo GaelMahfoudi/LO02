@@ -29,7 +29,7 @@ public class ModeGraphique extends JFrame implements View{
 	private MainJoueurPan main;
 	private TablePan table;
 	private TableauDeBord tableauDeBord;
-	private RapportDActivite rapport;
+	public RapportDActivite rapport;
 	private Partie partie;
 	private OptionJeu option;
 	private Observateur obs;
@@ -181,9 +181,9 @@ public class ModeGraphique extends JFrame implements View{
 	public void afficherFinManche(Partie p) {
 
 		this.cacherJeu();
+		rapport.refreshscore(p.getJoueur(p.getJoueurActuel()));;
 		
-		
-		JOptionPane.showMessageDialog(null, "La manche est finie, tenez vous prêt !", "Fin de la manche", JOptionPane.WARNING_MESSAGE);
+		JOptionPane.showMessageDialog(null, "La manche est finie, tenez vous prï¿½t !", "Fin de la manche", JOptionPane.WARNING_MESSAGE);
 		
 		rapport.refresh();
 		tableauDeBord.setManche(p.getManche());

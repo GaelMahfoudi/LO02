@@ -136,7 +136,7 @@ public class JoueurNormal extends Joueur {
 		int choix = obs.askUno();
 		if(choix == 1)
 		{
-			if( this.getNombreCarte() == 0)
+			if( this.getNombreCarte() == 1)
 				this.uno=true;
 			else
 				this.uno=false;

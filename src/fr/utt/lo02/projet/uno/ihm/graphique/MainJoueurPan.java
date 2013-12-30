@@ -107,7 +107,6 @@ public class MainJoueurPan extends JPanel implements ActionListener{
 
 	public void actionPerformed(ActionEvent e) {
 
-		System.out.println("test");
 		ImageCarte carteG = (ImageCarte)e.getSource();
 		Carte carte = carteG.getCarte();
 		for (int i=0; i<joueur.getNombreCarte(); i++)
