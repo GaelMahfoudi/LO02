@@ -17,20 +17,55 @@ import fr.utt.lo02.projet.uno.noyau.gestion.joueur.*;
 public class Partie implements Observer{
 	/* {author=Victor Le Deuff Gaï¿½l Mahfoudi}*/
 
+	/**
+	 * Valeur de la manche actuel
+	 * @see Partie#getManche()
+	 */
 	private int manche;
 
+	/**
+	 * Entier gérant le sens de rotation d'une partie
+	 * @see Partie#getSens()
+	 * @see Partie#setSens()
+	 */
 	private int sens;
 
+	/**
+	 * Entier représentant le nombre de joueur total
+	 * @see Partie#getNbreJoueur()
+	 * @see Partie#setNbreJoueur(int)
+	 */
 	private int nbreJoueur;
 	
+	/**
+	 * Entier représentant le nombre de joueur réel
+	 * @see Partie#getNbreJoueurReel()
+	 */
 	private int nbreJoueurReel;
 	
+	/**
+	 * Entier représentant le nombre de joueur virtuel
+	 */
 	private int nbreJoueurIA;
 
+	/**
+	 * Entier repésentant l'indice du joueur actuel
+	 * @see Partie#getJoueurActuel()
+	 * @see Partie#setJoueurActuel(int)
+	 */
 	private int joueurActuel;
 
+	/**
+	 * La liste des joueurs de la partie
+	 * @see Partie#getListeJoueur()
+	 */
 	private ArrayList<Joueur> listeJoueur;
 
+	/**
+	 * L'observateur de la partie
+	 * @see Partie#addObservateur(Observateur)
+	 * @see Partie#getObservateur()
+	 */
 	private Observateur obs;
 
 

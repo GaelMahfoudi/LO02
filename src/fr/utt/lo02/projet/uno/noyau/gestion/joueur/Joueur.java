@@ -7,7 +7,7 @@ import fr.utt.lo02.projet.uno.noyau.gestion.carte.*;
 import fr.utt.lo02.projet.uno.noyau.gestion.partie.Partie;
 
 /**
- *  La classe Joueur est abstraite. Elle possï¿½de les attributs et mï¿½thodes communes aux joueurs et aux IA.
+ *  La classe Joueur est abstraite. Elle possède les attributs et méthodes communes aux joueurs et aux IA.
  */
 public abstract class Joueur{
 	/* {author=Victor Le Deuff Gaï¿½l Mahfoudi}*/
