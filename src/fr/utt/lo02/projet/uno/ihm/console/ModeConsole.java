@@ -23,6 +23,7 @@ public class ModeConsole implements Observateur, View
 
 	public Partie partie;
 	public Scanner sc = new Scanner(System.in);
+	private Observateur obs;
 
 
 	/**
@@ -158,16 +159,8 @@ public class ModeConsole implements Observateur, View
 
 		System.out.println(partie.getJoueur(partie.getJoueurActuel()).afficherPseudo() + " A posé un PLUS_QUATRE,");
 		Joueur joueur = partie.getJoueur(Math.abs((partie.getJoueurActuel()+partie.getSens())%partie.getNbreJoueur()));
-		if( joueur instanceof JoueurNormal)
-		{
-			System.out.println(joueur.afficherPseudo()+ ", voulez vous declarer un bluff? [1|0] ");
-			return this.askNombre(0,1);
-		}
-		else
-		{
-			joueur.direBluff(partie.getJoueur(partie.getJoueurActuel()), partie);
-			return 1;
-		}
+		System.out.println(joueur.afficherPseudo()+ ", voulez vous declarer un bluff? [1|0] ");
+		return this.askNombre(0,1);
 	}
 
 
@@ -179,7 +172,6 @@ public class ModeConsole implements Observateur, View
 	public void notifyPioche(Joueur joueur) //Losrque le joueur pioche
 	{
 
-		//if( this.partie.getManche() != 0)
 			System.out.println(joueur.afficherPseudo() + " a pioché un " + joueur.getMain().getMain().get(joueur.getNombreCarte()-1));
 
 	}
@@ -240,7 +232,7 @@ public class ModeConsole implements Observateur, View
 	 * @return int Choix
 	 * Demande a l'utilisateur contree qui il souhaite declarer un contre uno
 	 */
-	public int askContreUno() 
+	public int askContreUno(Partie partie) 
 	{
 
 		System.out.println("A qui dites vous contre Uno? [1.."+(partie.getNbreJoueur())+"]");
@@ -373,7 +365,7 @@ public class ModeConsole implements Observateur, View
 		}
 		else if (choix >= joueur.getMain().getNombreCarte()+1)
 		{
-			System.out.println(joueur.afficherPseudo() +" passe.");
+			this.notifyPasse(joueur);
 		}
 
 	}
@@ -490,7 +482,7 @@ public class ModeConsole implements Observateur, View
 
 
 	@Override
-	public int demanderContreUno() {
+	public int demanderContreUno(Partie partie) {
 
 		System.out.println("A qui dites vous contre Uno? [1.."+(partie.getNbreJoueur())+"]");
 		for(int i = 0; i<partie.getNbreJoueur(); i++)
@@ -565,5 +557,62 @@ public class ModeConsole implements Observateur, View
 		return partie;
 	}
 
+
+
+	@Override
+	public void afficherPasse(Joueur joueur) {
+		System.out.println(joueur.afficherPseudo() +" passe.");
+	}
+
+
+
+	@Override
+	public void notifyPasse(Joueur joueur) {
+		this.afficherPasse(joueur);
+	}
+
+
+
+	@Override
+	public void declarerUno() {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+
+	@Override
+	public void setController(Observateur obs) {
+		// TODO Auto-generated method stub
+		this.obs=obs;
+	}
+
+
+
+	@Override
+	public Joueur quiDemandeUno(Partie partie) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+
+
+	@Override
+	public Joueur quiDemandeContreUno(Partie partie) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+
+
+	@Override
+	public void declarerContreUno() {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+
+	
 }
 

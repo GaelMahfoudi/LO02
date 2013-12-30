@@ -8,6 +8,7 @@ public interface Observateur
 {
 	public void notifyManche(Partie partie);
 	public void notifyPartie(Partie partie);
+	public void notifyPasse(Joueur joueur);
 	public void notifyTour(Joueur joueur, int choix);
 	public int askCarte(Joueur joueur);
 	public int askPoserCarte(Joueur joueur);
@@ -16,8 +17,10 @@ public interface Observateur
 	public void notifyError();
 	public ECouleur askCouleur();
 	public int askUno();
-	public int askContreUno();
+	public void declarerUno();
+	public int askContreUno(Partie partie);
 	public String askPseudo();
 	public int askNombre(int min, int max);
+	public void declarerContreUno();
 
 }

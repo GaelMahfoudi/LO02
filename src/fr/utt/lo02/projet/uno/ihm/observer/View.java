@@ -8,6 +8,7 @@ public interface View {
 	
 	public void afficherFinManche(Partie p);
 	public void afficherFinPartie(Partie p);
+	public void afficherPasse(Joueur joueur);
 	public void afficherTour(Joueur joueur, int choix);
 	public int demanderCarteAJouer(Joueur joueur);
 	public int poserCartePioche(Joueur joueur);
@@ -16,8 +17,12 @@ public interface View {
 	public void afficherMauvaisChoix();
 	public ECouleur demanderCouleur();
 	public int demanderUno();
-	public int demanderContreUno();
+	public int demanderContreUno(Partie partie);
 	public String demanderPseudo();
 	public int demanderChoix(int min, int max);
 	public Partie demarrerPartie(Partie partie, UnoController controller);
+	public void declarerUno();
+	public void setController(Observateur obs);
+	public Joueur quiDemandeUno(Partie partie);
+	public Joueur quiDemandeContreUno(Partie partie);
 }

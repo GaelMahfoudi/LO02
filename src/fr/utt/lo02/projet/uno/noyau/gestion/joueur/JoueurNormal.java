@@ -104,7 +104,6 @@ public class JoueurNormal extends Joueur {
 		if (choix == 0)
 		{
 			this.piocherCarte(4);
-			joueur.choisirCouleur();
 		}
 		else
 		{
@@ -122,13 +121,12 @@ public class JoueurNormal extends Joueur {
 			{
 				joueur.piocherCarte(4);
 				joueur.main.ajouterCarte(Talon.getInstance().enleverDerniereCarte());
-				//joueur.choisirCouleur();
+				obs.notifyPasse(this);
 				
 			}
 			else
 			{
 				this.piocherCarte(6);
-				joueur.choisirCouleur();
 			}
 		}
 	}
@@ -138,11 +136,10 @@ public class JoueurNormal extends Joueur {
 		int choix = obs.askUno();
 		if(choix == 1)
 		{
-			/*if( this.getNombreCarte() == 0)
+			if( this.getNombreCarte() == 0)
 				this.uno=true;
 			else
-				this.uno=false;*/
-			uno = true;
+				this.uno=false;
 		}
 
 		
@@ -152,7 +149,7 @@ public class JoueurNormal extends Joueur {
 	public void direContreUno(Partie partie) 
 	{
 		
-		int nJoueur = obs.askContreUno()-1;
+		int nJoueur = obs.askContreUno(partie)-1;
 		if(nJoueur < partie.getNbreJoueur() && this != partie.getJoueur(nJoueur) )
 		{
 			direContreUno(partie.getJoueur(nJoueur));

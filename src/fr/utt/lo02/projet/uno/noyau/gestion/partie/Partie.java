@@ -22,6 +22,10 @@ public class Partie implements Observer{
 	private int sens;
 
 	private int nbreJoueur;
+	
+	private int nbreJoueurReel;
+	
+	private int nbreJoueurIA;
 
 	private int joueurActuel;
 
@@ -32,7 +36,19 @@ public class Partie implements Observer{
 
 
 	
-	
+	/**
+	 * Constructeur d'une partie de uno.
+	 * Il prend en paramètre le nombre de joueurs réels, Le nombre de 
+	 * joueurs virtuels ainsi que le UnoController de la partie.
+	 * @param nbJoueur
+	 * 			C'est le nombre de joueur réel
+	 * @param nbIA
+	 * 			C'est le nombre de joueur virtuel
+	 * @param obs
+	 * 			C'est le UnoController qui observe la partie
+	 * 
+	 * @see UnoController
+	 */
 	public Partie(int nbJoueur, int nbIA, Observateur obs)
 	{
 		sens=1;
@@ -40,6 +56,8 @@ public class Partie implements Observer{
 		joueurActuel=0;
 		listeJoueur = new ArrayList<Joueur>();
 		this.nbreJoueur = nbJoueur + nbIA;
+		this.nbreJoueurIA = nbIA;
+		this.nbreJoueurReel = nbJoueur;
 		this.addObservateur(obs);//ajoute l'observeur dÃ©s le debut
 		//generation des joueurs normaux
 		for(int i=0;i<nbJoueur;i++)
@@ -57,7 +75,11 @@ public class Partie implements Observer{
 	}
 	
 	
-	
+	/**
+	 * Cette méthode distribue les cartes au différents joueurs de la partie.
+	 * Elle permet aussi de poser la première carte sur le talon en prenant garde de ne pas
+	 * mettre une carte Plus Quatre ou Joker
+	 */
 	public void distribuerCarte() {
 		
 		for(int i=0;i<listeJoueur.size();i++)
@@ -79,7 +101,15 @@ public class Partie implements Observer{
 		}while(cartePioche.getSpecial()!=null);
 		
 	}
-
+	
+	
+	/**
+	 * Cette méthode vérifie si il y a un gagnant dans la manche actuel. Elle vérifie
+	 * si un joueur possède 0 carte.
+	 * 
+	 * @return
+	 * 		La méthode renvoie un boolean valant true en cas de gagnant et false sinon
+	 */
 	public boolean verifierGagnantManche() {
 
 		for(int i=0;i<this.nbreJoueur;i++)
@@ -91,7 +121,15 @@ public class Partie implements Observer{
 		}
 		return false;
 	}
-
+	
+	
+	/**
+	 * Cette méthode vérifie si il y a un gagnant à la partie actuel.
+	 * Elle vérifie si un joueur a plus de 500 points.
+	 * 
+	 * @return
+	 * 		La méthode renvoie true si il y a un gagnant et false sinon
+	 */
 	public boolean verifierGagnantPartie()
 	{
 		for(int i=0;i<this.nbreJoueur;i++)
@@ -105,6 +143,9 @@ public class Partie implements Observer{
 	}
 	
 	
+	/**
+	 * Cette méthode déroule une manche tant qu'aucun joueur n'ai posé toute ses cartes.
+	 */
 	public void deroulerManche()
 	{
 		//Initialisation de la manche
@@ -137,6 +178,10 @@ public class Partie implements Observer{
 	}
 	
 	
+	
+	/**
+	 * Cette méthode déroule une partie tant qu'aucun joueur n'ai plus de 500 points
+	 */
 	public void deroulerPartie() 
 	{
 		//Lancement de la partie
@@ -150,45 +195,88 @@ public class Partie implements Observer{
 	}
 
 
+	/**
+	 * Cette méthode calcule et renvoie le prochain joueur qui doit jouer
+	 */
 	public void nextJoueur() {
 		joueurActuel = Math.abs((joueurActuel+sens)%nbreJoueur);
 	}
 
 
-
+	/**
+	 * Cette méthode renvoie un entier représentant le sens de rotation de la partie
+	 * @return
+	 * 		Renvoie 1 pour le sens horraire et -1 pour le sens anti-horraire
+	 */
 	public int getSens() {
 		return sens;
 	}
 
 	
+	/**
+	 * Cette méthode change le sens de rotation d'une partie.
+	 */
 	public  void setSens() {
 		this.sens *= -1;
 	}
 
+	/**
+	 * Cette méthode actualise le joueur qui doit joueur
+	 * @param joueurActuel
+	 * 		Le nouveau joueur devant jouer
+	 */
 	public void setJoueurActuel(int joueurActuel) {
 		this.joueurActuel = joueurActuel;
 	}
 
 
+	/**
+	 * Cette méthode récupère le joueur à l'index index dans la liste des joueurs
+	 * @param index
+	 * 		L'index du joueur que l'on veut récupérer
+	 * @return
+	 * 		Renvoie le joueur voulu
+	 */
 	public Joueur getJoueur(int index){
 		return listeJoueur.get(index);
 	}
 
+	/**
+	 * Cette méthode renvoie le joueur actuellement en train de jouer
+	 * @return
+	 * 		Renvoie l'indice du joueur actuel
+	 */
 	public int getJoueurActuel()
 	{
 		return this.joueurActuel;
 	}
 
+	
+	/**
+	 * Cette méthode renvoie le nombre de joueur de la partie actuelle
+	 * @return
+	 * 		Renvoie un entier représentant le nombre de joueur actuel
+	 */
 	public int getNbreJoueur()
 	{
 		return this.nbreJoueur;
 	}
 	
+	/**
+	 * Cette méthode permet de régler le nombre de joueur de la partie
+	 * @param nbreJoueur
+	 * 		Le nouveau nombre de joueur
+	 */
 	public void setNbreJoueur(int nbreJoueur)
 	{
 		this.nbreJoueur = nbreJoueur;
 	}
 	
+	/**
+	 * Cette méthode renvoie la liste des joueurs de la partie
+	 * @return
+	 * 		Renvoie un ArrayList comprennant les joueurs de la partie
+	 */
 	public ArrayList<Joueur> getListeJoueur()
 	{
 		return listeJoueur;
@@ -197,7 +285,6 @@ public class Partie implements Observer{
 	public static void main(String[] args)
 	{
 		//ModeConsole c = new ModeConsole();
-		
 		ModeGraphique g = new ModeGraphique();
 		UnoController controller = new UnoController(g);
 		
@@ -205,18 +292,48 @@ public class Partie implements Observer{
 		
 	}
 	
-    
+    /**
+     * Cette méthode renvoie la manche actuelle
+     * @return
+     * 			Renvoie un entier représentant la manche actuelle
+     */
 	public int getManche() {
 		return manche;
 	}
 
+	/**
+	 * Cette méthode permet de rajouter un observateur à la partie.
+	 * Cette observateur peut être un UnoControleur.
+	 * 
+	 * @see Observateur
+	 * @see UnoController
+	 */
 	public void addObservateur(Observateur obs) {
 		 this.obs = obs;
 	}
 	
+	/**
+	 * Cette méthode permet de renvoyer l'observateur de la partie.
+	 * @return
+	 * 		Renvoie l'observateur de la partie
+	 * 
+	 * @see Observateur
+	 * @see UnoController
+	 */
 	public Observateur getObservateur()
 	{
 		return obs;
+	}
+
+	
+	/**
+	 * Cette méthode retourne le nombre de joueur réel
+	 * @return
+	 * 		Renvoie un entier étant le nombre de joueur réel
+	 */
+	public int getNbreJoueurReel() {
+		// TODO Auto-generated method stub
+		return nbreJoueurReel;
 	}
 }
 

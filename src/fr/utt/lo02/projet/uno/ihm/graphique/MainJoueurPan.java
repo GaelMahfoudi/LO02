@@ -7,6 +7,7 @@ import java.util.ArrayList;
 
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
+import javax.swing.TransferHandler;
 
 import fr.utt.lo02.projet.uno.noyau.carte.Carte;
 import fr.utt.lo02.projet.uno.noyau.gestion.joueur.Joueur;
@@ -24,12 +25,15 @@ public class MainJoueurPan extends JPanel implements ActionListener{
 	private ArrayList<ImageCarte> main; 
 	private JPanel mainPane;
 	private JScrollPane scroll;
+	private int anciennePosition;
+	private int nouvellePosition;
+	
 
 	public MainJoueurPan()
 	{
 		super();
+		anciennePosition=-1;
 		mainPane = new JPanel();
-		
 		scroll = new JScrollPane(mainPane); 
 		scroll.setPreferredSize(new Dimension(5*lCarte, hCarte+30));
 		scroll.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_NEVER); // Pas de barre verticale
@@ -49,7 +53,7 @@ public class MainJoueurPan extends JPanel implements ActionListener{
 
 	public void refresh(Joueur joueur) {
 		
-		
+		 anciennePosition = -1;
 		 mainPane.removeAll();
 		 main = new ArrayList<ImageCarte>();
 		 choix = -1;
@@ -57,13 +61,22 @@ public class MainJoueurPan extends JPanel implements ActionListener{
 		 this.joueur = joueur;
 		 for (int i=0; i<joueur.getNombreCarte(); i++)
 		 {
-             
              ImageCarte c = new ImageCarte(joueur.getMain().getMain().get(i)); 
              main.add(c);
              mainPane.add(c);
 		 }
 	}
 
+	//Cette methode permet de changer l'ordre des cartes
+	private void refreshOrdreMain() 
+	{
+		Carte carte = joueur.getMain().getMain().get(anciennePosition);
+		joueur.getMain().getMain().remove(anciennePosition);
+		joueur.getMain().getMain().add(nouvellePosition, carte);
+		this.refresh(joueur);
+	}
+
+	
 	public void vider() {
 		mainPane.removeAll();
 		for(int i=0; i<5; i++)
@@ -78,7 +91,7 @@ public class MainJoueurPan extends JPanel implements ActionListener{
 		for(int i=0; i<main.size(); i++)
 		{
 			ImageCarte c = (ImageCarte) main.get(i);
-			c.addActionListener(this);
+			this.addListeners(c);
 		}
 		
 		return choix;
@@ -86,7 +99,15 @@ public class MainJoueurPan extends JPanel implements ActionListener{
 
 
 	
+	private void addListeners(ImageCarte c) {
+			c.addActionListener(this);
+			c.setTransferHandler(new TransferHandler(" "));
+		
+	}
+
 	public void actionPerformed(ActionEvent e) {
+
+		System.out.println("test");
 		ImageCarte carteG = (ImageCarte)e.getSource();
 		Carte carte = carteG.getCarte();
 		for (int i=0; i<joueur.getNombreCarte(); i++)

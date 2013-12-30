@@ -3,22 +3,28 @@ package fr.utt.lo02.projet.uno.ihm.graphique;
 
 import java.awt.BorderLayout;
 import java.awt.Image;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
+import javax.swing.JMenu;
+import javax.swing.JMenuBar;
+import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 
+import fr.utt.lo02.projet.uno.ihm.observer.Observateur;
 import fr.utt.lo02.projet.uno.ihm.observer.UnoController;
 import fr.utt.lo02.projet.uno.ihm.observer.View;
 import fr.utt.lo02.projet.uno.noyau.carte.ECouleur;
 import fr.utt.lo02.projet.uno.noyau.gestion.joueur.Joueur;
+import fr.utt.lo02.projet.uno.noyau.gestion.joueur.JoueurNormal;
 import fr.utt.lo02.projet.uno.noyau.gestion.partie.Partie;
 
 public class ModeGraphique extends JFrame implements View{
 
 	public final static int hFenetre = 700;
 	public final static int lFenetre = 800;
-	//private Partie partie;
 	private ParametrerPartie param;
 	private MainJoueurPan main;
 	private TablePan table;
@@ -26,15 +32,50 @@ public class ModeGraphique extends JFrame implements View{
 	private RapportDActivite rapport;
 	private Partie partie;
 	private OptionJeu option;
+	private Observateur obs;
+	public Joueur joueurActuel;
 	
+	//Pour la barre de menu
+	private JMenuBar menuBar = new JMenuBar();
+	  private JMenu fichier = new JMenu("Fichier");
+	  private JMenuItem chargerPartie = new JMenu("Charger une partie");
+	  private JMenuItem nouvellePartie = new JMenu("Nouvelle partie");
+	  private JMenuItem aProposItem = new JMenu("a propos");
+	  private JMenu aPropos = new JMenu("A propos");
+	  private JMenuItem quitter = new JMenuItem("Quitter");
+
+	 
+	  
+	  
+	  
 	public ModeGraphique()
 	{
+		
 		param = new ParametrerPartie();
 		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
 		this.setSize(lFenetre, hFenetre);
 		this.setLocationRelativeTo(null);
 		this.setResizable(false);
 		this.setLayout(new BorderLayout());
+		
+		//Pour la barre de menu
+		
+		//On initialise nos menus 
+		this.fichier.add(nouvellePartie);
+	   	    
+	    this.fichier.add(chargerPartie);
+	    //Ajout d'un séparateur
+	    this.fichier.addSeparator();
+	    this.fichier.add(quitter);
+	    quitter.addActionListener(new ActionListener(){
+	      public void actionPerformed(ActionEvent arg0) {
+	        System.exit(0);
+	      }        
+	    });
+	    this.aPropos.add(aProposItem);
+	    this.menuBar.add(fichier);
+	    this.menuBar.add(aPropos);
+	    this.setJMenuBar(menuBar);
 	}
 
 	
@@ -62,10 +103,13 @@ public class ModeGraphique extends JFrame implements View{
 		rapport = new RapportDActivite(partie);
 		this.getContentPane().add(rapport, BorderLayout.WEST);
 		
-		
+		//L'est: les options en cours de jeu
+		option = new OptionJeu(this);
+		this.getContentPane().add(option, BorderLayout.EAST);
 		
 		this.setVisible(true);
-		JOptionPane.showMessageDialog(null, " Appuyez sur ok lorsque vous serez pret", ("Au tour de "+ (String)partie.getJoueur(partie.getJoueurActuel()).afficherPseudo()), JOptionPane.WARNING_MESSAGE);
+		if(partie.getJoueur(partie.getJoueurActuel()) instanceof JoueurNormal)
+			JOptionPane.showMessageDialog(null, " Appuyez sur ok lorsque vous serez pret", ("Au tour de "+ (String)partie.getJoueur(partie.getJoueurActuel()).afficherPseudo()), JOptionPane.WARNING_MESSAGE);
 		
 		
 		return partie;
@@ -79,25 +123,21 @@ public class ModeGraphique extends JFrame implements View{
 	
 	public int demanderCarteAJouer(Joueur joueur) 
 	{
-		this.refresh(joueur);
-		
+		this.joueurActuel=joueur;
+		this.refresh();
 		return this.demanderChoix(0, joueur.getNombreCarte());
 	}
 	
 
-	private void refresh(Joueur joueur) {
-		
-		
-				
-				
+	public void refresh() {
 				//Rafraichissement du tableau de bord
-				tableauDeBord.setJoueur(joueur);
+				tableauDeBord.setJoueur(joueurActuel);
 				tableauDeBord.refresh();
 				
 				//Rafraichissement de la table de jeu
 				table.refresh();
 				//Rafraichissement de la main du joueur
-				main.refresh(joueur);
+				main.refresh(joueurActuel);
 				//Rafraichissement du rapport d'activité
 				rapport.refresh();
 				
@@ -129,9 +169,18 @@ public class ModeGraphique extends JFrame implements View{
 
 
 
+	public void cacherJeu()
+	{
+		main.vider();
+		this.repaint();
+		this.setVisible(true);
+		
+		
+	}
+	
 	public void afficherFinManche(Partie p) {
 
-		main.vider();
+		this.cacherJeu();
 		
 		
 		JOptionPane.showMessageDialog(null, "La manche est finie, tenez vous pr�t !", "Fin de la manche", JOptionPane.WARNING_MESSAGE);
@@ -141,11 +190,7 @@ public class ModeGraphique extends JFrame implements View{
 		this.repaint();
 	}
 
-	@Override
-	public void afficherFinPartie(Partie p) {
-		// TODO Auto-generated method stub
-
-	}
+	
 
 	@Override
 	public void afficherTour(Joueur joueur, int choix) {
@@ -155,8 +200,9 @@ public class ModeGraphique extends JFrame implements View{
 		
 		//TODO maj machin a posé truc
 		
-		main.vider(); //Protection de la main du joueur precedent
-		JOptionPane.showMessageDialog(null, " Appuyez sur ok lorsque vous serez pret", ("Au tour de "+ (String)partie.getJoueur(Math.abs((partie.getJoueurActuel()+partie.getSens())%partie.getNbreJoueur())).afficherPseudo()), JOptionPane.WARNING_MESSAGE);
+		this.cacherJeu();
+		if(partie.getJoueur(Math.abs((partie.getJoueurActuel()+partie.getSens())%partie.getNbreJoueur())) instanceof JoueurNormal)
+			JOptionPane.showMessageDialog(null, " Appuyez sur ok lorsque vous serez pret", ("Au tour de "+ (String)partie.getJoueur(Math.abs((partie.getJoueurActuel()+partie.getSens())%partie.getNbreJoueur())).afficherPseudo()), JOptionPane.WARNING_MESSAGE);
 		
 	
 	}
@@ -192,20 +238,6 @@ public class ModeGraphique extends JFrame implements View{
 		
 	}
 
-	@Override
-	public void afficherCartePioche(Joueur joueur) {
-		//NE sert a rien en mode graphique... inclut dans poserCartePioche
-		
-
-	}
-
-	@Override
-	public int demanderBluff(Partie partie) {
-		int choix = 
-		return 0;
-	}
-
-	@Override
 	public void afficherMauvaisChoix() {
 		JOptionPane.showMessageDialog(null, "Cette carte ne peut etre posée", "Erreur", JOptionPane.ERROR_MESSAGE);
 	}
@@ -214,15 +246,15 @@ public class ModeGraphique extends JFrame implements View{
 	public ECouleur demanderCouleur() {
 		String[] couleur = {"Bleu", "Rouge", "Jaune", "Vert"};
 	    
-		 int rang = JOptionPane.showOptionDialog(null, "Veuillez choisir la nouvelle couleur:", "Ghangement de couleur", JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE, null, couleur, "echec");
+		 int rang = JOptionPane.showOptionDialog(null, "Veuillez choisir la nouvelle couleur:", "Changement de couleur", JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE, null, couleur, "echec");
 		switch(rang)
 		{
 			case 0:
 				return ECouleur.BLEU;
 			case 1:
-				return ECouleur.JAUNE;
-			case 2:
 				return ECouleur.ROUGE;
+			case 2:
+				return ECouleur.JAUNE;
 			case 3:
 				return ECouleur.VERT;
 			default:
@@ -230,27 +262,157 @@ public class ModeGraphique extends JFrame implements View{
 		}
 	}
 
+
+	public int demanderBluff(Partie partie) {
+		// TODO Auto-generated method stub
+		Joueur joueur = partie.getJoueur(Math.abs((partie.getJoueurActuel()+partie.getSens())%partie.getNbreJoueur()));
+		ImageIcon icon = new ImageIcon("./src/fr/utt/lo02/projet/uno/ihm/uno_images/special/plus_quatre.jpg");
+		icon = new ImageIcon(icon.getImage().getScaledInstance(ImageCarte.lCarte, ImageCarte.hCarte, Image.SCALE_DEFAULT));
+	
+		int option = JOptionPane.showConfirmDialog(null,  joueur.afficherPseudo()+ ", voulez vous declarer un bluff?", partie.getJoueur(partie.getJoueurActuel()).afficherPseudo() +" a posé un Plus quatre:", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE , icon );
+		
+		
+			if(option == JOptionPane.OK_OPTION)
+			{
+				
+				return 1;
+			}
+			else
+			{
+				return 0;
+			}
+		
+	}
+
+
+	public void declarerUno() {
+		
+		obs.declarerUno();
+	}
+	
+	public void afficherCartePioche(Joueur joueur) {
+		//Inclut dans poser carte pioche, ici non met a jour le nombree du carte du joueur
+		
+		rapport.refreshJoueur(joueur);
+		
+
+	}
+
+	
+	public void setController(Observateur obs)
+	{
+		this.obs=obs;
+	}
+	
+	public Joueur quiDemandeUno(Partie partie) {
+		int rang = -1;
+	    String[] nomJoueur = new String[partie.getNbreJoueur()+1];
+	    for(int i=0; i<partie.getNbreJoueur(); i++)
+	    {
+	    	nomJoueur[i]=partie.getJoueur(i).afficherPseudo();
+	    }
+	    nomJoueur[partie.getNbreJoueur()] = "annuler";
+		while(rang == -1)
+			rang = JOptionPane.showOptionDialog(null, "Qui souhaite declarer un UNO?", "UNO", JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE, null, nomJoueur, "echec");
+
+		if(rang < partie.getNbreJoueur())
+			return partie.getJoueur(rang);
+		else
+			return null;
+		 
+	}
+	
 	@Override
 	public int demanderUno() {
-		// TODO Auto-generated method stub
+		//Ne sert a rien en mode graphique
 		return 0;
 	}
+	
+	//Lance l'action
+	public void contreUno() {
+		obs.declarerContreUno();
+	}
+	
+	//Demande  qui declare contreUno
+	public Joueur quiDemandeContreUno(Partie partie) {
+		int rang = -1;
+		String[] nomJoueur = new String[partie.getNbreJoueurReel()+1];
+	    int j=0;
+		for(int i=0; i<partie.getNbreJoueur(); i++)
+	    {
+	    	if(partie.getJoueur(i) instanceof JoueurNormal)
+	    	{
+	    		nomJoueur[j]=partie.getJoueur(i).afficherPseudo();
+	    		j++;
+	    	}
+	    }
+	    nomJoueur[partie.getNbreJoueurReel()] = "annuler";
+		while(rang == -1)
+			rang = JOptionPane.showOptionDialog(null, "Qui souhaite declarer un contre-UNO?", "Contre-UNO", JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE, null, nomJoueur, "echec");
 
+		
+		if(rang < partie.getNbreJoueurReel())
+		{
+			for(int i=0; i<partie.getNbreJoueur(); i++)
+			{
+				if(partie.getJoueur(i).afficherPseudo().equals(nomJoueur[rang]))
+					return partie.getJoueur(i);
+			}
+			return null; //Ne peut arriver
+		}
+			
+		else
+			return null;
+	}
+	
+	//Demande a qui on fait un contre uno
+	public int demanderContreUno(Partie partie) {
+		// TODO Auto-generated method stub
+		int rang = -1;
+	    String[] nomJoueur = new String[partie.getNbreJoueur()+1];
+	    for(int i=0; i<partie.getNbreJoueur(); i++)
+	    {
+	    	nomJoueur[i]=partie.getJoueur(i).afficherPseudo();
+	    }
+	    nomJoueur[partie.getNbreJoueur()] = "annuler";
+		while(rang == -1)
+			rang = JOptionPane.showOptionDialog(null, "A qui souhaitez vous dire contre-UNO?", "Contre-UNO", JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE, null, nomJoueur, "echec");
+
+		return rang;
+	}
+
+	
+	
+	
 	@Override
-	public int demanderContreUno() {
+	public void afficherFinPartie(Partie p) {
 		// TODO Auto-generated method stub
-		return 0;
+
+	}
+	
+
+
+	
+	@Override
+	public void afficherPasse(Joueur joueur) {
+		// TODO Auto-generated method stub
+		
 	}
 
-	
-	
+
+
+
 
 
 
 	
 
+
+
 	
-	
+
+
+
 	
 
 }
