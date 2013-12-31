@@ -4,11 +4,17 @@ import fr.utt.lo02.projet.uno.noyau.carte.ESpecial;
 import fr.utt.lo02.projet.uno.noyau.gestion.partie.Partie;
 
 /**
- *  Classe gï¿½rant l'IA de type Bluff
+ *  La classe IABluff est une implémentation de StyleIA. Elle permet de faire adopter un comportement
+ *  de bluff à une IA
  */
 public class IABluff implements StyleIA {
 
-	@Override
+	/**
+	 * Implémentation de la méthode jouerCarte de StyleIA.
+	 * Elle cherche dans un premier temps à dire contre uno à un joueur.
+	 * Puis elle cherche une carte plus quatre.
+	 * @see StyleIA#jouerCarte(Partie, Joueur)
+	 */
 	public int jouerCarte(Partie partie, Joueur joueur) {
 		
 		for(int i=0; i<partie.getNbreJoueur(); i++) //Contre Uno direct
@@ -29,7 +35,11 @@ public class IABluff implements StyleIA {
 		
 	}
 
-	@Override
+	/**
+	 * Implémentation de la méthode direBluff de StyleIA.
+	 * Si le joueur à plus de 7 cartes, l'IA dit bluff.
+	 * @see StyleIA#direBluff(Joueur)
+	 */
 	public boolean direBluff(Joueur j) {
 		if(j.getNombreCarte()>7)
 		{

@@ -9,28 +9,58 @@ import fr.utt.lo02.projet.uno.noyau.gestion.carte.Talon;
 import fr.utt.lo02.projet.uno.noyau.gestion.partie.Partie;
 
 /**
- *  IA hï¿½rite de joueur. Elle gï¿½re un joueur non-humain
+ *  La classe IA permet de gérer un joueur virtuel. Elle hérite de Joueur. De plus elle possède un
+ *  attribut StyleIA qui définit son comportement.
+ *  @see StyleIA
+ *  @see IAOffensive
+ *  @see IANormal
+ *  @see IABluff
  */
 public class IA extends Joueur {
 	/* {author=Victor Le Deuff Gaï¿½l Mahfoudi}*/
 
 
+	/**
+	 * L'attribut styleJeu permet de définir le comportement de l'IA à l'aide des classes
+	 * IANormal, IAOffensive, IABluff.
+	 * @see StyleIA
+	 * @see IAOffensive
+	 * @see IANormal
+	 * @see IABluff
+	 */
 	private StyleIA styleJeu;
 	
+	/**
+	 * Constructeur de la classe IA. Il prend en paramètre un observateur.
+	 * @param obs
+	 * 		L'observateur de cette IA
+	 */
 	public IA(Observateur obs)
 	{
 		super(obs);
 		pseudo = generePseudo();
 	}
-	
-	
+
+
+	/**
+	 * Implémentation de la méthode jouer de la classe Joueur.
+	 * Cette méthode prend en paramètre la partie ou se trouve l'IA.
+	 * L'IA joue en fonction de l'attribut styleJeu.
+	 * 
+	 * @see IA#styleJeu
+	 * @see StyleIA
+	 * @see IAOffensive
+	 * @see IANormal
+	 * @see IABluff
+	 * @see Joueur
+	 */
 	public void jouer(Partie partie) {
 		int i = 0;
-		
+
 		this.setStyleJeu();
 		i = styleJeu.jouerCarte(partie, this);
-		
-		
+
+
 		if(i <= main.getNombreCarte())
 		{
 			Talon.getInstance().ajouterCarte(main.enleverCarte(i));
@@ -46,9 +76,9 @@ public class IA extends Joueur {
 		{
 			obs.notifyTour(this, this.getNombreCarte()+1);
 		}
-		
+
 	}
-	
+
 
 	private void setStyleJeu() {
 
@@ -60,16 +90,16 @@ public class IA extends Joueur {
 		{
 			styleJeu = new IANormal();
 		}
-		
+
 	}
 
 
 	public String generePseudo() {
 		return "Bernard";
 	}
-	
 
-	
+
+
 
 	public void direBluff(Joueur joueur, Partie partie)
 	{
@@ -97,7 +127,7 @@ public class IA extends Joueur {
 			{
 				this.piocherCarte(4); //Le joueur n'a pas dementi le joueur actuel
 			}
-			
+
 		}
 	}
 
@@ -115,17 +145,17 @@ public class IA extends Joueur {
 		}
 	}
 
-	
+
 	@Override
 	public void choisirCouleur() { //TODO
-		
+
 		Random r = new Random();
-		
+
 		int a = 0;
-		
+
 		//Tire un nombre entre 0 (inclu) et 4 (exclu)
 		a = r.nextInt(4);
-		
+
 		//On choisis la bonne couleur
 		switch(a)
 		{

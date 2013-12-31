@@ -5,10 +5,17 @@ package fr.utt.lo02.projet.uno.noyau.gestion.joueur;
 import fr.utt.lo02.projet.uno.noyau.gestion.partie.Partie;
 
 /** 
- *  Classe gï¿½rant l'IA de type Normale
+ *  La classe IANormal est une implémentation de StyleIA. Elle permet de faire adopter un comportement
+ *  neutre à une IA
  */
 public class IANormal implements StyleIA {
 
+	/**
+	 * Implémentation de la méthode jouerCarte de StyleIA.
+	 * Elle cherche d'abord une carte normale à poser, puis n'importe quelle carte
+	 * et enfin elle pioche si elle ne peut rien faire.
+	 * @see StyleIA#jouerCarte(Partie, Joueur)
+	 */
 	public int jouerCarte(Partie partie, Joueur joueur) {
 		
 		int i = 0;
@@ -40,6 +47,11 @@ public class IANormal implements StyleIA {
 	}
 
 	
+	/**
+	 * Implémentation de la méthode direBluff de StyleIA.
+	 * L'IA neutre ne déclare pas de bluff.
+	 * @see StyleIA#direBluff(Joueur)
+	 */
 	public boolean direBluff(Joueur j) {
 		
 		return false;

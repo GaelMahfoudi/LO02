@@ -4,11 +4,18 @@ import fr.utt.lo02.projet.uno.noyau.carte.CSpecial;
 import fr.utt.lo02.projet.uno.noyau.gestion.partie.Partie;
 
 /** 
- *  Classe gï¿½rant l'IA de type Offensive
+ *  La classe IAOffensive est une implémentation de StyleIA. Elle permet de faire adopter un comportement
+ *  offensif à une IA
  */
 public class IAOffensive implements StyleIA {
 
-	@Override
+	/**
+	 * Implémentation de la méthode jouerCarte de StyleIA.
+	 * L'IA offensive cherche à poser ses cartes pièges dans un premier temps.
+	 * Ensuite lla première carte qu'elle peut poser.
+	 * Et enfin elle pioche si elle ne peut rien faire.
+	 * @see StyleIA#jouerCarte(Partie, Joueur)
+	 */
 	public int jouerCarte(Partie partie, Joueur joueur) {
 
 		int i = 0;
@@ -35,7 +42,11 @@ public class IAOffensive implements StyleIA {
 		return joueur.getNombreCarte()+1;
 	}
 
-	@Override
+	/**
+	 * Implémentation de la méthode direBluff de StyleIA.
+	 * Elle déclare un bluff si le nombre de carte du joueur est supérieur à 10
+	 * @see StyleIA#direBluff(Joueur)
+	 */
 	public boolean direBluff(Joueur j) {
 		
 		if(j.getNombreCarte()>10)
