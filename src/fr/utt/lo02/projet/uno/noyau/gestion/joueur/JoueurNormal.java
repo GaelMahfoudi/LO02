@@ -8,17 +8,31 @@ import fr.utt.lo02.projet.uno.noyau.gestion.carte.Talon;
 import fr.utt.lo02.projet.uno.noyau.gestion.partie.Partie;
 
 /**
- *  JoueurNormal hï¿½rite de joueur. Elle gï¿½re un joueur humain.
+ *  JoueurNormal hérite de joueur. Elle gère un joueur humain.
  */
 public class JoueurNormal extends Joueur {
 	/* {author=Victor Le Deuff Gaï¿½l Mahfoudi}*/
 	
-	
+	/**
+	 * Constructeur d'un JoueurNormal. Il prend en paramètre l'obsevateur du joueur.
+	 * @param obs
+	 * 		L'observateur du joueur
+	 * @see Joueur
+	 * @see Observateur
+	 */
 	public JoueurNormal(Observateur obs) {
 		super(obs);
 		this.pseudo = obs.askPseudo();	
 	}
 
+	/**
+	 * Implémentation de la méthode abstraite jouer de joueur. Cette méthode
+	 * définit la façon dont le joueur joue. Elle prend en paramètre la partie de Uno
+	 * ou se trouve le joueur
+	 * @param partie
+	 * 		La partie de uno
+	 * @see Joueur#jouer(Partie)
+	 */
 	public void jouer(Partie partie) 
 	{
 		if(this.uno && this.getNombreCarte() != 0)
@@ -97,6 +111,16 @@ public class JoueurNormal extends Joueur {
 
 	
 
+	/**
+	 * Implémentation de la méthode direBluff de la classe Joueur. Cette méthode
+	 * définit la façon dont le joueur déclare un bluf. Elle prend en paramètre la partie de Uno
+	 * et le joueur à qui l'on déclare le bluff.
+	 * @param joueur
+	 * 		Le joueur accusé de bluff
+	 * @param partie 
+	 * 		La partie de Uno
+	 * @see Joueur#direBluff(Joueur, Partie)
+	 */
 	public void direBluff(Joueur joueur, Partie partie) 
 	{		
 		Carte carteAComparer = Talon.getInstance().getAvantDerniereCarte();
@@ -131,6 +155,11 @@ public class JoueurNormal extends Joueur {
 		}
 	}
 
+	/**
+	 * Implémentation de la méthode direUno de la classe Joueur.
+	 * Cette méthode définit la façon dont un joueur dit Uno.
+	 * @see Joueur#direUno()
+	 */
 	public void direUno() {
 		
 		int choix = obs.askUno();
@@ -141,11 +170,15 @@ public class JoueurNormal extends Joueur {
 			else
 				this.uno=false;
 		}
-
-		
-		
 	}
 
+	/**
+	 * Implémentation de la méthode direContreUno de la classe Joueur.
+	 * Cette méthode prend en paramètre la partie de Uno.
+	 * @param partie
+	 * 		La partie de Uno
+	 * @see Joueur#direContreUno(Partie)
+	 */
 	public void direContreUno(Partie partie) 
 	{
 		
@@ -156,6 +189,13 @@ public class JoueurNormal extends Joueur {
 		}
 	}
 
+	/**
+	 * Implémentation de la méthode direContreUno de la classe Joueur.
+	 * Cette méthode prend en paramètre le joueur accusé.
+	 * @param j
+	 * 		Le joueur accusé
+	 * @see Joueur#direContreUno(Joueur)
+	 */
 	public void direContreUno(Joueur j) {
 		
 		if( j.getNombreCarte() != 1 && j.getUno() == true) 
@@ -168,7 +208,10 @@ public class JoueurNormal extends Joueur {
 		}
 	}
 
-
+	/**
+	 * Cette méthode demande au joueur de choisir la nouvelle couleur.
+	 * @see Joueur#choisirCouleur()
+	 */
 	public void choisirCouleur() 
 	{
 		Talon.getInstance().setCouleurDerniereCarte(obs.askCouleur());
