@@ -74,7 +74,7 @@ public class RapportDActivite extends JPanel{
 		this.refresh();
 	}
 	
-	public void refreshscore(Joueur joueur)
+	/*public void refreshscore(Joueur joueur)
 	{
 		for(int i=0; i<this.nbreJoueur; i++)
 		{
@@ -86,7 +86,7 @@ public class RapportDActivite extends JPanel{
 			}
 		}
 		this.refresh();
-	}
+	}*/
 	
 	public void refreshscore(Partie partie)
 	{

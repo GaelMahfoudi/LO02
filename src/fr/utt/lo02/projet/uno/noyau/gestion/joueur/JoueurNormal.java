@@ -53,7 +53,14 @@ public class JoueurNormal extends Joueur {
 					Talon.getInstance().ajouterCarte(carteChoisie);
 					carteChoisie.appliquerRegle(partie);
 					if(carteChoisie.getSpecial() == ESpecial.JOKER && carteChoisie.getSpecial() == ESpecial.PLUS_QUATRE)
+					{
 						obs.askCouleur();
+					}
+					else if(Talon.getInstance().getDerniereCarte().getSpecial() == ESpecial.PASSE)
+					{
+						obs.notifyPasse(partie.getJoueur(partie.getJoueurActuel()));
+					}
+						
 					obs.notifyTour(this, choix);
 					this.direUno();
 					return;

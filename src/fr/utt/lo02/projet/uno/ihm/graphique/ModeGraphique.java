@@ -398,7 +398,7 @@ public class ModeGraphique extends JFrame implements View{
 		
 		if(joueur instanceof JoueurNormal)
 		{
-			JOptionPane.showMessageDialog(null, "Une carte Passe à été jouée, vous passez votre tour !", "Carte Passe", JOptionPane.INFORMATION_MESSAGE);
+			JOptionPane.showMessageDialog(null, "Une carte Passe à été jouée, vous passez votre tour " + joueur.afficherPseudo() + " !", "Carte Passe", JOptionPane.INFORMATION_MESSAGE);
 		}
 		
 	}
