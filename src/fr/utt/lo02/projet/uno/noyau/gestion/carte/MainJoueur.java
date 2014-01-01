@@ -8,29 +8,55 @@ import fr.utt.lo02.projet.uno.noyau.carte.Carte;
 import fr.utt.lo02.projet.uno.noyau.carte.ESpecial;
 
 /**
- *  MainJoueur hï¿½rite de PaquetDeCarte. Elle reprï¿½sente la main du joueur.
+ *  La classe MainJoueur représente la main d'un joueur de Uno.
  */
 public class MainJoueur {
-	/* {author=Victor Le Deuff Gaï¿½l Mahfoudi}*/
 
-
+	/**
+	 * L'attribut main est la liste des cartes du joueur.
+	 * @see MainJoueur#ajouterCarte(Carte)
+	 * @see MainJoueur#enleverCarte(int)
+	 * @see MainJoueur#getMain()
+	 * @see MainJoueur#getNombreCarte()
+	 * @see MainJoueur#reinitialiserMain()
+	 * @see MainJoueur#setMain(List)
+	 * @see MainJoueur#scoreMain()
+	 */
 	private List<Carte> main;
 	
+	
+	/**
+	 * Constructeur de la classe MainJoueur. Il instancie l'attribut main.
+	 */
 	public MainJoueur()
 	{
 		main = new ArrayList<Carte>();
 	}
 
+	/**
+	 * Cette méthode réinitialise la main du joueur, elle vide les cartes.
+	 */
 	public void reinitialiserMain()
 	{
 		this.main.clear();
 	}
 	
-	
+	/**
+	 * Cette méthode renvoie le nombre de carte dans la main.
+	 * @return
+	 * 		Renvoie un entier étant le nombre de carte du joueur
+	 */
 	public int getNombreCarte() {
 		return main.size();
 	}
 
+	/**
+	 * Cette méthode renvoie la carte à l'indice index.
+	 * @param index
+	 * 		L'index de la carte choisie
+	 * @return
+	 * 		Renvoie la carte choisie
+	 */
 	public Carte enleverCarte(int index) {
 		if(index<0 || index>main.size())
 		{
@@ -42,6 +68,11 @@ public class MainJoueur {
 		}
 	}
 
+	/**
+	 * Cette méthode calcule le score de la main.
+	 * @return
+	 * 		Renvoie un entier étant le score de la main.
+	 */
 	public int scoreMain() {
 		int score = 0;
 		for (int i=0; i< this.main.size(); i++)
@@ -59,19 +90,30 @@ public class MainJoueur {
 		return score;
 	}
 
+	/**
+	 * Cette méthode permet de rajouter une carte dans la main.
+	 * @param carte
+	 * 		La carte à ajouter
+	 */
 	public void ajouterCarte(Carte carte) {
 		main.add(carte);
 	}
 	
-	
+	/**
+	 * Cette méthode permet de récupérer la liste des cartes.
+	 * @return
+	 * 		Renvoie la liste des cartes
+	 */
 	public List<Carte> getMain() {
 		return main;
 	}
 
+	/**
+	 * Cette méthode permet de modifier la main.
+	 * @param main
+	 * 		La nouvelle main
+	 */
 	public void setMain(List<Carte> main) {
 		this.main = main;
 	}
-
-	
-
 }

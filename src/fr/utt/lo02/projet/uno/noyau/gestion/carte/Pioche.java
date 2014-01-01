@@ -5,16 +5,27 @@ import java.util.*;
 import fr.utt.lo02.projet.uno.noyau.carte.*;
 
 /**
- *  Pioche hï¿½rite de PaquetDeCarte. Elle reprï¿½sente la pioche. Elle n'est instanciï¿½e qu'une fois.
+ *  La classe Pioche permet de gérer la pioche du jeu de Uno. Cette classe suit le design pattern Singleton.
+ *  Elle n'est instanciée qu'une fois.
  */
 public class Pioche {
-	/* {author=Victor Le Deuff Gaï¿½l Mahfoudi}*/
 	
+	
+	/**
+	 * L'attribut listeCarte est la liste des cartes de la pioches.
+	 */
 	private Queue<Carte> listeCarte;
 	
+	/**
+	 * L'attribut pioche est l'unique instance de la classe pioche.
+	 * l'attibut est privé est accessible uniquement via la méthode getInstance
+	 * @see Pioche#getInstance()
+	 */
 	private static Pioche pioche = null;
 	
-	@SuppressWarnings("unchecked")
+	/**
+	 * Constructeur de la classe pioche. Il construit le jeu de carte du Uno.
+	 */
 	private Pioche(){
 		int i = 0;
 		
@@ -132,14 +143,29 @@ public class Pioche {
 		Collections.shuffle((List<Carte>) listeCarte);
 	}
 
+	/**
+	 * Cette méthode permet d'ajouter une carte à la pioche.
+	 * @param carte
+	 * 		La carte à ajouter.
+	 */
 	public void ajouterCarte(Carte carte) {
 		listeCarte.add(carte);
 	}
 
+	/**
+	 * Cette méthode renvoie le nombre de carte de la pioche.
+	 * @return
+	 * 		Renvoie un entier étant le nombre de carte
+	 */
 	public int getNombreCarte() {
 		return listeCarte.size();
 	}
 
+	/**
+	 * Cette méthode permet de retirer une carte de la pioche.
+	 * @return
+	 * 		Renvoie la carte retirée du paquet
+	 */
 	public Carte enleverCarte() {
 		
 		if(Pioche.getInstance().getNombreCarte() == 0 )
@@ -149,6 +175,11 @@ public class Pioche {
 		return listeCarte.poll();
 	}
 
+	/**
+	 * Cette méthode permet d récupérer l'unique instance de la classe Pioche.
+	 * @return
+	 * 		Renvoie l'unique instance de la classe Pioche
+	 */
 	public static Pioche getInstance() {
 		if(Pioche.pioche == null)
 		{
@@ -162,7 +193,9 @@ public class Pioche {
 	}
 	
 	
-	
+	/**
+	 * Cette méthode permet de réinitialiser l'instance de la classe Pioche.
+	 */
 	public static void reinitialiserPioche()
 	{
 		pioche = null;
