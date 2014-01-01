@@ -73,7 +73,7 @@ public class ParametrerPartie  extends JFrame implements ActionListener{
 			comboIA.addActionListener(this);
 			 
 			int nbreJoueur = nbreJoueurReel+nbreIA;
-			if(nbreJoueur > 0 && nbreJoueur < 10)
+			if(nbreJoueur > 0 && nbreJoueur <= 10)
 			{
 				nbreJoueurOk = true;
 				partie = new Partie(nbreJoueurReel, nbreIA, controller);
