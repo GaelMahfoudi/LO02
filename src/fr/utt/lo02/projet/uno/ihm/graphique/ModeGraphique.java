@@ -181,7 +181,7 @@ public class ModeGraphique extends JFrame implements View{
 	public void afficherFinManche(Partie p) {
 
 		this.cacherJeu();
-		rapport.refreshscore(p.getJoueur(p.getJoueurActuel()));;
+		rapport.refreshscore(p);
 		
 		JOptionPane.showMessageDialog(null, "La manche est finie, tenez vous prï¿½t !", "Fin de la manche", JOptionPane.WARNING_MESSAGE);
 		
@@ -395,24 +395,11 @@ public class ModeGraphique extends JFrame implements View{
 	
 	@Override
 	public void afficherPasse(Joueur joueur) {
-		// TODO Auto-generated method stub
+		
+		if(joueur instanceof JoueurNormal)
+		{
+			JOptionPane.showMessageDialog(null, "Une carte Passe à été jouée, vous passez votre tour !", "Carte Passe", JOptionPane.INFORMATION_MESSAGE);
+		}
 		
 	}
-
-
-
-
-
-
-
-	
-
-
-
-	
-
-
-
-	
-
 }

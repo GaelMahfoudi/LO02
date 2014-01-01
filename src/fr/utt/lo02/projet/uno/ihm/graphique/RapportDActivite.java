@@ -63,10 +63,10 @@ public class RapportDActivite extends JPanel{
 			{
 				if( joueur.getUno() )
 				{
-					joueurCarte[i] = joueur.afficherPseudo()+ ": " +joueur.getNombreCarte()+" restantes (uno)" ;
+					joueurCarte[i] = joueur.afficherPseudo()+ " : " +joueur.getNombreCarte()+" restantes (uno)" ;
 				}
 				else
-					joueurCarte[i] = joueur.afficherPseudo()+ ": " +joueur.getNombreCarte()+" restantes" ;
+					joueurCarte[i] = joueur.afficherPseudo()+ " : " +joueur.getNombreCarte()+" restantes" ;
 					
 				
 			}
@@ -81,9 +81,18 @@ public class RapportDActivite extends JPanel{
 				
 			if(scoreJoueurs[i].contains(joueur.afficherPseudo()))
 			{
-					scoreJoueurs[i] = joueur.afficherPseudo()+ ": " +joueur.getScore()+" points" ;
+					scoreJoueurs[i] = joueur.afficherPseudo()+ " : " +joueur.getScore()+" points" ;
 				
 			}
+		}
+		this.refresh();
+	}
+	
+	public void refreshscore(Partie partie)
+	{
+		for(int i=0; i<partie.getNbreJoueur(); i++)
+		{
+			scoreJoueurs[i] = partie.getJoueur(i).afficherPseudo() + " : " + partie.getJoueur(i).getScore()+" points" ;
 		}
 		this.refresh();
 	}
