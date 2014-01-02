@@ -42,6 +42,9 @@ public class MainJoueurPan extends JPanel implements ActionListener{
 		scroll = new JScrollPane(mainPane); 
 		scroll.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_NEVER); // Pas de barre verticale
 		scroll.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS); //Barre horizontale
+		scroll.setOpaque(false);
+		scroll.setBorder(null);
+		scroll.getViewport().setOpaque(false);
 		
 		   
 		joueur = null;
@@ -53,7 +56,7 @@ public class MainJoueurPan extends JPanel implements ActionListener{
 
 		}
 		this.add(scroll);
-		
+		this.setOpaque(false);
 	}
 
 	public void refresh(Joueur joueur) {
