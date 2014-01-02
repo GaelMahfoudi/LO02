@@ -49,6 +49,8 @@ public class Bouton extends JButton implements MouseListener
 		    g2d.drawString(this.name, this.getWidth() / 2 - (this.getWidth() / 2 /4), (this.getHeight() / 2) + 5);
 
 			this.setOpaque(false);
+			this.setContentAreaFilled(false);
+			this.setBorderPainted(false);
 	 }
 
 	@Override

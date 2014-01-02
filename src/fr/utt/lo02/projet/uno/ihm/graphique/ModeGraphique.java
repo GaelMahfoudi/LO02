@@ -3,12 +3,9 @@ package fr.utt.lo02.projet.uno.ihm.graphique;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
-<<<<<<< HEAD
-=======
 import java.awt.GradientPaint;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
->>>>>>> 01636b73004822c0cba186de720974f9fd67744c
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
