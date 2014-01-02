@@ -1,6 +1,7 @@
 package fr.utt.lo02.projet.uno.ihm.graphique;
 
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -19,14 +20,17 @@ public class OptionJeu extends JPanel implements ActionListener{
 	public OptionJeu(ModeGraphique mg)
 	{
 		this.mg=mg;
+		this.setPreferredSize(new Dimension(200,150));
 		this.setLayout(new GridLayout(3, 1));
-		this.direUno.setOpaque(false);
-		this.direUno.setContentAreaFilled(false);
-		this.direUno.setBorderPainted(false);
 		
+
 		this.direContreUno.setOpaque(false);
 		this.direContreUno.setContentAreaFilled(false);
 		this.direContreUno.setBorderPainted(false);
+		
+		this.direUno.setOpaque(false);
+		this.direUno.setContentAreaFilled(false);
+		this.direUno.setBorderPainted(false);
 		
 		this.pause.setOpaque(false);
 		this.pause.setContentAreaFilled(false);
