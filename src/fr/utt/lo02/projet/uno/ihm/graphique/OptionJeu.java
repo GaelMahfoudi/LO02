@@ -20,6 +20,17 @@ public class OptionJeu extends JPanel implements ActionListener{
 	{
 		this.mg=mg;
 		this.setLayout(new GridLayout(3, 1));
+		this.direUno.setOpaque(false);
+		this.direUno.setContentAreaFilled(false);
+		this.direUno.setBorderPainted(false);
+		
+		this.direContreUno.setOpaque(false);
+		this.direContreUno.setContentAreaFilled(false);
+		this.direContreUno.setBorderPainted(false);
+		
+		this.pause.setOpaque(false);
+		this.pause.setContentAreaFilled(false);
+		this.pause.setBorderPainted(false);
 		this.add(pause);
 		this.add(direUno);
 		this.add(direContreUno);
@@ -27,7 +38,7 @@ public class OptionJeu extends JPanel implements ActionListener{
 		direUno.addActionListener(this);
 		direContreUno.addActionListener(this);
 		this.setBorder(BorderFactory.createLineBorder(Color.black));
-
+		this.setOpaque(false);
 	}
 
 	
