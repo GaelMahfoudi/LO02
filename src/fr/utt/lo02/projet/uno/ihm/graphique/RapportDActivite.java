@@ -38,13 +38,16 @@ public class RapportDActivite extends JPanel{
         	joueurCarte[i] = partie.getJoueur(i).afficherPseudo()+ ": 5 restantes" ;
         	scoreJoueurs[i] = partie.getJoueur(i).afficherPseudo() + ": "+ partie.getJoueur(i).getScore() + " points";
         }
+		
 		this.refresh();
 	}
+	
 	private void personnaliser(JTextArea c) {
 
 		c.setOpaque(false);
 		c.setForeground(Color.white);
 		c.setFont(new Font("Arial", Font.BOLD, 18));
+		
 		c.setBorder(BorderFactory.createLineBorder(Color.black));
 
 	}

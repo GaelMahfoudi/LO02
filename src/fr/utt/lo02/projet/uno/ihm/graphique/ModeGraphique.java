@@ -433,16 +433,16 @@ public class ModeGraphique extends JFrame implements View, ActionListener{
 		int choix = -1;
 		String[] reponse = {"Nouvelle partie", "Quitter"};
 		while(choix == -1)
-			choix = JOptionPane.showOptionDialog(null, partie.getJoueur(partie.getJoueurActuel()).afficherPseudo()+" a remporté la partie! que souhaitez vous faire?", "Fin de la partie!", JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE, null, reponse, "echec");
-		if(choix == 1)
+		{
+			choix = JOptionPane.showConfirmDialog(null, partie.getJoueur(partie.getJoueurActuel()).afficherPseudo()+" a remporté la partie! Nouvelle partie ?", "Fin de la partie!", JOptionPane.YES_NO_OPTION);
+		}
+		if(choix == JOptionPane.NO_OPTION)
 			System.exit(0);
 		else
 			this.recommencerPartie();
 	}
 	
 
-
-	
 	private void recommencerPartie() {
 		this.dispose();
 		Partie.main(null);
