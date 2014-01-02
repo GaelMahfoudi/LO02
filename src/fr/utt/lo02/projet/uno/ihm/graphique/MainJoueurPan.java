@@ -1,6 +1,8 @@
 package fr.utt.lo02.projet.uno.ihm.graphique;
 
+import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
@@ -32,13 +34,16 @@ public class MainJoueurPan extends JPanel implements ActionListener{
 	public MainJoueurPan()
 	{
 		super();
+		this.setOpaque(false);
+		this.setLayout(new GridLayout(1,1));
 		anciennePosition=-1;
 		mainPane = new JPanel();
+		mainPane.setOpaque(false);
 		scroll = new JScrollPane(mainPane); 
-		scroll.setPreferredSize(new Dimension(5*lCarte, hCarte+30));
 		scroll.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_NEVER); // Pas de barre verticale
 		scroll.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS); //Barre horizontale
-		 
+		
+		   
 		joueur = null;
 		choix = -1;
 
@@ -55,10 +60,12 @@ public class MainJoueurPan extends JPanel implements ActionListener{
 		
 		 anciennePosition = -1;
 		 mainPane.removeAll();
+		 mainPane.setOpaque(false);
 		 main = new ArrayList<ImageCarte>();
 		 choix = -1;
-		 
 		 this.joueur = joueur;
+		 
+		 
 		 for (int i=0; i<joueur.getNombreCarte(); i++)
 		 {
              ImageCarte c = new ImageCarte(joueur.getMain().getMain().get(i)); 
@@ -101,8 +108,6 @@ public class MainJoueurPan extends JPanel implements ActionListener{
 	
 	private void addListeners(ImageCarte c) {
 			c.addActionListener(this);
-			c.setTransferHandler(new TransferHandler(" "));
-		
 	}
 
 	public void actionPerformed(ActionEvent e) {

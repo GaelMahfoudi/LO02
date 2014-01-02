@@ -24,6 +24,7 @@ public class ImageCarte extends JButton {
     {
 		
          this.carte = null;
+         this.setOpaque(false);
     	 this.setPreferredSize(new Dimension(lCarte, hCarte));
          this.image=new JLabel();
          this.image.setPreferredSize(new Dimension(ImageCarte.lCarte, ImageCarte.hCarte));
@@ -35,6 +36,7 @@ public class ImageCarte extends JButton {
     
 	public ImageCarte(Carte carte)
 	{
+		this.setOpaque(false);
 		 this.carte= carte;
 
          // dimension de la carte
