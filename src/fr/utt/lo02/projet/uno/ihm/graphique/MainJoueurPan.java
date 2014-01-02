@@ -7,6 +7,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
+import javax.swing.BorderFactory;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.TransferHandler;
@@ -34,6 +35,8 @@ public class MainJoueurPan extends JPanel implements ActionListener{
 	public MainJoueurPan()
 	{
 		super();
+
+		this.setBorder(BorderFactory.createLineBorder(Color.black));
 		this.setOpaque(false);
 		this.setLayout(new GridLayout(1,1));
 		anciennePosition=-1;

@@ -26,7 +26,10 @@ public class Bouton extends JButton implements MouseListener
 	public Bouton(String name)
 	{
 		super(name);
-		super.setOpaque(false);
+
+		this.setOpaque(false);
+		this.setContentAreaFilled(false);
+		this.setBorderPainted(false);
 		this.name = name;
 		this.setBorder(BorderFactory.createLineBorder(Color.black));
 		try {
