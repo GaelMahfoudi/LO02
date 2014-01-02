@@ -23,6 +23,7 @@ public class ModeConsole implements Observateur, View
 
 	public Partie partie;
 	public Scanner sc = new Scanner(System.in);
+	@SuppressWarnings("unused")
 	private Observateur obs;
 
 

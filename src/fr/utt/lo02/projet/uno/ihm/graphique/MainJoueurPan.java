@@ -1,7 +1,6 @@
 package fr.utt.lo02.projet.uno.ihm.graphique;
 
 import java.awt.Color;
-import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -10,7 +9,6 @@ import java.util.ArrayList;
 import javax.swing.BorderFactory;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
-import javax.swing.TransferHandler;
 
 import fr.utt.lo02.projet.uno.noyau.carte.Carte;
 import fr.utt.lo02.projet.uno.noyau.gestion.joueur.Joueur;
@@ -21,6 +19,10 @@ import fr.utt.lo02.projet.uno.noyau.gestion.joueur.Joueur;
 
 public class MainJoueurPan extends JPanel implements ActionListener{
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 8769487842894870766L;
 	public static final int hCarte=175;
 	public static final int lCarte=125;
 	private int choix;
@@ -28,8 +30,6 @@ public class MainJoueurPan extends JPanel implements ActionListener{
 	private ArrayList<ImageCarte> main; 
 	private JPanel mainPane;
 	private JScrollPane scroll;
-	private int anciennePosition;
-	private int nouvellePosition;
 	
 
 	public MainJoueurPan()
@@ -39,7 +39,6 @@ public class MainJoueurPan extends JPanel implements ActionListener{
 		this.setBorder(BorderFactory.createLineBorder(Color.black));
 		this.setOpaque(false);
 		this.setLayout(new GridLayout(1,1));
-		anciennePosition=-1;
 		mainPane = new JPanel();
 		mainPane.setOpaque(false);
 		scroll = new JScrollPane(mainPane); 
@@ -64,7 +63,6 @@ public class MainJoueurPan extends JPanel implements ActionListener{
 
 	public void refresh(Joueur joueur) {
 		
-		 anciennePosition = -1;
 		 mainPane.removeAll();
 		 mainPane.setOpaque(false);
 		 main = new ArrayList<ImageCarte>();
@@ -78,15 +76,6 @@ public class MainJoueurPan extends JPanel implements ActionListener{
              main.add(c);
              mainPane.add(c);
 		 }
-	}
-
-	//Cette methode permet de changer l'ordre des cartes
-	private void refreshOrdreMain() 
-	{
-		Carte carte = joueur.getMain().getMain().get(anciennePosition);
-		joueur.getMain().getMain().remove(anciennePosition);
-		joueur.getMain().getMain().add(nouvellePosition, carte);
-		this.refresh(joueur);
 	}
 
 	

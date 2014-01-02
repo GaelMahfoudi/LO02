@@ -12,6 +12,10 @@ import javax.swing.JPanel;
 
 public class OptionJeu extends JPanel implements ActionListener{
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -6041778679539547059L;
 	private Bouton direUno = new Bouton("Uno");
 	private Bouton direContreUno = new Bouton("Contre-uno");
 	private Bouton pause = new Bouton("Pause");

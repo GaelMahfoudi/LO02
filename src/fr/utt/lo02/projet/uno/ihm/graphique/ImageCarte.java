@@ -54,7 +54,7 @@ public class ImageCarte extends JButton {
 	{
 		if (carte == null)
 		{
-			ImageIcon img=new ImageIcon(this.pathImage + "/special/back.jpg");
+			ImageIcon img=new ImageIcon(ImageCarte.pathImage + "/special/back.jpg");
             Image i=img.getImage().getScaledInstance(ImageCarte.lCarte, ImageCarte.hCarte, Image.SCALE_DEFAULT);
             img.setImage(i);
             this.setIcon(img);
@@ -69,7 +69,7 @@ public class ImageCarte extends JButton {
 				String val = ImageCarte.getValeur(carte);
 	          
 	
-	            ImageIcon img=new ImageIcon(this.pathImage + "/" + couleur + "/" + val +".jpg");
+	            ImageIcon img=new ImageIcon(ImageCarte.pathImage + "/" + couleur + "/" + val +".jpg");
 	            Image i=img.getImage().getScaledInstance(ImageCarte.lCarte, ImageCarte.hCarte, Image.SCALE_DEFAULT);
 	            img.setImage(i);
 	
@@ -80,7 +80,7 @@ public class ImageCarte extends JButton {
 			{
 				String couleur=ImageCarte.getCouleur(carte);
 				String special = ImageCarte.getSpecial(carte);
-				ImageIcon img=new ImageIcon(this.pathImage + "/" + couleur + "/" + special +".jpg");
+				ImageIcon img=new ImageIcon(ImageCarte.pathImage + "/" + couleur + "/" + special +".jpg");
 	            Image i=img.getImage().getScaledInstance(ImageCarte.lCarte, ImageCarte.hCarte, Image.SCALE_DEFAULT);
 	            img.setImage(i);
 	

@@ -12,6 +12,10 @@ import fr.utt.lo02.projet.uno.noyau.gestion.joueur.Joueur;
 
 public class TableauDeBord extends JPanel{
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -937445359070340197L;
 	private JTextField info;
 	private int manche;
 	private String joueur;
@@ -29,6 +33,7 @@ public class TableauDeBord extends JPanel{
 		
 		info.setOpaque(false);
 		this.setOpaque(false);
+		info.setEditable(false);
 		info.setHorizontalAlignment(JTextField.CENTER);
 		info.setFont(new Font("Arial", Font.BOLD, 30));
 		info.setForeground(Color.white);

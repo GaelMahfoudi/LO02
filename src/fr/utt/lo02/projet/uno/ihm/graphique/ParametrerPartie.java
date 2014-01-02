@@ -1,6 +1,5 @@
 package fr.utt.lo02.projet.uno.ihm.graphique;
 
-import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.GradientPaint;
@@ -23,6 +22,10 @@ import fr.utt.lo02.projet.uno.noyau.gestion.partie.Partie;
 
 public class ParametrerPartie  extends JFrame implements ActionListener{
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 123317141480211943L;
 	private boolean nbreJoueurOk;
 	private JComboBox<?> comboIA;
 	private JComboBox<?> comboReel;
@@ -31,6 +34,7 @@ public class ParametrerPartie  extends JFrame implements ActionListener{
 	private int nbreIA;
 	
 
+	@SuppressWarnings("serial")
 	public ParametrerPartie()
 	{
 		nbreJoueurReel = 0;

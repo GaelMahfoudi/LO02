@@ -7,7 +7,6 @@ import java.util.List;
 import fr.utt.lo02.projet.uno.ihm.observer.*;
 import fr.utt.lo02.projet.uno.ihm.graphique.ModeGraphique;
 import fr.utt.lo02.projet.uno.noyau.carte.Carte;
-import fr.utt.lo02.projet.uno.noyau.carte.ESpecial;
 import fr.utt.lo02.projet.uno.noyau.gestion.carte.Pioche;
 import fr.utt.lo02.projet.uno.noyau.gestion.carte.Talon;
 import fr.utt.lo02.projet.uno.noyau.gestion.joueur.*;
@@ -47,6 +46,7 @@ public class Partie implements Observer{
 	/**
 	 * Entier repr�sentant le nombre de joueur virtuel
 	 */
+	@SuppressWarnings("unused")
 	private int nbreJoueurIA;
 
 	/**

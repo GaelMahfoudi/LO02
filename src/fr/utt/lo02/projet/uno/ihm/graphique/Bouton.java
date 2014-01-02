@@ -1,7 +1,6 @@
 package fr.utt.lo02.projet.uno.ihm.graphique;
 
 import java.awt.Color;
-import java.awt.Dimension;
 import java.awt.GradientPaint;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
@@ -16,6 +15,7 @@ import javax.swing.BorderFactory;
 import javax.swing.JButton;
 
 
+@SuppressWarnings("serial")
 public class Bouton extends JButton implements MouseListener
 {
 	

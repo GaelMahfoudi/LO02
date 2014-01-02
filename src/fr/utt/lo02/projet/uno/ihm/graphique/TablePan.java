@@ -1,20 +1,11 @@
 package fr.utt.lo02.projet.uno.ihm.graphique;
 
 import java.awt.Color;
-import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Font;
-import java.awt.GradientPaint;
-import java.awt.Graphics;
-import java.awt.Graphics2D;
-import java.awt.GridLayout;
-import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-
 import javax.swing.BorderFactory;
-import javax.swing.ImageIcon;
-import javax.swing.JComponent;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
@@ -23,6 +14,10 @@ import fr.utt.lo02.projet.uno.noyau.gestion.carte.Talon;
 
 public class TablePan extends JPanel implements ActionListener{
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 8312818601075105050L;
 	private JPanel pioche;
 	private JPanel talon;
 	private boolean choixPioche;

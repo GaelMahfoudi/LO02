@@ -9,7 +9,6 @@ import java.awt.Graphics2D;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.IOException;
 
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
@@ -31,6 +30,10 @@ import fr.utt.lo02.projet.uno.noyau.gestion.partie.Partie;
 
 public class ModeGraphique extends JFrame implements View, ActionListener{
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 5061274056292434902L;
 	public final static int hFenetre = 725;
 	public final static int lFenetre = 800;
 	private ParametrerPartie param;
@@ -57,6 +60,7 @@ public class ModeGraphique extends JFrame implements View, ActionListener{
 	  
 	  
 	  
+	@SuppressWarnings("serial")
 	public ModeGraphique()
 	{
 		
@@ -427,10 +431,8 @@ public class ModeGraphique extends JFrame implements View, ActionListener{
 	
 	
 	
-	@Override
 	public void afficherFinPartie(Partie p) {
 		int choix = -1;
-		String[] reponse = {"Nouvelle partie", "Quitter"};
 		while(choix == -1)
 		{
 			choix = JOptionPane.showConfirmDialog(null, partie.getJoueur(partie.getJoueurActuel()).afficherPseudo()+" a remporté la partie! Nouvelle partie ?", "Fin de la partie!", JOptionPane.YES_NO_OPTION);

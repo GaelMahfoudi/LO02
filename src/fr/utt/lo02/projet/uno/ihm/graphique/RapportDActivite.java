@@ -7,18 +7,10 @@ import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.GridLayout;
 import java.awt.Image;
-import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Paths;
-
-import javax.imageio.ImageIO;
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
-import javax.swing.JTextField;
 
 import fr.utt.lo02.projet.uno.noyau.gestion.joueur.Joueur;
 import fr.utt.lo02.projet.uno.noyau.gestion.partie.Partie;
@@ -26,6 +18,10 @@ import fr.utt.lo02.projet.uno.noyau.gestion.partie.Partie;
 public class RapportDActivite extends JPanel{
 
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -947703756535873129L;
 	private JTextArea nbreCarte;
 	private int nbreJoueur;
 	private String[] joueurCarte;
@@ -56,12 +52,21 @@ public class RapportDActivite extends JPanel{
 	private void personnaliser(JTextArea c) {
 
 		c.setOpaque(false);
-		c.setForeground(Color.white);
+		c.setForeground(Color.black);
 		c.setFont(new Font("Arial", Font.BOLD, 18));
-
+		c.setEditable(false);
 		c.setBorder(BorderFactory.createLineBorder(Color.black));
 
 	}
+	
+	public void paintComponent(Graphics g) {
+		Image img = new ImageIcon(ImageCarte.pathImage+ "/theme/FondScore.png").getImage();
+		Graphics2D g2d = (Graphics2D)g;
+	    GradientPaint gp = new GradientPaint(0, 0, Color.blue, 0, 20, Color.cyan, true);
+	    g2d.setPaint(gp);
+	    g2d.drawImage(img, 0, 0, 300, 600, this);
+	    
+	    }
 	public void refresh()
 	{
 		this.removeAll();

@@ -5,8 +5,8 @@ import java.util.*;
 import fr.utt.lo02.projet.uno.noyau.carte.*;
 
 /**
- *  La classe Pioche permet de gérer la pioche du jeu de Uno. Cette classe suit le design pattern Singleton.
- *  Elle n'est instanciée qu'une fois.
+ *  La classe Pioche permet de gï¿½rer la pioche du jeu de Uno. Cette classe suit le design pattern Singleton.
+ *  Elle n'est instanciï¿½e qu'une fois.
  */
 public class Pioche {
 	
@@ -18,7 +18,7 @@ public class Pioche {
 	
 	/**
 	 * L'attribut pioche est l'unique instance de la classe pioche.
-	 * l'attibut est privé est accessible uniquement via la méthode getInstance
+	 * l'attibut est privï¿½ est accessible uniquement via la mï¿½thode getInstance
 	 * @see Pioche#getInstance()
 	 */
 	private static Pioche pioche = null;
@@ -26,6 +26,7 @@ public class Pioche {
 	/**
 	 * Constructeur de la classe pioche. Il construit le jeu de carte du Uno.
 	 */
+	@SuppressWarnings("unchecked")
 	private Pioche(){
 		int i = 0;
 		
@@ -144,27 +145,27 @@ public class Pioche {
 	}
 
 	/**
-	 * Cette méthode permet d'ajouter une carte à la pioche.
+	 * Cette mï¿½thode permet d'ajouter une carte ï¿½ la pioche.
 	 * @param carte
-	 * 		La carte à ajouter.
+	 * 		La carte ï¿½ ajouter.
 	 */
 	public void ajouterCarte(Carte carte) {
 		listeCarte.add(carte);
 	}
 
 	/**
-	 * Cette méthode renvoie le nombre de carte de la pioche.
+	 * Cette mï¿½thode renvoie le nombre de carte de la pioche.
 	 * @return
-	 * 		Renvoie un entier étant le nombre de carte
+	 * 		Renvoie un entier ï¿½tant le nombre de carte
 	 */
 	public int getNombreCarte() {
 		return listeCarte.size();
 	}
 
 	/**
-	 * Cette méthode permet de retirer une carte de la pioche.
+	 * Cette mï¿½thode permet de retirer une carte de la pioche.
 	 * @return
-	 * 		Renvoie la carte retirée du paquet
+	 * 		Renvoie la carte retirï¿½e du paquet
 	 */
 	public Carte enleverCarte() {
 		
@@ -176,7 +177,7 @@ public class Pioche {
 	}
 
 	/**
-	 * Cette méthode permet d récupérer l'unique instance de la classe Pioche.
+	 * Cette mï¿½thode permet d rï¿½cupï¿½rer l'unique instance de la classe Pioche.
 	 * @return
 	 * 		Renvoie l'unique instance de la classe Pioche
 	 */
@@ -194,7 +195,7 @@ public class Pioche {
 	
 	
 	/**
-	 * Cette méthode permet de réinitialiser l'instance de la classe Pioche.
+	 * Cette mï¿½thode permet de rï¿½initialiser l'instance de la classe Pioche.
 	 */
 	public static void reinitialiserPioche()
 	{
