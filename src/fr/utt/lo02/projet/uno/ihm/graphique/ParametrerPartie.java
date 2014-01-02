@@ -37,7 +37,12 @@ public class ParametrerPartie  extends JFrame implements ActionListener{
 		nbreIA =0;
 		nbreJoueurOk = false;
 
-		this.setSize(300, 300);
+		this.setSize(300, 400);
+		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
+		this.setLocationRelativeTo(null);
+		this.setResizable(false);
+		this.setVisible(true);
+		
 		
 		this.setContentPane(new JPanel()
 		{
@@ -51,10 +56,7 @@ public class ParametrerPartie  extends JFrame implements ActionListener{
 			    }
 		});
 
-		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
-		this.setLocationRelativeTo(null);
-		this.setResizable(false);
-		this.setVisible(true);
+		
 		
 	}
 	 
@@ -97,17 +99,19 @@ public class ParametrerPartie  extends JFrame implements ActionListener{
 		this.setVisible(true);
 
 		nouvellePartie.addActionListener(this);
-		
+
+
 		while(!nbreJoueurOk)
 		{
 			comboReel.addActionListener(this);
 			comboIA.addActionListener(this);
-			 
+
 			int nbreJoueur = nbreJoueurReel+nbreIA;
 			if(nbreJoueur > 0 && nbreJoueur <= 10)
 			{
 				nbreJoueurOk = true;
 				partie = new Partie(nbreJoueurReel, nbreIA, controller);
+				
 			}
 		}
 		this.setVisible(false);

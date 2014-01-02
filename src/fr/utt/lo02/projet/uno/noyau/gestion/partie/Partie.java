@@ -25,32 +25,32 @@ public class Partie implements Observer{
 	private int manche;
 
 	/**
-	 * Entier gérant le sens de rotation d'une partie
+	 * Entier gï¿½rant le sens de rotation d'une partie
 	 * @see Partie#getSens()
 	 * @see Partie#setSens()
 	 */
 	private int sens;
 
 	/**
-	 * Entier représentant le nombre de joueur total
+	 * Entier reprï¿½sentant le nombre de joueur total
 	 * @see Partie#getNbreJoueur()
 	 * @see Partie#setNbreJoueur(int)
 	 */
 	private int nbreJoueur;
 	
 	/**
-	 * Entier représentant le nombre de joueur réel
+	 * Entier reprï¿½sentant le nombre de joueur rï¿½el
 	 * @see Partie#getNbreJoueurReel()
 	 */
 	private int nbreJoueurReel;
 	
 	/**
-	 * Entier représentant le nombre de joueur virtuel
+	 * Entier reprï¿½sentant le nombre de joueur virtuel
 	 */
 	private int nbreJoueurIA;
 
 	/**
-	 * Entier repésentant l'indice du joueur actuel
+	 * Entier repï¿½sentant l'indice du joueur actuel
 	 * @see Partie#getJoueurActuel()
 	 * @see Partie#setJoueurActuel(int)
 	 */
@@ -74,10 +74,10 @@ public class Partie implements Observer{
 	
 	/**
 	 * Constructeur d'une partie de uno.
-	 * Il prend en paramètre le nombre de joueurs réels, Le nombre de 
+	 * Il prend en paramï¿½tre le nombre de joueurs rï¿½els, Le nombre de 
 	 * joueurs virtuels ainsi que le UnoController de la partie.
 	 * @param nbJoueur
-	 * 			C'est le nombre de joueur réel
+	 * 			C'est le nombre de joueur rï¿½el
 	 * @param nbIA
 	 * 			C'est le nombre de joueur virtuel
 	 * @param obs
@@ -112,8 +112,8 @@ public class Partie implements Observer{
 	
 	
 	/**
-	 * Cette méthode distribue les cartes au différents joueurs de la partie.
-	 * Elle permet aussi de poser la première carte sur le talon en prenant garde de ne pas
+	 * Cette mï¿½thode distribue les cartes au diffï¿½rents joueurs de la partie.
+	 * Elle permet aussi de poser la premiï¿½re carte sur le talon en prenant garde de ne pas
 	 * mettre une carte Plus Quatre ou Joker
 	 */
 	public void distribuerCarte() {
@@ -140,11 +140,11 @@ public class Partie implements Observer{
 	
 	
 	/**
-	 * Cette méthode vérifie si il y a un gagnant dans la manche actuel. Elle vérifie
-	 * si un joueur possède 0 carte.
+	 * Cette mï¿½thode vï¿½rifie si il y a un gagnant dans la manche actuel. Elle vï¿½rifie
+	 * si un joueur possï¿½de 0 carte.
 	 * 
 	 * @return
-	 * 		La méthode renvoie un boolean valant true en cas de gagnant et false sinon
+	 * 		La mï¿½thode renvoie un boolean valant true en cas de gagnant et false sinon
 	 */
 	public boolean verifierGagnantManche() {
 
@@ -160,11 +160,11 @@ public class Partie implements Observer{
 	
 	
 	/**
-	 * Cette méthode vérifie si il y a un gagnant à la partie actuel.
-	 * Elle vérifie si un joueur a plus de 500 points.
+	 * Cette mï¿½thode vï¿½rifie si il y a un gagnant ï¿½ la partie actuel.
+	 * Elle vï¿½rifie si un joueur a plus de 500 points.
 	 * 
 	 * @return
-	 * 		La méthode renvoie true si il y a un gagnant et false sinon
+	 * 		La mï¿½thode renvoie true si il y a un gagnant et false sinon
 	 */
 	public boolean verifierGagnantPartie()
 	{
@@ -180,7 +180,7 @@ public class Partie implements Observer{
 	
 	
 	/**
-	 * Cette méthode déroule une manche tant qu'aucun joueur n'ai posé toute ses cartes.
+	 * Cette mï¿½thode dï¿½roule une manche tant qu'aucun joueur n'ai posï¿½ toute ses cartes.
 	 */
 	public void deroulerManche()
 	{
@@ -216,7 +216,7 @@ public class Partie implements Observer{
 	
 	
 	/**
-	 * Cette méthode déroule une partie tant qu'aucun joueur n'ai plus de 500 points
+	 * Cette mï¿½thode dï¿½roule une partie tant qu'aucun joueur n'ai plus de 500 points
 	 */
 	public void deroulerPartie() 
 	{
@@ -232,7 +232,7 @@ public class Partie implements Observer{
 
 
 	/**
-	 * Cette méthode calcule et renvoie le prochain joueur qui doit jouer
+	 * Cette mï¿½thode calcule et renvoie le prochain joueur qui doit jouer
 	 */
 	public void nextJoueur() {
 		joueurActuel = Math.abs((joueurActuel+sens)%nbreJoueur);
@@ -240,7 +240,7 @@ public class Partie implements Observer{
 
 
 	/**
-	 * Cette méthode renvoie un entier représentant le sens de rotation de la partie
+	 * Cette mï¿½thode renvoie un entier reprï¿½sentant le sens de rotation de la partie
 	 * @return
 	 * 		Renvoie 1 pour le sens horraire et -1 pour le sens anti-horraire
 	 */
@@ -250,14 +250,14 @@ public class Partie implements Observer{
 
 	
 	/**
-	 * Cette méthode change le sens de rotation d'une partie.
+	 * Cette mï¿½thode change le sens de rotation d'une partie.
 	 */
 	public  void setSens() {
 		this.sens *= -1;
 	}
 
 	/**
-	 * Cette méthode actualise le joueur qui doit joueur
+	 * Cette mï¿½thode actualise le joueur qui doit joueur
 	 * @param joueurActuel
 	 * 		Le nouveau joueur devant jouer
 	 */
@@ -267,9 +267,9 @@ public class Partie implements Observer{
 
 
 	/**
-	 * Cette méthode récupère le joueur à l'index index dans la liste des joueurs
+	 * Cette mï¿½thode rï¿½cupï¿½re le joueur ï¿½ l'index index dans la liste des joueurs
 	 * @param index
-	 * 		L'index du joueur que l'on veut récupérer
+	 * 		L'index du joueur que l'on veut rï¿½cupï¿½rer
 	 * @return
 	 * 		Renvoie le joueur voulu
 	 */
@@ -278,7 +278,7 @@ public class Partie implements Observer{
 	}
 
 	/**
-	 * Cette méthode renvoie le joueur actuellement en train de jouer
+	 * Cette mï¿½thode renvoie le joueur actuellement en train de jouer
 	 * @return
 	 * 		Renvoie l'indice du joueur actuel
 	 */
@@ -289,9 +289,9 @@ public class Partie implements Observer{
 
 	
 	/**
-	 * Cette méthode renvoie le nombre de joueur de la partie actuelle
+	 * Cette mï¿½thode renvoie le nombre de joueur de la partie actuelle
 	 * @return
-	 * 		Renvoie un entier représentant le nombre de joueur actuel
+	 * 		Renvoie un entier reprï¿½sentant le nombre de joueur actuel
 	 */
 	public int getNbreJoueur()
 	{
@@ -299,7 +299,7 @@ public class Partie implements Observer{
 	}
 	
 	/**
-	 * Cette méthode permet de régler le nombre de joueur de la partie
+	 * Cette mï¿½thode permet de rï¿½gler le nombre de joueur de la partie
 	 * @param nbreJoueur
 	 * 		Le nouveau nombre de joueur
 	 */
@@ -309,7 +309,7 @@ public class Partie implements Observer{
 	}
 	
 	/**
-	 * Cette méthode renvoie la liste des joueurs de la partie
+	 * Cette mï¿½thode renvoie la liste des joueurs de la partie
 	 * @return
 	 * 		Renvoie un ArrayList comprennant les joueurs de la partie
 	 */
@@ -320,7 +320,6 @@ public class Partie implements Observer{
 
 	public static void main(String[] args)
 	{
-		//ModeConsole c = new ModeConsole();
 		ModeGraphique g = new ModeGraphique();
 		UnoController controller = new UnoController(g);
 		
@@ -329,17 +328,17 @@ public class Partie implements Observer{
 	}
 	
     /**
-     * Cette méthode renvoie la manche actuelle
+     * Cette mï¿½thode renvoie la manche actuelle
      * @return
-     * 			Renvoie un entier représentant la manche actuelle
+     * 			Renvoie un entier reprï¿½sentant la manche actuelle
      */
 	public int getManche() {
 		return manche;
 	}
 
 	/**
-	 * Cette méthode permet de rajouter un observateur à la partie.
-	 * Cette observateur peut être un UnoControleur.
+	 * Cette mï¿½thode permet de rajouter un observateur ï¿½ la partie.
+	 * Cette observateur peut ï¿½tre un UnoControleur.
 	 * 
 	 * @see Observateur
 	 * @see UnoController
@@ -349,7 +348,7 @@ public class Partie implements Observer{
 	}
 	
 	/**
-	 * Cette méthode permet de renvoyer l'observateur de la partie.
+	 * Cette mï¿½thode permet de renvoyer l'observateur de la partie.
 	 * @return
 	 * 		Renvoie l'observateur de la partie
 	 * 
@@ -363,9 +362,9 @@ public class Partie implements Observer{
 
 	
 	/**
-	 * Cette méthode retourne le nombre de joueur réel
+	 * Cette mï¿½thode retourne le nombre de joueur rï¿½el
 	 * @return
-	 * 		Renvoie un entier étant le nombre de joueur réel
+	 * 		Renvoie un entier ï¿½tant le nombre de joueur rï¿½el
 	 */
 	public int getNbreJoueurReel() {
 		// TODO Auto-generated method stub
