@@ -30,7 +30,7 @@ public class RapportDActivite extends JPanel{
 		for(int i= 0; i< partie.getNbreJoueur(); i++)
         {
         	joueurCarte[i] = partie.getJoueur(i).afficherPseudo()+ ": 5 restantes" ;
-        	scoreJoueurs[i] = partie.getJoueur(i).getScore() + " points";
+        	scoreJoueurs[i] = partie.getJoueur(i).afficherPseudo() + ": "+ partie.getJoueur(i).getScore() + " points";
         }
 		this.refresh();
 	}

@@ -4,7 +4,6 @@ import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -19,7 +18,7 @@ public class ParametrerPartie  extends JFrame implements ActionListener{
 	private boolean nbreJoueurOk;
 	private JComboBox<?> comboIA;
 	private JComboBox<?> comboReel;
-	private JButton nouvellePartie;
+	private Bouton nouvellePartie;
 	private int nbreJoueurReel;
 	private int nbreIA;
 	
@@ -59,7 +58,7 @@ public class ParametrerPartie  extends JFrame implements ActionListener{
 		 this.getContentPane().add(panIA);
 		
 		 //Bouton de validation
-		 nouvellePartie = new JButton("Lancer la partie");
+		 nouvellePartie = new Bouton("Lancer la partie");
 		 
 		 this.getContentPane().add(nouvellePartie);
 		 

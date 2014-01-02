@@ -17,7 +17,7 @@ public class ImageCarte extends JButton {
 	public static final int hCarte=175;
     public static final int lCarte=108;
     private Carte carte;
-    private final String pathImage ="./src/fr/utt/lo02/projet/uno/ihm/uno_images";
+    public static final String pathImage ="./src/fr/utt/lo02/projet/uno/ihm/uno_images";
     private JLabel image;
     
     public ImageCarte()
