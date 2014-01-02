@@ -215,8 +215,7 @@ public class ModeGraphique extends JFrame implements View, ActionListener{
 	{
 		main.vider();
 		this.repaint();
-		
-		
+		this.setVisible(true);
 	}
 	
 	public void afficherFinManche(Partie p) {
@@ -250,6 +249,7 @@ public class ModeGraphique extends JFrame implements View, ActionListener{
 			else
 				JOptionPane.showMessageDialog(null, " Appuyez sur ok lorsque vous serez pret", ("Au tour de "+ (String)partie.getJoueur(joueurSuivant).afficherPseudo()), JOptionPane.WARNING_MESSAGE);
 		}
+		this.repaint();
 	
 	}
 

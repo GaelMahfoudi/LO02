@@ -31,6 +31,7 @@ public class OptionJeu extends JPanel implements ActionListener{
 		this.pause.setOpaque(false);
 		this.pause.setContentAreaFilled(false);
 		this.pause.setBorderPainted(false);
+		
 		this.add(pause);
 		this.add(direUno);
 		this.add(direContreUno);
