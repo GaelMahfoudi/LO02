@@ -249,7 +249,6 @@ public class ModeGraphique extends JFrame implements View, ActionListener{
 			else
 				JOptionPane.showMessageDialog(null, " Appuyez sur ok lorsque vous serez pret", ("Au tour de "+ (String)partie.getJoueur(joueurSuivant).afficherPseudo()), JOptionPane.WARNING_MESSAGE);
 		}
-		this.repaint();
 	
 	}
 
