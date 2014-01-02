@@ -52,10 +52,10 @@ public class RapportDActivite extends JPanel{
 	private void personnaliser(JTextArea c) {
 
 		c.setOpaque(false);
-		c.setForeground(Color.black);
-		c.setFont(new Font("Arial", Font.BOLD, 18));
+		c.setForeground(Color.white);
+		c.setFont(new Font("Comic", Font.BOLD, 18));
 		c.setEditable(false);
-		c.setBorder(BorderFactory.createLineBorder(Color.black));
+		c.setBorder(BorderFactory.createLineBorder(Color.white));
 
 	}
 	
@@ -64,7 +64,7 @@ public class RapportDActivite extends JPanel{
 		Graphics2D g2d = (Graphics2D)g;
 	    GradientPaint gp = new GradientPaint(0, 0, Color.blue, 0, 20, Color.cyan, true);
 	    g2d.setPaint(gp);
-	    g2d.drawImage(img, 0, 0, 300, 600, this);
+	    g2d.drawImage(img, 0, 0, this.getWidth(),  this.getHeight(), this);
 	    
 	    }
 	public void refresh()

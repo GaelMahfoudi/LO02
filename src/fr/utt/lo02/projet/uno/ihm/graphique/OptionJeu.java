@@ -46,7 +46,7 @@ public class OptionJeu extends JPanel implements ActionListener{
 		pause.addActionListener(this);
 		direUno.addActionListener(this);
 		direContreUno.addActionListener(this);
-		this.setBorder(BorderFactory.createLineBorder(Color.black));
+		this.setBorder(BorderFactory.createLineBorder(Color.white));
 		this.setOpaque(false);
 	}
 

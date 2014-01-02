@@ -37,7 +37,7 @@ public class TableauDeBord extends JPanel{
 		info.setHorizontalAlignment(JTextField.CENTER);
 		info.setFont(new Font("Arial", Font.BOLD, 30));
 		info.setForeground(Color.white);
-		info.setBorder(BorderFactory.createLineBorder(Color.black));
+		info.setBorder(BorderFactory.createLineBorder(Color.white));
 
 		
 		

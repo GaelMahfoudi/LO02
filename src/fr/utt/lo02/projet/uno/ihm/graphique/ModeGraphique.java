@@ -7,14 +7,9 @@ import java.awt.GradientPaint;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Image;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
-import javax.swing.JMenu;
-import javax.swing.JMenuBar;
-import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
@@ -28,7 +23,7 @@ import fr.utt.lo02.projet.uno.noyau.gestion.joueur.Joueur;
 import fr.utt.lo02.projet.uno.noyau.gestion.joueur.JoueurNormal;
 import fr.utt.lo02.projet.uno.noyau.gestion.partie.Partie;
 
-public class ModeGraphique extends JFrame implements View, ActionListener{
+public class ModeGraphique extends JFrame implements View{
 
 	/**
 	 * 
@@ -46,18 +41,7 @@ public class ModeGraphique extends JFrame implements View, ActionListener{
 	private Observateur obs;
 	public Joueur joueurActuel;
 	
-	//Pour la barre de menu
-	private JMenuBar menuBar = new JMenuBar();
-	  private JMenu fichier = new JMenu("Fichier");
-	  private JMenu aPropos = new JMenu("A propos");
-	  private JMenuItem sauverPartie = new JMenuItem("Sauvegarder la partie");
-	  private JMenuItem chargerPartie = new JMenuItem("Charger une partie");
-	  private JMenuItem nouvellePartie = new JMenuItem("Nouvelle partie");
-	  private JMenuItem aProposItem = new JMenuItem("a propos");
-	  private JMenuItem quitter = new JMenuItem("Quitter");
-
-	 
-	  
+	
 	  
 	  
 	@SuppressWarnings("serial")
@@ -84,41 +68,12 @@ public class ModeGraphique extends JFrame implements View, ActionListener{
 		
 		this.getContentPane().setLayout(new BorderLayout());
 		
-		//Pour la barre de menu
-		menu();
+	
 		
 	}
 	
 
-	private void menu() {
-		//On initialise nos menus 
-				this.fichier.add(nouvellePartie);
-				nouvellePartie.addActionListener(this);
-				    
-			    this.fichier.add(chargerPartie);
-			    this.fichier.add(sauverPartie);
-			    sauverPartie.addActionListener(this);
-			    //Ajout d'un séparateur
-			    this.fichier.addSeparator();
-			    this.fichier.add(quitter);
-			    quitter.addActionListener(new ActionListener(){
-			      public void actionPerformed(ActionEvent arg0) {
-			        System.exit(0);
-			      }        
-			    });
-			    this.aPropos.add(aProposItem);
-			    aProposItem.addActionListener(new ActionListener(){
-				      public void actionPerformed(ActionEvent arg0) {
-				    	  JOptionPane.showMessageDialog(null, "Uno réalisé par Gael et Victor dans le cadre de LO02", "A propos", JOptionPane.WARNING_MESSAGE);
-				  		
-				      }        
-				    });
-				    
-			    this.menuBar.add(fichier);
-			    this.menuBar.add(aPropos);
-			    this.setJMenuBar(menuBar);
-	}
-
+	
 
 	public void paintComponent(Graphics g){
         super.paintComponents(g);
@@ -458,23 +413,4 @@ public class ModeGraphique extends JFrame implements View, ActionListener{
 	}
 
 
-	public void actionPerformed(ActionEvent e) {
-		if(e.getSource().equals(nouvellePartie))
-		{
-			int option = JOptionPane.showConfirmDialog(null, "Voulez vous vraiment lancer une nouvelle partie?", "Nouvelle partie", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE );
-			if(option == JOptionPane.OK_OPTION)
-			{
-				this.recommencerPartie();
-			}
-		}
-		else if(e.getSource().equals(sauverPartie))
-		{
-			this.sauverPartie();
-		}
-	}
-
-
-	private void sauverPartie() {
-		// TODO Auto-generated method stub
-	}
 }

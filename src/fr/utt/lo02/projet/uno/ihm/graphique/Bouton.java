@@ -31,7 +31,7 @@ public class Bouton extends JButton implements MouseListener
 		this.setContentAreaFilled(false);
 		this.setBorderPainted(false);
 		this.name = name;
-		this.setBorder(BorderFactory.createLineBorder(Color.black));
+		this.setBorder(BorderFactory.createLineBorder(Color.white));
 		try {
 		      img = ImageIO.read(new File(ImageCarte.pathImage+ "/theme/bouton.png"));
 		    } catch (IOException e) {

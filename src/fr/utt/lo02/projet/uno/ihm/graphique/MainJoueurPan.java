@@ -36,7 +36,7 @@ public class MainJoueurPan extends JPanel implements ActionListener{
 	{
 		super();
 
-		this.setBorder(BorderFactory.createLineBorder(Color.black));
+		this.setBorder(BorderFactory.createLineBorder(Color.white));
 		this.setOpaque(false);
 		this.setLayout(new GridLayout(1,1));
 		mainPane = new JPanel();

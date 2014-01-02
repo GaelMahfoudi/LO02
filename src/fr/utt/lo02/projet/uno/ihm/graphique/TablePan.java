@@ -31,7 +31,7 @@ public class TablePan extends JPanel implements ActionListener{
 		setChoixPioche(false);
 		this.setLayout(new FlowLayout());
 		this.setOpaque(false);
-		this.setBorder(BorderFactory.createLineBorder(Color.black));
+		this.setBorder(BorderFactory.createLineBorder(Color.white));
 		
 		
 	
