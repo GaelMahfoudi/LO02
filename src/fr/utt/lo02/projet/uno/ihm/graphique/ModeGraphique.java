@@ -2,6 +2,7 @@ package fr.utt.lo02.projet.uno.ihm.graphique;
 
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -140,7 +141,6 @@ public class ModeGraphique extends JFrame implements View{
 				main.refresh(joueurActuel);
 				//Rafraichissement du rapport d'activité
 				rapport.refresh();
-				
 				
 				this.repaint();
 				this.setVisible(true);
