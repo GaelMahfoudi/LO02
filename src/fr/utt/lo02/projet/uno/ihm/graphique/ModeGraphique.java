@@ -184,7 +184,6 @@ public class ModeGraphique extends JFrame implements View, ActionListener{
 				//Rafraichissement du rapport d'activité
 				rapport.refresh();
 				
-				
 				this.repaint();
 				this.setVisible(true);
 	}
