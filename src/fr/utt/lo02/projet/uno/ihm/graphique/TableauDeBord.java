@@ -1,5 +1,10 @@
 package fr.utt.lo02.projet.uno.ihm.graphique;
 
+import java.awt.Color;
+import java.awt.Font;
+import java.awt.GridLayout;
+
+import javax.swing.BorderFactory;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
@@ -17,9 +22,19 @@ public class TableauDeBord extends JPanel{
 		this.joueur = " ";
 		this.refresh();
 		this.add(info);
+		this.personnaliser();
 	}
 	private void personnaliser() {
 		// TODO gerer la police, la taille &co
+		
+		info.setOpaque(false);
+		this.setOpaque(false);
+		info.setHorizontalAlignment(JTextField.CENTER);
+		info.setFont(new Font("Arial", Font.BOLD, 30));
+		info.setForeground(Color.white);
+		info.setBorder(BorderFactory.createLineBorder(Color.black));
+
+		
 		
 	}
 	public void setManche(int manche) 
@@ -35,7 +50,9 @@ public class TableauDeBord extends JPanel{
 	public void refresh()
 	{
 		info = new JTextField("Manche "+ manche+": \n Au tour de " + joueur);
+		this.personnaliser();
 		this.removeAll();
+		this.setLayout(new GridLayout(1,1));
 		this.add(info);
 		
 		this.repaint();

@@ -1,6 +1,7 @@
 package fr.utt.lo02.projet.uno.ihm.graphique;
 
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.GradientPaint;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
@@ -11,6 +12,7 @@ import java.io.File;
 import java.io.IOException;
 
 import javax.imageio.ImageIO;
+import javax.swing.BorderFactory;
 import javax.swing.JButton;
 
 
@@ -24,12 +26,15 @@ public class Bouton extends JButton implements MouseListener
 	public Bouton(String name)
 	{
 		super(name);
+		this.setOpaque(false);
 		this.name = name;
+		this.setBorder(BorderFactory.createLineBorder(Color.black));
 		try {
-		      img = ImageIO.read(new File(ImageCarte.pathImage+ "/theme/bouton.jpg"));
+		      img = ImageIO.read(new File(ImageCarte.pathImage+ "/theme/bouton.png"));
 		    } catch (IOException e) {
 		      e.printStackTrace();
 		    }
+		this.setOpaque(false);
 		this.addMouseListener(this);
 	}
 	
@@ -42,7 +47,9 @@ public class Bouton extends JButton implements MouseListener
 		    g2d.drawImage(img, 0, 0, this.getWidth(), this.getHeight(), this);
 		    g2d.setColor(Color.black);
 		    g2d.drawString(this.name, this.getWidth() / 2 - (this.getWidth() / 2 /4), (this.getHeight() / 2) + 5);
-		  }
+
+			this.setOpaque(false);
+	 }
 
 	@Override
 	public void mouseClicked(MouseEvent arg0) {
@@ -54,7 +61,7 @@ public class Bouton extends JButton implements MouseListener
 	public void mouseEntered(MouseEvent arg0) {
 		// TODO Auto-generated method stub
 		try {
-		      img = ImageIO.read(new File(ImageCarte.pathImage+ "/theme/boutonEntered.jpg"));
+		      img = ImageIO.read(new File(ImageCarte.pathImage+ "/theme/boutonEntered.png"));
 		    } catch (IOException e) {
 		      e.printStackTrace();
 		    }
@@ -65,7 +72,7 @@ public class Bouton extends JButton implements MouseListener
 	public void mouseExited(MouseEvent arg0) {
 		// TODO Auto-generated method stub
 		try {
-		      img = ImageIO.read(new File(ImageCarte.pathImage+ "/theme/bouton.jpg"));
+		      img = ImageIO.read(new File(ImageCarte.pathImage+ "/theme/bouton.png"));
 		    } catch (IOException e) {
 		      e.printStackTrace();
 		    }
@@ -74,13 +81,18 @@ public class Bouton extends JButton implements MouseListener
 
 	@Override
 	public void mousePressed(MouseEvent arg0) {
-		// TODO Auto-generated method stub
+		try {
+		      img = ImageIO.read(new File(ImageCarte.pathImage+ "/theme/boutonPressed.png"));
+		    } catch (IOException e) {
+		      e.printStackTrace();
+		    }
+			this.repaint();
 		
 	}
 
 	@Override
 	public void mouseReleased(MouseEvent arg0) {
 		// TODO Auto-generated method stub
-		
+		this.mouseExited(arg0);
 	}
 }

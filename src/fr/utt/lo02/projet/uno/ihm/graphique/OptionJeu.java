@@ -1,17 +1,19 @@
 package fr.utt.lo02.projet.uno.ihm.graphique;
 
+import java.awt.Color;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import javax.swing.BorderFactory;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 public class OptionJeu extends JPanel implements ActionListener{
 
-	private Bouton direUno = new Bouton("Dire Uno");
-	private Bouton direContreUno = new Bouton("Dire contre-uno");
-	private Bouton pause = new Bouton("Mettre le jeu en pause");
+	private Bouton direUno = new Bouton("Uno");
+	private Bouton direContreUno = new Bouton("Contre-uno");
+	private Bouton pause = new Bouton("Pause");
 	private ModeGraphique mg;
 	
 	public OptionJeu(ModeGraphique mg)
@@ -24,6 +26,8 @@ public class OptionJeu extends JPanel implements ActionListener{
 		pause.addActionListener(this);
 		direUno.addActionListener(this);
 		direContreUno.addActionListener(this);
+		this.setBorder(BorderFactory.createLineBorder(Color.black));
+
 	}
 
 	

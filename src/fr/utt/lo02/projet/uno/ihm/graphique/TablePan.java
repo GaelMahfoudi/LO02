@@ -1,12 +1,23 @@
 package fr.utt.lo02.projet.uno.ihm.graphique;
 
+import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.FlowLayout;
+import java.awt.Font;
+import java.awt.GradientPaint;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
 import java.awt.GridLayout;
+import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import javax.swing.BorderFactory;
+import javax.swing.ImageIcon;
+import javax.swing.JComponent;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JTextField;
 
 import fr.utt.lo02.projet.uno.noyau.gestion.carte.Talon;
 
@@ -24,24 +35,41 @@ public class TablePan extends JPanel implements ActionListener{
 	{
 		setChoixPioche(false);
 		this.setLayout(new FlowLayout());
+		this.setOpaque(false);
+		this.setBorder(BorderFactory.createLineBorder(Color.black));
 		
+		
+	
 		pioche = new JPanel();
-		pioche.setLayout(new GridLayout(2,1));
+		pioche.setOpaque(false);
+		pioche.setLayout(new FlowLayout());
 		labelPioche = new JLabel("Piocher");
+		personnaliser(labelPioche);
 		cartePioche = new ImageCarte();
 		this.pioche.add(cartePioche);
 		this.pioche.add(labelPioche);
 		this.add(pioche);
 		
+		
 		talon = new JPanel();
-		talon.setLayout(new GridLayout(2,1));
-		labelTalon = new JLabel("Carte du Talon");
+		talon.setOpaque(false);
+		talon.setLayout(new FlowLayout());
+		labelTalon = new JLabel("Talon");
+		personnaliser(labelTalon);
 		carteTalon = new ImageCarte();
 		this.add(talon);
+
+		
 		
 		
 	}
-	
+	public void personnaliser (JLabel c)
+	{
+		c.setOpaque(false);
+		c.setForeground(Color.white);
+		c.setFont(new Font("Arial", Font.BOLD, 20));
+		c.setHorizontalAlignment(JTextField.CENTER);
+	}
 	public void refresh()
 	{
 		setChoixPioche(false);

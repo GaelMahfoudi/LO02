@@ -2,9 +2,14 @@ package fr.utt.lo02.projet.uno.ihm.graphique;
 
 
 import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.GradientPaint;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
 
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
@@ -12,6 +17,7 @@ import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 
 import fr.utt.lo02.projet.uno.ihm.observer.Observateur;
 import fr.utt.lo02.projet.uno.ihm.observer.UnoController;
@@ -23,7 +29,7 @@ import fr.utt.lo02.projet.uno.noyau.gestion.partie.Partie;
 
 public class ModeGraphique extends JFrame implements View{
 
-	public final static int hFenetre = 700;
+	public final static int hFenetre = 725;
 	public final static int lFenetre = 800;
 	private ParametrerPartie param;
 	private MainJoueurPan main;
@@ -56,13 +62,25 @@ public class ModeGraphique extends JFrame implements View{
 		this.setSize(lFenetre, hFenetre);
 		this.setLocationRelativeTo(null);
 		this.setResizable(false);
-		this.setLayout(new BorderLayout());
+		
+		this.setContentPane(new JPanel()
+		{
+			private Image img = new ImageIcon(ImageCarte.pathImage+ "/theme/FondUno.png").getImage();
+				public void paintComponent(Graphics g) {
+				Graphics2D g2d = (Graphics2D)g;
+			    GradientPaint gp = new GradientPaint(0, 0, Color.blue, 0, 20, Color.cyan, true);
+			    g2d.setPaint(gp);
+			    g2d.drawImage(img, 0, 0, this.getWidth(), this.getHeight(), this);
+			    
+			    }
+		});
+		
+		this.getContentPane().setLayout(new BorderLayout());
 		
 		//Pour la barre de menu
 		
 		//On initialise nos menus 
 		this.fichier.add(nouvellePartie);
-	   	    
 	    this.fichier.add(chargerPartie);
 	    //Ajout d'un sÃ©parateur
 	    this.fichier.addSeparator();
@@ -77,7 +95,13 @@ public class ModeGraphique extends JFrame implements View{
 	    this.menuBar.add(aPropos);
 	    this.setJMenuBar(menuBar);
 	}
+	
 
+	public void paintComponent(Graphics g){
+        super.paintComponents(g);
+        this.setBackground(new Color(200,200,200));
+ 
+    }
 	
 	
 	public Partie demarrerPartie(Partie partie, UnoController controller) 
@@ -398,7 +422,7 @@ public class ModeGraphique extends JFrame implements View{
 		
 		if(joueur instanceof JoueurNormal)
 		{
-			JOptionPane.showMessageDialog(null, "Une carte Passe à été jouée, vous passez votre tour " + joueur.afficherPseudo() + " !", "Carte Passe", JOptionPane.INFORMATION_MESSAGE);
+			JOptionPane.showMessageDialog(null, "Une carte Passe ï¿½ ï¿½tï¿½ jouï¿½e, vous passez votre tour " + joueur.afficherPseudo() + " !", "Carte Passe", JOptionPane.INFORMATION_MESSAGE);
 		}
 		
 	}

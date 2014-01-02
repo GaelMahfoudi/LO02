@@ -1,9 +1,13 @@
 package fr.utt.lo02.projet.uno.ihm.graphique;
 
+import java.awt.Color;
+import java.awt.Font;
 import java.awt.GridLayout;
 
+import javax.swing.BorderFactory;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
+import javax.swing.JTextField;
 
 import fr.utt.lo02.projet.uno.noyau.gestion.joueur.Joueur;
 import fr.utt.lo02.projet.uno.noyau.gestion.partie.Partie;
@@ -18,12 +22,14 @@ public class RapportDActivite extends JPanel{
 	private String[] scoreJoueurs;
 	public RapportDActivite(Partie partie)
 	{
-
+		this.setOpaque(false);
 		this.nbreJoueur = partie.getNbreJoueur();
 		joueurCarte = new String[nbreJoueur];
 		scoreJoueurs = new String[nbreJoueur];
 		 nbreCarte = new JTextArea();
+		 personnaliser(nbreCarte);
 		 score = new JTextArea();
+		 personnaliser(score);
 			
 		nbreCarte.setLineWrap(false); //Interdit les retours a la ligne automatique
 		score.setLineWrap(false);
@@ -34,13 +40,24 @@ public class RapportDActivite extends JPanel{
         }
 		this.refresh();
 	}
+	private void personnaliser(JTextArea c) {
+
+		c.setOpaque(false);
+		c.setForeground(Color.white);
+		c.setFont(new Font("Arial", Font.BOLD, 18));
+		c.setBorder(BorderFactory.createLineBorder(Color.black));
+
+	}
 	public void refresh()
 	{
 		this.removeAll();
 		//Refresh de nbreCarte
-		this.setLayout(new GridLayout(3,1));
-        nbreCarte = new JTextArea("Nombre de cartes restantes:");
+		this.setLayout(new GridLayout(2,1));
+        nbreCarte = new JTextArea("Nombre de cartes:");
+        personnaliser(nbreCarte);
         score =  new JTextArea("Score:");
+        personnaliser(score);
+        
         
 		for(int i=0; i< this.nbreJoueur; i++)
 		{
