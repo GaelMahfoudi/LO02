@@ -14,15 +14,30 @@ import javax.imageio.ImageIO;
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
 
-
+/**
+ * 
+ * @author Gael, Victor
+ * IL s'agit ici d'un JButton personnalisé par 3 images differentes selon l'attitude la souris, cette classe est utilisée pour tous les boutons du jeu
+ *
+ */
 @SuppressWarnings("serial")
 public class Bouton extends JButton implements MouseListener
 {
-	
+	/**
+	 * Image du bouton
+	 */
 	private Image img;
+	/**
+	 * Nom du bouton (String), qui est ecrit par dessus l'image
+	 */
 	private String name;
 	
-	
+	/**
+	 * Constructeur de la classe, il initialise le bouton, en chargeant son image et ajoute un MouseListener sur lui meme
+	 * @param name
+	 * 				le nom du bouton
+	 * @see MouseListener
+	 */
 	public Bouton(String name)
 	{
 		super(name);
@@ -41,6 +56,11 @@ public class Bouton extends JButton implements MouseListener
 		this.addMouseListener(this);
 	}
 	
+	/**
+	 * Redefinission de paintComponent de la classe JComponent.
+	 * Elle permet desormais de rafraichir l'image en fonction de la position de la souris
+	 * @param Graphics g
+	 */
 	 public void paintComponent(Graphics g){
 
 		 	super.paintComponent(g);
@@ -56,13 +76,17 @@ public class Bouton extends JButton implements MouseListener
 			this.setBorderPainted(false);
 	 }
 
-	@Override
+	
 	public void mouseClicked(MouseEvent arg0) {
-		// TODO Auto-generated method stub
+		// Pas d'utilité ici
 		
 	}
 
-	@Override
+	
+	/**
+	 * @see MouseListener#mouseEntered(MouseEvent)
+	 * change l'image associé a img. Au prochain paintComponent, le bouton changera d'image
+	 */
 	public void mouseEntered(MouseEvent arg0) {
 		// TODO Auto-generated method stub
 		try {
@@ -73,7 +97,10 @@ public class Bouton extends JButton implements MouseListener
 			this.repaint();
 	}
 
-	@Override
+	/**
+	 * @see MouseListener#mouseExited(MouseEvent)
+	 * change l'image associé a img. Au prochain paintComponent, le bouton changera d'image
+	 */
 	public void mouseExited(MouseEvent arg0) {
 		// TODO Auto-generated method stub
 		try {
@@ -84,7 +111,10 @@ public class Bouton extends JButton implements MouseListener
 		this.repaint();
 	}
 
-	@Override
+	/**
+	 * @see MouseListener#mousePressed(MouseEvent)
+	 * change l'image associé a img. Au prochain paintComponent, le bouton changera d'image
+	 */
 	public void mousePressed(MouseEvent arg0) {
 		try {
 		      img = ImageIO.read(new File(ImageCarte.pathImage+ "/theme/boutonPressed.png"));
@@ -94,8 +124,11 @@ public class Bouton extends JButton implements MouseListener
 			this.repaint();
 		
 	}
-
-	@Override
+		
+	/**
+	 * @see MouseListener#mouseReleased(MouseEvent)
+	 * change l'image associé a img. Au prochain paintComponent, le bouton changera d'image
+	 */
 	public void mouseReleased(MouseEvent arg0) {
 		// TODO Auto-generated method stub
 		this.mouseExited(arg0);

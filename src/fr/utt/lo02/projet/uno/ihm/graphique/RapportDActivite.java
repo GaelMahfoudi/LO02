@@ -15,18 +15,47 @@ import javax.swing.JTextArea;
 import fr.utt.lo02.projet.uno.noyau.gestion.joueur.Joueur;
 import fr.utt.lo02.projet.uno.noyau.gestion.partie.Partie;
 
+/**
+ * Classe Rapport d'activité héritant de JPanel
+ * @see JPanel
+ * Donne au joueur les informations sur less autres: nombre de cartes restantes, scores de chacuns
+ * @author Gael et Victor
+ *
+ */
 public class RapportDActivite extends JPanel{
 
 
-	/**
-	 * 
-	 */
+	
 	private static final long serialVersionUID = -947703756535873129L;
+	/**
+	 * @see JTextArea
+	 * COntient les informations sur le nombre de carte de chacuns
+	 */
 	private JTextArea nbreCarte;
+	/**
+	 * Entier correspondant au nombre de joueur de la partie
+	 */
 	private int nbreJoueur;
+	/**
+	 * Tableau contenant dans chaue case le nom et le nombre de carte du joueur
+	 */
 	private String[] joueurCarte;
+	
+	/**
+	 * JTetArea contenant les scores de chacuns
+	 */
 	private JTextArea score;
+	/**
+	 * Tableau de String contenant dans chaque case le nom et le score de chaues joueurs
+	 */
 	private String[] scoreJoueurs;
+	
+	
+	/**
+	 * Constructeur de la partie
+	 * initialise les attributs en debuts de partie (score a 0, cartes a 5
+	 * @param partie
+	 */
 	public RapportDActivite(Partie partie)
 	{
 		this.setOpaque(false);
@@ -49,6 +78,13 @@ public class RapportDActivite extends JPanel{
 		this.refresh();
 	}
 	
+	
+	/**
+	 * Meme personnalisation pour les deux JTextArea:
+	 * transparent, avec bordure, police et ouleur d'ecriture
+	 * @param c
+	 * 		Le JTextArea a personnaliser
+	 */
 	private void personnaliser(JTextArea c) {
 
 		c.setOpaque(false);
@@ -59,6 +95,10 @@ public class RapportDActivite extends JPanel{
 
 	}
 	
+	/**
+	 * @see JPanel#paintComponents(Graphics)
+	 * Créé l'image de fond de la classe
+	 */
 	public void paintComponent(Graphics g) {
 		Image img = new ImageIcon(ImageCarte.pathImage+ "/theme/FondScore.png").getImage();
 		Graphics2D g2d = (Graphics2D)g;
@@ -67,6 +107,12 @@ public class RapportDActivite extends JPanel{
 	    g2d.drawImage(img, 0, 0, this.getWidth(),  this.getHeight(), this);
 	    
 	    }
+	
+	
+	/**
+	 * Rafraichit les informations affichées
+	 * 
+	 */
 	public void refresh()
 	{
 		this.removeAll();
@@ -90,6 +136,10 @@ public class RapportDActivite extends JPanel{
 	}
 
 
+	/** 
+	 * Raffraichit les informations du joueur en parametre
+	 * @param joueur
+	 */
 	public void refreshJoueur(Joueur joueur)
 	{
 		for(int i=0; i<this.nbreJoueur; i++)
@@ -110,19 +160,10 @@ public class RapportDActivite extends JPanel{
 		this.refresh();
 	}
 
-	/*public void refreshscore(Joueur joueur)
-	{
-		for(int i=0; i<this.nbreJoueur; i++)
-		{
-
-			if(scoreJoueurs[i].contains(joueur.afficherPseudo()))
-			{
-					scoreJoueurs[i] = joueur.afficherPseudo()+ " : " +joueur.getScore()+" points" ;
-
-			}
-		}
-		this.refresh();
-	}*/
+	/**
+	 * Rafraichi les scores de tout les joueurs en fin de manche
+	 * @param partie
+	 */
 
 	public void refreshscore(Partie partie)
 	{

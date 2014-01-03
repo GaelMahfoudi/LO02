@@ -20,27 +20,57 @@ import javax.swing.JPanel;
 import fr.utt.lo02.projet.uno.ihm.observer.UnoController;
 import fr.utt.lo02.projet.uno.noyau.gestion.partie.Partie;
 
+
+/**
+ * Classe ParametrerPartie
+ * Permet, avant de lancer la partie, de recuperer le nombre de Joueurs Reel (et leur noms) ainsi que le nombre de joueurs virtuels
+ * 
+ * @author Victor et Gael
+ *
+ */
 public class ParametrerPartie  extends JFrame implements ActionListener{
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 123317141480211943L;
+	/**
+	 * Boolean indiquant si les nombres de joueurs choisis par l'utilisateur sont plausible
+	 */
 	private boolean nbreJoueurOk;
+	/**
+	 * JComboBox recuperant le nombre de joueurs virtuels
+	 */
 	private JComboBox<?> comboIA;
+	/**
+	 * JComboBox recuperant le nombre de joueurs Reels
+	 */
 	private JComboBox<?> comboReel;
+	/**
+	 * @see Bouton
+	 * Bouton de validation
+	 */
 	private Bouton nouvellePartie;
+	/**
+	 * entier recuperant le nombre de joueur reels choisis dans la JComboBox associée
+	 * @see ParametrerPartie#comboReel
+	 */
 	private int nbreJoueurReel;
+	/**
+	 * entier recuperant le nombre de joueur virtuels choisis dans la JComboBox associée
+	 * @see ParametrerPartie#comboIA
+	 */
 	private int nbreIA;
 	
 
+	/**
+	 * Constructeur de la classe
+	 * Créé la fenetre
+	 */
 	@SuppressWarnings("serial")
 	public ParametrerPartie()
 	{
 		nbreJoueurReel = 0;
 		nbreIA =0;
 		nbreJoueurOk = false;
-
+		this.setTitle("Bienvenue");
 		this.setSize(300, 400);
 		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
 		this.setLocationRelativeTo(null);
@@ -65,7 +95,14 @@ public class ParametrerPartie  extends JFrame implements ActionListener{
 	}
 	 
 	
-	
+	/**
+	 * Créé la les composants de la fenetre afin de recuperer les choix de parametrage de la partie de l'utilisateur
+	 * Recupere en parametre une partie vide, l'instancie selon les parametres choisis par l'utilisateur
+	 * Il renvoie ensuite la partie ainsi créée
+	 * @param partie
+	 * @param controller
+	 * @return partie
+	 */
 	public Partie recupererPartie(Partie partie, UnoController controller) {
 		this.nbreJoueurOk = false;
 		 this.setLayout(new GridLayout(4, 1));
@@ -122,8 +159,11 @@ public class ParametrerPartie  extends JFrame implements ActionListener{
 		return partie;
 	}
 
-	
-public void actionPerformed(ActionEvent arg0) {
+	/**
+	 * @see ActionListener#actionPerformed(ActionEvent)
+	 * Verifie si les valeurs sont correct.
+	 */
+	public void actionPerformed(ActionEvent arg0) {
 		
 		//Lorsque l'on clique sur le bouton, on verifie le que le nombre de joueur n'est pas superieur a 10 et different de 0
 		
@@ -143,6 +183,10 @@ public void actionPerformed(ActionEvent arg0) {
 		
 	}
 	
+	/**
+	 * recupere le pseudo d'un joueur
+	 * @return pseudo (String)
+	 */
 	public String demanderPseudo() {
 	
 	

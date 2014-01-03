@@ -10,35 +10,52 @@ import javax.swing.BorderFactory;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
+/**
+ * Classe OptionJeu,
+ * contient la possibilité de declarer un Uno, un contre Uno ou mettre le jeu en pause
+ * @author Gael et Victor
+ *
+ */
 public class OptionJeu extends JPanel implements ActionListener{
 
-	/**
-	 * 
-	 */
+	
 	private static final long serialVersionUID = -6041778679539547059L;
+	/**
+	 * @see Bouton
+	 * bouton qui permettra de declarer un Uno
+	 */
 	private Bouton direUno = new Bouton("Uno");
+	/**
+	 * @see Bouton
+	 * Bouton qui permet de declarer un Contre Uno
+	 */
 	private Bouton direContreUno = new Bouton("Contre-uno");
+	/**
+	 * @see Bouton
+	 * Bouton qui permet de mettre le jeu en pause
+	 */
 	private Bouton pause = new Bouton("Pause");
+	
+	/**
+	 * Lien vers ModeGraphique
+	 * @see ModeGraphique
+	 */
 	private ModeGraphique mg;
 	
+	
+	/**
+	 * Constructeur de la classe,
+	 * @param mg
+	 * 		ModeGraphique instanciant cette classe
+	 * 		met en place les ActionLIstener sur les bouton
+	 * @see ModeGraphique, ActionListener
+	 */
 	public OptionJeu(ModeGraphique mg)
 	{
 		this.mg=mg;
 		this.setPreferredSize(new Dimension(200,150));
 		this.setLayout(new GridLayout(3, 1));
-		
-
-		this.direContreUno.setOpaque(false);
-		this.direContreUno.setContentAreaFilled(false);
-		this.direContreUno.setBorderPainted(false);
-		
-		this.direUno.setOpaque(false);
-		this.direUno.setContentAreaFilled(false);
-		this.direUno.setBorderPainted(false);
-		
-		this.pause.setOpaque(false);
-		this.pause.setContentAreaFilled(false);
-		this.pause.setBorderPainted(false);
+	
 		
 		this.add(pause);
 		this.add(direUno);
@@ -52,7 +69,11 @@ public class OptionJeu extends JPanel implements ActionListener{
 
 	
 
-	@Override
+	/**
+	 * @see ActionListener#actionPerformed(ActionEvent)
+	 * Selon la source de l'evenement, on lance la methode associée de ModeGraphique
+	 * @see ModeGraphique
+	 */
 	public void actionPerformed(ActionEvent arg0) {
 		if(arg0.getSource().equals(direUno))
 		{

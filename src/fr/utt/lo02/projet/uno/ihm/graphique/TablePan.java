@@ -12,20 +12,54 @@ import javax.swing.JTextField;
 
 import fr.utt.lo02.projet.uno.noyau.gestion.carte.Talon;
 
+/**
+ * Classe TablePan heritant de JPanel
+ * Cette classe est destin a afficher la carte du Talon et la pioche
+ * @author Victor & Gael
+ *
+ */
 public class TablePan extends JPanel implements ActionListener{
 	
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 8312818601075105050L;
+	/**
+	 * JPanel qui va contenr une image de Carte factice (face cachée) qui permet de piocher i on clique dessus
+	 * @see ImageCarte
+	 * @see Pioche
+	 */
 	private JPanel pioche;
+	/**
+	 * JPanel qui affiche la dernier carte du Talon
+	 */
 	private JPanel talon;
+	/**
+	 * Boolean qui correspond au choix de l'utilisateur (s'il veut pioher ou non)
+	 */
 	private boolean choixPioche;
+	/**
+	 * Representation de la derniere carte du talon
+	 */
 	private ImageCarte carteTalon;
+	/**
+	 * Image factice (face cachée, associé a aucune Carte
+	 */
 	private ImageCarte cartePioche;
+	/**
+	 * afficher "Piocher" a coté de cartePioche
+	 */
 	private JLabel labelPioche;
+	/**
+	 * afficher "Talon" a coter de carteTalon
+	 */
 	private JLabel labelTalon;
 	
+	
+	/**
+	 * Constructeur de la classe
+	 * Met en place la position des composants  en attributs de la classe
+	 */
 	public TablePan()
 	{
 		setChoixPioche(false);
@@ -58,6 +92,12 @@ public class TablePan extends JPanel implements ActionListener{
 		
 		
 	}
+	
+	/**
+	 * Personnalise les JLabel de la classe: transparence, couleur et police du texte
+	 * @param c
+	 * 			Le JLabel a personnaliser
+	 */
 	public void personnaliser (JLabel c)
 	{
 		c.setOpaque(false);
@@ -65,6 +105,10 @@ public class TablePan extends JPanel implements ActionListener{
 		c.setFont(new Font("Arial", Font.BOLD, 20));
 		c.setHorizontalAlignment(JTextField.CENTER);
 	}
+	
+	/**
+	 * rafraichit le panneau selon la derniere carte du talon
+	 */
 	public void refresh()
 	{
 		setChoixPioche(false);
@@ -75,21 +119,35 @@ public class TablePan extends JPanel implements ActionListener{
 		this.talon.add(labelTalon);
 		
 	}
+	
+	
+	/**
+	 * Renvoie true si le joueur a choisis de piocher, false sinon (et par defaut)
+	 * @return
+	 */
 	public boolean isChoixPioche() {
 		
 		cartePioche.addActionListener(this);
 		return choixPioche;
 	}
 
+	/**
+	 * setter de choixPioche
+	 * @see TablePan#choixPioche
+	 * @param choixPioche
+	 */
 	public void setChoixPioche(boolean choixPioche) {
 		this.choixPioche = choixPioche;
 	}
 
-	@Override
+	/**
+	 * @see ActionListener#actionPerformed(ActionEvent)
+	 * si l'on clique sur la pioche, on met choixPioche a true
+	 */
 	public void actionPerformed(ActionEvent arg0) {
 		if(arg0.getSource().equals(cartePioche))
 		{
-			this.choixPioche = true;
+			this.setChoixPioche(true);
 		}
 	}
 

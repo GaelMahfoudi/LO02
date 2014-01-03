@@ -9,17 +9,45 @@ import java.awt.Dimension;
 import java.awt.Image;
 
 
-
+/**
+ * 
+ * @author Gael, Victor
+ * Classe ImageCarte, Il s'agit d'un JButton personnalisé: son image est une carte du Uno et est rattaché a un objet de la classe Carte
+ * @see Carte
+ *
+ */
 public class ImageCarte extends JButton {
 
 	
 	private static final long serialVersionUID = -6038129419355178442L;
+	/**
+	 *Entier correspondant a la hauteur de l'image d'une carte
+	 */
 	public static final int hCarte=175;
-    public static final int lCarte=108;
+	/**
+	 *Entier correspondant a la largeur de l'image d'une carte
+	 */
+	public static final int lCarte=108;
+	/**
+	 * objet de la classe Carte
+	 * @see Carte
+	 */
     private Carte carte;
+    /**
+     * Chemin d'accès vers les images du programme
+     */
     public static final String pathImage ="./src/fr/utt/lo02/projet/uno/ihm/uno_images";
+    /**
+     * On place dans ce JLablel l'image associée a la carte
+     */
     private JLabel image;
     
+    
+    
+    /**
+     * Constructeur de la classe,
+     * Sans parametre, il s'agira de la face cachée de la carte (cet objet n'est pas rattaché a une Carte)
+     */
     public ImageCarte()
     {
 		
@@ -33,7 +61,12 @@ public class ImageCarte extends JButton {
          this.refresh();
     }
     
-    
+    /**
+     * Constructeur de la classe, associe le bouton a une Carte
+     * @see Carte
+     * @param carte
+     * 			carte associée au bouton
+     */
 	public ImageCarte(Carte carte)
 	{
 		this.setOpaque(false);
@@ -49,7 +82,9 @@ public class ImageCarte extends JButton {
          this.refresh();
 	}
 
-
+/**
+ * rafraichit le bouton en lui associant une image correspondant a sa Carte associée
+ */
 	private void refresh() 
 	{
 		if (carte == null)
@@ -95,6 +130,11 @@ public class ImageCarte extends JButton {
 		
 	}
 
+	/**
+	 * converti Especial en String
+	 * @param carte
+	 * @return String
+	 */
 	public static String getSpecial(Carte carte) {
 		
 		if(carte.getSpecial() == null)
@@ -117,6 +157,11 @@ public class ImageCarte extends JButton {
 		}
 	}
 
+	/**
+	 * Convertit ECouleur en String
+	 * @param carte
+	 * @return String
+	 */
 	public static String getCouleur(Carte carte) {
 			
 		if(carte.getCouleur() == null)
@@ -138,6 +183,11 @@ public class ImageCarte extends JButton {
 		
 	}
 	
+	/**
+	 * Convertit le int lié a la valeur en String
+	 * @param carte
+	 * @return String
+	 */
 	public static String getValeur(Carte carte) {
 		  switch (carte.getValeur())
         {
@@ -170,6 +220,10 @@ public class ImageCarte extends JButton {
 	}
 
 
+	/**
+	 * getter de la carte associé au bouton
+	 * @return Carte
+	 */
 	public Carte getCarte() {
 		
 		return carte;

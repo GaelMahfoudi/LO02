@@ -23,30 +23,81 @@ import fr.utt.lo02.projet.uno.noyau.gestion.joueur.Joueur;
 import fr.utt.lo02.projet.uno.noyau.gestion.joueur.JoueurNormal;
 import fr.utt.lo02.projet.uno.noyau.gestion.partie.Partie;
 
+
+/**
+ * Classe ModeGraphique implementant View
+ * @see View
+ * @author Victor & Gael
+ * 
+ * Cette classe est la vue de l'application (voir design pattern MVC)
+ * Elle fait le lien entre l'utilisateur et le moteur du jeu (@see Observer)
+ * Cette classe utilise java.swing et java.awt afin de créé son interface graphique
+ *
+ */
 public class ModeGraphique extends JFrame implements View{
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 5061274056292434902L;
+	/**
+	 * hauteur de la fenetre (entier naturel)
+	 */
 	public final static int hFenetre = 725;
+	/**
+	 * Largeur de la fentre (entier naturel)
+	 */
 	public final static int lFenetre = 800;
+	/**
+	 * @see ParametrerPartie
+	 * Permet de parametrer la partie et de l'instancier
+	 * cet attribut ne sert don qu'au debut de la partie
+	 */
 	private ParametrerPartie param;
+	/**
+	 * @see MainJoueurPan
+	 */
 	private MainJoueurPan main;
+	/**
+	 * @see TablePan
+	 */
 	private TablePan table;
+	/**
+	 * @see TableauDeBord
+	 */
 	private TableauDeBord tableauDeBord;
+	/**
+	 * @see RapportDActivite
+	 */
 	public RapportDActivite rapport;
-	private Partie partie;
+	/**
+	 * @see OptionJeu
+	 */
 	private OptionJeu option;
+	/**
+	 * @see Partie
+	 * correspond a la partie en cours
+	 */
+	private Partie partie;
+	/**
+	 * @see Observateur
+	 * c'est l'observateur qui fait le lien entre le moteur et la vue
+	 */
 	private Observateur obs;
+	/**
+	 * @see JoueurNormal
+	 * Correspond au joueur actuel (joueur Reel)
+	 */
 	public Joueur joueurActuel;
 	
 	
 	  
-	  
+	  /**
+	   * Constructeur de la classe
+	   * Met en place le parametrage de la parie et lui meme
+	   */
 	@SuppressWarnings("serial")
 	public ModeGraphique()
 	{
+		
+		this.setTitle("Partie en cours");
 		
 		param = new ParametrerPartie();
 		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
@@ -74,7 +125,12 @@ public class ModeGraphique extends JFrame implements View{
 	
 
 	
-
+/**
+ * @see JFrame#paintComponents(Graphics)
+ * met en place l'image de fond
+ * @param g
+ *
+ */
 	public void paintComponent(Graphics g){
         super.paintComponents(g);
         this.setBackground(new Color(200,200,200));
@@ -82,6 +138,11 @@ public class ModeGraphique extends JFrame implements View{
     }
 	
 	
+	/**
+	 * Afin de demarer la partie, on la recupere de ParameterPartie
+	 * @see ParametrerPartie
+	 * ENfin, on met en place les diferents panneaux de la fenetre
+	 */
 	public Partie demarrerPartie(Partie partie, UnoController controller) 
 	{
 		//Creation de la partie
@@ -117,12 +178,23 @@ public class ModeGraphique extends JFrame implements View{
 		return partie;
 	}
 	
+	/**
+	 * @see ParametrerPartie#demanderPseudo()
+	 * Retourne le pseudo du joueur apres l'avoir demandé a @see ModeGraphique#param
+	 * @return String pseudo
+	 */
 	public String demanderPseudo() 
 	{
 			return param.demanderPseudo();
 	}
 		
 	
+	/**
+	 * @param Joueur
+	 * 		Le joueur actuel
+	 * 
+	 * renvoie la position de la carte que le joueur veut poser
+	 */
 	public int demanderCarteAJouer(Joueur joueur) 
 	{
 		this.joueurActuel=joueur;
@@ -131,6 +203,9 @@ public class ModeGraphique extends JFrame implements View{
 	}
 	
 
+	/**
+	 * Rafraichit la fenetre et ses JPanel
+	 */
 	public void refresh() {
 				//Rafraichissement du tableau de bord
 				tableauDeBord.setJoueur(joueurActuel);
@@ -148,7 +223,13 @@ public class ModeGraphique extends JFrame implements View{
 	}
 
 
-
+	/**
+	 * 
+	 * retourne un entier entre min et max, choisi par l'utilisateur
+	 * @param min, max
+	 * @return choix
+	 * 
+	 */
 	public int demanderChoix(int min, int max) {
 		boolean choixPioche = false;
 		int choixCarte = -1;
@@ -170,6 +251,9 @@ public class ModeGraphique extends JFrame implements View{
 
 
 
+	/**
+	 * Affin de proteger l'intimité d'un joueur, on cache son jeu avant de changer de tour
+	 */
 	public void cacherJeu()
 	{
 		main.vider();
@@ -177,6 +261,10 @@ public class ModeGraphique extends JFrame implements View{
 		this.setVisible(true);
 	}
 	
+	/**
+	 * Notifie la fin de la manche et met a jour la fenetre
+	 * @param Partie
+	 */
 	public void afficherFinManche(Partie p) {
 
 		this.cacherJeu();
@@ -191,7 +279,10 @@ public class ModeGraphique extends JFrame implements View{
 
 	
 
-	
+	/**
+	 * Notifie la fin du tour et rafraichit la fentre
+	 * @param Joueur, int
+	 */
 	public void afficherTour(Joueur joueur, int choix) {
 		
 		rapport.refreshJoueur(joueur);
@@ -212,7 +303,11 @@ public class ModeGraphique extends JFrame implements View{
 	}
 
 	
-	@Override
+	/**
+	 * Demande a l'utilisateur s'il veut poser ou non la carte piochée
+	 * @param JoueurAtuel
+	 * @return int (oui/non, 1/0)
+	 */
 	public int poserCartePioche(Joueur joueur) {
 			
 		ImageIcon icon;
@@ -242,11 +337,17 @@ public class ModeGraphique extends JFrame implements View{
 		
 	}
 
+	/**
+	 * notifie l'utilisateur que la carte selectionnée precedement ne peut etre posée
+	 */
 	public void afficherMauvaisChoix() {
 		JOptionPane.showMessageDialog(null, "Cette carte ne peut etre posée", "Erreur", JOptionPane.ERROR_MESSAGE);
 	}
 
-	@Override
+	/**
+	 * Demande a l'utilisateur quelle couleur il veut imposer au jeu
+	 * @return ECouleur
+	 */
 	public ECouleur demanderCouleur() {
 		String[] couleur = {"Bleu", "Rouge", "Jaune", "Vert"};
 	    
@@ -266,7 +367,9 @@ public class ModeGraphique extends JFrame implements View{
 		}
 	}
 
-
+	/**
+	 * Demande a l'utilisateur s'il pense que le joueur actuel bluff
+	 */
 	public int demanderBluff(Partie partie) {
 		Joueur joueur = partie.getJoueur(Math.abs((partie.getJoueurActuel()+partie.getSens())%partie.getNbreJoueur()));
 		ImageIcon icon = new ImageIcon("./src/fr/utt/lo02/projet/uno/ihm/uno_images/special/plus_quatre.jpg");
@@ -287,12 +390,18 @@ public class ModeGraphique extends JFrame implements View{
 		
 	}
 
-
+	/**
+	 * action lancée si un utilisateur souhaite declarer un uno
+	 */
 	public void declarerUno() {
 		
 		obs.declarerUno();
 	}
 	
+	/**
+	 * rafraichit les infos sur le joueur dans rapport
+	 * @see ModeGraphique#rapport
+	 */
 	public void afficherCartePioche(Joueur joueur) {
 		//Inclut dans poser carte pioche, ici on met a jour le nombre du carte du joueur
 		
@@ -301,12 +410,17 @@ public class ModeGraphique extends JFrame implements View{
 
 	}
 
-	
+	/**
+	 * @see View#setController(Observateur)
+	 */
 	public void setController(Observateur obs)
 	{
 		this.obs=obs;
 	}
 	
+	/**
+	 * @see View#quiDemandeUno(Partie)
+	 */
 	public Joueur quiDemandeUno(Partie partie) {
 		int rang = -1;
 	    String[] nomJoueur = new String[partie.getNbreJoueur()+1];
@@ -325,17 +439,25 @@ public class ModeGraphique extends JFrame implements View{
 		 
 	}
 	
-	
+	/** 
+	 * @see View#demanderUno()
+	 */
 	public int demanderUno() {
 		//Ne sert a rien en mode graphique
 		return 0;
 	}
 	
+	/**
+	 * @see View#contreUno()
+	 */
 	//Lance l'action
 	public void contreUno() {
 		obs.declarerContreUno();
 	}
 	
+	/**
+	 * @see View#quiDemandeContreUno(Partie)
+	 */
 	//Demande  qui declare contreUno
 	public Joueur quiDemandeContreUno(Partie partie) {
 		int rang = -1;
@@ -368,6 +490,9 @@ public class ModeGraphique extends JFrame implements View{
 			return null;
 	}
 	
+	/**
+	 * @see View#demanderContreUno(Partie)
+	 */
 	//Demande a qui on fait un contre uno
 	public int demanderContreUno(Partie partie) {
 		int rang = -1;
@@ -385,7 +510,9 @@ public class ModeGraphique extends JFrame implements View{
 
 	
 	
-	
+	/**
+	 * @see View#afficherFinPartie(Partie)
+	 */
 	public void afficherFinPartie(Partie p) {
 		int choix = -1;
 		while(choix == -1)
@@ -399,13 +526,19 @@ public class ModeGraphique extends JFrame implements View{
 	}
 	
 
+	/**
+	 * Action qui remet la partie a zero
+	 */
 	private void recommencerPartie() {
 		this.dispose();
 		Partie.main(null);
 	}
 
 
-	@Override
+	/**
+	 * 
+	 * @see fr.utt.lo02.projet.uno.ihm.observer.View#afficherPasse(fr.utt.lo02.projet.uno.noyau.gestion.joueur.Joueur)
+	 */
 	public void afficherPasse(Joueur joueur) {
 		
 		//Ici c'est pour notifier qu'un joueur passe, pas forcement qu'une carte passe a été posée

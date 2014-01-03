@@ -10,16 +10,33 @@ import javax.swing.JTextField;
 
 import fr.utt.lo02.projet.uno.noyau.gestion.joueur.Joueur;
 
+/**
+ * Classe TableauDeBord heritant de JPanel
+ * Affiche a l'utilisteur le numero de la mance actuelle et le nom du joueur actuel
+ * @author Victor et Gael
+ *
+ */
 public class TableauDeBord extends JPanel{
 
-	/**
-	 * 
-	 */
+	
 	private static final long serialVersionUID = -937445359070340197L;
+	/**
+	 * contient les informations de la classe (manche et nom du joueur actuel)
+	 */
 	private JTextField info;
+	/**
+	 * entier correspondant au numer de la manche
+	 */
 	private int manche;
+	/**
+	 * String correspondant au nom du joueur actuel
+	 */
 	private String joueur;
 	
+	
+	/**
+	 * Constructeur de la partie, initialise les attributss de la classe
+	 */
 	public TableauDeBord()
 	{
 		this.manche = 1;
@@ -28,6 +45,11 @@ public class TableauDeBord extends JPanel{
 		this.add(info);
 		this.personnaliser();
 	}
+	
+	/**
+	 * Personnalise info
+	 * @see TableauDeBord#info
+	 */
 	private void personnaliser() {
 		// TODO gerer la police, la taille &co
 		
@@ -42,16 +64,31 @@ public class TableauDeBord extends JPanel{
 		
 		
 	}
+	
+	/**
+	 * setter de manche
+	 * @see TableauDeBord#manche
+	 * @param manche
+	 */
 	public void setManche(int manche) 
 	{
 		this.manche = manche;
 		
 	}
+	
+	/**
+	 * Setter de joueur
+	 * @see TableauDeBord#joueur
+	 * @param joueur
+	 */
 	public void setJoueur(Joueur joueur) 
 	{
 		this.joueur = joueur.afficherPseudo();
 	}
 
+	/**
+	 * rafraichit le panneau en fonction des nouvelles valeurs des attributs
+	 */
 	public void refresh()
 	{
 		info = new JTextField("Manche "+ manche+": \n Au tour de " + joueur);

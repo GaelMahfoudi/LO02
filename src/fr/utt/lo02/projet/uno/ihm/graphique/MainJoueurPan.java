@@ -14,24 +14,46 @@ import fr.utt.lo02.projet.uno.noyau.carte.Carte;
 import fr.utt.lo02.projet.uno.noyau.gestion.joueur.Joueur;
 
 
-//Amelioration a prevoir: gliser les cartes pour les ranger dans un autre ordre?
-
+/**
+ * CLasse MainJoueur heritant de JPanel
+ * Composée d'ImageCarte, cette classe regroupe et affiche les cartes dans la main du joueur courant
+ * @author Victor, Gael
+ * @see ImageCarte
+ *
+ */
 
 public class MainJoueurPan extends JPanel implements ActionListener{
 
-	/**
-	 * 
-	 */
+	
 	private static final long serialVersionUID = 8769487842894870766L;
-	public static final int hCarte=175;
-	public static final int lCarte=125;
+	/**
+	 * Il s'agit de la position (entier naturel) dans la main de la carte que souhaite poser le joueur
+	 */
 	private int choix;
+	/**
+	 * Le joueur dont la main est affichée a l'ecran
+	 */
 	private Joueur joueur;
+	/**
+	 * La main du joueur (Liste de ImageCarte)
+	 * @see ImageCarte
+	 */
 	private ArrayList<ImageCarte> main; 
+	/**
+	 * JPanel, interieur du JScrollPane
+	 * @see MainJoueurPan#scroll
+	 */
 	private JPanel mainPane;
+	/**
+	 * S'il y a trop de ImageCarte pour l'ecran, permet d'etendre le panel
+	 */
 	private JScrollPane scroll;
 	
 
+	/**
+	 * Constructeur de la classe
+	 * met en place le panneau, en y incluant 5 cartes factices face cachées
+	 */
 	public MainJoueurPan()
 	{
 		super();
@@ -61,6 +83,11 @@ public class MainJoueurPan extends JPanel implements ActionListener{
 		this.setOpaque(false);
 	}
 
+	
+	/**
+	 * Change les cartes affichés par celle de joueur, le nouveau joueur courant
+	 * @param joueur
+	 */
 	public void refresh(Joueur joueur) {
 		
 		 mainPane.removeAll();
@@ -78,7 +105,9 @@ public class MainJoueurPan extends JPanel implements ActionListener{
 		 }
 	}
 
-	
+	/**
+	 * Cache le jeu du joueur precedent en le remplacant par 5 cartes factices (face cachée)
+	 */
 	public void vider() {
 		mainPane.removeAll();
 		for(int i=0; i<5; i++)
@@ -87,24 +116,28 @@ public class MainJoueurPan extends JPanel implements ActionListener{
 		}
 	}
 	
-	
+	/**
+	 * Lit les listenners des cartes jusqu'a ce que l'entier choix prenne une valeur plausible et la renvoie
+	 * @return choix
+	 */
 	public int getChoix()
 	{
 		for(int i=0; i<main.size(); i++)
 		{
 			ImageCarte c = (ImageCarte) main.get(i);
-			this.addListeners(c);
+			c.addActionListener(this);
 		}
 		
 		return choix;
 	}
 
 
-	
-	private void addListeners(ImageCarte c) {
-			c.addActionListener(this);
-	}
 
+	/**
+	 * @see ActionListener#ActionPerformed(ActionEvent)
+	 * recupere la position de la carte choisie et le stocke dans choix
+	 * @see MainJoueurPan#choix
+	 */
 	public void actionPerformed(ActionEvent e) {
 
 		ImageCarte carteG = (ImageCarte)e.getSource();
