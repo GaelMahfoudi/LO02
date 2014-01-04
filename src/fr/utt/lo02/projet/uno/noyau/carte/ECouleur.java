@@ -1,7 +1,7 @@
 package fr.utt.lo02.projet.uno.noyau.carte;
 
 /** 
- *  ECouleur ï¿½numï¿½re les diffï¿½rentes couleurs des cartes
+ *  ECouleur énumère les différentes couleurs des cartes de Uno
  */
 public enum ECouleur {
   /* {author=Victor Le Deuff Gaï¿½l Mahfoudi}*/

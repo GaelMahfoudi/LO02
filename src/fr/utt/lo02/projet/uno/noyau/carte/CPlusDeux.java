@@ -4,14 +4,27 @@ import fr.utt.lo02.projet.uno.noyau.gestion.carte.Talon;
 import fr.utt.lo02.projet.uno.noyau.gestion.joueur.Joueur;
 import fr.utt.lo02.projet.uno.noyau.gestion.partie.Partie;
 
+
+/**
+ * La classe CPlusDeux représente une carte plus deux dans un jeu de Uno
+ * @author Victor & Gaël
+ */
 public class CPlusDeux extends CSpecial {
 	
+	/**
+	 * Constructeur de la classe CPlusDeux
+	 * @param couleur
+	 * 		La couleur de la carte 
+	 */
 	public CPlusDeux(ECouleur couleur)
 	{
 		super(ESpecial.PLUS_DEUX, couleur);
 	}
-
-	@Override
+	
+	/**
+	 * Implémentation de la méthode apliquerRegle de la classe Carte
+	 * @see Carte#appliquerRegle(Partie)
+	 */
 	public void appliquerRegle(Partie partie) {
 
 		Joueur joueurNext = partie.getJoueur(Math.abs((partie.getJoueurActuel()+partie.getSens())%partie.getNbreJoueur()));
@@ -19,8 +32,11 @@ public class CPlusDeux extends CSpecial {
 		partie.nextJoueur();
 		
 	}
-
-	@Override
+	
+	/**
+	 * Implémentation de la méthode estPosable de la classe Carte
+	 * @see Carte#estPosable()
+	 */
 	public boolean estPosable() {
 		
 		if(this.couleur==Talon.getInstance().getDerniereCarte().getCouleur() || this.special == Talon.getInstance().getDerniereCarte().getSpecial())
@@ -30,8 +46,10 @@ public class CPlusDeux extends CSpecial {
 		
 		return false;
 	}
-
-	@Override
+	
+	/**
+	 * @see Object#toString()
+	 */
 	public String toString() {
 		return "CPlusDeux [special=" + special + ", couleur=" + couleur + "]";
 	}

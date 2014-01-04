@@ -190,7 +190,7 @@ public class ModeGraphique extends JFrame implements View{
 		
 	
 	/**
-	 * @param Joueur
+	 * @param joueur
 	 * 		Le joueur actuel
 	 * 
 	 * renvoie la position de la carte que le joueur veut poser
@@ -226,9 +226,12 @@ public class ModeGraphique extends JFrame implements View{
 	/**
 	 * 
 	 * retourne un entier entre min et max, choisi par l'utilisateur
-	 * @param min, max
-	 * @return choix
-	 * 
+	 * @param min
+	 * 		Le choix minimum
+	 * @param max
+	 * 		Le choix maximum
+	 * @return 
+	 * 		Renvoie le choix du joueur
 	 */
 	public int demanderChoix(int min, int max) {
 		boolean choixPioche = false;
@@ -263,7 +266,8 @@ public class ModeGraphique extends JFrame implements View{
 	
 	/**
 	 * Notifie la fin de la manche et met a jour la fenetre
-	 * @param Partie
+	 * @param p
+	 * 		La partie
 	 */
 	public void afficherFinManche(Partie p) {
 
@@ -281,7 +285,8 @@ public class ModeGraphique extends JFrame implements View{
 
 	/**
 	 * Notifie la fin du tour et rafraichit la fentre
-	 * @param Joueur, int
+	 * @param joueur
+	 * @param choix
 	 */
 	public void afficherTour(Joueur joueur, int choix) {
 		
@@ -305,8 +310,10 @@ public class ModeGraphique extends JFrame implements View{
 	
 	/**
 	 * Demande a l'utilisateur s'il veut poser ou non la carte pioch√©e
-	 * @param JoueurAtuel
-	 * @return int (oui/non, 1/0)
+	 * @param joueur
+	 * 		Le joueur
+	 * @return 
+	 * 		Renvoie un entier Ètant le choix du joueur
 	 */
 	public int poserCartePioche(Joueur joueur) {
 			
@@ -346,7 +353,8 @@ public class ModeGraphique extends JFrame implements View{
 
 	/**
 	 * Demande a l'utilisateur quelle couleur il veut imposer au jeu
-	 * @return ECouleur
+	 * @return 
+	 * 		Renvoie la couleur choisie par le joueur
 	 */
 	public ECouleur demanderCouleur() {
 		String[] couleur = {"Bleu", "Rouge", "Jaune", "Vert"};
@@ -404,10 +412,7 @@ public class ModeGraphique extends JFrame implements View{
 	 */
 	public void afficherCartePioche(Joueur joueur) {
 		//Inclut dans poser carte pioche, ici on met a jour le nombre du carte du joueur
-		
 		rapport.refreshJoueur(joueur);
-		
-
 	}
 
 	/**
@@ -448,7 +453,7 @@ public class ModeGraphique extends JFrame implements View{
 	}
 	
 	/**
-	 * @see View#contreUno()
+	 * @see UnoController#declarerContreUno()
 	 */
 	//Lance l'action
 	public void contreUno() {

@@ -42,8 +42,9 @@ public class ModeConsole implements Observateur, View
 
 
 	/**
-	 * @param Partie partie
 	 * Fait le bilan de la manche et annonce la prochaine s'il y en a une
+	 * @param partie
+	 * 		La partie de Uno
 	 */
 	public void notifyManche(Partie partie) //Change de manche
 	{
@@ -66,9 +67,9 @@ public class ModeConsole implements Observateur, View
 
 
 	/**
-	 * @param Partie partie
-	 * 
 	 * Notifie la fin de la partie
+	 * @param partie
+	 * 		La partie de Uno
 	 */
 	public void notifyPartie(Partie partie) //Fin de partie
 	{
@@ -88,10 +89,12 @@ public class ModeConsole implements Observateur, View
 
 
 	/**
-	 * @param Joueur joueur, int choix
 	 * Fait le bilan d'un tour: ce que le joueur a posé, l'effet de la carte, s'il a pioché...
+	 * @param joueur
+	 * 		Le joueur
+	 * @param choix
+	 * 		Le choix du joueur
 	 */
-	@SuppressWarnings("incomplete-switch")
 	public void notifyTour(Joueur joueur, int choix) 
 	{
 
@@ -126,8 +129,10 @@ public class ModeConsole implements Observateur, View
 	 * -Piocher
 	 * -Dire un contre Uno
 	 * 
-	 * @param Joueur joueur
-	 * @return int choix
+	 * @param joueur
+	 * 		Le joueur
+	 * @return
+	 * 		Renvoie le choix du joueur
 	 */
 	public int askCarte(Joueur joueur) //Permet au joueur de choisir une carte
 	{
@@ -167,8 +172,9 @@ public class ModeConsole implements Observateur, View
 
 
 	/**
-	 * @param Joueur joueur
 	 * Notifie au joueur la carte qu'il vient de piocher
+	 * @param joueur
+	 * 		Le joueur
 	 */
 	public void notifyPioche(Joueur joueur) //Losrque le joueur pioche
 	{
@@ -180,9 +186,11 @@ public class ModeConsole implements Observateur, View
 
 
 	/**
-	 * @param Joueur joueur
-	 * @return int Choix
 	 * Demande au joueur s'il veut poser la carte precedemment piochée
+	 * @param joueur
+	 * 		Le joueur
+	 * @return 
+	 * 		Renvoie le choix du joueur
 	 */
 	public int askPoserCarte(Joueur joueur) 
 	{
@@ -259,9 +267,13 @@ public class ModeConsole implements Observateur, View
 
 
 	/**
-	 * @param int min, int max
-	 * @return int choix
 	 * Algorithme de saisie au clavier
+	 * @param min
+	 * 		Le choix minimum
+	 * @param max
+	 * 		Le choix maximum
+	 * @return
+	 * 		Renvoie le choix du joueur
 	 */
 	public int askNombre(int min, int max) {
 

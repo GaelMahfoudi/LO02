@@ -48,7 +48,8 @@ public class OptionJeu extends JPanel implements ActionListener{
 	 * @param mg
 	 * 		ModeGraphique instanciant cette classe
 	 * 		met en place les ActionLIstener sur les bouton
-	 * @see ModeGraphique, ActionListener
+	 * @see ModeGraphique
+	 * @see ActionListener
 	 */
 	public OptionJeu(ModeGraphique mg)
 	{

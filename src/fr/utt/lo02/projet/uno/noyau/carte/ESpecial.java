@@ -1,7 +1,7 @@
 package fr.utt.lo02.projet.uno.noyau.carte;
 
 /** 
- *  ESpecial ï¿½numï¿½re les diffï¿½rentes spï¿½cialitï¿½es de carte.
+ *  ESpecial énumère les diférentes spécialitées des cartes de Uno
  */
 public enum ESpecial {
   /* {author=Victor Le Deuff Gaï¿½l Mahfoudi}*/

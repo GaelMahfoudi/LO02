@@ -27,7 +27,6 @@ public class TablePan extends JPanel implements ActionListener{
 	/**
 	 * JPanel qui va contenr une image de Carte factice (face cach√©e) qui permet de piocher i on clique dessus
 	 * @see ImageCarte
-	 * @see Pioche
 	 */
 	private JPanel pioche;
 	/**
@@ -124,6 +123,7 @@ public class TablePan extends JPanel implements ActionListener{
 	/**
 	 * Renvoie true si le joueur a choisis de piocher, false sinon (et par defaut)
 	 * @return
+	 *  Renvoie un boolean Ètant le choix du joueur
 	 */
 	public boolean isChoixPioche() {
 		

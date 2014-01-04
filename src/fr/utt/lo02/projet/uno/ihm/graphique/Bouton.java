@@ -59,7 +59,7 @@ public class Bouton extends JButton implements MouseListener
 	/**
 	 * Redefinission de paintComponent de la classe JComponent.
 	 * Elle permet desormais de rafraichir l'image en fonction de la position de la souris
-	 * @param Graphics g
+	 * @param g
 	 */
 	 public void paintComponent(Graphics g){
 

@@ -134,8 +134,8 @@ public class MainJoueurPan extends JPanel implements ActionListener{
 
 
 	/**
-	 * @see ActionListener#ActionPerformed(ActionEvent)
-	 * recupere la position de la carte choisie et le stocke dans choix
+	 * Recupere la position de la carte choisie et le stocke dans choix
+	 * @see ActionListener#actionPerformed(ActionEvent)
 	 * @see MainJoueurPan#choix
 	 */
 	public void actionPerformed(ActionEvent e) {
