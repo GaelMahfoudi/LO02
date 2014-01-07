@@ -129,7 +129,6 @@ public abstract class Joueur{
 
 		main.ajouterCarte(c);
 		obs.notifyPioche(this);
-
 	}
 	
 	/**

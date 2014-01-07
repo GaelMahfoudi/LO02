@@ -35,6 +35,8 @@ public class JoueurNormal extends Joueur {
 	 */
 	public void jouer(Partie partie) 
 	{
+		main.trierMain();
+		
 		if(this.uno && this.getNombreCarte() != 0)
 			this.uno=false;
 		

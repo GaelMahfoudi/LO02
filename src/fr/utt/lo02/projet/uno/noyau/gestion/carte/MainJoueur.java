@@ -5,6 +5,7 @@ import java.util.*;
 import fr.utt.lo02.projet.uno.noyau.carte.CClassique;
 import fr.utt.lo02.projet.uno.noyau.carte.CSpecial;
 import fr.utt.lo02.projet.uno.noyau.carte.Carte;
+import fr.utt.lo02.projet.uno.noyau.carte.ECouleur;
 import fr.utt.lo02.projet.uno.noyau.carte.ESpecial;
 
 /**
@@ -115,5 +116,57 @@ public class MainJoueur {
 	 */
 	public void setMain(List<Carte> main) {
 		this.main = main;
+	}
+	
+	public void trierMain()
+	{
+		int i = 0;
+		
+		Carte tmp;
+		
+		for(i=0;i<main.size();i++)
+		{
+			if(main.get(i).getCouleur() == ECouleur.BLEU)
+			{
+				tmp = main.remove(i);
+				main.add(0, tmp);
+			}
+		}
+		
+		for(i=0;i<main.size();i++)
+		{
+			if(main.get(i).getCouleur() == ECouleur.JAUNE)
+			{
+				tmp = main.remove(i);
+				main.add(0, tmp);
+			}
+		}
+		
+		for(i=0;i<main.size();i++)
+		{
+			if(main.get(i).getCouleur() == ECouleur.ROUGE)
+			{
+				tmp = main.remove(i);
+				main.add(0, tmp);
+			}
+		}
+		
+		for(i=0;i<main.size();i++)
+		{
+			if(main.get(i).getCouleur() == ECouleur.VERT)
+			{
+				tmp = main.remove(i);
+				main.add(0, tmp);
+			}
+		}
+		
+		for(i=0;i<main.size();i++)
+		{
+			if(main.get(i).getCouleur() == null)
+			{
+				tmp = main.remove(i);
+				main.add(0, tmp);
+			}
+		}
 	}
 }

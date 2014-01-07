@@ -56,7 +56,9 @@ public class IA extends Joueur {
 	 */
 	public void jouer(Partie partie) {
 		int i = 0;
-
+		
+		main.trierMain();
+		
 		this.setStyleJeu();
 		i = styleJeu.jouerCarte(partie, this);
 
