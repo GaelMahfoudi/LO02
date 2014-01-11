@@ -97,12 +97,13 @@ public class IA extends Joueur {
 
 
 	public String generePseudo() {
-		String[] nameList = {"Jean", "Fabrice", "Pierre", "Alain", "Guillaume", "Julie", "Vanessa", "Marie", "Gaël", "Victor"};
+		String[] nameList = {"Jean", "Fabrice", "Pierre", "Alain", "Guillaume", "Julie", "Vanessa", "Marie", "Gaël", "Victor", "Natacha"};
 		
 		Random r = new Random();
 		StringBuffer name = new StringBuffer();
 		
-		name.append(nameList[r.nextInt(9)]);
+		name.append(nameList[r.nextInt(10)]);
+		name.append("Du");
 		name.append(r.nextInt(100));
 		return name.toString();
 	}

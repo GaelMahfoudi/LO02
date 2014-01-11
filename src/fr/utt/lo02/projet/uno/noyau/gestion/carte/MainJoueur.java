@@ -118,6 +118,9 @@ public class MainJoueur {
 		this.main = main;
 	}
 	
+	/**
+	 * Cette méthode permet de trier la main de Uno
+	 */
 	public void trierMain()
 	{
 		int i = 0;

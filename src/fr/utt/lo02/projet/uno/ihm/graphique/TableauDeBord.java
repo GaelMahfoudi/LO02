@@ -74,6 +74,7 @@ public class TableauDeBord extends JPanel{
 	{
 		this.manche = manche;
 		
+		
 	}
 	
 	/**
@@ -91,7 +92,7 @@ public class TableauDeBord extends JPanel{
 	 */
 	public void refresh()
 	{
-		info = new JTextField("Manche "+ manche+": \n Au tour de " + joueur);
+		info = new JTextField("Manche "+ this.manche+": Au tour de " + joueur);
 		this.personnaliser();
 		this.removeAll();
 		this.setLayout(new GridLayout(1,1));

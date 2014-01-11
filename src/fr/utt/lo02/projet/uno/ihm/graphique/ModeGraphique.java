@@ -277,7 +277,8 @@ public class ModeGraphique extends JFrame implements View{
 		JOptionPane.showMessageDialog(null, "La manche est finie, tenez vous pret !", "Fin de la manche", JOptionPane.WARNING_MESSAGE);
 		
 		rapport.refresh();
-		tableauDeBord.setManche(p.getManche());
+		tableauDeBord.setManche(p.getManche()+1);
+		tableauDeBord.refresh();
 		this.repaint();
 	}
 
