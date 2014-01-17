@@ -227,7 +227,11 @@ public class ImageCarte extends JButton {
 		return carte;
 	}
 	
-	
+	/**
+	 * Redefinission de paintComponent de la classe JComponent.
+	 * Elle permet desormais de rafraichir l'image en fonction de la carte associée
+	 * @param g
+	 */
 	public void paintComponent(Graphics g){
 
 	 	super.paintComponent(g);
