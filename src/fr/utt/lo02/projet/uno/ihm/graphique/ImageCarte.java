@@ -1,12 +1,17 @@
 package fr.utt.lo02.projet.uno.ihm.graphique;
 
-import javax.swing.ImageIcon;
+import javax.imageio.ImageIO;
 import javax.swing.JButton;
-import javax.swing.JLabel;
 
 import fr.utt.lo02.projet.uno.noyau.carte.Carte;
+
+import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.GradientPaint;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
 import java.awt.Image;
+import java.io.IOException;
 
 
 /**
@@ -33,14 +38,11 @@ public class ImageCarte extends JButton {
 	 * @see Carte
 	 */
     private Carte carte;
+    
     /**
-     * Chemin d'accès vers les images du programme
+     * L'image associée a la carte
      */
-    public static final String pathImage ="./src/fr/utt/lo02/projet/uno/ihm/uno_images";
-    /**
-     * On place dans ce JLablel l'image associée a la carte
-     */
-    private JLabel image;
+    private Image img = null;
     
     
     
@@ -54,9 +56,7 @@ public class ImageCarte extends JButton {
          this.carte = null;
          this.setOpaque(false);
     	 this.setPreferredSize(new Dimension(lCarte, hCarte));
-         this.image=new JLabel();
-         this.image.setPreferredSize(new Dimension(ImageCarte.lCarte, ImageCarte.hCarte));
-         this.add(image);
+         
          // refesh
          this.refresh();
     }
@@ -75,9 +75,7 @@ public class ImageCarte extends JButton {
          // dimension de la carte
          this.setPreferredSize(new Dimension(lCarte, hCarte));
          
-         this.image=new JLabel();
-         this.image.setPreferredSize(new Dimension(ImageCarte.lCarte, ImageCarte.hCarte));
-         this.add(image);
+        
          // refesh
          this.refresh();
 	}
@@ -89,11 +87,12 @@ public class ImageCarte extends JButton {
 	{
 		if (carte == null)
 		{
-			ImageIcon img=new ImageIcon(ImageCarte.pathImage + "/special/back.jpg");
-            Image i=img.getImage().getScaledInstance(ImageCarte.lCarte, ImageCarte.hCarte, Image.SCALE_DEFAULT);
-            img.setImage(i);
-            this.setIcon(img);
-            
+			
+			try {
+			      img = ImageIO.read(getClass().getResourceAsStream("/special/back.jpg"));
+			    } catch (IOException e) {
+			      e.printStackTrace();
+			    }
 
 		}
 		else
@@ -104,24 +103,23 @@ public class ImageCarte extends JButton {
 				String val = ImageCarte.getValeur(carte);
 	          
 	
-	            ImageIcon img=new ImageIcon(ImageCarte.pathImage + "/" + couleur + "/" + val +".jpg");
-	            Image i=img.getImage().getScaledInstance(ImageCarte.lCarte, ImageCarte.hCarte, Image.SCALE_DEFAULT);
-	            img.setImage(i);
-	
-	            this.setIcon(img);
+				try {
+				      img = ImageIO.read(getClass().getResourceAsStream("/" + couleur + "/" + val +".jpg"));
+				    } catch (IOException e) {
+				      e.printStackTrace();
+				    }
 	
 			}
 			else //si elle est speciale
 			{
 				String couleur=ImageCarte.getCouleur(carte);
 				String special = ImageCarte.getSpecial(carte);
-				ImageIcon img=new ImageIcon(ImageCarte.pathImage + "/" + couleur + "/" + special +".jpg");
-	            Image i=img.getImage().getScaledInstance(ImageCarte.lCarte, ImageCarte.hCarte, Image.SCALE_DEFAULT);
-	            img.setImage(i);
-	
-	
-	            this.setIcon(img);
-	
+				
+				try {
+				      img = ImageIO.read(getClass().getResourceAsStream("/" + couleur + "/" + special +".jpg"));
+				    } catch (IOException e) {
+				      e.printStackTrace();
+				    }
 			}
 		}
 		this.setVisible(true);
@@ -229,6 +227,21 @@ public class ImageCarte extends JButton {
 		return carte;
 	}
 	
+	
+	public void paintComponent(Graphics g){
+
+	 	super.paintComponent(g);
+	    Graphics2D g2d = (Graphics2D)g;
+	    GradientPaint gp = new GradientPaint(0, 0, Color.blue, 0, 20, Color.cyan, true);
+	    g2d.setPaint(gp);
+	    g2d.drawImage(img, 0, 0, this.getWidth(), this.getHeight(), this);
+	    g2d.setColor(Color.black);
+	    g2d.drawString(" ", this.getWidth() / 2 - (this.getWidth() / 2 /4), (this.getHeight() / 2) + 5);
+
+		this.setOpaque(false);
+		this.setContentAreaFilled(false);
+		this.setBorderPainted(false);
+ }
 
 	
 }

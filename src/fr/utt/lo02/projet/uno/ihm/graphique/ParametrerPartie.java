@@ -9,8 +9,9 @@ import java.awt.GridLayout;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
 
-import javax.swing.ImageIcon;
+import javax.imageio.ImageIO;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -80,8 +81,14 @@ public class ParametrerPartie  extends JFrame implements ActionListener{
 		
 		this.setContentPane(new JPanel()
 		{
-			private Image img = new ImageIcon(ImageCarte.pathImage+ "/theme/FondUno.png").getImage();
+			private Image img = null;
 				public void paintComponent(Graphics g) {
+				try {
+					img = ImageIO.read(getClass().getResourceAsStream("/theme/FondUno.png"));
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 				Graphics2D g2d = (Graphics2D)g;
 			    GradientPaint gp = new GradientPaint(0, 0, Color.blue, 0, 20, Color.cyan, true);
 			    g2d.setPaint(gp);

@@ -95,6 +95,7 @@ public class ModeConsole implements Observateur, View
 	 * @param choix
 	 * 		Le choix du joueur
 	 */
+	@SuppressWarnings("incomplete-switch")
 	public void notifyTour(Joueur joueur, int choix) 
 	{
 

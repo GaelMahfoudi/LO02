@@ -7,7 +7,6 @@ import java.awt.Graphics2D;
 import java.awt.Image;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
-import java.io.File;
 import java.io.IOException;
 
 import javax.imageio.ImageIO;
@@ -48,7 +47,7 @@ public class Bouton extends JButton implements MouseListener
 		this.name = name;
 		this.setBorder(BorderFactory.createLineBorder(Color.white));
 		try {
-		      img = ImageIO.read(new File(ImageCarte.pathImage+ "/theme/bouton.png"));
+		      img = ImageIO.read(getClass().getResourceAsStream("/theme/bouton.png"));
 		    } catch (IOException e) {
 		      e.printStackTrace();
 		    }
@@ -90,8 +89,8 @@ public class Bouton extends JButton implements MouseListener
 	public void mouseEntered(MouseEvent arg0) {
 		// TODO Auto-generated method stub
 		try {
-		      img = ImageIO.read(new File(ImageCarte.pathImage+ "/theme/boutonEntered.png"));
-		    } catch (IOException e) {
+			img = ImageIO.read(getClass().getResourceAsStream("/theme/boutonEntered.png"));
+			} catch (IOException e) {
 		      e.printStackTrace();
 		    }
 			this.repaint();
@@ -104,7 +103,7 @@ public class Bouton extends JButton implements MouseListener
 	public void mouseExited(MouseEvent arg0) {
 		// TODO Auto-generated method stub
 		try {
-		      img = ImageIO.read(new File(ImageCarte.pathImage+ "/theme/bouton.png"));
+			img = ImageIO.read(getClass().getResourceAsStream("/theme/bouton.png"));
 		    } catch (IOException e) {
 		      e.printStackTrace();
 		    }
@@ -117,7 +116,7 @@ public class Bouton extends JButton implements MouseListener
 	 */
 	public void mousePressed(MouseEvent arg0) {
 		try {
-		      img = ImageIO.read(new File(ImageCarte.pathImage+ "/theme/boutonPressed.png"));
+			img = ImageIO.read(getClass().getResourceAsStream("/theme/boutonPressed.png"));
 		    } catch (IOException e) {
 		      e.printStackTrace();
 		    }
